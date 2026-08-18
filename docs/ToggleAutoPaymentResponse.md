@@ -1,0 +1,72 @@
+# ToggleAutoPaymentResponse
+
+## Properties
+
+Name | Type | Description | Notes
+------------ | ------------- | ------------- | -------------
+**Message** | **string** |  | 
+**AutoPayment** | **bool** |  | 
+
+## Methods
+
+### NewToggleAutoPaymentResponse
+
+`func NewToggleAutoPaymentResponse(message string, autoPayment bool, ) *ToggleAutoPaymentResponse`
+
+NewToggleAutoPaymentResponse instantiates a new ToggleAutoPaymentResponse object
+This constructor will assign default values to properties that have it defined,
+and makes sure properties required by API are set, but the set of arguments
+will change when the set of required properties is changed
+
+### NewToggleAutoPaymentResponseWithDefaults
+
+`func NewToggleAutoPaymentResponseWithDefaults() *ToggleAutoPaymentResponse`
+
+NewToggleAutoPaymentResponseWithDefaults instantiates a new ToggleAutoPaymentResponse object
+This constructor will only assign default values to properties that have it defined,
+but it doesn't guarantee that properties required by API are set
+
+### GetMessage
+
+`func (o *ToggleAutoPaymentResponse) GetMessage() string`
+
+GetMessage returns the Message field if non-nil, zero value otherwise.
+
+### GetMessageOk
+
+`func (o *ToggleAutoPaymentResponse) GetMessageOk() (*string, bool)`
+
+GetMessageOk returns a tuple with the Message field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetMessage
+
+`func (o *ToggleAutoPaymentResponse) SetMessage(v string)`
+
+SetMessage sets Message field to given value.
+
+
+### GetAutoPayment
+
+`func (o *ToggleAutoPaymentResponse) GetAutoPayment() bool`
+
+GetAutoPayment returns the AutoPayment field if non-nil, zero value otherwise.
+
+### GetAutoPaymentOk
+
+`func (o *ToggleAutoPaymentResponse) GetAutoPaymentOk() (*bool, bool)`
+
+GetAutoPaymentOk returns a tuple with the AutoPayment field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetAutoPayment
+
+`func (o *ToggleAutoPaymentResponse) SetAutoPayment(v bool)`
+
+SetAutoPayment sets AutoPayment field to given value.
+
+
+
+[[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
+
+
