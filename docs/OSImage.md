@@ -7,7 +7,7 @@ Name | Type | Description | Notes
 **Id** | **int32** |  | [readonly] 
 **Slug** | **string** |  | 
 **Name** | **string** | Display name for users | 
-**FamilyName** | **string** |  | [readonly] 
+**FamilyName** | **NullableString** |  | [readonly] 
 **IsDefault** | Pointer to **bool** | Default version within this family (shown pre-selected) | [optional] 
 **DefaultUsername** | **string** | Account the image provisions for SSH login. | [readonly] 
 
@@ -15,7 +15,7 @@ Name | Type | Description | Notes
 
 ### NewOSImage
 
-`func NewOSImage(id int32, slug string, name string, familyName string, defaultUsername string, ) *OSImage`
+`func NewOSImage(id int32, slug string, name string, familyName NullableString, defaultUsername string, ) *OSImage`
 
 NewOSImage instantiates a new OSImage object
 This constructor will assign default values to properties that have it defined,
@@ -110,6 +110,16 @@ and a boolean to check if the value has been set.
 SetFamilyName sets FamilyName field to given value.
 
 
+### SetFamilyNameNil
+
+`func (o *OSImage) SetFamilyNameNil(b bool)`
+
+ SetFamilyNameNil sets the value for FamilyName to be an explicit nil
+
+### UnsetFamilyName
+`func (o *OSImage) UnsetFamilyName()`
+
+UnsetFamilyName ensures that no value is present for FamilyName, not even an explicit nil
 ### GetIsDefault
 
 `func (o *OSImage) GetIsDefault() bool`

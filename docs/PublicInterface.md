@@ -5,8 +5,8 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Interface** | **string** |  | [readonly] 
-**Ipv4** | **string** |  | [readonly] 
-**Ipv6** | **string** |  | [readonly] 
+**Ipv4** | **string** |  | [readonly] [default to ""]
+**Ipv6** | **string** |  | [readonly] [default to ""]
 **FwRulesSet** | Pointer to **NullableString** | ID or slug | [optional] 
 **FwPolicyIn** | Pointer to [**FwPolicyOutEnum**](FwPolicyOutEnum.md) |  | [optional] 
 **FwPolicyOut** | Pointer to [**FwPolicyOutEnum**](FwPolicyOutEnum.md) |  | [optional] 

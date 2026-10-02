@@ -8,29 +8,29 @@ Name | Type | Description | Notes
 **Status** | [**ResourceStatusEnum**](ResourceStatusEnum.md) |  | [readonly] 
 **Name** | Pointer to **string** |  | [optional] 
 **Generation** | **string** |  | [readonly] 
-**ClusterType** | **string** |  | [readonly] 
-**KubeVersion** | **string** |  | [readonly] 
+**ClusterType** | **NullableString** |  | [readonly] 
+**KubeVersion** | **NullableString** |  | [readonly] 
 **PricePerMonth** | **string** |  | 
 **PricePerHour** | **float64** |  | [readonly] 
 **Features** | Pointer to [**[]FeaturesEnum**](FeaturesEnum.md) |  | [optional] 
 **FeaturesReady** | **bool** |  | [readonly] 
-**KubeconfigValidUntil** | **string** |  | [readonly] 
-**Ipv4Address** | **string** |  | [readonly] 
-**Ipv6Address** | **string** |  | [readonly] 
+**KubeconfigValidUntil** | **NullableString** |  | [readonly] 
+**Ipv4Address** | **NullableString** |  | [readonly] 
+**Ipv6Address** | **NullableString** |  | [readonly] 
 **DualStack** | **bool** |  | [readonly] 
 **Protected** | Pointer to **bool** |  | [optional] 
-**TalosVersion** | **string** |  | [readonly] 
+**TalosVersion** | **NullableString** |  | [readonly] 
 **TalosUpgradeAvailable** | **bool** |  | [readonly] 
-**TalosNextVersion** | **string** |  | [readonly] 
-**StorageQuotaGb** | **int32** |  | [readonly] 
-**LastPoolUsedBytes** | **int64** |  | [readonly] 
-**LastStorageSyncAt** | **string** |  | [readonly] 
+**TalosNextVersion** | **NullableString** |  | [readonly] 
+**StorageQuotaGb** | **NullableInt32** |  | [readonly] 
+**LastPoolUsedBytes** | **NullableInt64** |  | [readonly] 
+**LastStorageSyncAt** | **NullableString** |  | [readonly] 
 
 ## Methods
 
 ### NewClusterDetail
 
-`func NewClusterDetail(id int32, status ResourceStatusEnum, generation string, clusterType string, kubeVersion string, pricePerMonth string, pricePerHour float64, featuresReady bool, kubeconfigValidUntil string, ipv4Address string, ipv6Address string, dualStack bool, talosVersion string, talosUpgradeAvailable bool, talosNextVersion string, storageQuotaGb int32, lastPoolUsedBytes int64, lastStorageSyncAt string, ) *ClusterDetail`
+`func NewClusterDetail(id int32, status ResourceStatusEnum, generation string, clusterType NullableString, kubeVersion NullableString, pricePerMonth string, pricePerHour float64, featuresReady bool, kubeconfigValidUntil NullableString, ipv4Address NullableString, ipv6Address NullableString, dualStack bool, talosVersion NullableString, talosUpgradeAvailable bool, talosNextVersion NullableString, storageQuotaGb NullableInt32, lastPoolUsedBytes NullableInt64, lastStorageSyncAt NullableString, ) *ClusterDetail`
 
 NewClusterDetail instantiates a new ClusterDetail object
 This constructor will assign default values to properties that have it defined,
@@ -150,6 +150,16 @@ and a boolean to check if the value has been set.
 SetClusterType sets ClusterType field to given value.
 
 
+### SetClusterTypeNil
+
+`func (o *ClusterDetail) SetClusterTypeNil(b bool)`
+
+ SetClusterTypeNil sets the value for ClusterType to be an explicit nil
+
+### UnsetClusterType
+`func (o *ClusterDetail) UnsetClusterType()`
+
+UnsetClusterType ensures that no value is present for ClusterType, not even an explicit nil
 ### GetKubeVersion
 
 `func (o *ClusterDetail) GetKubeVersion() string`
@@ -170,6 +180,16 @@ and a boolean to check if the value has been set.
 SetKubeVersion sets KubeVersion field to given value.
 
 
+### SetKubeVersionNil
+
+`func (o *ClusterDetail) SetKubeVersionNil(b bool)`
+
+ SetKubeVersionNil sets the value for KubeVersion to be an explicit nil
+
+### UnsetKubeVersion
+`func (o *ClusterDetail) UnsetKubeVersion()`
+
+UnsetKubeVersion ensures that no value is present for KubeVersion, not even an explicit nil
 ### GetPricePerMonth
 
 `func (o *ClusterDetail) GetPricePerMonth() string`
@@ -275,6 +295,16 @@ and a boolean to check if the value has been set.
 SetKubeconfigValidUntil sets KubeconfigValidUntil field to given value.
 
 
+### SetKubeconfigValidUntilNil
+
+`func (o *ClusterDetail) SetKubeconfigValidUntilNil(b bool)`
+
+ SetKubeconfigValidUntilNil sets the value for KubeconfigValidUntil to be an explicit nil
+
+### UnsetKubeconfigValidUntil
+`func (o *ClusterDetail) UnsetKubeconfigValidUntil()`
+
+UnsetKubeconfigValidUntil ensures that no value is present for KubeconfigValidUntil, not even an explicit nil
 ### GetIpv4Address
 
 `func (o *ClusterDetail) GetIpv4Address() string`
@@ -295,6 +325,16 @@ and a boolean to check if the value has been set.
 SetIpv4Address sets Ipv4Address field to given value.
 
 
+### SetIpv4AddressNil
+
+`func (o *ClusterDetail) SetIpv4AddressNil(b bool)`
+
+ SetIpv4AddressNil sets the value for Ipv4Address to be an explicit nil
+
+### UnsetIpv4Address
+`func (o *ClusterDetail) UnsetIpv4Address()`
+
+UnsetIpv4Address ensures that no value is present for Ipv4Address, not even an explicit nil
 ### GetIpv6Address
 
 `func (o *ClusterDetail) GetIpv6Address() string`
@@ -315,6 +355,16 @@ and a boolean to check if the value has been set.
 SetIpv6Address sets Ipv6Address field to given value.
 
 
+### SetIpv6AddressNil
+
+`func (o *ClusterDetail) SetIpv6AddressNil(b bool)`
+
+ SetIpv6AddressNil sets the value for Ipv6Address to be an explicit nil
+
+### UnsetIpv6Address
+`func (o *ClusterDetail) UnsetIpv6Address()`
+
+UnsetIpv6Address ensures that no value is present for Ipv6Address, not even an explicit nil
 ### GetDualStack
 
 `func (o *ClusterDetail) GetDualStack() bool`
@@ -380,6 +430,16 @@ and a boolean to check if the value has been set.
 SetTalosVersion sets TalosVersion field to given value.
 
 
+### SetTalosVersionNil
+
+`func (o *ClusterDetail) SetTalosVersionNil(b bool)`
+
+ SetTalosVersionNil sets the value for TalosVersion to be an explicit nil
+
+### UnsetTalosVersion
+`func (o *ClusterDetail) UnsetTalosVersion()`
+
+UnsetTalosVersion ensures that no value is present for TalosVersion, not even an explicit nil
 ### GetTalosUpgradeAvailable
 
 `func (o *ClusterDetail) GetTalosUpgradeAvailable() bool`
@@ -420,6 +480,16 @@ and a boolean to check if the value has been set.
 SetTalosNextVersion sets TalosNextVersion field to given value.
 
 
+### SetTalosNextVersionNil
+
+`func (o *ClusterDetail) SetTalosNextVersionNil(b bool)`
+
+ SetTalosNextVersionNil sets the value for TalosNextVersion to be an explicit nil
+
+### UnsetTalosNextVersion
+`func (o *ClusterDetail) UnsetTalosNextVersion()`
+
+UnsetTalosNextVersion ensures that no value is present for TalosNextVersion, not even an explicit nil
 ### GetStorageQuotaGb
 
 `func (o *ClusterDetail) GetStorageQuotaGb() int32`
@@ -440,6 +510,16 @@ and a boolean to check if the value has been set.
 SetStorageQuotaGb sets StorageQuotaGb field to given value.
 
 
+### SetStorageQuotaGbNil
+
+`func (o *ClusterDetail) SetStorageQuotaGbNil(b bool)`
+
+ SetStorageQuotaGbNil sets the value for StorageQuotaGb to be an explicit nil
+
+### UnsetStorageQuotaGb
+`func (o *ClusterDetail) UnsetStorageQuotaGb()`
+
+UnsetStorageQuotaGb ensures that no value is present for StorageQuotaGb, not even an explicit nil
 ### GetLastPoolUsedBytes
 
 `func (o *ClusterDetail) GetLastPoolUsedBytes() int64`
@@ -460,6 +540,16 @@ and a boolean to check if the value has been set.
 SetLastPoolUsedBytes sets LastPoolUsedBytes field to given value.
 
 
+### SetLastPoolUsedBytesNil
+
+`func (o *ClusterDetail) SetLastPoolUsedBytesNil(b bool)`
+
+ SetLastPoolUsedBytesNil sets the value for LastPoolUsedBytes to be an explicit nil
+
+### UnsetLastPoolUsedBytes
+`func (o *ClusterDetail) UnsetLastPoolUsedBytes()`
+
+UnsetLastPoolUsedBytes ensures that no value is present for LastPoolUsedBytes, not even an explicit nil
 ### GetLastStorageSyncAt
 
 `func (o *ClusterDetail) GetLastStorageSyncAt() string`
@@ -480,6 +570,16 @@ and a boolean to check if the value has been set.
 SetLastStorageSyncAt sets LastStorageSyncAt field to given value.
 
 
+### SetLastStorageSyncAtNil
+
+`func (o *ClusterDetail) SetLastStorageSyncAtNil(b bool)`
+
+ SetLastStorageSyncAtNil sets the value for LastStorageSyncAt to be an explicit nil
+
+### UnsetLastStorageSyncAt
+`func (o *ClusterDetail) UnsetLastStorageSyncAt()`
+
+UnsetLastStorageSyncAt ensures that no value is present for LastStorageSyncAt, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

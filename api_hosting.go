@@ -28,11 +28,11 @@ type ApiHostingHostingChangePasswordCreateRequest struct {
 	ctx context.Context
 	ApiService *HostingAPIService
 	id string
-	changePassword *ChangePassword
+	changePasswordRequest *ChangePasswordRequest
 }
 
-func (r ApiHostingHostingChangePasswordCreateRequest) ChangePassword(changePassword ChangePassword) ApiHostingHostingChangePasswordCreateRequest {
-	r.changePassword = &changePassword
+func (r ApiHostingHostingChangePasswordCreateRequest) ChangePasswordRequest(changePasswordRequest ChangePasswordRequest) ApiHostingHostingChangePasswordCreateRequest {
+	r.changePasswordRequest = &changePasswordRequest
 	return r
 }
 
@@ -78,8 +78,8 @@ func (a *HostingAPIService) HostingHostingChangePasswordCreateExecute(r ApiHosti
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.changePassword == nil {
-		return localVarReturnValue, nil, reportError("changePassword is required and must be specified")
+	if r.changePasswordRequest == nil {
+		return localVarReturnValue, nil, reportError("changePasswordRequest is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -100,7 +100,7 @@ func (a *HostingAPIService) HostingHostingChangePasswordCreateExecute(r ApiHosti
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.changePassword
+	localVarPostBody = r.changePasswordRequest
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {

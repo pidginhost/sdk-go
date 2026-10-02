@@ -27,15 +27,15 @@ type EmailAPIService service
 type ApiEmailApiCredentialsCreateRequest struct {
 	ctx context.Context
 	ApiService *EmailAPIService
-	apiCredential *ApiCredential
+	credentialCreateRequest *CredentialCreateRequest
 }
 
-func (r ApiEmailApiCredentialsCreateRequest) ApiCredential(apiCredential ApiCredential) ApiEmailApiCredentialsCreateRequest {
-	r.apiCredential = &apiCredential
+func (r ApiEmailApiCredentialsCreateRequest) CredentialCreateRequest(credentialCreateRequest CredentialCreateRequest) ApiEmailApiCredentialsCreateRequest {
+	r.credentialCreateRequest = &credentialCreateRequest
 	return r
 }
 
-func (r ApiEmailApiCredentialsCreateRequest) Execute() (*ApiCredential, *http.Response, error) {
+func (r ApiEmailApiCredentialsCreateRequest) Execute() (*ApiCredentialCreated, *http.Response, error) {
 	return r.ApiService.EmailApiCredentialsCreateExecute(r)
 }
 
@@ -60,13 +60,13 @@ func (a *EmailAPIService) EmailApiCredentialsCreate(ctx context.Context) ApiEmai
 }
 
 // Execute executes the request
-//  @return ApiCredential
-func (a *EmailAPIService) EmailApiCredentialsCreateExecute(r ApiEmailApiCredentialsCreateRequest) (*ApiCredential, *http.Response, error) {
+//  @return ApiCredentialCreated
+func (a *EmailAPIService) EmailApiCredentialsCreateExecute(r ApiEmailApiCredentialsCreateRequest) (*ApiCredentialCreated, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *ApiCredential
+		localVarReturnValue  *ApiCredentialCreated
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "EmailAPIService.EmailApiCredentialsCreate")
@@ -98,7 +98,7 @@ func (a *EmailAPIService) EmailApiCredentialsCreateExecute(r ApiEmailApiCredenti
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.apiCredential
+	localVarPostBody = r.credentialCreateRequest
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
@@ -514,11 +514,11 @@ func (a *EmailAPIService) EmailApiCredentialsRetrieveExecute(r ApiEmailApiCreden
 type ApiEmailDomainsCreateRequest struct {
 	ctx context.Context
 	ApiService *EmailAPIService
-	domainAdd *DomainAdd
+	domainAddRequest *DomainAddRequest
 }
 
-func (r ApiEmailDomainsCreateRequest) DomainAdd(domainAdd DomainAdd) ApiEmailDomainsCreateRequest {
-	r.domainAdd = &domainAdd
+func (r ApiEmailDomainsCreateRequest) DomainAddRequest(domainAddRequest DomainAddRequest) ApiEmailDomainsCreateRequest {
+	r.domainAddRequest = &domainAddRequest
 	return r
 }
 
@@ -566,8 +566,8 @@ func (a *EmailAPIService) EmailDomainsCreateExecute(r ApiEmailDomainsCreateReque
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.domainAdd == nil {
-		return localVarReturnValue, nil, reportError("domainAdd is required and must be specified")
+	if r.domainAddRequest == nil {
+		return localVarReturnValue, nil, reportError("domainAddRequest is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -588,7 +588,7 @@ func (a *EmailAPIService) EmailDomainsCreateExecute(r ApiEmailDomainsCreateReque
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.domainAdd
+	localVarPostBody = r.domainAddRequest
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
@@ -644,15 +644,15 @@ type ApiEmailDomainsInboundRoutesCreateRequest struct {
 	ctx context.Context
 	ApiService *EmailAPIService
 	domainPk int32
-	inboundRoute *InboundRoute
+	inboundRouteCreateRequest *InboundRouteCreateRequest
 }
 
-func (r ApiEmailDomainsInboundRoutesCreateRequest) InboundRoute(inboundRoute InboundRoute) ApiEmailDomainsInboundRoutesCreateRequest {
-	r.inboundRoute = &inboundRoute
+func (r ApiEmailDomainsInboundRoutesCreateRequest) InboundRouteCreateRequest(inboundRouteCreateRequest InboundRouteCreateRequest) ApiEmailDomainsInboundRoutesCreateRequest {
+	r.inboundRouteCreateRequest = &inboundRouteCreateRequest
 	return r
 }
 
-func (r ApiEmailDomainsInboundRoutesCreateRequest) Execute() (*InboundRoute, *http.Response, error) {
+func (r ApiEmailDomainsInboundRoutesCreateRequest) Execute() (*InboundRouteWriteResponse, *http.Response, error) {
 	return r.ApiService.EmailDomainsInboundRoutesCreateExecute(r)
 }
 
@@ -679,13 +679,13 @@ func (a *EmailAPIService) EmailDomainsInboundRoutesCreate(ctx context.Context, d
 }
 
 // Execute executes the request
-//  @return InboundRoute
-func (a *EmailAPIService) EmailDomainsInboundRoutesCreateExecute(r ApiEmailDomainsInboundRoutesCreateRequest) (*InboundRoute, *http.Response, error) {
+//  @return InboundRouteWriteResponse
+func (a *EmailAPIService) EmailDomainsInboundRoutesCreateExecute(r ApiEmailDomainsInboundRoutesCreateRequest) (*InboundRouteWriteResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *InboundRoute
+		localVarReturnValue  *InboundRouteWriteResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "EmailAPIService.EmailDomainsInboundRoutesCreate")
@@ -699,8 +699,8 @@ func (a *EmailAPIService) EmailDomainsInboundRoutesCreateExecute(r ApiEmailDomai
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.inboundRoute == nil {
-		return localVarReturnValue, nil, reportError("inboundRoute is required and must be specified")
+	if r.inboundRouteCreateRequest == nil {
+		return localVarReturnValue, nil, reportError("inboundRouteCreateRequest is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -721,7 +721,7 @@ func (a *EmailAPIService) EmailDomainsInboundRoutesCreateExecute(r ApiEmailDomai
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.inboundRoute
+	localVarPostBody = r.inboundRouteCreateRequest
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
@@ -1159,12 +1159,6 @@ type ApiEmailDomainsRotateDkimCreateRequest struct {
 	ctx context.Context
 	ApiService *EmailAPIService
 	id int32
-	sendingDomain *SendingDomain
-}
-
-func (r ApiEmailDomainsRotateDkimCreateRequest) SendingDomain(sendingDomain SendingDomain) ApiEmailDomainsRotateDkimCreateRequest {
-	r.sendingDomain = &sendingDomain
-	return r
 }
 
 func (r ApiEmailDomainsRotateDkimCreateRequest) Execute() (*SendingDomain, *http.Response, error) {
@@ -1216,7 +1210,7 @@ func (a *EmailAPIService) EmailDomainsRotateDkimCreateExecute(r ApiEmailDomainsR
 	localVarFormParams := url.Values{}
 
 	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{"application/json"}
+	localVarHTTPContentTypes := []string{}
 
 	// set Content-Type header
 	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
@@ -1232,8 +1226,6 @@ func (a *EmailAPIService) EmailDomainsRotateDkimCreateExecute(r ApiEmailDomainsR
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	// body params
-	localVarPostBody = r.sendingDomain
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
@@ -1289,11 +1281,11 @@ type ApiEmailDomainsToggleInboundCreateRequest struct {
 	ctx context.Context
 	ApiService *EmailAPIService
 	id int32
-	sendingDomain *SendingDomain
+	toggleInboundRequest *ToggleInboundRequest
 }
 
-func (r ApiEmailDomainsToggleInboundCreateRequest) SendingDomain(sendingDomain SendingDomain) ApiEmailDomainsToggleInboundCreateRequest {
-	r.sendingDomain = &sendingDomain
+func (r ApiEmailDomainsToggleInboundCreateRequest) ToggleInboundRequest(toggleInboundRequest ToggleInboundRequest) ApiEmailDomainsToggleInboundCreateRequest {
+	r.toggleInboundRequest = &toggleInboundRequest
 	return r
 }
 
@@ -1363,7 +1355,7 @@ func (a *EmailAPIService) EmailDomainsToggleInboundCreateExecute(r ApiEmailDomai
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.sendingDomain
+	localVarPostBody = r.toggleInboundRequest
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
@@ -1419,12 +1411,6 @@ type ApiEmailDomainsVerifyCreateRequest struct {
 	ctx context.Context
 	ApiService *EmailAPIService
 	id int32
-	sendingDomain *SendingDomain
-}
-
-func (r ApiEmailDomainsVerifyCreateRequest) SendingDomain(sendingDomain SendingDomain) ApiEmailDomainsVerifyCreateRequest {
-	r.sendingDomain = &sendingDomain
-	return r
 }
 
 func (r ApiEmailDomainsVerifyCreateRequest) Execute() (*SendingDomain, *http.Response, error) {
@@ -1476,7 +1462,7 @@ func (a *EmailAPIService) EmailDomainsVerifyCreateExecute(r ApiEmailDomainsVerif
 	localVarFormParams := url.Values{}
 
 	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{"application/json"}
+	localVarHTTPContentTypes := []string{}
 
 	// set Content-Type header
 	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
@@ -1492,8 +1478,6 @@ func (a *EmailAPIService) EmailDomainsVerifyCreateExecute(r ApiEmailDomainsVerif
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	// body params
-	localVarPostBody = r.sendingDomain
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
@@ -1548,15 +1532,15 @@ func (a *EmailAPIService) EmailDomainsVerifyCreateExecute(r ApiEmailDomainsVerif
 type ApiEmailInboundRoutesCreateRequest struct {
 	ctx context.Context
 	ApiService *EmailAPIService
-	inboundRoute *InboundRoute
+	inboundRouteCreateRequest *InboundRouteCreateRequest
 }
 
-func (r ApiEmailInboundRoutesCreateRequest) InboundRoute(inboundRoute InboundRoute) ApiEmailInboundRoutesCreateRequest {
-	r.inboundRoute = &inboundRoute
+func (r ApiEmailInboundRoutesCreateRequest) InboundRouteCreateRequest(inboundRouteCreateRequest InboundRouteCreateRequest) ApiEmailInboundRoutesCreateRequest {
+	r.inboundRouteCreateRequest = &inboundRouteCreateRequest
 	return r
 }
 
-func (r ApiEmailInboundRoutesCreateRequest) Execute() (*InboundRoute, *http.Response, error) {
+func (r ApiEmailInboundRoutesCreateRequest) Execute() (*InboundRouteWriteResponse, *http.Response, error) {
 	return r.ApiService.EmailInboundRoutesCreateExecute(r)
 }
 
@@ -1581,13 +1565,13 @@ func (a *EmailAPIService) EmailInboundRoutesCreate(ctx context.Context) ApiEmail
 }
 
 // Execute executes the request
-//  @return InboundRoute
-func (a *EmailAPIService) EmailInboundRoutesCreateExecute(r ApiEmailInboundRoutesCreateRequest) (*InboundRoute, *http.Response, error) {
+//  @return InboundRouteWriteResponse
+func (a *EmailAPIService) EmailInboundRoutesCreateExecute(r ApiEmailInboundRoutesCreateRequest) (*InboundRouteWriteResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *InboundRoute
+		localVarReturnValue  *InboundRouteWriteResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "EmailAPIService.EmailInboundRoutesCreate")
@@ -1600,8 +1584,8 @@ func (a *EmailAPIService) EmailInboundRoutesCreateExecute(r ApiEmailInboundRoute
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.inboundRoute == nil {
-		return localVarReturnValue, nil, reportError("inboundRoute is required and must be specified")
+	if r.inboundRouteCreateRequest == nil {
+		return localVarReturnValue, nil, reportError("inboundRouteCreateRequest is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -1622,7 +1606,7 @@ func (a *EmailAPIService) EmailInboundRoutesCreateExecute(r ApiEmailInboundRoute
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.inboundRoute
+	localVarPostBody = r.inboundRouteCreateRequest
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
@@ -1917,15 +1901,15 @@ type ApiEmailInboundRoutesPartialUpdateRequest struct {
 	ctx context.Context
 	ApiService *EmailAPIService
 	id int32
-	patchedInboundRoute *PatchedInboundRoute
+	patchedInboundRouteCreateRequest *PatchedInboundRouteCreateRequest
 }
 
-func (r ApiEmailInboundRoutesPartialUpdateRequest) PatchedInboundRoute(patchedInboundRoute PatchedInboundRoute) ApiEmailInboundRoutesPartialUpdateRequest {
-	r.patchedInboundRoute = &patchedInboundRoute
+func (r ApiEmailInboundRoutesPartialUpdateRequest) PatchedInboundRouteCreateRequest(patchedInboundRouteCreateRequest PatchedInboundRouteCreateRequest) ApiEmailInboundRoutesPartialUpdateRequest {
+	r.patchedInboundRouteCreateRequest = &patchedInboundRouteCreateRequest
 	return r
 }
 
-func (r ApiEmailInboundRoutesPartialUpdateRequest) Execute() (*InboundRoute, *http.Response, error) {
+func (r ApiEmailInboundRoutesPartialUpdateRequest) Execute() (*InboundRouteWriteResponse, *http.Response, error) {
 	return r.ApiService.EmailInboundRoutesPartialUpdateExecute(r)
 }
 
@@ -1952,13 +1936,13 @@ func (a *EmailAPIService) EmailInboundRoutesPartialUpdate(ctx context.Context, i
 }
 
 // Execute executes the request
-//  @return InboundRoute
-func (a *EmailAPIService) EmailInboundRoutesPartialUpdateExecute(r ApiEmailInboundRoutesPartialUpdateRequest) (*InboundRoute, *http.Response, error) {
+//  @return InboundRouteWriteResponse
+func (a *EmailAPIService) EmailInboundRoutesPartialUpdateExecute(r ApiEmailInboundRoutesPartialUpdateRequest) (*InboundRouteWriteResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPatch
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *InboundRoute
+		localVarReturnValue  *InboundRouteWriteResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "EmailAPIService.EmailInboundRoutesPartialUpdate")
@@ -1991,7 +1975,7 @@ func (a *EmailAPIService) EmailInboundRoutesPartialUpdateExecute(r ApiEmailInbou
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.patchedInboundRoute
+	localVarPostBody = r.patchedInboundRouteCreateRequest
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
@@ -2171,7 +2155,7 @@ type ApiEmailMessagesRetrieveRequest struct {
 	messageId string
 }
 
-func (r ApiEmailMessagesRetrieveRequest) Execute() (*http.Response, error) {
+func (r ApiEmailMessagesRetrieveRequest) Execute() (map[string]interface{}, *http.Response, error) {
 	return r.ApiService.EmailMessagesRetrieveExecute(r)
 }
 
@@ -2193,16 +2177,18 @@ func (a *EmailAPIService) EmailMessagesRetrieve(ctx context.Context, messageId s
 }
 
 // Execute executes the request
-func (a *EmailAPIService) EmailMessagesRetrieveExecute(r ApiEmailMessagesRetrieveRequest) (*http.Response, error) {
+//  @return map[string]interface{}
+func (a *EmailAPIService) EmailMessagesRetrieveExecute(r ApiEmailMessagesRetrieveRequest) (map[string]interface{}, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
 		formFiles            []formFile
+		localVarReturnValue  map[string]interface{}
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "EmailAPIService.EmailMessagesRetrieve")
 	if err != nil {
-		return nil, &GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/email/messages/{message_id}/"
@@ -2222,7 +2208,7 @@ func (a *EmailAPIService) EmailMessagesRetrieveExecute(r ApiEmailMessagesRetriev
 	}
 
 	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{}
+	localVarHTTPHeaderAccepts := []string{"application/json"}
 
 	// set Accept header
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
@@ -2245,19 +2231,19 @@ func (a *EmailAPIService) EmailMessagesRetrieveExecute(r ApiEmailMessagesRetriev
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
-		return nil, err
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarHTTPResponse, err
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarHTTPResponse, err
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -2265,20 +2251,29 @@ func (a *EmailAPIService) EmailMessagesRetrieveExecute(r ApiEmailMessagesRetriev
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
-		return localVarHTTPResponse, newErr
+		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarHTTPResponse, nil
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiEmailSandboxAddressesCreateRequest struct {
 	ctx context.Context
 	ApiService *EmailAPIService
-	sandboxAddress *SandboxAddress
+	sandboxAddressRequest *SandboxAddressRequest
 }
 
-func (r ApiEmailSandboxAddressesCreateRequest) SandboxAddress(sandboxAddress SandboxAddress) ApiEmailSandboxAddressesCreateRequest {
-	r.sandboxAddress = &sandboxAddress
+func (r ApiEmailSandboxAddressesCreateRequest) SandboxAddressRequest(sandboxAddressRequest SandboxAddressRequest) ApiEmailSandboxAddressesCreateRequest {
+	r.sandboxAddressRequest = &sandboxAddressRequest
 	return r
 }
 
@@ -2326,8 +2321,8 @@ func (a *EmailAPIService) EmailSandboxAddressesCreateExecute(r ApiEmailSandboxAd
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.sandboxAddress == nil {
-		return localVarReturnValue, nil, reportError("sandboxAddress is required and must be specified")
+	if r.sandboxAddressRequest == nil {
+		return localVarReturnValue, nil, reportError("sandboxAddressRequest is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -2348,7 +2343,7 @@ func (a *EmailAPIService) EmailSandboxAddressesCreateExecute(r ApiEmailSandboxAd
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.sandboxAddress
+	localVarPostBody = r.sandboxAddressRequest
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
@@ -2764,9 +2759,15 @@ func (a *EmailAPIService) EmailSandboxAddressesRetrieveExecute(r ApiEmailSandbox
 type ApiEmailSendCreateRequest struct {
 	ctx context.Context
 	ApiService *EmailAPIService
+	sendRequest *SendRequest
 }
 
-func (r ApiEmailSendCreateRequest) Execute() (*http.Response, error) {
+func (r ApiEmailSendCreateRequest) SendRequest(sendRequest SendRequest) ApiEmailSendCreateRequest {
+	r.sendRequest = &sendRequest
+	return r
+}
+
+func (r ApiEmailSendCreateRequest) Execute() (*EmailSendResponse, *http.Response, error) {
 	return r.ApiService.EmailSendCreateExecute(r)
 }
 
@@ -2784,16 +2785,18 @@ func (a *EmailAPIService) EmailSendCreate(ctx context.Context) ApiEmailSendCreat
 }
 
 // Execute executes the request
-func (a *EmailAPIService) EmailSendCreateExecute(r ApiEmailSendCreateRequest) (*http.Response, error) {
+//  @return EmailSendResponse
+func (a *EmailAPIService) EmailSendCreateExecute(r ApiEmailSendCreateRequest) (*EmailSendResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
 		formFiles            []formFile
+		localVarReturnValue  *EmailSendResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "EmailAPIService.EmailSendCreate")
 	if err != nil {
-		return nil, &GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/email/send/"
@@ -2801,9 +2804,12 @@ func (a *EmailAPIService) EmailSendCreateExecute(r ApiEmailSendCreateRequest) (*
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
+	if r.sendRequest == nil {
+		return localVarReturnValue, nil, reportError("sendRequest is required and must be specified")
+	}
 
 	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{}
+	localVarHTTPContentTypes := []string{"application/json"}
 
 	// set Content-Type header
 	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
@@ -2812,28 +2818,30 @@ func (a *EmailAPIService) EmailSendCreateExecute(r ApiEmailSendCreateRequest) (*
 	}
 
 	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{}
+	localVarHTTPHeaderAccepts := []string{"application/json"}
 
 	// set Accept header
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
+	// body params
+	localVarPostBody = r.sendRequest
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
-		return nil, err
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarHTTPResponse, err
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarHTTPResponse, err
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -2841,25 +2849,34 @@ func (a *EmailAPIService) EmailSendCreateExecute(r ApiEmailSendCreateRequest) (*
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
-		return localVarHTTPResponse, newErr
+		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarHTTPResponse, nil
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiEmailServicesApiCredentialsCreateRequest struct {
 	ctx context.Context
 	ApiService *EmailAPIService
 	servicePk int32
-	apiCredential *ApiCredential
+	credentialCreateRequest *CredentialCreateRequest
 }
 
-func (r ApiEmailServicesApiCredentialsCreateRequest) ApiCredential(apiCredential ApiCredential) ApiEmailServicesApiCredentialsCreateRequest {
-	r.apiCredential = &apiCredential
+func (r ApiEmailServicesApiCredentialsCreateRequest) CredentialCreateRequest(credentialCreateRequest CredentialCreateRequest) ApiEmailServicesApiCredentialsCreateRequest {
+	r.credentialCreateRequest = &credentialCreateRequest
 	return r
 }
 
-func (r ApiEmailServicesApiCredentialsCreateRequest) Execute() (*ApiCredential, *http.Response, error) {
+func (r ApiEmailServicesApiCredentialsCreateRequest) Execute() (*ApiCredentialCreated, *http.Response, error) {
 	return r.ApiService.EmailServicesApiCredentialsCreateExecute(r)
 }
 
@@ -2886,13 +2903,13 @@ func (a *EmailAPIService) EmailServicesApiCredentialsCreate(ctx context.Context,
 }
 
 // Execute executes the request
-//  @return ApiCredential
-func (a *EmailAPIService) EmailServicesApiCredentialsCreateExecute(r ApiEmailServicesApiCredentialsCreateRequest) (*ApiCredential, *http.Response, error) {
+//  @return ApiCredentialCreated
+func (a *EmailAPIService) EmailServicesApiCredentialsCreateExecute(r ApiEmailServicesApiCredentialsCreateRequest) (*ApiCredentialCreated, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *ApiCredential
+		localVarReturnValue  *ApiCredentialCreated
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "EmailAPIService.EmailServicesApiCredentialsCreate")
@@ -2925,7 +2942,7 @@ func (a *EmailAPIService) EmailServicesApiCredentialsCreateExecute(r ApiEmailSer
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.apiCredential
+	localVarPostBody = r.credentialCreateRequest
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
@@ -3235,11 +3252,11 @@ type ApiEmailServicesChangeTierPartialUpdateRequest struct {
 	ctx context.Context
 	ApiService *EmailAPIService
 	id int32
-	patchedSubscribe *PatchedSubscribe
+	subscribeRequest *SubscribeRequest
 }
 
-func (r ApiEmailServicesChangeTierPartialUpdateRequest) PatchedSubscribe(patchedSubscribe PatchedSubscribe) ApiEmailServicesChangeTierPartialUpdateRequest {
-	r.patchedSubscribe = &patchedSubscribe
+func (r ApiEmailServicesChangeTierPartialUpdateRequest) SubscribeRequest(subscribeRequest SubscribeRequest) ApiEmailServicesChangeTierPartialUpdateRequest {
+	r.subscribeRequest = &subscribeRequest
 	return r
 }
 
@@ -3290,6 +3307,9 @@ func (a *EmailAPIService) EmailServicesChangeTierPartialUpdateExecute(r ApiEmail
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
+	if r.subscribeRequest == nil {
+		return localVarReturnValue, nil, reportError("subscribeRequest is required and must be specified")
+	}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{"application/json"}
@@ -3309,7 +3329,7 @@ func (a *EmailAPIService) EmailServicesChangeTierPartialUpdateExecute(r ApiEmail
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.patchedSubscribe
+	localVarPostBody = r.subscribeRequest
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
@@ -3364,11 +3384,11 @@ func (a *EmailAPIService) EmailServicesChangeTierPartialUpdateExecute(r ApiEmail
 type ApiEmailServicesCreateRequest struct {
 	ctx context.Context
 	ApiService *EmailAPIService
-	subscribe *Subscribe
+	subscribeRequest *SubscribeRequest
 }
 
-func (r ApiEmailServicesCreateRequest) Subscribe(subscribe Subscribe) ApiEmailServicesCreateRequest {
-	r.subscribe = &subscribe
+func (r ApiEmailServicesCreateRequest) SubscribeRequest(subscribeRequest SubscribeRequest) ApiEmailServicesCreateRequest {
+	r.subscribeRequest = &subscribeRequest
 	return r
 }
 
@@ -3416,8 +3436,8 @@ func (a *EmailAPIService) EmailServicesCreateExecute(r ApiEmailServicesCreateReq
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.subscribe == nil {
-		return localVarReturnValue, nil, reportError("subscribe is required and must be specified")
+	if r.subscribeRequest == nil {
+		return localVarReturnValue, nil, reportError("subscribeRequest is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -3438,7 +3458,7 @@ func (a *EmailAPIService) EmailServicesCreateExecute(r ApiEmailServicesCreateReq
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.subscribe
+	localVarPostBody = r.subscribeRequest
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
@@ -3618,7 +3638,7 @@ type ApiEmailServicesDedicatedIpDestroyRequest struct {
 	id int32
 }
 
-func (r ApiEmailServicesDedicatedIpDestroyRequest) Execute() (*http.Response, error) {
+func (r ApiEmailServicesDedicatedIpDestroyRequest) Execute() (*EmailService, *http.Response, error) {
 	return r.ApiService.EmailServicesDedicatedIpDestroyExecute(r)
 }
 
@@ -3645,16 +3665,18 @@ func (a *EmailAPIService) EmailServicesDedicatedIpDestroy(ctx context.Context, i
 }
 
 // Execute executes the request
-func (a *EmailAPIService) EmailServicesDedicatedIpDestroyExecute(r ApiEmailServicesDedicatedIpDestroyRequest) (*http.Response, error) {
+//  @return EmailService
+func (a *EmailAPIService) EmailServicesDedicatedIpDestroyExecute(r ApiEmailServicesDedicatedIpDestroyRequest) (*EmailService, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodDelete
 		localVarPostBody     interface{}
 		formFiles            []formFile
+		localVarReturnValue  *EmailService
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "EmailAPIService.EmailServicesDedicatedIpDestroy")
 	if err != nil {
-		return nil, &GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/email/services/{id}/dedicated_ip/"
@@ -3674,7 +3696,7 @@ func (a *EmailAPIService) EmailServicesDedicatedIpDestroyExecute(r ApiEmailServi
 	}
 
 	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{}
+	localVarHTTPHeaderAccepts := []string{"application/json"}
 
 	// set Accept header
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
@@ -3697,19 +3719,19 @@ func (a *EmailAPIService) EmailServicesDedicatedIpDestroyExecute(r ApiEmailServi
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
-		return nil, err
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarHTTPResponse, err
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarHTTPResponse, err
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -3717,132 +3739,30 @@ func (a *EmailAPIService) EmailServicesDedicatedIpDestroyExecute(r ApiEmailServi
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
-		return localVarHTTPResponse, newErr
+		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarHTTPResponse, nil
-}
-
-type ApiEmailServicesDestroyRequest struct {
-	ctx context.Context
-	ApiService *EmailAPIService
-	id int32
-}
-
-func (r ApiEmailServicesDestroyRequest) Execute() (*http.Response, error) {
-	return r.ApiService.EmailServicesDestroyExecute(r)
-}
-
-/*
-EmailServicesDestroy Method for EmailServicesDestroy
-
-Intersect the beta gate and IAM with the configured API permissions.
-
-Keeping the gate additive preserves authentication, custom-token scope,
-and OAuth scope checks when the customer-facing feature flag is open.
-Per-action permission overrides (the staff-only restore action) remain in
-the same intersection.
-
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param id A unique integer value identifying this email service.
- @return ApiEmailServicesDestroyRequest
-*/
-func (a *EmailAPIService) EmailServicesDestroy(ctx context.Context, id int32) ApiEmailServicesDestroyRequest {
-	return ApiEmailServicesDestroyRequest{
-		ApiService: a,
-		ctx: ctx,
-		id: id,
-	}
-}
-
-// Execute executes the request
-func (a *EmailAPIService) EmailServicesDestroyExecute(r ApiEmailServicesDestroyRequest) (*http.Response, error) {
-	var (
-		localVarHTTPMethod   = http.MethodDelete
-		localVarPostBody     interface{}
-		formFiles            []formFile
-	)
-
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "EmailAPIService.EmailServicesDestroy")
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		return nil, &GenericOpenAPIError{error: err.Error()}
-	}
-
-	localVarPath := localBasePath + "/api/email/services/{id}/"
-	localVarPath = strings.Replace(localVarPath, "{"+"id"+"}", url.PathEscape(parameterValueToString(r.id, "id")), -1)
-
-	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := url.Values{}
-	localVarFormParams := url.Values{}
-
-	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{}
-
-	// set Content-Type header
-	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
-	if localVarHTTPContentType != "" {
-		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
-	}
-
-	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{}
-
-	// set Accept header
-	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
-	if localVarHTTPHeaderAccept != "" {
-		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
-	}
-	if r.ctx != nil {
-		// API Key Authentication
-		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["tokenAuth"]; ok {
-				var key string
-				if apiKey.Prefix != "" {
-					key = apiKey.Prefix + " " + apiKey.Key
-				} else {
-					key = apiKey.Key
-				}
-				localVarHeaderParams["Authorization"] = key
-			}
-		}
-	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
-	if err != nil {
-		return nil, err
-	}
-
-	localVarHTTPResponse, err := a.client.callAPI(req)
-	if err != nil || localVarHTTPResponse == nil {
-		return localVarHTTPResponse, err
-	}
-
-	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
-	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
-	if err != nil {
-		return localVarHTTPResponse, err
-	}
-
-	if localVarHTTPResponse.StatusCode >= 300 {
 		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
-			error: localVarHTTPResponse.Status,
+			error: err.Error(),
 		}
-		return localVarHTTPResponse, newErr
+		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiEmailServicesDomainsCreateRequest struct {
 	ctx context.Context
 	ApiService *EmailAPIService
 	servicePk int32
-	domainAdd *DomainAdd
+	domainAddRequest *DomainAddRequest
 }
 
-func (r ApiEmailServicesDomainsCreateRequest) DomainAdd(domainAdd DomainAdd) ApiEmailServicesDomainsCreateRequest {
-	r.domainAdd = &domainAdd
+func (r ApiEmailServicesDomainsCreateRequest) DomainAddRequest(domainAddRequest DomainAddRequest) ApiEmailServicesDomainsCreateRequest {
+	r.domainAddRequest = &domainAddRequest
 	return r
 }
 
@@ -3893,8 +3813,8 @@ func (a *EmailAPIService) EmailServicesDomainsCreateExecute(r ApiEmailServicesDo
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.domainAdd == nil {
-		return localVarReturnValue, nil, reportError("domainAdd is required and must be specified")
+	if r.domainAddRequest == nil {
+		return localVarReturnValue, nil, reportError("domainAddRequest is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -3915,7 +3835,7 @@ func (a *EmailAPIService) EmailServicesDomainsCreateExecute(r ApiEmailServicesDo
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.domainAdd
+	localVarPostBody = r.domainAddRequest
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
@@ -4231,9 +4151,23 @@ type ApiEmailServicesMessagesRetrieveRequest struct {
 	ctx context.Context
 	ApiService *EmailAPIService
 	servicePk int32
+	page *int32
+	perPage *int32
 }
 
-func (r ApiEmailServicesMessagesRetrieveRequest) Execute() (*http.Response, error) {
+// Page number, starting at 1.
+func (r ApiEmailServicesMessagesRetrieveRequest) Page(page int32) ApiEmailServicesMessagesRetrieveRequest {
+	r.page = &page
+	return r
+}
+
+// Page size, capped at 200; defaults to 50.
+func (r ApiEmailServicesMessagesRetrieveRequest) PerPage(perPage int32) ApiEmailServicesMessagesRetrieveRequest {
+	r.perPage = &perPage
+	return r
+}
+
+func (r ApiEmailServicesMessagesRetrieveRequest) Execute() (*EmailMessageList, *http.Response, error) {
 	return r.ApiService.EmailServicesMessagesRetrieveExecute(r)
 }
 
@@ -4259,16 +4193,18 @@ func (a *EmailAPIService) EmailServicesMessagesRetrieve(ctx context.Context, ser
 }
 
 // Execute executes the request
-func (a *EmailAPIService) EmailServicesMessagesRetrieveExecute(r ApiEmailServicesMessagesRetrieveRequest) (*http.Response, error) {
+//  @return EmailMessageList
+func (a *EmailAPIService) EmailServicesMessagesRetrieveExecute(r ApiEmailServicesMessagesRetrieveRequest) (*EmailMessageList, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
 		formFiles            []formFile
+		localVarReturnValue  *EmailMessageList
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "EmailAPIService.EmailServicesMessagesRetrieve")
 	if err != nil {
-		return nil, &GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/email/services/{service_pk}/messages/"
@@ -4278,6 +4214,12 @@ func (a *EmailAPIService) EmailServicesMessagesRetrieveExecute(r ApiEmailService
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.page != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "page", r.page, "form", "")
+	}
+	if r.perPage != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "per_page", r.perPage, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -4288,7 +4230,7 @@ func (a *EmailAPIService) EmailServicesMessagesRetrieveExecute(r ApiEmailService
 	}
 
 	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{}
+	localVarHTTPHeaderAccepts := []string{"application/json"}
 
 	// set Accept header
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
@@ -4311,19 +4253,19 @@ func (a *EmailAPIService) EmailServicesMessagesRetrieveExecute(r ApiEmailService
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
-		return nil, err
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarHTTPResponse, err
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarHTTPResponse, err
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -4331,22 +4273,25 @@ func (a *EmailAPIService) EmailServicesMessagesRetrieveExecute(r ApiEmailService
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
-		return localVarHTTPResponse, newErr
+		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarHTTPResponse, nil
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiEmailServicesPartialUpdateRequest struct {
 	ctx context.Context
 	ApiService *EmailAPIService
 	id int32
-	patchedEmailService *PatchedEmailService
-}
-
-func (r ApiEmailServicesPartialUpdateRequest) PatchedEmailService(patchedEmailService PatchedEmailService) ApiEmailServicesPartialUpdateRequest {
-	r.patchedEmailService = &patchedEmailService
-	return r
 }
 
 func (r ApiEmailServicesPartialUpdateRequest) Execute() (*EmailService, *http.Response, error) {
@@ -4398,7 +4343,7 @@ func (a *EmailAPIService) EmailServicesPartialUpdateExecute(r ApiEmailServicesPa
 	localVarFormParams := url.Values{}
 
 	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{"application/json"}
+	localVarHTTPContentTypes := []string{}
 
 	// set Content-Type header
 	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
@@ -4414,8 +4359,6 @@ func (a *EmailAPIService) EmailServicesPartialUpdateExecute(r ApiEmailServicesPa
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	// body params
-	localVarPostBody = r.patchedEmailService
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
@@ -4715,11 +4658,11 @@ type ApiEmailServicesSandboxAddressesCreateRequest struct {
 	ctx context.Context
 	ApiService *EmailAPIService
 	servicePk int32
-	sandboxAddress *SandboxAddress
+	sandboxAddressRequest *SandboxAddressRequest
 }
 
-func (r ApiEmailServicesSandboxAddressesCreateRequest) SandboxAddress(sandboxAddress SandboxAddress) ApiEmailServicesSandboxAddressesCreateRequest {
-	r.sandboxAddress = &sandboxAddress
+func (r ApiEmailServicesSandboxAddressesCreateRequest) SandboxAddressRequest(sandboxAddressRequest SandboxAddressRequest) ApiEmailServicesSandboxAddressesCreateRequest {
+	r.sandboxAddressRequest = &sandboxAddressRequest
 	return r
 }
 
@@ -4770,8 +4713,8 @@ func (a *EmailAPIService) EmailServicesSandboxAddressesCreateExecute(r ApiEmailS
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.sandboxAddress == nil {
-		return localVarReturnValue, nil, reportError("sandboxAddress is required and must be specified")
+	if r.sandboxAddressRequest == nil {
+		return localVarReturnValue, nil, reportError("sandboxAddressRequest is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -4792,7 +4735,7 @@ func (a *EmailAPIService) EmailServicesSandboxAddressesCreateExecute(r ApiEmailS
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.sandboxAddress
+	localVarPostBody = r.sandboxAddressRequest
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
@@ -4980,15 +4923,15 @@ type ApiEmailServicesSmtpCredentialsCreateRequest struct {
 	ctx context.Context
 	ApiService *EmailAPIService
 	servicePk int32
-	smtpCredential *SmtpCredential
+	credentialCreateRequest *CredentialCreateRequest
 }
 
-func (r ApiEmailServicesSmtpCredentialsCreateRequest) SmtpCredential(smtpCredential SmtpCredential) ApiEmailServicesSmtpCredentialsCreateRequest {
-	r.smtpCredential = &smtpCredential
+func (r ApiEmailServicesSmtpCredentialsCreateRequest) CredentialCreateRequest(credentialCreateRequest CredentialCreateRequest) ApiEmailServicesSmtpCredentialsCreateRequest {
+	r.credentialCreateRequest = &credentialCreateRequest
 	return r
 }
 
-func (r ApiEmailServicesSmtpCredentialsCreateRequest) Execute() (*SmtpCredential, *http.Response, error) {
+func (r ApiEmailServicesSmtpCredentialsCreateRequest) Execute() (*SmtpCredentialCreated, *http.Response, error) {
 	return r.ApiService.EmailServicesSmtpCredentialsCreateExecute(r)
 }
 
@@ -5015,13 +4958,13 @@ func (a *EmailAPIService) EmailServicesSmtpCredentialsCreate(ctx context.Context
 }
 
 // Execute executes the request
-//  @return SmtpCredential
-func (a *EmailAPIService) EmailServicesSmtpCredentialsCreateExecute(r ApiEmailServicesSmtpCredentialsCreateRequest) (*SmtpCredential, *http.Response, error) {
+//  @return SmtpCredentialCreated
+func (a *EmailAPIService) EmailServicesSmtpCredentialsCreateExecute(r ApiEmailServicesSmtpCredentialsCreateRequest) (*SmtpCredentialCreated, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *SmtpCredential
+		localVarReturnValue  *SmtpCredentialCreated
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "EmailAPIService.EmailServicesSmtpCredentialsCreate")
@@ -5054,7 +4997,7 @@ func (a *EmailAPIService) EmailServicesSmtpCredentialsCreateExecute(r ApiEmailSe
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.smtpCredential
+	localVarPostBody = r.credentialCreateRequest
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
@@ -5242,9 +5185,21 @@ type ApiEmailServicesStatsRetrieveRequest struct {
 	ctx context.Context
 	ApiService *EmailAPIService
 	servicePk int32
+	end *string
+	start *string
 }
 
-func (r ApiEmailServicesStatsRetrieveRequest) Execute() (*http.Response, error) {
+func (r ApiEmailServicesStatsRetrieveRequest) End(end string) ApiEmailServicesStatsRetrieveRequest {
+	r.end = &end
+	return r
+}
+
+func (r ApiEmailServicesStatsRetrieveRequest) Start(start string) ApiEmailServicesStatsRetrieveRequest {
+	r.start = &start
+	return r
+}
+
+func (r ApiEmailServicesStatsRetrieveRequest) Execute() (*EmailStats, *http.Response, error) {
 	return r.ApiService.EmailServicesStatsRetrieveExecute(r)
 }
 
@@ -5271,16 +5226,18 @@ func (a *EmailAPIService) EmailServicesStatsRetrieve(ctx context.Context, servic
 }
 
 // Execute executes the request
-func (a *EmailAPIService) EmailServicesStatsRetrieveExecute(r ApiEmailServicesStatsRetrieveRequest) (*http.Response, error) {
+//  @return EmailStats
+func (a *EmailAPIService) EmailServicesStatsRetrieveExecute(r ApiEmailServicesStatsRetrieveRequest) (*EmailStats, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
 		formFiles            []formFile
+		localVarReturnValue  *EmailStats
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "EmailAPIService.EmailServicesStatsRetrieve")
 	if err != nil {
-		return nil, &GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/email/services/{service_pk}/stats/"
@@ -5290,6 +5247,12 @@ func (a *EmailAPIService) EmailServicesStatsRetrieveExecute(r ApiEmailServicesSt
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.end != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "end", r.end, "form", "")
+	}
+	if r.start != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "start", r.start, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -5300,7 +5263,7 @@ func (a *EmailAPIService) EmailServicesStatsRetrieveExecute(r ApiEmailServicesSt
 	}
 
 	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{}
+	localVarHTTPHeaderAccepts := []string{"application/json"}
 
 	// set Accept header
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
@@ -5323,19 +5286,19 @@ func (a *EmailAPIService) EmailServicesStatsRetrieveExecute(r ApiEmailServicesSt
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
-		return nil, err
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarHTTPResponse, err
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarHTTPResponse, err
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -5343,21 +5306,30 @@ func (a *EmailAPIService) EmailServicesStatsRetrieveExecute(r ApiEmailServicesSt
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
-		return localVarHTTPResponse, newErr
+		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarHTTPResponse, nil
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiEmailServicesSuppressionsCreateRequest struct {
 	ctx context.Context
 	ApiService *EmailAPIService
 	servicePk int32
-	suppressionEntry *SuppressionEntry
+	suppressionAddRequest *SuppressionAddRequest
 }
 
-func (r ApiEmailServicesSuppressionsCreateRequest) SuppressionEntry(suppressionEntry SuppressionEntry) ApiEmailServicesSuppressionsCreateRequest {
-	r.suppressionEntry = &suppressionEntry
+func (r ApiEmailServicesSuppressionsCreateRequest) SuppressionAddRequest(suppressionAddRequest SuppressionAddRequest) ApiEmailServicesSuppressionsCreateRequest {
+	r.suppressionAddRequest = &suppressionAddRequest
 	return r
 }
 
@@ -5408,6 +5380,9 @@ func (a *EmailAPIService) EmailServicesSuppressionsCreateExecute(r ApiEmailServi
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
+	if r.suppressionAddRequest == nil {
+		return localVarReturnValue, nil, reportError("suppressionAddRequest is required and must be specified")
+	}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{"application/json"}
@@ -5427,7 +5402,7 @@ func (a *EmailAPIService) EmailServicesSuppressionsCreateExecute(r ApiEmailServi
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.suppressionEntry
+	localVarPostBody = r.suppressionAddRequest
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
@@ -5614,15 +5589,15 @@ func (a *EmailAPIService) EmailServicesSuppressionsListExecute(r ApiEmailService
 type ApiEmailSmtpCredentialsCreateRequest struct {
 	ctx context.Context
 	ApiService *EmailAPIService
-	smtpCredential *SmtpCredential
+	credentialCreateRequest *CredentialCreateRequest
 }
 
-func (r ApiEmailSmtpCredentialsCreateRequest) SmtpCredential(smtpCredential SmtpCredential) ApiEmailSmtpCredentialsCreateRequest {
-	r.smtpCredential = &smtpCredential
+func (r ApiEmailSmtpCredentialsCreateRequest) CredentialCreateRequest(credentialCreateRequest CredentialCreateRequest) ApiEmailSmtpCredentialsCreateRequest {
+	r.credentialCreateRequest = &credentialCreateRequest
 	return r
 }
 
-func (r ApiEmailSmtpCredentialsCreateRequest) Execute() (*SmtpCredential, *http.Response, error) {
+func (r ApiEmailSmtpCredentialsCreateRequest) Execute() (*SmtpCredentialCreated, *http.Response, error) {
 	return r.ApiService.EmailSmtpCredentialsCreateExecute(r)
 }
 
@@ -5647,13 +5622,13 @@ func (a *EmailAPIService) EmailSmtpCredentialsCreate(ctx context.Context) ApiEma
 }
 
 // Execute executes the request
-//  @return SmtpCredential
-func (a *EmailAPIService) EmailSmtpCredentialsCreateExecute(r ApiEmailSmtpCredentialsCreateRequest) (*SmtpCredential, *http.Response, error) {
+//  @return SmtpCredentialCreated
+func (a *EmailAPIService) EmailSmtpCredentialsCreateExecute(r ApiEmailSmtpCredentialsCreateRequest) (*SmtpCredentialCreated, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *SmtpCredential
+		localVarReturnValue  *SmtpCredentialCreated
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "EmailAPIService.EmailSmtpCredentialsCreate")
@@ -5685,7 +5660,7 @@ func (a *EmailAPIService) EmailSmtpCredentialsCreateExecute(r ApiEmailSmtpCreden
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.smtpCredential
+	localVarPostBody = r.credentialCreateRequest
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
@@ -6101,11 +6076,11 @@ func (a *EmailAPIService) EmailSmtpCredentialsRetrieveExecute(r ApiEmailSmtpCred
 type ApiEmailSuppressionsCreateRequest struct {
 	ctx context.Context
 	ApiService *EmailAPIService
-	suppressionEntry *SuppressionEntry
+	suppressionAddRequest *SuppressionAddRequest
 }
 
-func (r ApiEmailSuppressionsCreateRequest) SuppressionEntry(suppressionEntry SuppressionEntry) ApiEmailSuppressionsCreateRequest {
-	r.suppressionEntry = &suppressionEntry
+func (r ApiEmailSuppressionsCreateRequest) SuppressionAddRequest(suppressionAddRequest SuppressionAddRequest) ApiEmailSuppressionsCreateRequest {
+	r.suppressionAddRequest = &suppressionAddRequest
 	return r
 }
 
@@ -6153,6 +6128,9 @@ func (a *EmailAPIService) EmailSuppressionsCreateExecute(r ApiEmailSuppressionsC
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
+	if r.suppressionAddRequest == nil {
+		return localVarReturnValue, nil, reportError("suppressionAddRequest is required and must be specified")
+	}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{"application/json"}
@@ -6172,7 +6150,7 @@ func (a *EmailAPIService) EmailSuppressionsCreateExecute(r ApiEmailSuppressionsC
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.suppressionEntry
+	localVarPostBody = r.suppressionAddRequest
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {

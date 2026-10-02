@@ -26,7 +26,7 @@ type TicketMessage struct {
 	Date string `json:"date"`
 	Message string `json:"message"`
 	AuthorName string `json:"author_name"`
-	HasAttachment string `json:"has_attachment"`
+	HasAttachment bool `json:"has_attachment"`
 	AttachmentFilename string `json:"attachment_filename"`
 }
 
@@ -36,7 +36,7 @@ type _TicketMessage TicketMessage
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewTicketMessage(id int32, date string, message string, authorName string, hasAttachment string, attachmentFilename string) *TicketMessage {
+func NewTicketMessage(id int32, date string, message string, authorName string, hasAttachment bool, attachmentFilename string) *TicketMessage {
 	this := TicketMessage{}
 	this.Id = id
 	this.Date = date
@@ -152,9 +152,9 @@ func (o *TicketMessage) SetAuthorName(v string) {
 }
 
 // GetHasAttachment returns the HasAttachment field value
-func (o *TicketMessage) GetHasAttachment() string {
+func (o *TicketMessage) GetHasAttachment() bool {
 	if o == nil {
-		var ret string
+		var ret bool
 		return ret
 	}
 
@@ -163,7 +163,7 @@ func (o *TicketMessage) GetHasAttachment() string {
 
 // GetHasAttachmentOk returns a tuple with the HasAttachment field value
 // and a boolean to check if the value has been set.
-func (o *TicketMessage) GetHasAttachmentOk() (*string, bool) {
+func (o *TicketMessage) GetHasAttachmentOk() (*bool, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -171,7 +171,7 @@ func (o *TicketMessage) GetHasAttachmentOk() (*string, bool) {
 }
 
 // SetHasAttachment sets field value
-func (o *TicketMessage) SetHasAttachment(v string) {
+func (o *TicketMessage) SetHasAttachment(v bool) {
 	o.HasAttachment = v
 }
 

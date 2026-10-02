@@ -24,7 +24,7 @@ var _ MappedNullable = &ResourcePoolNode{}
 type ResourcePoolNode struct {
 	Id int32 `json:"id"`
 	Name string `json:"name"`
-	Ip string `json:"ip"`
+	Ip NullableString `json:"ip"`
 }
 
 type _ResourcePoolNode ResourcePoolNode
@@ -33,7 +33,7 @@ type _ResourcePoolNode ResourcePoolNode
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewResourcePoolNode(id int32, name string, ip string) *ResourcePoolNode {
+func NewResourcePoolNode(id int32, name string, ip NullableString) *ResourcePoolNode {
 	this := ResourcePoolNode{}
 	this.Id = id
 	this.Name = name
@@ -98,27 +98,29 @@ func (o *ResourcePoolNode) SetName(v string) {
 }
 
 // GetIp returns the Ip field value
+// If the value is explicit nil, the zero value for string will be returned
 func (o *ResourcePoolNode) GetIp() string {
-	if o == nil {
+	if o == nil || o.Ip.Get() == nil {
 		var ret string
 		return ret
 	}
 
-	return o.Ip
+	return *o.Ip.Get()
 }
 
 // GetIpOk returns a tuple with the Ip field value
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *ResourcePoolNode) GetIpOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return &o.Ip, true
+	return o.Ip.Get(), o.Ip.IsSet()
 }
 
 // SetIp sets field value
 func (o *ResourcePoolNode) SetIp(v string) {
-	o.Ip = v
+	o.Ip.Set(&v)
 }
 
 func (o ResourcePoolNode) MarshalJSON() ([]byte, error) {
@@ -133,7 +135,7 @@ func (o ResourcePoolNode) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["id"] = o.Id
 	toSerialize["name"] = o.Name
-	toSerialize["ip"] = o.Ip
+	toSerialize["ip"] = o.Ip.Get()
 	return toSerialize, nil
 }
 

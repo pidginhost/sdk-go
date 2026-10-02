@@ -16,7 +16,7 @@ import (
 	"fmt"
 )
 
-// FeaturesEnum * `cert-manager` - Certificate manager * `ceph-csi` - Ceph CSI * `metrics-server` - Metrics Server * `cloudnative-pg` - CloudNative PG * `mariadb-operator` - MariaDB Operator * `mongodb-operator` - MongoDB Operator
+// FeaturesEnum * `cert-manager` - Certificate manager * `ceph-csi` - Ceph CSI * `metrics-server` - Metrics Server * `cloudnative-pg` - CloudNative PG * `mariadb-operator` - MariaDB Operator * `mongodb-operator` - MongoDB Operator * `lb-envoy-metrics` - Load balancer metrics
 type FeaturesEnum string
 
 // List of FeaturesEnum
@@ -27,6 +27,7 @@ const (
 	FEATURESENUM_CLOUDNATIVE_PG FeaturesEnum = "cloudnative-pg"
 	FEATURESENUM_MARIADB_OPERATOR FeaturesEnum = "mariadb-operator"
 	FEATURESENUM_MONGODB_OPERATOR FeaturesEnum = "mongodb-operator"
+	FEATURESENUM_LB_ENVOY_METRICS FeaturesEnum = "lb-envoy-metrics"
 )
 
 // All allowed values of FeaturesEnum enum
@@ -37,6 +38,7 @@ var AllowedFeaturesEnumEnumValues = []FeaturesEnum{
 	"cloudnative-pg",
 	"mariadb-operator",
 	"mongodb-operator",
+	"lb-envoy-metrics",
 }
 
 func (v *FeaturesEnum) UnmarshalJSON(src []byte) error {

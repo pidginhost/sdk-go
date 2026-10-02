@@ -38,7 +38,7 @@ type InvoiceDetail struct {
 	ClientInfo interface{} `json:"client_info"`
 	InvoiceInfo interface{} `json:"invoice_info"`
 	PaymentMethod string `json:"payment_method"`
-	Services string `json:"services"`
+	Services []InvoiceService `json:"services"`
 }
 
 type _InvoiceDetail InvoiceDetail
@@ -47,7 +47,7 @@ type _InvoiceDetail InvoiceDetail
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewInvoiceDetail(id int32, numberProforma string, numberFiscal string, status InvoiceStatusEnum, subtotal string, vatValue string, vatPercentage int32, total string, invoiceDate string, dueDate NullableString, paymentDate NullableString, productInfo interface{}, usageDetail interface{}, clientInfo interface{}, invoiceInfo interface{}, paymentMethod string, services string) *InvoiceDetail {
+func NewInvoiceDetail(id int32, numberProforma string, numberFiscal string, status InvoiceStatusEnum, subtotal string, vatValue string, vatPercentage int32, total string, invoiceDate string, dueDate NullableString, paymentDate NullableString, productInfo interface{}, usageDetail interface{}, clientInfo interface{}, invoiceInfo interface{}, paymentMethod string, services []InvoiceService) *InvoiceDetail {
 	this := InvoiceDetail{}
 	this.Id = id
 	this.NumberProforma = numberProforma
@@ -474,9 +474,9 @@ func (o *InvoiceDetail) SetPaymentMethod(v string) {
 }
 
 // GetServices returns the Services field value
-func (o *InvoiceDetail) GetServices() string {
+func (o *InvoiceDetail) GetServices() []InvoiceService {
 	if o == nil {
-		var ret string
+		var ret []InvoiceService
 		return ret
 	}
 
@@ -485,15 +485,15 @@ func (o *InvoiceDetail) GetServices() string {
 
 // GetServicesOk returns a tuple with the Services field value
 // and a boolean to check if the value has been set.
-func (o *InvoiceDetail) GetServicesOk() (*string, bool) {
+func (o *InvoiceDetail) GetServicesOk() ([]InvoiceService, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return &o.Services, true
+	return o.Services, true
 }
 
 // SetServices sets field value
-func (o *InvoiceDetail) SetServices(v string) {
+func (o *InvoiceDetail) SetServices(v []InvoiceService) {
 	o.Services = v
 }
 

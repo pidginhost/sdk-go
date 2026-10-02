@@ -20,13 +20,13 @@ Name | Type | Description | Notes
 **ClientInfo** | **interface{}** |  | [readonly] 
 **InvoiceInfo** | **interface{}** |  | [readonly] 
 **PaymentMethod** | **string** |  | [readonly] 
-**Services** | **string** |  | [readonly] 
+**Services** | [**[]InvoiceService**](InvoiceService.md) |  | [readonly] 
 
 ## Methods
 
 ### NewInvoiceDetail
 
-`func NewInvoiceDetail(id int32, numberProforma string, numberFiscal string, status InvoiceStatusEnum, subtotal string, vatValue string, vatPercentage int32, total string, invoiceDate string, dueDate NullableString, paymentDate NullableString, productInfo interface{}, usageDetail interface{}, clientInfo interface{}, invoiceInfo interface{}, paymentMethod string, services string, ) *InvoiceDetail`
+`func NewInvoiceDetail(id int32, numberProforma string, numberFiscal string, status InvoiceStatusEnum, subtotal string, vatValue string, vatPercentage int32, total string, invoiceDate string, dueDate NullableString, paymentDate NullableString, productInfo interface{}, usageDetail interface{}, clientInfo interface{}, invoiceInfo interface{}, paymentMethod string, services []InvoiceService, ) *InvoiceDetail`
 
 NewInvoiceDetail instantiates a new InvoiceDetail object
 This constructor will assign default values to properties that have it defined,
@@ -423,20 +423,20 @@ SetPaymentMethod sets PaymentMethod field to given value.
 
 ### GetServices
 
-`func (o *InvoiceDetail) GetServices() string`
+`func (o *InvoiceDetail) GetServices() []InvoiceService`
 
 GetServices returns the Services field if non-nil, zero value otherwise.
 
 ### GetServicesOk
 
-`func (o *InvoiceDetail) GetServicesOk() (*string, bool)`
+`func (o *InvoiceDetail) GetServicesOk() (*[]InvoiceService, bool)`
 
 GetServicesOk returns a tuple with the Services field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetServices
 
-`func (o *InvoiceDetail) SetServices(v string)`
+`func (o *InvoiceDetail) SetServices(v []InvoiceService)`
 
 SetServices sets Services field to given value.
 

@@ -97,6 +97,7 @@ Method | HTTP request | Description
 [**CloudServersSnapshotsDestroy**](CloudAPI.md#CloudServersSnapshotsDestroy) | **Delete** /api/cloud/servers/{id}/snapshots/{snapshot_name}/ | 
 [**CloudServersSnapshotsList**](CloudAPI.md#CloudServersSnapshotsList) | **Get** /api/cloud/servers/{id}/snapshots/ | 
 [**CloudServersSnapshotsRollbackCreate**](CloudAPI.md#CloudServersSnapshotsRollbackCreate) | **Post** /api/cloud/servers/{id}/snapshots/{snapshot_name}/rollback/ | 
+[**CloudServersTrafficRetrieve**](CloudAPI.md#CloudServersTrafficRetrieve) | **Get** /api/cloud/servers/{id}/traffic/ | 
 [**CloudServersUpdate**](CloudAPI.md#CloudServersUpdate) | **Put** /api/cloud/servers/{id}/ | 
 [**CloudServersUsageRetrieve**](CloudAPI.md#CloudServersUsageRetrieve) | **Get** /api/cloud/servers/{id}/usage/ | 
 [**CloudServersVolumesCreate**](CloudAPI.md#CloudServersVolumesCreate) | **Post** /api/cloud/servers/{server_id}/volumes/ | 
@@ -119,7 +120,7 @@ Method | HTTP request | Description
 
 ## CloudBucketsCreate
 
-> Bucket CloudBucketsCreate(ctx).BucketCreate(bucketCreate).Execute()
+> Bucket CloudBucketsCreate(ctx).BucketCreateRequest(bucketCreateRequest).Execute()
 
 
 
@@ -138,11 +139,11 @@ import (
 )
 
 func main() {
-	bucketCreate := *openapiclient.NewBucketCreate("Name_example", int32(123)) // BucketCreate | 
+	bucketCreateRequest := *openapiclient.NewBucketCreateRequest("Name_example", int32(123)) // BucketCreateRequest | 
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.CloudAPI.CloudBucketsCreate(context.Background()).BucketCreate(bucketCreate).Execute()
+	resp, r, err := apiClient.CloudAPI.CloudBucketsCreate(context.Background()).BucketCreateRequest(bucketCreateRequest).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `CloudAPI.CloudBucketsCreate``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -163,7 +164,7 @@ Other parameters are passed through a pointer to a apiCloudBucketsCreateRequest 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **bucketCreate** | [**BucketCreate**](BucketCreate.md) |  | 
+ **bucketCreateRequest** | [**BucketCreateRequest**](BucketCreateRequest.md) |  | 
 
 ### Return type
 
@@ -456,7 +457,7 @@ Other parameters are passed through a pointer to a apiCloudBucketsListRequest st
 
 ## CloudBucketsResizeCreate
 
-> Bucket CloudBucketsResizeCreate(ctx, id).BucketResize(bucketResize).Execute()
+> Bucket CloudBucketsResizeCreate(ctx, id).BucketResizeRequest(bucketResizeRequest).Execute()
 
 
 
@@ -476,11 +477,11 @@ import (
 
 func main() {
 	id := int32(56) // int32 | A unique integer value identifying this S3 bucket.
-	bucketResize := *openapiclient.NewBucketResize(int32(123)) // BucketResize | 
+	bucketResizeRequest := *openapiclient.NewBucketResizeRequest(int32(123)) // BucketResizeRequest | 
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.CloudAPI.CloudBucketsResizeCreate(context.Background(), id).BucketResize(bucketResize).Execute()
+	resp, r, err := apiClient.CloudAPI.CloudBucketsResizeCreate(context.Background(), id).BucketResizeRequest(bucketResizeRequest).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `CloudAPI.CloudBucketsResizeCreate``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -506,7 +507,7 @@ Other parameters are passed through a pointer to a apiCloudBucketsResizeCreateRe
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
- **bucketResize** | [**BucketResize**](BucketResize.md) |  | 
+ **bucketResizeRequest** | [**BucketResizeRequest**](BucketResizeRequest.md) |  | 
 
 ### Return type
 
@@ -598,7 +599,7 @@ Name | Type | Description  | Notes
 
 ## CloudBucketsVisibilityCreate
 
-> Bucket CloudBucketsVisibilityCreate(ctx, id).BucketVisibility(bucketVisibility).Execute()
+> Bucket CloudBucketsVisibilityCreate(ctx, id).BucketVisibilityRequest(bucketVisibilityRequest).Execute()
 
 
 
@@ -618,11 +619,11 @@ import (
 
 func main() {
 	id := int32(56) // int32 | A unique integer value identifying this S3 bucket.
-	bucketVisibility := *openapiclient.NewBucketVisibility(false) // BucketVisibility | 
+	bucketVisibilityRequest := *openapiclient.NewBucketVisibilityRequest(false) // BucketVisibilityRequest | 
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.CloudAPI.CloudBucketsVisibilityCreate(context.Background(), id).BucketVisibility(bucketVisibility).Execute()
+	resp, r, err := apiClient.CloudAPI.CloudBucketsVisibilityCreate(context.Background(), id).BucketVisibilityRequest(bucketVisibilityRequest).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `CloudAPI.CloudBucketsVisibilityCreate``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -648,7 +649,7 @@ Other parameters are passed through a pointer to a apiCloudBucketsVisibilityCrea
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
- **bucketVisibility** | [**BucketVisibility**](BucketVisibility.md) |  | 
+ **bucketVisibilityRequest** | [**BucketVisibilityRequest**](BucketVisibilityRequest.md) |  | 
 
 ### Return type
 
@@ -670,7 +671,7 @@ Name | Type | Description  | Notes
 
 ## CloudFirewallRulesSetCreate
 
-> FirewallRulesSet CloudFirewallRulesSetCreate(ctx).FirewallRulesSet(firewallRulesSet).Execute()
+> FirewallRulesSet CloudFirewallRulesSetCreate(ctx).FirewallRulesSetRequest(firewallRulesSetRequest).Execute()
 
 
 
@@ -689,11 +690,11 @@ import (
 )
 
 func main() {
-	firewallRulesSet := *openapiclient.NewFirewallRulesSet(int32(123), "Name_example", openapiclient.FirewallRulesSetStatusEnum("validated"), []openapiclient.FirewallRule{*openapiclient.NewFirewallRule(int32(123), openapiclient.FirewallRuleDirectionEnum("in"), openapiclient.FwPolicyOutEnum("ACCEPT"), false, "ErrorMessage_example")}, false) // FirewallRulesSet | 
+	firewallRulesSetRequest := *openapiclient.NewFirewallRulesSetRequest("Name_example") // FirewallRulesSetRequest | 
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.CloudAPI.CloudFirewallRulesSetCreate(context.Background()).FirewallRulesSet(firewallRulesSet).Execute()
+	resp, r, err := apiClient.CloudAPI.CloudFirewallRulesSetCreate(context.Background()).FirewallRulesSetRequest(firewallRulesSetRequest).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `CloudAPI.CloudFirewallRulesSetCreate``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -714,7 +715,7 @@ Other parameters are passed through a pointer to a apiCloudFirewallRulesSetCreat
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **firewallRulesSet** | [**FirewallRulesSet**](FirewallRulesSet.md) |  | 
+ **firewallRulesSetRequest** | [**FirewallRulesSetRequest**](FirewallRulesSetRequest.md) |  | 
 
 ### Return type
 
@@ -865,7 +866,7 @@ Other parameters are passed through a pointer to a apiCloudFirewallRulesSetListR
 
 ## CloudFirewallRulesSetPartialUpdate
 
-> FirewallRulesSet CloudFirewallRulesSetPartialUpdate(ctx, id).PatchedFirewallRulesSet(patchedFirewallRulesSet).Execute()
+> FirewallRulesSet CloudFirewallRulesSetPartialUpdate(ctx, id).PatchedFirewallRulesSetRequest(patchedFirewallRulesSetRequest).Execute()
 
 
 
@@ -885,11 +886,11 @@ import (
 
 func main() {
 	id := int32(56) // int32 | A unique integer value identifying this firewall rules set.
-	patchedFirewallRulesSet := *openapiclient.NewPatchedFirewallRulesSet() // PatchedFirewallRulesSet |  (optional)
+	patchedFirewallRulesSetRequest := *openapiclient.NewPatchedFirewallRulesSetRequest() // PatchedFirewallRulesSetRequest |  (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.CloudAPI.CloudFirewallRulesSetPartialUpdate(context.Background(), id).PatchedFirewallRulesSet(patchedFirewallRulesSet).Execute()
+	resp, r, err := apiClient.CloudAPI.CloudFirewallRulesSetPartialUpdate(context.Background(), id).PatchedFirewallRulesSetRequest(patchedFirewallRulesSetRequest).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `CloudAPI.CloudFirewallRulesSetPartialUpdate``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -915,7 +916,7 @@ Other parameters are passed through a pointer to a apiCloudFirewallRulesSetParti
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
- **patchedFirewallRulesSet** | [**PatchedFirewallRulesSet**](PatchedFirewallRulesSet.md) |  | 
+ **patchedFirewallRulesSetRequest** | [**PatchedFirewallRulesSetRequest**](PatchedFirewallRulesSetRequest.md) |  | 
 
 ### Return type
 
@@ -1007,7 +1008,7 @@ Name | Type | Description  | Notes
 
 ## CloudFirewallRulesSetRulesCreate
 
-> FirewallRule CloudFirewallRulesSetRulesCreate(ctx, rulesSetId).FirewallRule(firewallRule).Execute()
+> FirewallRule CloudFirewallRulesSetRulesCreate(ctx, rulesSetId).FirewallRuleRequest(firewallRuleRequest).Execute()
 
 
 
@@ -1027,11 +1028,11 @@ import (
 
 func main() {
 	rulesSetId := "rulesSetId_example" // string | 
-	firewallRule := *openapiclient.NewFirewallRule(int32(123), openapiclient.FirewallRuleDirectionEnum("in"), openapiclient.FwPolicyOutEnum("ACCEPT"), false, "ErrorMessage_example") // FirewallRule | 
+	firewallRuleRequest := *openapiclient.NewFirewallRuleRequest(openapiclient.FirewallRuleDirectionEnum("in"), openapiclient.FwPolicyOutEnum("ACCEPT")) // FirewallRuleRequest | 
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.CloudAPI.CloudFirewallRulesSetRulesCreate(context.Background(), rulesSetId).FirewallRule(firewallRule).Execute()
+	resp, r, err := apiClient.CloudAPI.CloudFirewallRulesSetRulesCreate(context.Background(), rulesSetId).FirewallRuleRequest(firewallRuleRequest).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `CloudAPI.CloudFirewallRulesSetRulesCreate``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -1057,7 +1058,7 @@ Other parameters are passed through a pointer to a apiCloudFirewallRulesSetRules
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
- **firewallRule** | [**FirewallRule**](FirewallRule.md) |  | 
+ **firewallRuleRequest** | [**FirewallRuleRequest**](FirewallRuleRequest.md) |  | 
 
 ### Return type
 
@@ -1220,7 +1221,7 @@ Name | Type | Description  | Notes
 
 ## CloudFirewallRulesSetRulesPartialUpdate
 
-> FirewallRule CloudFirewallRulesSetRulesPartialUpdate(ctx, ruleId, rulesSetId).PatchedFirewallRule(patchedFirewallRule).Execute()
+> FirewallRule CloudFirewallRulesSetRulesPartialUpdate(ctx, ruleId, rulesSetId).PatchedFirewallRuleRequest(patchedFirewallRuleRequest).Execute()
 
 
 
@@ -1241,11 +1242,11 @@ import (
 func main() {
 	ruleId := "ruleId_example" // string | 
 	rulesSetId := "rulesSetId_example" // string | 
-	patchedFirewallRule := *openapiclient.NewPatchedFirewallRule() // PatchedFirewallRule |  (optional)
+	patchedFirewallRuleRequest := *openapiclient.NewPatchedFirewallRuleRequest() // PatchedFirewallRuleRequest |  (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.CloudAPI.CloudFirewallRulesSetRulesPartialUpdate(context.Background(), ruleId, rulesSetId).PatchedFirewallRule(patchedFirewallRule).Execute()
+	resp, r, err := apiClient.CloudAPI.CloudFirewallRulesSetRulesPartialUpdate(context.Background(), ruleId, rulesSetId).PatchedFirewallRuleRequest(patchedFirewallRuleRequest).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `CloudAPI.CloudFirewallRulesSetRulesPartialUpdate``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -1273,7 +1274,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
 
- **patchedFirewallRule** | [**PatchedFirewallRule**](PatchedFirewallRule.md) |  | 
+ **patchedFirewallRuleRequest** | [**PatchedFirewallRuleRequest**](PatchedFirewallRuleRequest.md) |  | 
 
 ### Return type
 
@@ -1368,7 +1369,7 @@ Name | Type | Description  | Notes
 
 ## CloudFirewallRulesSetRulesUpdate
 
-> FirewallRule CloudFirewallRulesSetRulesUpdate(ctx, ruleId, rulesSetId).FirewallRule(firewallRule).Execute()
+> FirewallRule CloudFirewallRulesSetRulesUpdate(ctx, ruleId, rulesSetId).FirewallRuleRequest(firewallRuleRequest).Execute()
 
 
 
@@ -1389,11 +1390,11 @@ import (
 func main() {
 	ruleId := "ruleId_example" // string | 
 	rulesSetId := "rulesSetId_example" // string | 
-	firewallRule := *openapiclient.NewFirewallRule(int32(123), openapiclient.FirewallRuleDirectionEnum("in"), openapiclient.FwPolicyOutEnum("ACCEPT"), false, "ErrorMessage_example") // FirewallRule | 
+	firewallRuleRequest := *openapiclient.NewFirewallRuleRequest(openapiclient.FirewallRuleDirectionEnum("in"), openapiclient.FwPolicyOutEnum("ACCEPT")) // FirewallRuleRequest | 
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.CloudAPI.CloudFirewallRulesSetRulesUpdate(context.Background(), ruleId, rulesSetId).FirewallRule(firewallRule).Execute()
+	resp, r, err := apiClient.CloudAPI.CloudFirewallRulesSetRulesUpdate(context.Background(), ruleId, rulesSetId).FirewallRuleRequest(firewallRuleRequest).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `CloudAPI.CloudFirewallRulesSetRulesUpdate``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -1421,7 +1422,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
 
- **firewallRule** | [**FirewallRule**](FirewallRule.md) |  | 
+ **firewallRuleRequest** | [**FirewallRuleRequest**](FirewallRuleRequest.md) |  | 
 
 ### Return type
 
@@ -1443,7 +1444,7 @@ Name | Type | Description  | Notes
 
 ## CloudFirewallRulesSetUpdate
 
-> FirewallRulesSet CloudFirewallRulesSetUpdate(ctx, id).FirewallRulesSet(firewallRulesSet).Execute()
+> FirewallRulesSet CloudFirewallRulesSetUpdate(ctx, id).FirewallRulesSetRequest(firewallRulesSetRequest).Execute()
 
 
 
@@ -1463,11 +1464,11 @@ import (
 
 func main() {
 	id := int32(56) // int32 | A unique integer value identifying this firewall rules set.
-	firewallRulesSet := *openapiclient.NewFirewallRulesSet(int32(123), "Name_example", openapiclient.FirewallRulesSetStatusEnum("validated"), []openapiclient.FirewallRule{*openapiclient.NewFirewallRule(int32(123), openapiclient.FirewallRuleDirectionEnum("in"), openapiclient.FwPolicyOutEnum("ACCEPT"), false, "ErrorMessage_example")}, false) // FirewallRulesSet | 
+	firewallRulesSetRequest := *openapiclient.NewFirewallRulesSetRequest("Name_example") // FirewallRulesSetRequest | 
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.CloudAPI.CloudFirewallRulesSetUpdate(context.Background(), id).FirewallRulesSet(firewallRulesSet).Execute()
+	resp, r, err := apiClient.CloudAPI.CloudFirewallRulesSetUpdate(context.Background(), id).FirewallRulesSetRequest(firewallRulesSetRequest).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `CloudAPI.CloudFirewallRulesSetUpdate``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -1493,7 +1494,7 @@ Other parameters are passed through a pointer to a apiCloudFirewallRulesSetUpdat
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
- **firewallRulesSet** | [**FirewallRulesSet**](FirewallRulesSet.md) |  | 
+ **firewallRulesSetRequest** | [**FirewallRulesSetRequest**](FirewallRulesSetRequest.md) |  | 
 
 ### Return type
 
@@ -1659,7 +1660,7 @@ Name | Type | Description  | Notes
 
 ## CloudFloatingIpv4Create
 
-> FloatingIPv4 CloudFloatingIpv4Create(ctx).FloatingIPv4Create(floatingIPv4Create).Execute()
+> FloatingIPv4 CloudFloatingIpv4Create(ctx).FloatingIPv4CreateRequest(floatingIPv4CreateRequest).Execute()
 
 
 
@@ -1678,11 +1679,11 @@ import (
 )
 
 func main() {
-	floatingIPv4Create := *openapiclient.NewFloatingIPv4Create() // FloatingIPv4Create |  (optional)
+	floatingIPv4CreateRequest := *openapiclient.NewFloatingIPv4CreateRequest() // FloatingIPv4CreateRequest |  (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.CloudAPI.CloudFloatingIpv4Create(context.Background()).FloatingIPv4Create(floatingIPv4Create).Execute()
+	resp, r, err := apiClient.CloudAPI.CloudFloatingIpv4Create(context.Background()).FloatingIPv4CreateRequest(floatingIPv4CreateRequest).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `CloudAPI.CloudFloatingIpv4Create``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -1703,7 +1704,7 @@ Other parameters are passed through a pointer to a apiCloudFloatingIpv4CreateReq
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **floatingIPv4Create** | [**FloatingIPv4Create**](FloatingIPv4Create.md) |  | 
+ **floatingIPv4CreateRequest** | [**FloatingIPv4CreateRequest**](FloatingIPv4CreateRequest.md) |  | 
 
 ### Return type
 
@@ -1859,7 +1860,7 @@ Name | Type | Description  | Notes
 
 ## CloudFloatingIpv4RdnsCreate
 
-> ReverseDNS CloudFloatingIpv4RdnsCreate(ctx, id).ReverseDNS(reverseDNS).Execute()
+> ReverseDNS CloudFloatingIpv4RdnsCreate(ctx, id).ReverseDNSRequest(reverseDNSRequest).Execute()
 
 
 
@@ -1879,11 +1880,11 @@ import (
 
 func main() {
 	id := int32(56) // int32 | A unique integer value identifying this floating IPv4.
-	reverseDNS := *openapiclient.NewReverseDNS("ReverseDns_example") // ReverseDNS | 
+	reverseDNSRequest := *openapiclient.NewReverseDNSRequest("ReverseDns_example") // ReverseDNSRequest | 
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.CloudAPI.CloudFloatingIpv4RdnsCreate(context.Background(), id).ReverseDNS(reverseDNS).Execute()
+	resp, r, err := apiClient.CloudAPI.CloudFloatingIpv4RdnsCreate(context.Background(), id).ReverseDNSRequest(reverseDNSRequest).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `CloudAPI.CloudFloatingIpv4RdnsCreate``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -1909,7 +1910,7 @@ Other parameters are passed through a pointer to a apiCloudFloatingIpv4RdnsCreat
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
- **reverseDNS** | [**ReverseDNS**](ReverseDNS.md) |  | 
+ **reverseDNSRequest** | [**ReverseDNSRequest**](ReverseDNSRequest.md) |  | 
 
 ### Return type
 
@@ -2287,7 +2288,7 @@ Name | Type | Description  | Notes
 
 ## CloudFloatingIpv6Create
 
-> FloatingIPv6 CloudFloatingIpv6Create(ctx).FloatingIPv6Create(floatingIPv6Create).Execute()
+> FloatingIPv6 CloudFloatingIpv6Create(ctx).FloatingIPv6CreateRequest(floatingIPv6CreateRequest).Execute()
 
 
 
@@ -2306,11 +2307,11 @@ import (
 )
 
 func main() {
-	floatingIPv6Create := *openapiclient.NewFloatingIPv6Create() // FloatingIPv6Create |  (optional)
+	floatingIPv6CreateRequest := *openapiclient.NewFloatingIPv6CreateRequest() // FloatingIPv6CreateRequest |  (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.CloudAPI.CloudFloatingIpv6Create(context.Background()).FloatingIPv6Create(floatingIPv6Create).Execute()
+	resp, r, err := apiClient.CloudAPI.CloudFloatingIpv6Create(context.Background()).FloatingIPv6CreateRequest(floatingIPv6CreateRequest).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `CloudAPI.CloudFloatingIpv6Create``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -2331,7 +2332,7 @@ Other parameters are passed through a pointer to a apiCloudFloatingIpv6CreateReq
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **floatingIPv6Create** | [**FloatingIPv6Create**](FloatingIPv6Create.md) |  | 
+ **floatingIPv6CreateRequest** | [**FloatingIPv6CreateRequest**](FloatingIPv6CreateRequest.md) |  | 
 
 ### Return type
 
@@ -2487,7 +2488,7 @@ Name | Type | Description  | Notes
 
 ## CloudFloatingIpv6RdnsCreate
 
-> ReverseDNS CloudFloatingIpv6RdnsCreate(ctx, id).ReverseDNS(reverseDNS).Execute()
+> ReverseDNS CloudFloatingIpv6RdnsCreate(ctx, id).ReverseDNSRequest(reverseDNSRequest).Execute()
 
 
 
@@ -2507,11 +2508,11 @@ import (
 
 func main() {
 	id := int32(56) // int32 | A unique integer value identifying this floating IPv6.
-	reverseDNS := *openapiclient.NewReverseDNS("ReverseDns_example") // ReverseDNS | 
+	reverseDNSRequest := *openapiclient.NewReverseDNSRequest("ReverseDns_example") // ReverseDNSRequest | 
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.CloudAPI.CloudFloatingIpv6RdnsCreate(context.Background(), id).ReverseDNS(reverseDNS).Execute()
+	resp, r, err := apiClient.CloudAPI.CloudFloatingIpv6RdnsCreate(context.Background(), id).ReverseDNSRequest(reverseDNSRequest).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `CloudAPI.CloudFloatingIpv6RdnsCreate``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -2537,7 +2538,7 @@ Other parameters are passed through a pointer to a apiCloudFloatingIpv6RdnsCreat
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
- **reverseDNS** | [**ReverseDNS**](ReverseDNS.md) |  | 
+ **reverseDNSRequest** | [**ReverseDNSRequest**](ReverseDNSRequest.md) |  | 
 
 ### Return type
 
@@ -3038,7 +3039,7 @@ Name | Type | Description  | Notes
 
 ## CloudIpv4Create
 
-> PublicIPv4 CloudIpv4Create(ctx).PublicIPv4(publicIPv4).Execute()
+> PublicIPv4 CloudIpv4Create(ctx).Execute()
 
 
 
@@ -3057,11 +3058,10 @@ import (
 )
 
 func main() {
-	publicIPv4 := *openapiclient.NewPublicIPv4(int32(123), "Slug_example", "Address_example", "Gateway_example", int32(123), false, "Server_example") // PublicIPv4 |  (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.CloudAPI.CloudIpv4Create(context.Background()).PublicIPv4(publicIPv4).Execute()
+	resp, r, err := apiClient.CloudAPI.CloudIpv4Create(context.Background()).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `CloudAPI.CloudIpv4Create``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -3073,16 +3073,12 @@ func main() {
 
 ### Path Parameters
 
-
+This endpoint does not need any parameter.
 
 ### Other Parameters
 
 Other parameters are passed through a pointer to a apiCloudIpv4CreateRequest struct via the builder pattern
 
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **publicIPv4** | [**PublicIPv4**](PublicIPv4.md) |  | 
 
 ### Return type
 
@@ -3094,7 +3090,7 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
-- **Content-Type**: application/json
+- **Content-Type**: Not defined
 - **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
@@ -3172,7 +3168,7 @@ Name | Type | Description  | Notes
 
 ## CloudIpv4DetachCreate
 
-> DetachIPv4Response CloudIpv4DetachCreate(ctx, id).PublicIPv4(publicIPv4).Execute()
+> DetachIPv4Response CloudIpv4DetachCreate(ctx, id).Execute()
 
 
 
@@ -3192,11 +3188,10 @@ import (
 
 func main() {
 	id := int32(56) // int32 | A unique integer value identifying this Public IPv4.
-	publicIPv4 := *openapiclient.NewPublicIPv4(int32(123), "Slug_example", "Address_example", "Gateway_example", int32(123), false, "Server_example") // PublicIPv4 |  (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.CloudAPI.CloudIpv4DetachCreate(context.Background(), id).PublicIPv4(publicIPv4).Execute()
+	resp, r, err := apiClient.CloudAPI.CloudIpv4DetachCreate(context.Background(), id).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `CloudAPI.CloudIpv4DetachCreate``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -3222,7 +3217,6 @@ Other parameters are passed through a pointer to a apiCloudIpv4DetachCreateReque
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
- **publicIPv4** | [**PublicIPv4**](PublicIPv4.md) |  | 
 
 ### Return type
 
@@ -3234,7 +3228,7 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
-- **Content-Type**: application/json
+- **Content-Type**: Not defined
 - **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
@@ -3310,7 +3304,7 @@ Name | Type | Description  | Notes
 
 ## CloudIpv4RdnsCreate
 
-> ReverseDNS CloudIpv4RdnsCreate(ctx, id).ReverseDNS(reverseDNS).Execute()
+> ReverseDNS CloudIpv4RdnsCreate(ctx, id).ReverseDNSRequest(reverseDNSRequest).Execute()
 
 
 
@@ -3330,11 +3324,11 @@ import (
 
 func main() {
 	id := int32(56) // int32 | A unique integer value identifying this Public IPv4.
-	reverseDNS := *openapiclient.NewReverseDNS("ReverseDns_example") // ReverseDNS | 
+	reverseDNSRequest := *openapiclient.NewReverseDNSRequest("ReverseDns_example") // ReverseDNSRequest | 
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.CloudAPI.CloudIpv4RdnsCreate(context.Background(), id).ReverseDNS(reverseDNS).Execute()
+	resp, r, err := apiClient.CloudAPI.CloudIpv4RdnsCreate(context.Background(), id).ReverseDNSRequest(reverseDNSRequest).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `CloudAPI.CloudIpv4RdnsCreate``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -3360,7 +3354,7 @@ Other parameters are passed through a pointer to a apiCloudIpv4RdnsCreateRequest
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
- **reverseDNS** | [**ReverseDNS**](ReverseDNS.md) |  | 
+ **reverseDNSRequest** | [**ReverseDNSRequest**](ReverseDNSRequest.md) |  | 
 
 ### Return type
 
@@ -3522,7 +3516,7 @@ Name | Type | Description  | Notes
 
 ## CloudIpv6Create
 
-> PublicIPv6 CloudIpv6Create(ctx).PublicIPv6(publicIPv6).Execute()
+> PublicIPv6 CloudIpv6Create(ctx).Execute()
 
 
 
@@ -3541,11 +3535,10 @@ import (
 )
 
 func main() {
-	publicIPv6 := *openapiclient.NewPublicIPv6(int32(123), "Slug_example", "Address_example", "Gateway_example", int32(123), false, "Server_example") // PublicIPv6 |  (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.CloudAPI.CloudIpv6Create(context.Background()).PublicIPv6(publicIPv6).Execute()
+	resp, r, err := apiClient.CloudAPI.CloudIpv6Create(context.Background()).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `CloudAPI.CloudIpv6Create``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -3557,16 +3550,12 @@ func main() {
 
 ### Path Parameters
 
-
+This endpoint does not need any parameter.
 
 ### Other Parameters
 
 Other parameters are passed through a pointer to a apiCloudIpv6CreateRequest struct via the builder pattern
 
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **publicIPv6** | [**PublicIPv6**](PublicIPv6.md) |  | 
 
 ### Return type
 
@@ -3578,7 +3567,7 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
-- **Content-Type**: application/json
+- **Content-Type**: Not defined
 - **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
@@ -3656,7 +3645,7 @@ Name | Type | Description  | Notes
 
 ## CloudIpv6DetachCreate
 
-> DetachIPv6Response CloudIpv6DetachCreate(ctx, id).PublicIPv6(publicIPv6).Execute()
+> DetachIPv6Response CloudIpv6DetachCreate(ctx, id).Execute()
 
 
 
@@ -3676,11 +3665,10 @@ import (
 
 func main() {
 	id := int32(56) // int32 | A unique integer value identifying this Public IPv6.
-	publicIPv6 := *openapiclient.NewPublicIPv6(int32(123), "Slug_example", "Address_example", "Gateway_example", int32(123), false, "Server_example") // PublicIPv6 |  (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.CloudAPI.CloudIpv6DetachCreate(context.Background(), id).PublicIPv6(publicIPv6).Execute()
+	resp, r, err := apiClient.CloudAPI.CloudIpv6DetachCreate(context.Background(), id).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `CloudAPI.CloudIpv6DetachCreate``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -3706,7 +3694,6 @@ Other parameters are passed through a pointer to a apiCloudIpv6DetachCreateReque
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
- **publicIPv6** | [**PublicIPv6**](PublicIPv6.md) |  | 
 
 ### Return type
 
@@ -3718,7 +3705,7 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
-- **Content-Type**: application/json
+- **Content-Type**: Not defined
 - **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
@@ -3794,7 +3781,7 @@ Name | Type | Description  | Notes
 
 ## CloudIpv6RdnsCreate
 
-> ReverseDNS CloudIpv6RdnsCreate(ctx, id).ReverseDNS(reverseDNS).Execute()
+> ReverseDNS CloudIpv6RdnsCreate(ctx, id).ReverseDNSRequest(reverseDNSRequest).Execute()
 
 
 
@@ -3814,11 +3801,11 @@ import (
 
 func main() {
 	id := int32(56) // int32 | A unique integer value identifying this Public IPv6.
-	reverseDNS := *openapiclient.NewReverseDNS("ReverseDns_example") // ReverseDNS | 
+	reverseDNSRequest := *openapiclient.NewReverseDNSRequest("ReverseDns_example") // ReverseDNSRequest | 
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.CloudAPI.CloudIpv6RdnsCreate(context.Background(), id).ReverseDNS(reverseDNS).Execute()
+	resp, r, err := apiClient.CloudAPI.CloudIpv6RdnsCreate(context.Background(), id).ReverseDNSRequest(reverseDNSRequest).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `CloudAPI.CloudIpv6RdnsCreate``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -3844,7 +3831,7 @@ Other parameters are passed through a pointer to a apiCloudIpv6RdnsCreateRequest
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
- **reverseDNS** | [**ReverseDNS**](ReverseDNS.md) |  | 
+ **reverseDNSRequest** | [**ReverseDNSRequest**](ReverseDNSRequest.md) |  | 
 
 ### Return type
 
@@ -4006,7 +3993,7 @@ Name | Type | Description  | Notes
 
 ## CloudPrivateNetworksAddServerCreate
 
-> AddServerResponse CloudPrivateNetworksAddServerCreate(ctx, id).PrivateNetworkAddHost(privateNetworkAddHost).Execute()
+> AddServerResponse CloudPrivateNetworksAddServerCreate(ctx, id).PrivateNetworkAddHostRequest(privateNetworkAddHostRequest).Execute()
 
 
 
@@ -4026,11 +4013,11 @@ import (
 
 func main() {
 	id := int32(56) // int32 | A unique integer value identifying this private network.
-	privateNetworkAddHost := *openapiclient.NewPrivateNetworkAddHost("Server_example") // PrivateNetworkAddHost | 
+	privateNetworkAddHostRequest := *openapiclient.NewPrivateNetworkAddHostRequest("Server_example") // PrivateNetworkAddHostRequest | 
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.CloudAPI.CloudPrivateNetworksAddServerCreate(context.Background(), id).PrivateNetworkAddHost(privateNetworkAddHost).Execute()
+	resp, r, err := apiClient.CloudAPI.CloudPrivateNetworksAddServerCreate(context.Background(), id).PrivateNetworkAddHostRequest(privateNetworkAddHostRequest).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `CloudAPI.CloudPrivateNetworksAddServerCreate``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -4056,7 +4043,7 @@ Other parameters are passed through a pointer to a apiCloudPrivateNetworksAddSer
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
- **privateNetworkAddHost** | [**PrivateNetworkAddHost**](PrivateNetworkAddHost.md) |  | 
+ **privateNetworkAddHostRequest** | [**PrivateNetworkAddHostRequest**](PrivateNetworkAddHostRequest.md) |  | 
 
 ### Return type
 
@@ -4078,7 +4065,7 @@ Name | Type | Description  | Notes
 
 ## CloudPrivateNetworksCreate
 
-> PrivateNetwork CloudPrivateNetworksCreate(ctx).PrivateNetwork(privateNetwork).Execute()
+> PrivateNetwork CloudPrivateNetworksCreate(ctx).PrivateNetworkRequest(privateNetworkRequest).Execute()
 
 
 
@@ -4097,11 +4084,11 @@ import (
 )
 
 func main() {
-	privateNetwork := *openapiclient.NewPrivateNetwork(int32(123), "Slug_example", "Address_example", false, []map[string]string{map[string]string{"key": "Inner_example"}}) // PrivateNetwork | 
+	privateNetworkRequest := *openapiclient.NewPrivateNetworkRequest("Address_example") // PrivateNetworkRequest | 
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.CloudAPI.CloudPrivateNetworksCreate(context.Background()).PrivateNetwork(privateNetwork).Execute()
+	resp, r, err := apiClient.CloudAPI.CloudPrivateNetworksCreate(context.Background()).PrivateNetworkRequest(privateNetworkRequest).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `CloudAPI.CloudPrivateNetworksCreate``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -4122,7 +4109,7 @@ Other parameters are passed through a pointer to a apiCloudPrivateNetworksCreate
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **privateNetwork** | [**PrivateNetwork**](PrivateNetwork.md) |  | 
+ **privateNetworkRequest** | [**PrivateNetworkRequest**](PrivateNetworkRequest.md) |  | 
 
 ### Return type
 
@@ -4278,7 +4265,7 @@ Name | Type | Description  | Notes
 
 ## CloudPrivateNetworksPartialUpdate
 
-> PrivateNetwork CloudPrivateNetworksPartialUpdate(ctx, id).PatchedPrivateNetwork(patchedPrivateNetwork).Execute()
+> PrivateNetwork CloudPrivateNetworksPartialUpdate(ctx, id).PatchedPrivateNetworkUpdateRequest(patchedPrivateNetworkUpdateRequest).Execute()
 
 
 
@@ -4298,11 +4285,11 @@ import (
 
 func main() {
 	id := int32(56) // int32 | A unique integer value identifying this private network.
-	patchedPrivateNetwork := *openapiclient.NewPatchedPrivateNetwork() // PatchedPrivateNetwork |  (optional)
+	patchedPrivateNetworkUpdateRequest := *openapiclient.NewPatchedPrivateNetworkUpdateRequest() // PatchedPrivateNetworkUpdateRequest |  (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.CloudAPI.CloudPrivateNetworksPartialUpdate(context.Background(), id).PatchedPrivateNetwork(patchedPrivateNetwork).Execute()
+	resp, r, err := apiClient.CloudAPI.CloudPrivateNetworksPartialUpdate(context.Background(), id).PatchedPrivateNetworkUpdateRequest(patchedPrivateNetworkUpdateRequest).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `CloudAPI.CloudPrivateNetworksPartialUpdate``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -4328,7 +4315,7 @@ Other parameters are passed through a pointer to a apiCloudPrivateNetworksPartia
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
- **patchedPrivateNetwork** | [**PatchedPrivateNetwork**](PatchedPrivateNetwork.md) |  | 
+ **patchedPrivateNetworkUpdateRequest** | [**PatchedPrivateNetworkUpdateRequest**](PatchedPrivateNetworkUpdateRequest.md) |  | 
 
 ### Return type
 
@@ -4350,7 +4337,7 @@ Name | Type | Description  | Notes
 
 ## CloudPrivateNetworksRemoveServerCreate
 
-> RemoveServerResponse CloudPrivateNetworksRemoveServerCreate(ctx, id).PrivateNetworkRemoveHost(privateNetworkRemoveHost).Execute()
+> RemoveServerResponse CloudPrivateNetworksRemoveServerCreate(ctx, id).PrivateNetworkRemoveHostRequest(privateNetworkRemoveHostRequest).Execute()
 
 
 
@@ -4370,11 +4357,11 @@ import (
 
 func main() {
 	id := int32(56) // int32 | A unique integer value identifying this private network.
-	privateNetworkRemoveHost := *openapiclient.NewPrivateNetworkRemoveHost("Server_example") // PrivateNetworkRemoveHost | 
+	privateNetworkRemoveHostRequest := *openapiclient.NewPrivateNetworkRemoveHostRequest("Server_example") // PrivateNetworkRemoveHostRequest | 
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.CloudAPI.CloudPrivateNetworksRemoveServerCreate(context.Background(), id).PrivateNetworkRemoveHost(privateNetworkRemoveHost).Execute()
+	resp, r, err := apiClient.CloudAPI.CloudPrivateNetworksRemoveServerCreate(context.Background(), id).PrivateNetworkRemoveHostRequest(privateNetworkRemoveHostRequest).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `CloudAPI.CloudPrivateNetworksRemoveServerCreate``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -4400,7 +4387,7 @@ Other parameters are passed through a pointer to a apiCloudPrivateNetworksRemove
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
- **privateNetworkRemoveHost** | [**PrivateNetworkRemoveHost**](PrivateNetworkRemoveHost.md) |  | 
+ **privateNetworkRemoveHostRequest** | [**PrivateNetworkRemoveHostRequest**](PrivateNetworkRemoveHostRequest.md) |  | 
 
 ### Return type
 
@@ -4492,7 +4479,7 @@ Name | Type | Description  | Notes
 
 ## CloudPrivateNetworksUpdate
 
-> PrivateNetwork CloudPrivateNetworksUpdate(ctx, id).PrivateNetwork(privateNetwork).Execute()
+> PrivateNetwork CloudPrivateNetworksUpdate(ctx, id).PrivateNetworkUpdateRequest(privateNetworkUpdateRequest).Execute()
 
 
 
@@ -4512,11 +4499,11 @@ import (
 
 func main() {
 	id := int32(56) // int32 | A unique integer value identifying this private network.
-	privateNetwork := *openapiclient.NewPrivateNetwork(int32(123), "Slug_example", "Address_example", false, []map[string]string{map[string]string{"key": "Inner_example"}}) // PrivateNetwork | 
+	privateNetworkUpdateRequest := *openapiclient.NewPrivateNetworkUpdateRequest() // PrivateNetworkUpdateRequest |  (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.CloudAPI.CloudPrivateNetworksUpdate(context.Background(), id).PrivateNetwork(privateNetwork).Execute()
+	resp, r, err := apiClient.CloudAPI.CloudPrivateNetworksUpdate(context.Background(), id).PrivateNetworkUpdateRequest(privateNetworkUpdateRequest).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `CloudAPI.CloudPrivateNetworksUpdate``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -4542,7 +4529,7 @@ Other parameters are passed through a pointer to a apiCloudPrivateNetworksUpdate
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
- **privateNetwork** | [**PrivateNetwork**](PrivateNetwork.md) |  | 
+ **privateNetworkUpdateRequest** | [**PrivateNetworkUpdateRequest**](PrivateNetworkUpdateRequest.md) |  | 
 
 ### Return type
 
@@ -4977,7 +4964,7 @@ Name | Type | Description  | Notes
 
 ## CloudServersBootIsosList
 
-> PaginatedBootISOList CloudServersBootIsosList(ctx, id).Page(page).Execute()
+> []BootISO CloudServersBootIsosList(ctx, id).Execute()
 
 
 
@@ -4997,16 +4984,15 @@ import (
 
 func main() {
 	id := int32(56) // int32 | A unique integer value identifying this virtual machine.
-	page := int32(56) // int32 | A page number within the paginated result set. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.CloudAPI.CloudServersBootIsosList(context.Background(), id).Page(page).Execute()
+	resp, r, err := apiClient.CloudAPI.CloudServersBootIsosList(context.Background(), id).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `CloudAPI.CloudServersBootIsosList``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `CloudServersBootIsosList`: PaginatedBootISOList
+	// response from `CloudServersBootIsosList`: []BootISO
 	fmt.Fprintf(os.Stdout, "Response from `CloudAPI.CloudServersBootIsosList`: %v\n", resp)
 }
 ```
@@ -5027,11 +5013,10 @@ Other parameters are passed through a pointer to a apiCloudServersBootIsosListRe
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
- **page** | **int32** | A page number within the paginated result set. | 
 
 ### Return type
 
-[**PaginatedBootISOList**](PaginatedBootISOList.md)
+[**[]BootISO**](BootISO.md)
 
 ### Authorization
 
@@ -5119,7 +5104,7 @@ Name | Type | Description  | Notes
 
 ## CloudServersCreate
 
-> ServerAddResponse CloudServersCreate(ctx).ServerAdd(serverAdd).Execute()
+> ServerAddResponse CloudServersCreate(ctx).ServerAddRequest(serverAddRequest).Execute()
 
 
 
@@ -5138,11 +5123,11 @@ import (
 )
 
 func main() {
-	serverAdd := *openapiclient.NewServerAdd("Image_example", "Package_example") // ServerAdd | 
+	serverAddRequest := *openapiclient.NewServerAddRequest("Image_example", "Package_example") // ServerAddRequest | 
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.CloudAPI.CloudServersCreate(context.Background()).ServerAdd(serverAdd).Execute()
+	resp, r, err := apiClient.CloudAPI.CloudServersCreate(context.Background()).ServerAddRequest(serverAddRequest).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `CloudAPI.CloudServersCreate``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -5163,7 +5148,7 @@ Other parameters are passed through a pointer to a apiCloudServersCreateRequest 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **serverAdd** | [**ServerAdd**](ServerAdd.md) |  | 
+ **serverAddRequest** | [**ServerAddRequest**](ServerAddRequest.md) |  | 
 
 ### Return type
 
@@ -5253,7 +5238,7 @@ Name | Type | Description  | Notes
 
 ## CloudServersDestroyProtectionCreate
 
-> DestroyProtectionResponse CloudServersDestroyProtectionCreate(ctx, id).DestroyProtection(destroyProtection).Execute()
+> DestroyProtectionResponse CloudServersDestroyProtectionCreate(ctx, id).DestroyProtectionRequest(destroyProtectionRequest).Execute()
 
 
 
@@ -5273,11 +5258,11 @@ import (
 
 func main() {
 	id := int32(56) // int32 | A unique integer value identifying this virtual machine.
-	destroyProtection := *openapiclient.NewDestroyProtection(false) // DestroyProtection | 
+	destroyProtectionRequest := *openapiclient.NewDestroyProtectionRequest(false) // DestroyProtectionRequest | 
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.CloudAPI.CloudServersDestroyProtectionCreate(context.Background(), id).DestroyProtection(destroyProtection).Execute()
+	resp, r, err := apiClient.CloudAPI.CloudServersDestroyProtectionCreate(context.Background(), id).DestroyProtectionRequest(destroyProtectionRequest).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `CloudAPI.CloudServersDestroyProtectionCreate``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -5303,7 +5288,7 @@ Other parameters are passed through a pointer to a apiCloudServersDestroyProtect
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
- **destroyProtection** | [**DestroyProtection**](DestroyProtection.md) |  | 
+ **destroyProtectionRequest** | [**DestroyProtectionRequest**](DestroyProtectionRequest.md) |  | 
 
 ### Return type
 
@@ -5533,7 +5518,7 @@ Name | Type | Description  | Notes
 
 ## CloudServersModifyPackageCreate
 
-> ServerUpgradeResponse CloudServersModifyPackageCreate(ctx, id).ServerProductUpgrade(serverProductUpgrade).Execute()
+> ServerUpgradeResponse CloudServersModifyPackageCreate(ctx, id).ServerProductUpgradeRequest(serverProductUpgradeRequest).Execute()
 
 
 
@@ -5553,11 +5538,11 @@ import (
 
 func main() {
 	id := int32(56) // int32 | A unique integer value identifying this virtual machine.
-	serverProductUpgrade := *openapiclient.NewServerProductUpgrade("Package_example") // ServerProductUpgrade | 
+	serverProductUpgradeRequest := *openapiclient.NewServerProductUpgradeRequest("Package_example") // ServerProductUpgradeRequest | 
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.CloudAPI.CloudServersModifyPackageCreate(context.Background(), id).ServerProductUpgrade(serverProductUpgrade).Execute()
+	resp, r, err := apiClient.CloudAPI.CloudServersModifyPackageCreate(context.Background(), id).ServerProductUpgradeRequest(serverProductUpgradeRequest).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `CloudAPI.CloudServersModifyPackageCreate``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -5583,7 +5568,7 @@ Other parameters are passed through a pointer to a apiCloudServersModifyPackageC
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
- **serverProductUpgrade** | [**ServerProductUpgrade**](ServerProductUpgrade.md) |  | 
+ **serverProductUpgradeRequest** | [**ServerProductUpgradeRequest**](ServerProductUpgradeRequest.md) |  | 
 
 ### Return type
 
@@ -5605,7 +5590,7 @@ Name | Type | Description  | Notes
 
 ## CloudServersPartialUpdate
 
-> ServerDetail CloudServersPartialUpdate(ctx, id).PatchedServerDetail(patchedServerDetail).Execute()
+> ServerDetail CloudServersPartialUpdate(ctx, id).PatchedServerDetailRequest(patchedServerDetailRequest).Execute()
 
 
 
@@ -5625,11 +5610,11 @@ import (
 
 func main() {
 	id := int32(56) // int32 | A unique integer value identifying this virtual machine.
-	patchedServerDetail := *openapiclient.NewPatchedServerDetail() // PatchedServerDetail |  (optional)
+	patchedServerDetailRequest := *openapiclient.NewPatchedServerDetailRequest() // PatchedServerDetailRequest |  (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.CloudAPI.CloudServersPartialUpdate(context.Background(), id).PatchedServerDetail(patchedServerDetail).Execute()
+	resp, r, err := apiClient.CloudAPI.CloudServersPartialUpdate(context.Background(), id).PatchedServerDetailRequest(patchedServerDetailRequest).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `CloudAPI.CloudServersPartialUpdate``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -5655,7 +5640,7 @@ Other parameters are passed through a pointer to a apiCloudServersPartialUpdateR
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
- **patchedServerDetail** | [**PatchedServerDetail**](PatchedServerDetail.md) |  | 
+ **patchedServerDetailRequest** | [**PatchedServerDetailRequest**](PatchedServerDetailRequest.md) |  | 
 
 ### Return type
 
@@ -5819,7 +5804,7 @@ Name | Type | Description  | Notes
 
 ## CloudServersPublicInterfaceCreate
 
-> PublicInterface CloudServersPublicInterfaceCreate(ctx, id).PublicInterface(publicInterface).Execute()
+> PublicInterface CloudServersPublicInterfaceCreate(ctx, id).PublicInterfaceRequest(publicInterfaceRequest).Execute()
 
 
 
@@ -5839,11 +5824,11 @@ import (
 
 func main() {
 	id := int32(56) // int32 | A unique integer value identifying this virtual machine.
-	publicInterface := *openapiclient.NewPublicInterface("Interface_example", "Ipv4_example", "Ipv6_example") // PublicInterface |  (optional)
+	publicInterfaceRequest := *openapiclient.NewPublicInterfaceRequest() // PublicInterfaceRequest |  (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.CloudAPI.CloudServersPublicInterfaceCreate(context.Background(), id).PublicInterface(publicInterface).Execute()
+	resp, r, err := apiClient.CloudAPI.CloudServersPublicInterfaceCreate(context.Background(), id).PublicInterfaceRequest(publicInterfaceRequest).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `CloudAPI.CloudServersPublicInterfaceCreate``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -5869,7 +5854,7 @@ Other parameters are passed through a pointer to a apiCloudServersPublicInterfac
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
- **publicInterface** | [**PublicInterface**](PublicInterface.md) |  | 
+ **publicInterfaceRequest** | [**PublicInterfaceRequest**](PublicInterfaceRequest.md) |  | 
 
 ### Return type
 
@@ -6311,7 +6296,7 @@ Name | Type | Description  | Notes
 
 ## CloudServersSnapshotsCreate
 
-> PaginatedSnapshotList CloudServersSnapshotsCreate(ctx, id).SnapshotCreate(snapshotCreate).Page(page).Execute()
+> SnapshotCreateQueued CloudServersSnapshotsCreate(ctx, id).SnapshotCreateRequest(snapshotCreateRequest).Execute()
 
 
 
@@ -6331,17 +6316,16 @@ import (
 
 func main() {
 	id := int32(56) // int32 | A unique integer value identifying this virtual machine.
-	snapshotCreate := *openapiclient.NewSnapshotCreate("Name_example") // SnapshotCreate | 
-	page := int32(56) // int32 | A page number within the paginated result set. (optional)
+	snapshotCreateRequest := *openapiclient.NewSnapshotCreateRequest("Name_example") // SnapshotCreateRequest | 
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.CloudAPI.CloudServersSnapshotsCreate(context.Background(), id).SnapshotCreate(snapshotCreate).Page(page).Execute()
+	resp, r, err := apiClient.CloudAPI.CloudServersSnapshotsCreate(context.Background(), id).SnapshotCreateRequest(snapshotCreateRequest).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `CloudAPI.CloudServersSnapshotsCreate``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `CloudServersSnapshotsCreate`: PaginatedSnapshotList
+	// response from `CloudServersSnapshotsCreate`: SnapshotCreateQueued
 	fmt.Fprintf(os.Stdout, "Response from `CloudAPI.CloudServersSnapshotsCreate`: %v\n", resp)
 }
 ```
@@ -6362,12 +6346,11 @@ Other parameters are passed through a pointer to a apiCloudServersSnapshotsCreat
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
- **snapshotCreate** | [**SnapshotCreate**](SnapshotCreate.md) |  | 
- **page** | **int32** | A page number within the paginated result set. | 
+ **snapshotCreateRequest** | [**SnapshotCreateRequest**](SnapshotCreateRequest.md) |  | 
 
 ### Return type
 
-[**PaginatedSnapshotList**](PaginatedSnapshotList.md)
+[**SnapshotCreateQueued**](SnapshotCreateQueued.md)
 
 ### Authorization
 
@@ -6458,7 +6441,7 @@ Name | Type | Description  | Notes
 
 ## CloudServersSnapshotsList
 
-> PaginatedSnapshotList CloudServersSnapshotsList(ctx, id).Page(page).Execute()
+> []Snapshot CloudServersSnapshotsList(ctx, id).Execute()
 
 
 
@@ -6478,16 +6461,15 @@ import (
 
 func main() {
 	id := int32(56) // int32 | A unique integer value identifying this virtual machine.
-	page := int32(56) // int32 | A page number within the paginated result set. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.CloudAPI.CloudServersSnapshotsList(context.Background(), id).Page(page).Execute()
+	resp, r, err := apiClient.CloudAPI.CloudServersSnapshotsList(context.Background(), id).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `CloudAPI.CloudServersSnapshotsList``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `CloudServersSnapshotsList`: PaginatedSnapshotList
+	// response from `CloudServersSnapshotsList`: []Snapshot
 	fmt.Fprintf(os.Stdout, "Response from `CloudAPI.CloudServersSnapshotsList`: %v\n", resp)
 }
 ```
@@ -6508,11 +6490,10 @@ Other parameters are passed through a pointer to a apiCloudServersSnapshotsListR
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
- **page** | **int32** | A page number within the paginated result set. | 
 
 ### Return type
 
-[**PaginatedSnapshotList**](PaginatedSnapshotList.md)
+[**[]Snapshot**](Snapshot.md)
 
 ### Authorization
 
@@ -6601,9 +6582,9 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
-## CloudServersUpdate
+## CloudServersTrafficRetrieve
 
-> ServerDetail CloudServersUpdate(ctx, id).ServerDetail(serverDetail).Execute()
+> ServerTrafficResponse CloudServersTrafficRetrieve(ctx, id).Execute()
 
 
 
@@ -6623,11 +6604,81 @@ import (
 
 func main() {
 	id := int32(56) // int32 | A unique integer value identifying this virtual machine.
-	serverDetail := *openapiclient.NewServerDetail(int32(123), "Hostname_example", "Image_example", "Package_example", int32(123), int32(123), int32(123), "Generation_example", map[string]interface{}{"key": interface{}(123)}, []openapiclient.Volume{*openapiclient.NewVolume(int32(123), int32(123), "Product_example", false, "Server_example")}, map[string]interface{}{"key": interface{}(123)}, []openapiclient.FloatingIPSummary{*openapiclient.NewFloatingIPSummary(int32(123), openapiclient.VersionEnum("ipv4"), "Address_example", "Label_example", "ReverseDns_example")}, openapiclient.ResourceStatusEnum("pending"), "Username_example", false, false, false, false, "BootIso_example", false) // ServerDetail |  (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.CloudAPI.CloudServersUpdate(context.Background(), id).ServerDetail(serverDetail).Execute()
+	resp, r, err := apiClient.CloudAPI.CloudServersTrafficRetrieve(context.Background(), id).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `CloudAPI.CloudServersTrafficRetrieve``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `CloudServersTrafficRetrieve`: ServerTrafficResponse
+	fmt.Fprintf(os.Stdout, "Response from `CloudAPI.CloudServersTrafficRetrieve`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**id** | **int32** | A unique integer value identifying this virtual machine. | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiCloudServersTrafficRetrieveRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+### Return type
+
+[**ServerTrafficResponse**](ServerTrafficResponse.md)
+
+### Authorization
+
+[tokenAuth](../README.md#tokenAuth), [cookieAuth](../README.md#cookieAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## CloudServersUpdate
+
+> ServerDetail CloudServersUpdate(ctx, id).ServerDetailRequest(serverDetailRequest).Execute()
+
+
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/pidginhost/sdk-go"
+)
+
+func main() {
+	id := int32(56) // int32 | A unique integer value identifying this virtual machine.
+	serverDetailRequest := *openapiclient.NewServerDetailRequest() // ServerDetailRequest |  (optional)
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.CloudAPI.CloudServersUpdate(context.Background(), id).ServerDetailRequest(serverDetailRequest).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `CloudAPI.CloudServersUpdate``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -6653,7 +6704,7 @@ Other parameters are passed through a pointer to a apiCloudServersUpdateRequest 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
- **serverDetail** | [**ServerDetail**](ServerDetail.md) |  | 
+ **serverDetailRequest** | [**ServerDetailRequest**](ServerDetailRequest.md) |  | 
 
 ### Return type
 
@@ -6745,7 +6796,7 @@ Name | Type | Description  | Notes
 
 ## CloudServersVolumesCreate
 
-> Volume CloudServersVolumesCreate(ctx, serverId).Volume(volume).Execute()
+> Volume CloudServersVolumesCreate(ctx, serverId).VolumeRequest(volumeRequest).Execute()
 
 
 
@@ -6765,11 +6816,11 @@ import (
 
 func main() {
 	serverId := "serverId_example" // string | 
-	volume := *openapiclient.NewVolume(int32(123), int32(123), "Product_example", false, "Server_example") // Volume | 
+	volumeRequest := *openapiclient.NewVolumeRequest(int32(123), "Product_example") // VolumeRequest | 
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.CloudAPI.CloudServersVolumesCreate(context.Background(), serverId).Volume(volume).Execute()
+	resp, r, err := apiClient.CloudAPI.CloudServersVolumesCreate(context.Background(), serverId).VolumeRequest(volumeRequest).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `CloudAPI.CloudServersVolumesCreate``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -6795,7 +6846,7 @@ Other parameters are passed through a pointer to a apiCloudServersVolumesCreateR
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
- **volume** | [**Volume**](Volume.md) |  | 
+ **volumeRequest** | [**VolumeRequest**](VolumeRequest.md) |  | 
 
 ### Return type
 
@@ -6958,7 +7009,7 @@ Name | Type | Description  | Notes
 
 ## CloudServersVolumesPartialUpdate
 
-> Volume CloudServersVolumesPartialUpdate(ctx, serverId, volumeId).PatchedVolume(patchedVolume).Execute()
+> Volume CloudServersVolumesPartialUpdate(ctx, serverId, volumeId).PatchedVolumeUpdateRequest(patchedVolumeUpdateRequest).Execute()
 
 
 
@@ -6979,11 +7030,11 @@ import (
 func main() {
 	serverId := "serverId_example" // string | 
 	volumeId := "volumeId_example" // string | 
-	patchedVolume := *openapiclient.NewPatchedVolume() // PatchedVolume |  (optional)
+	patchedVolumeUpdateRequest := *openapiclient.NewPatchedVolumeUpdateRequest() // PatchedVolumeUpdateRequest |  (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.CloudAPI.CloudServersVolumesPartialUpdate(context.Background(), serverId, volumeId).PatchedVolume(patchedVolume).Execute()
+	resp, r, err := apiClient.CloudAPI.CloudServersVolumesPartialUpdate(context.Background(), serverId, volumeId).PatchedVolumeUpdateRequest(patchedVolumeUpdateRequest).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `CloudAPI.CloudServersVolumesPartialUpdate``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -7011,7 +7062,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
 
- **patchedVolume** | [**PatchedVolume**](PatchedVolume.md) |  | 
+ **patchedVolumeUpdateRequest** | [**PatchedVolumeUpdateRequest**](PatchedVolumeUpdateRequest.md) |  | 
 
 ### Return type
 
@@ -7106,7 +7157,7 @@ Name | Type | Description  | Notes
 
 ## CloudServersVolumesUpdate
 
-> Volume CloudServersVolumesUpdate(ctx, serverId, volumeId).Volume(volume).Execute()
+> Volume CloudServersVolumesUpdate(ctx, serverId, volumeId).VolumeUpdateRequest(volumeUpdateRequest).Execute()
 
 
 
@@ -7127,11 +7178,11 @@ import (
 func main() {
 	serverId := "serverId_example" // string | 
 	volumeId := "volumeId_example" // string | 
-	volume := *openapiclient.NewVolume(int32(123), int32(123), "Product_example", false, "Server_example") // Volume | 
+	volumeUpdateRequest := *openapiclient.NewVolumeUpdateRequest(int32(123)) // VolumeUpdateRequest | 
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.CloudAPI.CloudServersVolumesUpdate(context.Background(), serverId, volumeId).Volume(volume).Execute()
+	resp, r, err := apiClient.CloudAPI.CloudServersVolumesUpdate(context.Background(), serverId, volumeId).VolumeUpdateRequest(volumeUpdateRequest).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `CloudAPI.CloudServersVolumesUpdate``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -7159,7 +7210,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
 
- **volume** | [**Volume**](Volume.md) |  | 
+ **volumeUpdateRequest** | [**VolumeUpdateRequest**](VolumeUpdateRequest.md) |  | 
 
 ### Return type
 
@@ -7317,7 +7368,7 @@ Name | Type | Description  | Notes
 
 ## CloudVolumesAttachCreate
 
-> AttachVolume CloudVolumesAttachCreate(ctx, id).AttachVolume(attachVolume).Execute()
+> AttachVolume CloudVolumesAttachCreate(ctx, id).AttachVolumeRequest(attachVolumeRequest).Execute()
 
 
 
@@ -7337,11 +7388,11 @@ import (
 
 func main() {
 	id := int32(56) // int32 | A unique integer value identifying this storage.
-	attachVolume := *openapiclient.NewAttachVolume(int32(123)) // AttachVolume | 
+	attachVolumeRequest := *openapiclient.NewAttachVolumeRequest(int32(123)) // AttachVolumeRequest | 
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.CloudAPI.CloudVolumesAttachCreate(context.Background(), id).AttachVolume(attachVolume).Execute()
+	resp, r, err := apiClient.CloudAPI.CloudVolumesAttachCreate(context.Background(), id).AttachVolumeRequest(attachVolumeRequest).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `CloudAPI.CloudVolumesAttachCreate``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -7367,7 +7418,7 @@ Other parameters are passed through a pointer to a apiCloudVolumesAttachCreateRe
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
- **attachVolume** | [**AttachVolume**](AttachVolume.md) |  | 
+ **attachVolumeRequest** | [**AttachVolumeRequest**](AttachVolumeRequest.md) |  | 
 
 ### Return type
 
@@ -7457,7 +7508,7 @@ Name | Type | Description  | Notes
 
 ## CloudVolumesDetachCreate
 
-> DetachVolume CloudVolumesDetachCreate(ctx, id).Volume(volume).Execute()
+> DetachVolume CloudVolumesDetachCreate(ctx, id).Execute()
 
 
 
@@ -7477,11 +7528,10 @@ import (
 
 func main() {
 	id := int32(56) // int32 | A unique integer value identifying this storage.
-	volume := *openapiclient.NewVolume(int32(123), int32(123), "Product_example", false, "Server_example") // Volume | 
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.CloudAPI.CloudVolumesDetachCreate(context.Background(), id).Volume(volume).Execute()
+	resp, r, err := apiClient.CloudAPI.CloudVolumesDetachCreate(context.Background(), id).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `CloudAPI.CloudVolumesDetachCreate``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -7507,7 +7557,6 @@ Other parameters are passed through a pointer to a apiCloudVolumesDetachCreateRe
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
- **volume** | [**Volume**](Volume.md) |  | 
 
 ### Return type
 
@@ -7519,7 +7568,7 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
-- **Content-Type**: application/json
+- **Content-Type**: Not defined
 - **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
@@ -7590,7 +7639,7 @@ Other parameters are passed through a pointer to a apiCloudVolumesListRequest st
 
 ## CloudVolumesPartialUpdate
 
-> Volume CloudVolumesPartialUpdate(ctx, id).PatchedVolume(patchedVolume).Execute()
+> Volume CloudVolumesPartialUpdate(ctx, id).PatchedVolumeUpdateRequest(patchedVolumeUpdateRequest).Execute()
 
 
 
@@ -7610,11 +7659,11 @@ import (
 
 func main() {
 	id := int32(56) // int32 | A unique integer value identifying this storage.
-	patchedVolume := *openapiclient.NewPatchedVolume() // PatchedVolume |  (optional)
+	patchedVolumeUpdateRequest := *openapiclient.NewPatchedVolumeUpdateRequest() // PatchedVolumeUpdateRequest |  (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.CloudAPI.CloudVolumesPartialUpdate(context.Background(), id).PatchedVolume(patchedVolume).Execute()
+	resp, r, err := apiClient.CloudAPI.CloudVolumesPartialUpdate(context.Background(), id).PatchedVolumeUpdateRequest(patchedVolumeUpdateRequest).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `CloudAPI.CloudVolumesPartialUpdate``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -7640,7 +7689,7 @@ Other parameters are passed through a pointer to a apiCloudVolumesPartialUpdateR
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
- **patchedVolume** | [**PatchedVolume**](PatchedVolume.md) |  | 
+ **patchedVolumeUpdateRequest** | [**PatchedVolumeUpdateRequest**](PatchedVolumeUpdateRequest.md) |  | 
 
 ### Return type
 
@@ -7732,7 +7781,7 @@ Name | Type | Description  | Notes
 
 ## CloudVolumesUpdate
 
-> Volume CloudVolumesUpdate(ctx, id).Volume(volume).Execute()
+> Volume CloudVolumesUpdate(ctx, id).VolumeUpdateRequest(volumeUpdateRequest).Execute()
 
 
 
@@ -7752,11 +7801,11 @@ import (
 
 func main() {
 	id := int32(56) // int32 | A unique integer value identifying this storage.
-	volume := *openapiclient.NewVolume(int32(123), int32(123), "Product_example", false, "Server_example") // Volume | 
+	volumeUpdateRequest := *openapiclient.NewVolumeUpdateRequest(int32(123)) // VolumeUpdateRequest | 
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.CloudAPI.CloudVolumesUpdate(context.Background(), id).Volume(volume).Execute()
+	resp, r, err := apiClient.CloudAPI.CloudVolumesUpdate(context.Background(), id).VolumeUpdateRequest(volumeUpdateRequest).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `CloudAPI.CloudVolumesUpdate``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -7782,7 +7831,7 @@ Other parameters are passed through a pointer to a apiCloudVolumesUpdateRequest 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
- **volume** | [**Volume**](Volume.md) |  | 
+ **volumeUpdateRequest** | [**VolumeUpdateRequest**](VolumeUpdateRequest.md) |  | 
 
 ### Return type
 

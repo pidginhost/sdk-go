@@ -15,14 +15,14 @@ Name | Type | Description | Notes
 **BounceRatePct** | **string** |  | [readonly] 
 **ComplaintRatePct** | **string** |  | [readonly] 
 **DedicatedIpAddon** | **bool** |  | [readonly] 
-**QuotaMonthly** | **string** |  | [readonly] 
-**PriceMonthlyEur** | **string** |  | [readonly] 
+**QuotaMonthly** | **int32** |  | [readonly] 
+**PriceMonthlyEur** | **float64** |  | [readonly] 
 
 ## Methods
 
 ### NewEmailService
 
-`func NewEmailService(id int32, tier string, status ResourceStatusEnum, sandboxMode bool, autoSuspended bool, autoSuspendReason string, msgsSent24h int32, msgsSent30d int32, bounceRatePct string, complaintRatePct string, dedicatedIpAddon bool, quotaMonthly string, priceMonthlyEur string, ) *EmailService`
+`func NewEmailService(id int32, tier string, status ResourceStatusEnum, sandboxMode bool, autoSuspended bool, autoSuspendReason string, msgsSent24h int32, msgsSent30d int32, bounceRatePct string, complaintRatePct string, dedicatedIpAddon bool, quotaMonthly int32, priceMonthlyEur float64, ) *EmailService`
 
 NewEmailService instantiates a new EmailService object
 This constructor will assign default values to properties that have it defined,
@@ -259,40 +259,40 @@ SetDedicatedIpAddon sets DedicatedIpAddon field to given value.
 
 ### GetQuotaMonthly
 
-`func (o *EmailService) GetQuotaMonthly() string`
+`func (o *EmailService) GetQuotaMonthly() int32`
 
 GetQuotaMonthly returns the QuotaMonthly field if non-nil, zero value otherwise.
 
 ### GetQuotaMonthlyOk
 
-`func (o *EmailService) GetQuotaMonthlyOk() (*string, bool)`
+`func (o *EmailService) GetQuotaMonthlyOk() (*int32, bool)`
 
 GetQuotaMonthlyOk returns a tuple with the QuotaMonthly field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetQuotaMonthly
 
-`func (o *EmailService) SetQuotaMonthly(v string)`
+`func (o *EmailService) SetQuotaMonthly(v int32)`
 
 SetQuotaMonthly sets QuotaMonthly field to given value.
 
 
 ### GetPriceMonthlyEur
 
-`func (o *EmailService) GetPriceMonthlyEur() string`
+`func (o *EmailService) GetPriceMonthlyEur() float64`
 
 GetPriceMonthlyEur returns the PriceMonthlyEur field if non-nil, zero value otherwise.
 
 ### GetPriceMonthlyEurOk
 
-`func (o *EmailService) GetPriceMonthlyEurOk() (*string, bool)`
+`func (o *EmailService) GetPriceMonthlyEurOk() (*float64, bool)`
 
 GetPriceMonthlyEurOk returns a tuple with the PriceMonthlyEur field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetPriceMonthlyEur
 
-`func (o *EmailService) SetPriceMonthlyEur(v string)`
+`func (o *EmailService) SetPriceMonthlyEur(v float64)`
 
 SetPriceMonthlyEur sets PriceMonthlyEur field to given value.
 

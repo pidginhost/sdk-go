@@ -7,15 +7,14 @@ Name | Type | Description | Notes
 **Id** | **int32** |  | [readonly] 
 **Package** | **string** |  | [readonly] 
 **Generation** | **string** |  | [readonly] 
-**Size** | **string** |  | [readonly] 
+**Size** | **int32** |  | [readonly] 
 **Nodes** | [**[]ResourcePoolNode**](ResourcePoolNode.md) |  | [readonly] 
-**NewSize** | Pointer to **int32** |  | [optional] 
 
 ## Methods
 
 ### NewResourcePool
 
-`func NewResourcePool(id int32, package_ string, generation string, size string, nodes []ResourcePoolNode, ) *ResourcePool`
+`func NewResourcePool(id int32, package_ string, generation string, size int32, nodes []ResourcePoolNode, ) *ResourcePool`
 
 NewResourcePool instantiates a new ResourcePool object
 This constructor will assign default values to properties that have it defined,
@@ -92,20 +91,20 @@ SetGeneration sets Generation field to given value.
 
 ### GetSize
 
-`func (o *ResourcePool) GetSize() string`
+`func (o *ResourcePool) GetSize() int32`
 
 GetSize returns the Size field if non-nil, zero value otherwise.
 
 ### GetSizeOk
 
-`func (o *ResourcePool) GetSizeOk() (*string, bool)`
+`func (o *ResourcePool) GetSizeOk() (*int32, bool)`
 
 GetSizeOk returns a tuple with the Size field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetSize
 
-`func (o *ResourcePool) SetSize(v string)`
+`func (o *ResourcePool) SetSize(v int32)`
 
 SetSize sets Size field to given value.
 
@@ -129,31 +128,6 @@ and a boolean to check if the value has been set.
 
 SetNodes sets Nodes field to given value.
 
-
-### GetNewSize
-
-`func (o *ResourcePool) GetNewSize() int32`
-
-GetNewSize returns the NewSize field if non-nil, zero value otherwise.
-
-### GetNewSizeOk
-
-`func (o *ResourcePool) GetNewSizeOk() (*int32, bool)`
-
-GetNewSizeOk returns a tuple with the NewSize field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetNewSize
-
-`func (o *ResourcePool) SetNewSize(v int32)`
-
-SetNewSize sets NewSize field to given value.
-
-### HasNewSize
-
-`func (o *ResourcePool) HasNewSize() bool`
-
-HasNewSize returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

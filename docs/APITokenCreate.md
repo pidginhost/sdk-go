@@ -9,14 +9,14 @@ Name | Type | Description | Notes
 **Scope** | Pointer to [**ScopeEnum**](ScopeEnum.md) |  | [optional] 
 **Key** | **string** |  | [readonly] 
 **Created** | **string** |  | [readonly] 
-**Account** | **NullableString** |  | [readonly] 
-**MembershipStatus** | **NullableString** |  | [readonly] 
+**Account** | Pointer to **NullableString** |  | [optional] 
+**MembershipStatus** | Pointer to **NullableString** |  | [optional] 
 
 ## Methods
 
 ### NewAPITokenCreate
 
-`func NewAPITokenCreate(id int32, name string, key string, created string, account NullableString, membershipStatus NullableString, ) *APITokenCreate`
+`func NewAPITokenCreate(id int32, name string, key string, created string, ) *APITokenCreate`
 
 NewAPITokenCreate instantiates a new APITokenCreate object
 This constructor will assign default values to properties that have it defined,
@@ -155,6 +155,11 @@ and a boolean to check if the value has been set.
 
 SetAccount sets Account field to given value.
 
+### HasAccount
+
+`func (o *APITokenCreate) HasAccount() bool`
+
+HasAccount returns a boolean if a field has been set.
 
 ### SetAccountNil
 
@@ -185,6 +190,11 @@ and a boolean to check if the value has been set.
 
 SetMembershipStatus sets MembershipStatus field to given value.
 
+### HasMembershipStatus
+
+`func (o *APITokenCreate) HasMembershipStatus() bool`
+
+HasMembershipStatus returns a boolean if a field has been set.
 
 ### SetMembershipStatusNil
 

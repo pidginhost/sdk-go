@@ -33,8 +33,8 @@ type EmailService struct {
 	BounceRatePct string `json:"bounce_rate_pct" validate:"regexp=^-?\\d{0\\,3}(?:\\.\\d{0\\,2})?$"`
 	ComplaintRatePct string `json:"complaint_rate_pct" validate:"regexp=^-?\\d{0\\,3}(?:\\.\\d{0\\,2})?$"`
 	DedicatedIpAddon bool `json:"dedicated_ip_addon"`
-	QuotaMonthly string `json:"quota_monthly"`
-	PriceMonthlyEur string `json:"price_monthly_eur"`
+	QuotaMonthly int32 `json:"quota_monthly"`
+	PriceMonthlyEur float64 `json:"price_monthly_eur"`
 }
 
 type _EmailService EmailService
@@ -43,7 +43,7 @@ type _EmailService EmailService
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewEmailService(id int32, tier string, status ResourceStatusEnum, sandboxMode bool, autoSuspended bool, autoSuspendReason string, msgsSent24h int32, msgsSent30d int32, bounceRatePct string, complaintRatePct string, dedicatedIpAddon bool, quotaMonthly string, priceMonthlyEur string) *EmailService {
+func NewEmailService(id int32, tier string, status ResourceStatusEnum, sandboxMode bool, autoSuspended bool, autoSuspendReason string, msgsSent24h int32, msgsSent30d int32, bounceRatePct string, complaintRatePct string, dedicatedIpAddon bool, quotaMonthly int32, priceMonthlyEur float64) *EmailService {
 	this := EmailService{}
 	this.Id = id
 	this.Tier = tier
@@ -334,9 +334,9 @@ func (o *EmailService) SetDedicatedIpAddon(v bool) {
 }
 
 // GetQuotaMonthly returns the QuotaMonthly field value
-func (o *EmailService) GetQuotaMonthly() string {
+func (o *EmailService) GetQuotaMonthly() int32 {
 	if o == nil {
-		var ret string
+		var ret int32
 		return ret
 	}
 
@@ -345,7 +345,7 @@ func (o *EmailService) GetQuotaMonthly() string {
 
 // GetQuotaMonthlyOk returns a tuple with the QuotaMonthly field value
 // and a boolean to check if the value has been set.
-func (o *EmailService) GetQuotaMonthlyOk() (*string, bool) {
+func (o *EmailService) GetQuotaMonthlyOk() (*int32, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -353,14 +353,14 @@ func (o *EmailService) GetQuotaMonthlyOk() (*string, bool) {
 }
 
 // SetQuotaMonthly sets field value
-func (o *EmailService) SetQuotaMonthly(v string) {
+func (o *EmailService) SetQuotaMonthly(v int32) {
 	o.QuotaMonthly = v
 }
 
 // GetPriceMonthlyEur returns the PriceMonthlyEur field value
-func (o *EmailService) GetPriceMonthlyEur() string {
+func (o *EmailService) GetPriceMonthlyEur() float64 {
 	if o == nil {
-		var ret string
+		var ret float64
 		return ret
 	}
 
@@ -369,7 +369,7 @@ func (o *EmailService) GetPriceMonthlyEur() string {
 
 // GetPriceMonthlyEurOk returns a tuple with the PriceMonthlyEur field value
 // and a boolean to check if the value has been set.
-func (o *EmailService) GetPriceMonthlyEurOk() (*string, bool) {
+func (o *EmailService) GetPriceMonthlyEurOk() (*float64, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -377,7 +377,7 @@ func (o *EmailService) GetPriceMonthlyEurOk() (*string, bool) {
 }
 
 // SetPriceMonthlyEur sets field value
-func (o *EmailService) SetPriceMonthlyEur(v string) {
+func (o *EmailService) SetPriceMonthlyEur(v float64) {
 	o.PriceMonthlyEur = v
 }
 

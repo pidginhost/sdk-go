@@ -6,13 +6,13 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Id** | **int32** |  | [readonly] 
 **Name** | **string** |  | 
-**Ip** | **string** |  | [readonly] 
+**Ip** | **NullableString** |  | [readonly] 
 
 ## Methods
 
 ### NewResourcePoolNode
 
-`func NewResourcePoolNode(id int32, name string, ip string, ) *ResourcePoolNode`
+`func NewResourcePoolNode(id int32, name string, ip NullableString, ) *ResourcePoolNode`
 
 NewResourcePoolNode instantiates a new ResourcePoolNode object
 This constructor will assign default values to properties that have it defined,
@@ -87,6 +87,16 @@ and a boolean to check if the value has been set.
 SetIp sets Ip field to given value.
 
 
+### SetIpNil
+
+`func (o *ResourcePoolNode) SetIpNil(b bool)`
+
+ SetIpNil sets the value for Ip to be an explicit nil
+
+### UnsetIp
+`func (o *ResourcePoolNode) UnsetIp()`
+
+UnsetIp ensures that no value is present for Ip, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

@@ -30,9 +30,9 @@ type HostingService struct {
 	NextInvoice string `json:"next_invoice"`
 	Created string `json:"created"`
 	BillingCycle string `json:"billing_cycle"`
-	PackageName string `json:"package_name"`
-	NodeUrl string `json:"node_url"`
-	Username string `json:"username"`
+	PackageName NullableString `json:"package_name"`
+	NodeUrl NullableString `json:"node_url"`
+	Username NullableString `json:"username"`
 }
 
 type _HostingService HostingService
@@ -41,7 +41,7 @@ type _HostingService HostingService
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewHostingService(id int32, hostname string, status ServiceStatusEnum, price string, nextInvoice string, created string, billingCycle string, packageName string, nodeUrl string, username string) *HostingService {
+func NewHostingService(id int32, hostname string, status ServiceStatusEnum, price string, nextInvoice string, created string, billingCycle string, packageName NullableString, nodeUrl NullableString, username NullableString) *HostingService {
 	this := HostingService{}
 	this.Id = id
 	this.Hostname = hostname
@@ -233,75 +233,81 @@ func (o *HostingService) SetBillingCycle(v string) {
 }
 
 // GetPackageName returns the PackageName field value
+// If the value is explicit nil, the zero value for string will be returned
 func (o *HostingService) GetPackageName() string {
-	if o == nil {
+	if o == nil || o.PackageName.Get() == nil {
 		var ret string
 		return ret
 	}
 
-	return o.PackageName
+	return *o.PackageName.Get()
 }
 
 // GetPackageNameOk returns a tuple with the PackageName field value
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *HostingService) GetPackageNameOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return &o.PackageName, true
+	return o.PackageName.Get(), o.PackageName.IsSet()
 }
 
 // SetPackageName sets field value
 func (o *HostingService) SetPackageName(v string) {
-	o.PackageName = v
+	o.PackageName.Set(&v)
 }
 
 // GetNodeUrl returns the NodeUrl field value
+// If the value is explicit nil, the zero value for string will be returned
 func (o *HostingService) GetNodeUrl() string {
-	if o == nil {
+	if o == nil || o.NodeUrl.Get() == nil {
 		var ret string
 		return ret
 	}
 
-	return o.NodeUrl
+	return *o.NodeUrl.Get()
 }
 
 // GetNodeUrlOk returns a tuple with the NodeUrl field value
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *HostingService) GetNodeUrlOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return &o.NodeUrl, true
+	return o.NodeUrl.Get(), o.NodeUrl.IsSet()
 }
 
 // SetNodeUrl sets field value
 func (o *HostingService) SetNodeUrl(v string) {
-	o.NodeUrl = v
+	o.NodeUrl.Set(&v)
 }
 
 // GetUsername returns the Username field value
+// If the value is explicit nil, the zero value for string will be returned
 func (o *HostingService) GetUsername() string {
-	if o == nil {
+	if o == nil || o.Username.Get() == nil {
 		var ret string
 		return ret
 	}
 
-	return o.Username
+	return *o.Username.Get()
 }
 
 // GetUsernameOk returns a tuple with the Username field value
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *HostingService) GetUsernameOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return &o.Username, true
+	return o.Username.Get(), o.Username.IsSet()
 }
 
 // SetUsername sets field value
 func (o *HostingService) SetUsername(v string) {
-	o.Username = v
+	o.Username.Set(&v)
 }
 
 func (o HostingService) MarshalJSON() ([]byte, error) {
@@ -321,9 +327,9 @@ func (o HostingService) ToMap() (map[string]interface{}, error) {
 	toSerialize["next_invoice"] = o.NextInvoice
 	toSerialize["created"] = o.Created
 	toSerialize["billing_cycle"] = o.BillingCycle
-	toSerialize["package_name"] = o.PackageName
-	toSerialize["node_url"] = o.NodeUrl
-	toSerialize["username"] = o.Username
+	toSerialize["package_name"] = o.PackageName.Get()
+	toSerialize["node_url"] = o.NodeUrl.Get()
+	toSerialize["username"] = o.Username.Get()
 	return toSerialize, nil
 }
 

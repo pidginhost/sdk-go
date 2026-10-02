@@ -148,7 +148,7 @@ Name | Type | Description  | Notes
 
 ## SupportTicketsCreate
 
-> TicketDetail SupportTicketsCreate(ctx).TicketCreate(ticketCreate).Execute()
+> TicketDetail SupportTicketsCreate(ctx).TicketCreateRequest(ticketCreateRequest).Execute()
 
 
 
@@ -167,11 +167,11 @@ import (
 )
 
 func main() {
-	ticketCreate := *openapiclient.NewTicketCreate("Subject_example", int32(123), "Message_example") // TicketCreate | 
+	ticketCreateRequest := *openapiclient.NewTicketCreateRequest("Subject_example", int32(123), "Message_example") // TicketCreateRequest | 
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.SupportAPI.SupportTicketsCreate(context.Background()).TicketCreate(ticketCreate).Execute()
+	resp, r, err := apiClient.SupportAPI.SupportTicketsCreate(context.Background()).TicketCreateRequest(ticketCreateRequest).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `SupportAPI.SupportTicketsCreate``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -192,7 +192,7 @@ Other parameters are passed through a pointer to a apiSupportTicketsCreateReques
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **ticketCreate** | [**TicketCreate**](TicketCreate.md) |  | 
+ **ticketCreateRequest** | [**TicketCreateRequest**](TicketCreateRequest.md) |  | 
 
 ### Return type
 
@@ -423,7 +423,7 @@ Name | Type | Description  | Notes
 
 ## SupportTicketsReplyCreate
 
-> TicketReplyResponse SupportTicketsReplyCreate(ctx, id).TicketReply(ticketReply).Execute()
+> TicketReplyResponse SupportTicketsReplyCreate(ctx, id).TicketReplyRequest(ticketReplyRequest).Execute()
 
 
 
@@ -443,11 +443,11 @@ import (
 
 func main() {
 	id := "id_example" // string | 
-	ticketReply := *openapiclient.NewTicketReply("Message_example") // TicketReply | 
+	ticketReplyRequest := *openapiclient.NewTicketReplyRequest("Message_example") // TicketReplyRequest | 
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.SupportAPI.SupportTicketsReplyCreate(context.Background(), id).TicketReply(ticketReply).Execute()
+	resp, r, err := apiClient.SupportAPI.SupportTicketsReplyCreate(context.Background(), id).TicketReplyRequest(ticketReplyRequest).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `SupportAPI.SupportTicketsReplyCreate``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -473,7 +473,7 @@ Other parameters are passed through a pointer to a apiSupportTicketsReplyCreateR
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
- **ticketReply** | [**TicketReply**](TicketReply.md) |  | 
+ **ticketReplyRequest** | [**TicketReplyRequest**](TicketReplyRequest.md) |  | 
 
 ### Return type
 

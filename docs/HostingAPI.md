@@ -12,7 +12,7 @@ Method | HTTP request | Description
 
 ## HostingHostingChangePasswordCreate
 
-> HostingChangePasswordResponse HostingHostingChangePasswordCreate(ctx, id).ChangePassword(changePassword).Execute()
+> HostingChangePasswordResponse HostingHostingChangePasswordCreate(ctx, id).ChangePasswordRequest(changePasswordRequest).Execute()
 
 
 
@@ -32,11 +32,11 @@ import (
 
 func main() {
 	id := "id_example" // string | 
-	changePassword := *openapiclient.NewChangePassword("Password_example") // ChangePassword | 
+	changePasswordRequest := *openapiclient.NewChangePasswordRequest("Password_example") // ChangePasswordRequest | 
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.HostingAPI.HostingHostingChangePasswordCreate(context.Background(), id).ChangePassword(changePassword).Execute()
+	resp, r, err := apiClient.HostingAPI.HostingHostingChangePasswordCreate(context.Background(), id).ChangePasswordRequest(changePasswordRequest).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `HostingAPI.HostingHostingChangePasswordCreate``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -62,7 +62,7 @@ Other parameters are passed through a pointer to a apiHostingHostingChangePasswo
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
- **changePassword** | [**ChangePassword**](ChangePassword.md) |  | 
+ **changePasswordRequest** | [**ChangePasswordRequest**](ChangePasswordRequest.md) |  | 
 
 ### Return type
 

@@ -10,13 +10,14 @@ Name | Type | Description | Notes
 **Gateway** | **string** |  | [readonly] 
 **Prefix** | **int32** |  | [readonly] 
 **Attached** | **bool** |  | [readonly] 
-**Server** | **string** |  | [readonly] 
+**Server** | **string** | Hostname of the server this address is attached to. Empty when it is not attached. | [readonly] 
+**ServerId** | **NullableInt32** | ID of the attached server, as used by /api/cloud/servers/{id}/. Null when the address is not attached to a cloud server. | [readonly] 
 
 ## Methods
 
 ### NewPublicIPv4
 
-`func NewPublicIPv4(id int32, slug string, address string, gateway string, prefix int32, attached bool, server string, ) *PublicIPv4`
+`func NewPublicIPv4(id int32, slug string, address string, gateway string, prefix int32, attached bool, server string, serverId NullableInt32, ) *PublicIPv4`
 
 NewPublicIPv4 instantiates a new PublicIPv4 object
 This constructor will assign default values to properties that have it defined,
@@ -171,6 +172,36 @@ and a boolean to check if the value has been set.
 SetServer sets Server field to given value.
 
 
+### GetServerId
+
+`func (o *PublicIPv4) GetServerId() int32`
+
+GetServerId returns the ServerId field if non-nil, zero value otherwise.
+
+### GetServerIdOk
+
+`func (o *PublicIPv4) GetServerIdOk() (*int32, bool)`
+
+GetServerIdOk returns a tuple with the ServerId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetServerId
+
+`func (o *PublicIPv4) SetServerId(v int32)`
+
+SetServerId sets ServerId field to given value.
+
+
+### SetServerIdNil
+
+`func (o *PublicIPv4) SetServerIdNil(b bool)`
+
+ SetServerIdNil sets the value for ServerId to be an explicit nil
+
+### UnsetServerId
+`func (o *PublicIPv4) UnsetServerId()`
+
+UnsetServerId ensures that no value is present for ServerId, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

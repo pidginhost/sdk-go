@@ -17,7 +17,7 @@ Name | Type | Description | Notes
 **DestroyProtection** | **bool** | Prevents the server from being destroyed until disabled. | [readonly] 
 **HaEnabled** | **bool** | Enables Proxmox HA — automatic restart and migration on node failure. | [readonly] 
 **CustomOs** | **bool** | Customer installed their own OS from an ISO; cloud-init features no longer apply | [readonly] 
-**Networks** | **map[string]interface{}** |  | [readonly] 
+**Networks** | [**ServerNetworks**](ServerNetworks.md) |  | [readonly] 
 **RescueMode** | **bool** |  | [readonly] 
 **BootIso** | **NullableString** |  | [readonly] 
 **RescueSupported** | **bool** |  | [readonly] 
@@ -26,7 +26,7 @@ Name | Type | Description | Notes
 
 ### NewServer
 
-`func NewServer(id int32, image string, package_ string, cpus int32, memory int32, diskSize int32, generation string, destroyProtection bool, haEnabled bool, customOs bool, networks map[string]interface{}, rescueMode bool, bootIso NullableString, rescueSupported bool, ) *Server`
+`func NewServer(id int32, image string, package_ string, cpus int32, memory int32, diskSize int32, generation string, destroyProtection bool, haEnabled bool, customOs bool, networks ServerNetworks, rescueMode bool, bootIso NullableString, rescueSupported bool, ) *Server`
 
 NewServer instantiates a new Server object
 This constructor will assign default values to properties that have it defined,
@@ -318,20 +318,20 @@ SetCustomOs sets CustomOs field to given value.
 
 ### GetNetworks
 
-`func (o *Server) GetNetworks() map[string]interface{}`
+`func (o *Server) GetNetworks() ServerNetworks`
 
 GetNetworks returns the Networks field if non-nil, zero value otherwise.
 
 ### GetNetworksOk
 
-`func (o *Server) GetNetworksOk() (*map[string]interface{}, bool)`
+`func (o *Server) GetNetworksOk() (*ServerNetworks, bool)`
 
 GetNetworksOk returns a tuple with the Networks field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetNetworks
 
-`func (o *Server) SetNetworks(v map[string]interface{})`
+`func (o *Server) SetNetworks(v ServerNetworks)`
 
 SetNetworks sets Networks field to given value.
 

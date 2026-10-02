@@ -101,7 +101,7 @@ Name | Type | Description  | Notes
 
 ## DomainDomainCheckAvailabilityCreate
 
-> CheckAvailability DomainDomainCheckAvailabilityCreate(ctx).CheckAvailability(checkAvailability).Execute()
+> CheckAvailability DomainDomainCheckAvailabilityCreate(ctx).CheckAvailabilityRequest(checkAvailabilityRequest).Execute()
 
 
 
@@ -120,11 +120,11 @@ import (
 )
 
 func main() {
-	checkAvailability := *openapiclient.NewCheckAvailability("Domain_example") // CheckAvailability | 
+	checkAvailabilityRequest := *openapiclient.NewCheckAvailabilityRequest("Domain_example") // CheckAvailabilityRequest | 
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.DomainAPI.DomainDomainCheckAvailabilityCreate(context.Background()).CheckAvailability(checkAvailability).Execute()
+	resp, r, err := apiClient.DomainAPI.DomainDomainCheckAvailabilityCreate(context.Background()).CheckAvailabilityRequest(checkAvailabilityRequest).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `DomainAPI.DomainDomainCheckAvailabilityCreate``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -145,7 +145,7 @@ Other parameters are passed through a pointer to a apiDomainDomainCheckAvailabil
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **checkAvailability** | [**CheckAvailability**](CheckAvailability.md) |  | 
+ **checkAvailabilityRequest** | [**CheckAvailabilityRequest**](CheckAvailabilityRequest.md) |  | 
 
 ### Return type
 
@@ -167,7 +167,7 @@ Name | Type | Description  | Notes
 
 ## DomainDomainContactsCreate
 
-> ContactsUpdateResponse DomainDomainContactsCreate(ctx, domain).ContactsUpdate(contactsUpdate).Execute()
+> ContactsUpdateResponse DomainDomainContactsCreate(ctx, domain).ContactsUpdateRequest(contactsUpdateRequest).Execute()
 
 
 
@@ -187,11 +187,11 @@ import (
 
 func main() {
 	domain := "domain_example" // string | 
-	contactsUpdate := *openapiclient.NewContactsUpdate(openapiclient.ContactTypeEnum("registrant"), int32(123)) // ContactsUpdate | 
+	contactsUpdateRequest := *openapiclient.NewContactsUpdateRequest(openapiclient.ContactTypeEnum("registrant"), int32(123)) // ContactsUpdateRequest | 
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.DomainAPI.DomainDomainContactsCreate(context.Background(), domain).ContactsUpdate(contactsUpdate).Execute()
+	resp, r, err := apiClient.DomainAPI.DomainDomainContactsCreate(context.Background(), domain).ContactsUpdateRequest(contactsUpdateRequest).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `DomainAPI.DomainDomainContactsCreate``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -217,7 +217,7 @@ Other parameters are passed through a pointer to a apiDomainDomainContactsCreate
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
- **contactsUpdate** | [**ContactsUpdate**](ContactsUpdate.md) |  | 
+ **contactsUpdateRequest** | [**ContactsUpdateRequest**](ContactsUpdateRequest.md) |  | 
 
 ### Return type
 
@@ -239,7 +239,7 @@ Name | Type | Description  | Notes
 
 ## DomainDomainCreate
 
-> DomainCreate DomainDomainCreate(ctx).DomainCreate(domainCreate).Execute()
+> DomainCreate DomainDomainCreate(ctx).DomainCreateRequest(domainCreateRequest).Execute()
 
 
 
@@ -258,11 +258,11 @@ import (
 )
 
 func main() {
-	domainCreate := *openapiclient.NewDomainCreate("Domain_example") // DomainCreate | 
+	domainCreateRequest := *openapiclient.NewDomainCreateRequest("Domain_example") // DomainCreateRequest | 
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.DomainAPI.DomainDomainCreate(context.Background()).DomainCreate(domainCreate).Execute()
+	resp, r, err := apiClient.DomainAPI.DomainDomainCreate(context.Background()).DomainCreateRequest(domainCreateRequest).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `DomainAPI.DomainDomainCreate``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -283,7 +283,7 @@ Other parameters are passed through a pointer to a apiDomainDomainCreateRequest 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **domainCreate** | [**DomainCreate**](DomainCreate.md) |  | 
+ **domainCreateRequest** | [**DomainCreateRequest**](DomainCreateRequest.md) |  | 
 
 ### Return type
 
@@ -305,7 +305,7 @@ Name | Type | Description  | Notes
 
 ## DomainDomainDnsCreate
 
-> DNSGlue DomainDomainDnsCreate(ctx, domain).DNSGlue(dNSGlue).Execute()
+> DNSGlue DomainDomainDnsCreate(ctx, domain).DNSGlueRequest(dNSGlueRequest).Execute()
 
 
 
@@ -325,11 +325,11 @@ import (
 
 func main() {
 	domain := "domain_example" // string | 
-	dNSGlue := *openapiclient.NewDNSGlue("Name_example", "Ip_example") // DNSGlue | 
+	dNSGlueRequest := *openapiclient.NewDNSGlueRequest("Name_example", "Ip_example") // DNSGlueRequest | 
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.DomainAPI.DomainDomainDnsCreate(context.Background(), domain).DNSGlue(dNSGlue).Execute()
+	resp, r, err := apiClient.DomainAPI.DomainDomainDnsCreate(context.Background(), domain).DNSGlueRequest(dNSGlueRequest).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `DomainAPI.DomainDomainDnsCreate``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -355,7 +355,7 @@ Other parameters are passed through a pointer to a apiDomainDomainDnsCreateReque
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
- **dNSGlue** | [**DNSGlue**](DNSGlue.md) |  | 
+ **dNSGlueRequest** | [**DNSGlueRequest**](DNSGlueRequest.md) |  | 
 
 ### Return type
 
@@ -586,7 +586,7 @@ Name | Type | Description  | Notes
 
 ## DomainDomainNameserversCreate
 
-> NameserversUpdateResponse DomainDomainNameserversCreate(ctx, domain).NameserversUpdate(nameserversUpdate).Execute()
+> NameserversUpdateResponse DomainDomainNameserversCreate(ctx, domain).NameserversUpdateRequest(nameserversUpdateRequest).Execute()
 
 
 
@@ -606,11 +606,11 @@ import (
 
 func main() {
 	domain := "domain_example" // string | 
-	nameserversUpdate := *openapiclient.NewNameserversUpdate([]string{"Nameservers_example"}) // NameserversUpdate | 
+	nameserversUpdateRequest := *openapiclient.NewNameserversUpdateRequest([]string{"Nameservers_example"}) // NameserversUpdateRequest | 
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.DomainAPI.DomainDomainNameserversCreate(context.Background(), domain).NameserversUpdate(nameserversUpdate).Execute()
+	resp, r, err := apiClient.DomainAPI.DomainDomainNameserversCreate(context.Background(), domain).NameserversUpdateRequest(nameserversUpdateRequest).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `DomainAPI.DomainDomainNameserversCreate``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -636,7 +636,7 @@ Other parameters are passed through a pointer to a apiDomainDomainNameserversCre
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
- **nameserversUpdate** | [**NameserversUpdate**](NameserversUpdate.md) |  | 
+ **nameserversUpdateRequest** | [**NameserversUpdateRequest**](NameserversUpdateRequest.md) |  | 
 
 ### Return type
 
@@ -658,7 +658,7 @@ Name | Type | Description  | Notes
 
 ## DomainDomainPartialUpdate
 
-> Domain DomainDomainPartialUpdate(ctx, domain).PatchedDomain(patchedDomain).Execute()
+> Domain DomainDomainPartialUpdate(ctx, domain).PatchedDomainRequest(patchedDomainRequest).Execute()
 
 
 
@@ -678,11 +678,11 @@ import (
 
 func main() {
 	domain := "domain_example" // string | 
-	patchedDomain := *openapiclient.NewPatchedDomain() // PatchedDomain |  (optional)
+	patchedDomainRequest := *openapiclient.NewPatchedDomainRequest() // PatchedDomainRequest |  (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.DomainAPI.DomainDomainPartialUpdate(context.Background(), domain).PatchedDomain(patchedDomain).Execute()
+	resp, r, err := apiClient.DomainAPI.DomainDomainPartialUpdate(context.Background(), domain).PatchedDomainRequest(patchedDomainRequest).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `DomainAPI.DomainDomainPartialUpdate``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -708,7 +708,7 @@ Other parameters are passed through a pointer to a apiDomainDomainPartialUpdateR
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
- **patchedDomain** | [**PatchedDomain**](PatchedDomain.md) |  | 
+ **patchedDomainRequest** | [**PatchedDomainRequest**](PatchedDomainRequest.md) |  | 
 
 ### Return type
 
@@ -730,7 +730,7 @@ Name | Type | Description  | Notes
 
 ## DomainDomainRenewCreate
 
-> RenewDomain DomainDomainRenewCreate(ctx, domain).RenewDomain(renewDomain).Execute()
+> RenewDomain DomainDomainRenewCreate(ctx, domain).RenewDomainRequest(renewDomainRequest).Execute()
 
 
 
@@ -750,11 +750,11 @@ import (
 
 func main() {
 	domain := "domain_example" // string | 
-	renewDomain := *openapiclient.NewRenewDomain(int32(123)) // RenewDomain | 
+	renewDomainRequest := *openapiclient.NewRenewDomainRequest(int32(123)) // RenewDomainRequest | 
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.DomainAPI.DomainDomainRenewCreate(context.Background(), domain).RenewDomain(renewDomain).Execute()
+	resp, r, err := apiClient.DomainAPI.DomainDomainRenewCreate(context.Background(), domain).RenewDomainRequest(renewDomainRequest).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `DomainAPI.DomainDomainRenewCreate``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -780,7 +780,7 @@ Other parameters are passed through a pointer to a apiDomainDomainRenewCreateReq
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
- **renewDomain** | [**RenewDomain**](RenewDomain.md) |  | 
+ **renewDomainRequest** | [**RenewDomainRequest**](RenewDomainRequest.md) |  | 
 
 ### Return type
 
@@ -872,7 +872,7 @@ Name | Type | Description  | Notes
 
 ## DomainDomainTransferRoDomainCreate
 
-> TransferRoDomain DomainDomainTransferRoDomainCreate(ctx).TransferRoDomain(transferRoDomain).Execute()
+> TransferRoDomain DomainDomainTransferRoDomainCreate(ctx).TransferRoDomainRequest(transferRoDomainRequest).Execute()
 
 
 
@@ -891,11 +891,11 @@ import (
 )
 
 func main() {
-	transferRoDomain := *openapiclient.NewTransferRoDomain("Domain_example", "AuthCode_example") // TransferRoDomain | 
+	transferRoDomainRequest := *openapiclient.NewTransferRoDomainRequest("Domain_example", "AuthCode_example") // TransferRoDomainRequest | 
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.DomainAPI.DomainDomainTransferRoDomainCreate(context.Background()).TransferRoDomain(transferRoDomain).Execute()
+	resp, r, err := apiClient.DomainAPI.DomainDomainTransferRoDomainCreate(context.Background()).TransferRoDomainRequest(transferRoDomainRequest).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `DomainAPI.DomainDomainTransferRoDomainCreate``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -916,7 +916,7 @@ Other parameters are passed through a pointer to a apiDomainDomainTransferRoDoma
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **transferRoDomain** | [**TransferRoDomain**](TransferRoDomain.md) |  | 
+ **transferRoDomainRequest** | [**TransferRoDomainRequest**](TransferRoDomainRequest.md) |  | 
 
 ### Return type
 
@@ -938,7 +938,7 @@ Name | Type | Description  | Notes
 
 ## DomainDomainUpdate
 
-> Domain DomainDomainUpdate(ctx, domain).Domain2(domain2).Execute()
+> Domain DomainDomainUpdate(ctx, domain).DomainRequest(domainRequest).Execute()
 
 
 
@@ -953,17 +953,16 @@ import (
 	"context"
 	"fmt"
 	"os"
-    "time"
 	openapiclient "github.com/pidginhost/sdk-go"
 )
 
 func main() {
 	domain := "domain_example" // string | 
-	domain2 := *openapiclient.NewDomain(int32(123), "Domain_example", *openapiclient.NewTLD(int32(123), "Tld_example", "Price_example", "Registrar_example"), false, time.Now(), time.Now(), "TODO", "IdnaName_example", int32(123), "ServiceStatus_example", interface{}(123)) // Domain |  (optional)
+	domainRequest := *openapiclient.NewDomainRequest() // DomainRequest |  (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.DomainAPI.DomainDomainUpdate(context.Background(), domain).Domain2(domain2).Execute()
+	resp, r, err := apiClient.DomainAPI.DomainDomainUpdate(context.Background(), domain).DomainRequest(domainRequest).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `DomainAPI.DomainDomainUpdate``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -989,7 +988,7 @@ Other parameters are passed through a pointer to a apiDomainDomainUpdateRequest 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
- **domain2** | [**Domain**](Domain.md) |  | 
+ **domainRequest** | [**DomainRequest**](DomainRequest.md) |  | 
 
 ### Return type
 
@@ -1011,7 +1010,7 @@ Name | Type | Description  | Notes
 
 ## DomainRegistrantsCreate
 
-> DomainRegistrant DomainRegistrantsCreate(ctx).DomainRegistrant(domainRegistrant).Execute()
+> DomainRegistrant DomainRegistrantsCreate(ctx).DomainRegistrantRequest(domainRegistrantRequest).Execute()
 
 
 
@@ -1030,11 +1029,11 @@ import (
 )
 
 func main() {
-	domainRegistrant := *openapiclient.NewDomainRegistrant(int32(123), "FirstName_example", "LastName_example", "Address_example", "City_example", "Region_example", "PostalCode_example", openapiclient.CountryEnum("AF"), "Email_example", "Phone_example") // DomainRegistrant | 
+	domainRegistrantRequest := *openapiclient.NewDomainRegistrantRequest("FirstName_example", "LastName_example", "Address_example", "City_example", "Region_example", "PostalCode_example", openapiclient.CountryEnum("AF"), "Email_example", "Phone_example") // DomainRegistrantRequest | 
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.DomainAPI.DomainRegistrantsCreate(context.Background()).DomainRegistrant(domainRegistrant).Execute()
+	resp, r, err := apiClient.DomainAPI.DomainRegistrantsCreate(context.Background()).DomainRegistrantRequest(domainRegistrantRequest).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `DomainAPI.DomainRegistrantsCreate``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -1055,7 +1054,7 @@ Other parameters are passed through a pointer to a apiDomainRegistrantsCreateReq
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **domainRegistrant** | [**DomainRegistrant**](DomainRegistrant.md) |  | 
+ **domainRegistrantRequest** | [**DomainRegistrantRequest**](DomainRegistrantRequest.md) |  | 
 
 ### Return type
 
@@ -1211,7 +1210,7 @@ Name | Type | Description  | Notes
 
 ## DomainRegistrantsPartialUpdate
 
-> DomainRegistrant DomainRegistrantsPartialUpdate(ctx, id).PatchedDomainRegistrant(patchedDomainRegistrant).Execute()
+> DomainRegistrant DomainRegistrantsPartialUpdate(ctx, id).PatchedDomainRegistrantRequest(patchedDomainRegistrantRequest).Execute()
 
 
 
@@ -1231,11 +1230,11 @@ import (
 
 func main() {
 	id := "id_example" // string | 
-	patchedDomainRegistrant := *openapiclient.NewPatchedDomainRegistrant() // PatchedDomainRegistrant |  (optional)
+	patchedDomainRegistrantRequest := *openapiclient.NewPatchedDomainRegistrantRequest() // PatchedDomainRegistrantRequest |  (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.DomainAPI.DomainRegistrantsPartialUpdate(context.Background(), id).PatchedDomainRegistrant(patchedDomainRegistrant).Execute()
+	resp, r, err := apiClient.DomainAPI.DomainRegistrantsPartialUpdate(context.Background(), id).PatchedDomainRegistrantRequest(patchedDomainRegistrantRequest).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `DomainAPI.DomainRegistrantsPartialUpdate``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -1261,7 +1260,7 @@ Other parameters are passed through a pointer to a apiDomainRegistrantsPartialUp
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
- **patchedDomainRegistrant** | [**PatchedDomainRegistrant**](PatchedDomainRegistrant.md) |  | 
+ **patchedDomainRegistrantRequest** | [**PatchedDomainRegistrantRequest**](PatchedDomainRegistrantRequest.md) |  | 
 
 ### Return type
 
@@ -1353,7 +1352,7 @@ Name | Type | Description  | Notes
 
 ## DomainRegistrantsUpdate
 
-> DomainRegistrant DomainRegistrantsUpdate(ctx, id).DomainRegistrant(domainRegistrant).Execute()
+> DomainRegistrant DomainRegistrantsUpdate(ctx, id).DomainRegistrantRequest(domainRegistrantRequest).Execute()
 
 
 
@@ -1373,11 +1372,11 @@ import (
 
 func main() {
 	id := "id_example" // string | 
-	domainRegistrant := *openapiclient.NewDomainRegistrant(int32(123), "FirstName_example", "LastName_example", "Address_example", "City_example", "Region_example", "PostalCode_example", openapiclient.CountryEnum("AF"), "Email_example", "Phone_example") // DomainRegistrant | 
+	domainRegistrantRequest := *openapiclient.NewDomainRegistrantRequest("FirstName_example", "LastName_example", "Address_example", "City_example", "Region_example", "PostalCode_example", openapiclient.CountryEnum("AF"), "Email_example", "Phone_example") // DomainRegistrantRequest | 
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.DomainAPI.DomainRegistrantsUpdate(context.Background(), id).DomainRegistrant(domainRegistrant).Execute()
+	resp, r, err := apiClient.DomainAPI.DomainRegistrantsUpdate(context.Background(), id).DomainRegistrantRequest(domainRegistrantRequest).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `DomainAPI.DomainRegistrantsUpdate``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -1403,7 +1402,7 @@ Other parameters are passed through a pointer to a apiDomainRegistrantsUpdateReq
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
- **domainRegistrant** | [**DomainRegistrant**](DomainRegistrant.md) |  | 
+ **domainRegistrantRequest** | [**DomainRegistrantRequest**](DomainRegistrantRequest.md) |  | 
 
 ### Return type
 

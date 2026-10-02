@@ -151,11 +151,11 @@ type ApiDedicatedServersPowerCreateRequest struct {
 	ctx context.Context
 	ApiService *DedicatedAPIService
 	id string
-	powerAction *PowerAction
+	powerActionRequest *PowerActionRequest
 }
 
-func (r ApiDedicatedServersPowerCreateRequest) PowerAction(powerAction PowerAction) ApiDedicatedServersPowerCreateRequest {
-	r.powerAction = &powerAction
+func (r ApiDedicatedServersPowerCreateRequest) PowerActionRequest(powerActionRequest PowerActionRequest) ApiDedicatedServersPowerCreateRequest {
+	r.powerActionRequest = &powerActionRequest
 	return r
 }
 
@@ -201,8 +201,8 @@ func (a *DedicatedAPIService) DedicatedServersPowerCreateExecute(r ApiDedicatedS
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.powerAction == nil {
-		return localVarReturnValue, nil, reportError("powerAction is required and must be specified")
+	if r.powerActionRequest == nil {
+		return localVarReturnValue, nil, reportError("powerActionRequest is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -223,7 +223,7 @@ func (a *DedicatedAPIService) DedicatedServersPowerCreateExecute(r ApiDedicatedS
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.powerAction
+	localVarPostBody = r.powerActionRequest
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
@@ -279,11 +279,11 @@ type ApiDedicatedServersRdnsCreateRequest struct {
 	ctx context.Context
 	ApiService *DedicatedAPIService
 	id string
-	dedicatedRDNS *DedicatedRDNS
+	dedicatedRDNSRequest *DedicatedRDNSRequest
 }
 
-func (r ApiDedicatedServersRdnsCreateRequest) DedicatedRDNS(dedicatedRDNS DedicatedRDNS) ApiDedicatedServersRdnsCreateRequest {
-	r.dedicatedRDNS = &dedicatedRDNS
+func (r ApiDedicatedServersRdnsCreateRequest) DedicatedRDNSRequest(dedicatedRDNSRequest DedicatedRDNSRequest) ApiDedicatedServersRdnsCreateRequest {
+	r.dedicatedRDNSRequest = &dedicatedRDNSRequest
 	return r
 }
 
@@ -329,8 +329,8 @@ func (a *DedicatedAPIService) DedicatedServersRdnsCreateExecute(r ApiDedicatedSe
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.dedicatedRDNS == nil {
-		return localVarReturnValue, nil, reportError("dedicatedRDNS is required and must be specified")
+	if r.dedicatedRDNSRequest == nil {
+		return localVarReturnValue, nil, reportError("dedicatedRDNSRequest is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -351,7 +351,7 @@ func (a *DedicatedAPIService) DedicatedServersRdnsCreateExecute(r ApiDedicatedSe
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.dedicatedRDNS
+	localVarPostBody = r.dedicatedRDNSRequest
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
@@ -407,11 +407,11 @@ type ApiDedicatedServersReinstallCreateRequest struct {
 	ctx context.Context
 	ApiService *DedicatedAPIService
 	id string
-	reinstall *Reinstall
+	reinstallRequest *ReinstallRequest
 }
 
-func (r ApiDedicatedServersReinstallCreateRequest) Reinstall(reinstall Reinstall) ApiDedicatedServersReinstallCreateRequest {
-	r.reinstall = &reinstall
+func (r ApiDedicatedServersReinstallCreateRequest) ReinstallRequest(reinstallRequest ReinstallRequest) ApiDedicatedServersReinstallCreateRequest {
+	r.reinstallRequest = &reinstallRequest
 	return r
 }
 
@@ -457,8 +457,8 @@ func (a *DedicatedAPIService) DedicatedServersReinstallCreateExecute(r ApiDedica
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.reinstall == nil {
-		return localVarReturnValue, nil, reportError("reinstall is required and must be specified")
+	if r.reinstallRequest == nil {
+		return localVarReturnValue, nil, reportError("reinstallRequest is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -479,7 +479,7 @@ func (a *DedicatedAPIService) DedicatedServersReinstallCreateExecute(r ApiDedica
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.reinstall
+	localVarPostBody = r.reinstallRequest
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {

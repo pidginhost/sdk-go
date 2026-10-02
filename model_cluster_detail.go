@@ -26,23 +26,23 @@ type ClusterDetail struct {
 	Status ResourceStatusEnum `json:"status"`
 	Name *string `json:"name,omitempty"`
 	Generation string `json:"generation"`
-	ClusterType string `json:"cluster_type"`
-	KubeVersion string `json:"kube_version"`
+	ClusterType NullableString `json:"cluster_type"`
+	KubeVersion NullableString `json:"kube_version"`
 	PricePerMonth string `json:"price_per_month" validate:"regexp=^-?\\d{0\\,16}(?:\\.\\d{0\\,4})?$"`
 	PricePerHour float64 `json:"price_per_hour"`
 	Features []FeaturesEnum `json:"features,omitempty"`
 	FeaturesReady bool `json:"features_ready"`
-	KubeconfigValidUntil string `json:"kubeconfig_valid_until"`
-	Ipv4Address string `json:"ipv4_address"`
-	Ipv6Address string `json:"ipv6_address"`
+	KubeconfigValidUntil NullableString `json:"kubeconfig_valid_until"`
+	Ipv4Address NullableString `json:"ipv4_address"`
+	Ipv6Address NullableString `json:"ipv6_address"`
 	DualStack bool `json:"dual_stack"`
 	Protected *bool `json:"protected,omitempty"`
-	TalosVersion string `json:"talos_version"`
+	TalosVersion NullableString `json:"talos_version"`
 	TalosUpgradeAvailable bool `json:"talos_upgrade_available"`
-	TalosNextVersion string `json:"talos_next_version"`
-	StorageQuotaGb int32 `json:"storage_quota_gb"`
-	LastPoolUsedBytes int64 `json:"last_pool_used_bytes"`
-	LastStorageSyncAt string `json:"last_storage_sync_at"`
+	TalosNextVersion NullableString `json:"talos_next_version"`
+	StorageQuotaGb NullableInt32 `json:"storage_quota_gb"`
+	LastPoolUsedBytes NullableInt64 `json:"last_pool_used_bytes"`
+	LastStorageSyncAt NullableString `json:"last_storage_sync_at"`
 }
 
 type _ClusterDetail ClusterDetail
@@ -51,7 +51,7 @@ type _ClusterDetail ClusterDetail
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewClusterDetail(id int32, status ResourceStatusEnum, generation string, clusterType string, kubeVersion string, pricePerMonth string, pricePerHour float64, featuresReady bool, kubeconfigValidUntil string, ipv4Address string, ipv6Address string, dualStack bool, talosVersion string, talosUpgradeAvailable bool, talosNextVersion string, storageQuotaGb int32, lastPoolUsedBytes int64, lastStorageSyncAt string) *ClusterDetail {
+func NewClusterDetail(id int32, status ResourceStatusEnum, generation string, clusterType NullableString, kubeVersion NullableString, pricePerMonth string, pricePerHour float64, featuresReady bool, kubeconfigValidUntil NullableString, ipv4Address NullableString, ipv6Address NullableString, dualStack bool, talosVersion NullableString, talosUpgradeAvailable bool, talosNextVersion NullableString, storageQuotaGb NullableInt32, lastPoolUsedBytes NullableInt64, lastStorageSyncAt NullableString) *ClusterDetail {
 	this := ClusterDetail{}
 	this.Id = id
 	this.Status = status
@@ -187,51 +187,55 @@ func (o *ClusterDetail) SetGeneration(v string) {
 }
 
 // GetClusterType returns the ClusterType field value
+// If the value is explicit nil, the zero value for string will be returned
 func (o *ClusterDetail) GetClusterType() string {
-	if o == nil {
+	if o == nil || o.ClusterType.Get() == nil {
 		var ret string
 		return ret
 	}
 
-	return o.ClusterType
+	return *o.ClusterType.Get()
 }
 
 // GetClusterTypeOk returns a tuple with the ClusterType field value
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *ClusterDetail) GetClusterTypeOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return &o.ClusterType, true
+	return o.ClusterType.Get(), o.ClusterType.IsSet()
 }
 
 // SetClusterType sets field value
 func (o *ClusterDetail) SetClusterType(v string) {
-	o.ClusterType = v
+	o.ClusterType.Set(&v)
 }
 
 // GetKubeVersion returns the KubeVersion field value
+// If the value is explicit nil, the zero value for string will be returned
 func (o *ClusterDetail) GetKubeVersion() string {
-	if o == nil {
+	if o == nil || o.KubeVersion.Get() == nil {
 		var ret string
 		return ret
 	}
 
-	return o.KubeVersion
+	return *o.KubeVersion.Get()
 }
 
 // GetKubeVersionOk returns a tuple with the KubeVersion field value
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *ClusterDetail) GetKubeVersionOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return &o.KubeVersion, true
+	return o.KubeVersion.Get(), o.KubeVersion.IsSet()
 }
 
 // SetKubeVersion sets field value
 func (o *ClusterDetail) SetKubeVersion(v string) {
-	o.KubeVersion = v
+	o.KubeVersion.Set(&v)
 }
 
 // GetPricePerMonth returns the PricePerMonth field value
@@ -339,75 +343,81 @@ func (o *ClusterDetail) SetFeaturesReady(v bool) {
 }
 
 // GetKubeconfigValidUntil returns the KubeconfigValidUntil field value
+// If the value is explicit nil, the zero value for string will be returned
 func (o *ClusterDetail) GetKubeconfigValidUntil() string {
-	if o == nil {
+	if o == nil || o.KubeconfigValidUntil.Get() == nil {
 		var ret string
 		return ret
 	}
 
-	return o.KubeconfigValidUntil
+	return *o.KubeconfigValidUntil.Get()
 }
 
 // GetKubeconfigValidUntilOk returns a tuple with the KubeconfigValidUntil field value
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *ClusterDetail) GetKubeconfigValidUntilOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return &o.KubeconfigValidUntil, true
+	return o.KubeconfigValidUntil.Get(), o.KubeconfigValidUntil.IsSet()
 }
 
 // SetKubeconfigValidUntil sets field value
 func (o *ClusterDetail) SetKubeconfigValidUntil(v string) {
-	o.KubeconfigValidUntil = v
+	o.KubeconfigValidUntil.Set(&v)
 }
 
 // GetIpv4Address returns the Ipv4Address field value
+// If the value is explicit nil, the zero value for string will be returned
 func (o *ClusterDetail) GetIpv4Address() string {
-	if o == nil {
+	if o == nil || o.Ipv4Address.Get() == nil {
 		var ret string
 		return ret
 	}
 
-	return o.Ipv4Address
+	return *o.Ipv4Address.Get()
 }
 
 // GetIpv4AddressOk returns a tuple with the Ipv4Address field value
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *ClusterDetail) GetIpv4AddressOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return &o.Ipv4Address, true
+	return o.Ipv4Address.Get(), o.Ipv4Address.IsSet()
 }
 
 // SetIpv4Address sets field value
 func (o *ClusterDetail) SetIpv4Address(v string) {
-	o.Ipv4Address = v
+	o.Ipv4Address.Set(&v)
 }
 
 // GetIpv6Address returns the Ipv6Address field value
+// If the value is explicit nil, the zero value for string will be returned
 func (o *ClusterDetail) GetIpv6Address() string {
-	if o == nil {
+	if o == nil || o.Ipv6Address.Get() == nil {
 		var ret string
 		return ret
 	}
 
-	return o.Ipv6Address
+	return *o.Ipv6Address.Get()
 }
 
 // GetIpv6AddressOk returns a tuple with the Ipv6Address field value
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *ClusterDetail) GetIpv6AddressOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return &o.Ipv6Address, true
+	return o.Ipv6Address.Get(), o.Ipv6Address.IsSet()
 }
 
 // SetIpv6Address sets field value
 func (o *ClusterDetail) SetIpv6Address(v string) {
-	o.Ipv6Address = v
+	o.Ipv6Address.Set(&v)
 }
 
 // GetDualStack returns the DualStack field value
@@ -467,27 +477,29 @@ func (o *ClusterDetail) SetProtected(v bool) {
 }
 
 // GetTalosVersion returns the TalosVersion field value
+// If the value is explicit nil, the zero value for string will be returned
 func (o *ClusterDetail) GetTalosVersion() string {
-	if o == nil {
+	if o == nil || o.TalosVersion.Get() == nil {
 		var ret string
 		return ret
 	}
 
-	return o.TalosVersion
+	return *o.TalosVersion.Get()
 }
 
 // GetTalosVersionOk returns a tuple with the TalosVersion field value
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *ClusterDetail) GetTalosVersionOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return &o.TalosVersion, true
+	return o.TalosVersion.Get(), o.TalosVersion.IsSet()
 }
 
 // SetTalosVersion sets field value
 func (o *ClusterDetail) SetTalosVersion(v string) {
-	o.TalosVersion = v
+	o.TalosVersion.Set(&v)
 }
 
 // GetTalosUpgradeAvailable returns the TalosUpgradeAvailable field value
@@ -515,99 +527,107 @@ func (o *ClusterDetail) SetTalosUpgradeAvailable(v bool) {
 }
 
 // GetTalosNextVersion returns the TalosNextVersion field value
+// If the value is explicit nil, the zero value for string will be returned
 func (o *ClusterDetail) GetTalosNextVersion() string {
-	if o == nil {
+	if o == nil || o.TalosNextVersion.Get() == nil {
 		var ret string
 		return ret
 	}
 
-	return o.TalosNextVersion
+	return *o.TalosNextVersion.Get()
 }
 
 // GetTalosNextVersionOk returns a tuple with the TalosNextVersion field value
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *ClusterDetail) GetTalosNextVersionOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return &o.TalosNextVersion, true
+	return o.TalosNextVersion.Get(), o.TalosNextVersion.IsSet()
 }
 
 // SetTalosNextVersion sets field value
 func (o *ClusterDetail) SetTalosNextVersion(v string) {
-	o.TalosNextVersion = v
+	o.TalosNextVersion.Set(&v)
 }
 
 // GetStorageQuotaGb returns the StorageQuotaGb field value
+// If the value is explicit nil, the zero value for int32 will be returned
 func (o *ClusterDetail) GetStorageQuotaGb() int32 {
-	if o == nil {
+	if o == nil || o.StorageQuotaGb.Get() == nil {
 		var ret int32
 		return ret
 	}
 
-	return o.StorageQuotaGb
+	return *o.StorageQuotaGb.Get()
 }
 
 // GetStorageQuotaGbOk returns a tuple with the StorageQuotaGb field value
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *ClusterDetail) GetStorageQuotaGbOk() (*int32, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return &o.StorageQuotaGb, true
+	return o.StorageQuotaGb.Get(), o.StorageQuotaGb.IsSet()
 }
 
 // SetStorageQuotaGb sets field value
 func (o *ClusterDetail) SetStorageQuotaGb(v int32) {
-	o.StorageQuotaGb = v
+	o.StorageQuotaGb.Set(&v)
 }
 
 // GetLastPoolUsedBytes returns the LastPoolUsedBytes field value
+// If the value is explicit nil, the zero value for int64 will be returned
 func (o *ClusterDetail) GetLastPoolUsedBytes() int64 {
-	if o == nil {
+	if o == nil || o.LastPoolUsedBytes.Get() == nil {
 		var ret int64
 		return ret
 	}
 
-	return o.LastPoolUsedBytes
+	return *o.LastPoolUsedBytes.Get()
 }
 
 // GetLastPoolUsedBytesOk returns a tuple with the LastPoolUsedBytes field value
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *ClusterDetail) GetLastPoolUsedBytesOk() (*int64, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return &o.LastPoolUsedBytes, true
+	return o.LastPoolUsedBytes.Get(), o.LastPoolUsedBytes.IsSet()
 }
 
 // SetLastPoolUsedBytes sets field value
 func (o *ClusterDetail) SetLastPoolUsedBytes(v int64) {
-	o.LastPoolUsedBytes = v
+	o.LastPoolUsedBytes.Set(&v)
 }
 
 // GetLastStorageSyncAt returns the LastStorageSyncAt field value
+// If the value is explicit nil, the zero value for string will be returned
 func (o *ClusterDetail) GetLastStorageSyncAt() string {
-	if o == nil {
+	if o == nil || o.LastStorageSyncAt.Get() == nil {
 		var ret string
 		return ret
 	}
 
-	return o.LastStorageSyncAt
+	return *o.LastStorageSyncAt.Get()
 }
 
 // GetLastStorageSyncAtOk returns a tuple with the LastStorageSyncAt field value
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *ClusterDetail) GetLastStorageSyncAtOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return &o.LastStorageSyncAt, true
+	return o.LastStorageSyncAt.Get(), o.LastStorageSyncAt.IsSet()
 }
 
 // SetLastStorageSyncAt sets field value
 func (o *ClusterDetail) SetLastStorageSyncAt(v string) {
-	o.LastStorageSyncAt = v
+	o.LastStorageSyncAt.Set(&v)
 }
 
 func (o ClusterDetail) MarshalJSON() ([]byte, error) {
@@ -626,27 +646,27 @@ func (o ClusterDetail) ToMap() (map[string]interface{}, error) {
 		toSerialize["name"] = o.Name
 	}
 	toSerialize["generation"] = o.Generation
-	toSerialize["cluster_type"] = o.ClusterType
-	toSerialize["kube_version"] = o.KubeVersion
+	toSerialize["cluster_type"] = o.ClusterType.Get()
+	toSerialize["kube_version"] = o.KubeVersion.Get()
 	toSerialize["price_per_month"] = o.PricePerMonth
 	toSerialize["price_per_hour"] = o.PricePerHour
 	if !IsNil(o.Features) {
 		toSerialize["features"] = o.Features
 	}
 	toSerialize["features_ready"] = o.FeaturesReady
-	toSerialize["kubeconfig_valid_until"] = o.KubeconfigValidUntil
-	toSerialize["ipv4_address"] = o.Ipv4Address
-	toSerialize["ipv6_address"] = o.Ipv6Address
+	toSerialize["kubeconfig_valid_until"] = o.KubeconfigValidUntil.Get()
+	toSerialize["ipv4_address"] = o.Ipv4Address.Get()
+	toSerialize["ipv6_address"] = o.Ipv6Address.Get()
 	toSerialize["dual_stack"] = o.DualStack
 	if !IsNil(o.Protected) {
 		toSerialize["protected"] = o.Protected
 	}
-	toSerialize["talos_version"] = o.TalosVersion
+	toSerialize["talos_version"] = o.TalosVersion.Get()
 	toSerialize["talos_upgrade_available"] = o.TalosUpgradeAvailable
-	toSerialize["talos_next_version"] = o.TalosNextVersion
-	toSerialize["storage_quota_gb"] = o.StorageQuotaGb
-	toSerialize["last_pool_used_bytes"] = o.LastPoolUsedBytes
-	toSerialize["last_storage_sync_at"] = o.LastStorageSyncAt
+	toSerialize["talos_next_version"] = o.TalosNextVersion.Get()
+	toSerialize["storage_quota_gb"] = o.StorageQuotaGb.Get()
+	toSerialize["last_pool_used_bytes"] = o.LastPoolUsedBytes.Get()
+	toSerialize["last_storage_sync_at"] = o.LastStorageSyncAt.Get()
 	return toSerialize, nil
 }
 

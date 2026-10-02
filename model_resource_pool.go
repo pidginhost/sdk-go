@@ -25,9 +25,8 @@ type ResourcePool struct {
 	Id int32 `json:"id"`
 	Package string `json:"package"`
 	Generation string `json:"generation"`
-	Size string `json:"size"`
+	Size int32 `json:"size"`
 	Nodes []ResourcePoolNode `json:"nodes"`
-	NewSize *int32 `json:"new_size,omitempty"`
 }
 
 type _ResourcePool ResourcePool
@@ -36,7 +35,7 @@ type _ResourcePool ResourcePool
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewResourcePool(id int32, package_ string, generation string, size string, nodes []ResourcePoolNode) *ResourcePool {
+func NewResourcePool(id int32, package_ string, generation string, size int32, nodes []ResourcePoolNode) *ResourcePool {
 	this := ResourcePool{}
 	this.Id = id
 	this.Package = package_
@@ -127,9 +126,9 @@ func (o *ResourcePool) SetGeneration(v string) {
 }
 
 // GetSize returns the Size field value
-func (o *ResourcePool) GetSize() string {
+func (o *ResourcePool) GetSize() int32 {
 	if o == nil {
-		var ret string
+		var ret int32
 		return ret
 	}
 
@@ -138,7 +137,7 @@ func (o *ResourcePool) GetSize() string {
 
 // GetSizeOk returns a tuple with the Size field value
 // and a boolean to check if the value has been set.
-func (o *ResourcePool) GetSizeOk() (*string, bool) {
+func (o *ResourcePool) GetSizeOk() (*int32, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -146,7 +145,7 @@ func (o *ResourcePool) GetSizeOk() (*string, bool) {
 }
 
 // SetSize sets field value
-func (o *ResourcePool) SetSize(v string) {
+func (o *ResourcePool) SetSize(v int32) {
 	o.Size = v
 }
 
@@ -174,38 +173,6 @@ func (o *ResourcePool) SetNodes(v []ResourcePoolNode) {
 	o.Nodes = v
 }
 
-// GetNewSize returns the NewSize field value if set, zero value otherwise.
-func (o *ResourcePool) GetNewSize() int32 {
-	if o == nil || IsNil(o.NewSize) {
-		var ret int32
-		return ret
-	}
-	return *o.NewSize
-}
-
-// GetNewSizeOk returns a tuple with the NewSize field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *ResourcePool) GetNewSizeOk() (*int32, bool) {
-	if o == nil || IsNil(o.NewSize) {
-		return nil, false
-	}
-	return o.NewSize, true
-}
-
-// HasNewSize returns a boolean if a field has been set.
-func (o *ResourcePool) HasNewSize() bool {
-	if o != nil && !IsNil(o.NewSize) {
-		return true
-	}
-
-	return false
-}
-
-// SetNewSize gets a reference to the given int32 and assigns it to the NewSize field.
-func (o *ResourcePool) SetNewSize(v int32) {
-	o.NewSize = &v
-}
-
 func (o ResourcePool) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -221,9 +188,6 @@ func (o ResourcePool) ToMap() (map[string]interface{}, error) {
 	toSerialize["generation"] = o.Generation
 	toSerialize["size"] = o.Size
 	toSerialize["nodes"] = o.Nodes
-	if !IsNil(o.NewSize) {
-		toSerialize["new_size"] = o.NewSize
-	}
 	return toSerialize, nil
 }
 

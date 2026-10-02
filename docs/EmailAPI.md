@@ -34,7 +34,6 @@ Method | HTTP request | Description
 [**EmailServicesCreate**](EmailAPI.md#EmailServicesCreate) | **Post** /api/email/services/ | 
 [**EmailServicesDedicatedIpCreate**](EmailAPI.md#EmailServicesDedicatedIpCreate) | **Post** /api/email/services/{id}/dedicated_ip/ | 
 [**EmailServicesDedicatedIpDestroy**](EmailAPI.md#EmailServicesDedicatedIpDestroy) | **Delete** /api/email/services/{id}/dedicated_ip/ | 
-[**EmailServicesDestroy**](EmailAPI.md#EmailServicesDestroy) | **Delete** /api/email/services/{id}/ | 
 [**EmailServicesDomainsCreate**](EmailAPI.md#EmailServicesDomainsCreate) | **Post** /api/email/services/{service_pk}/domains/ | 
 [**EmailServicesDomainsList**](EmailAPI.md#EmailServicesDomainsList) | **Get** /api/email/services/{service_pk}/domains/ | 
 [**EmailServicesList**](EmailAPI.md#EmailServicesList) | **Get** /api/email/services/ | 
@@ -62,7 +61,7 @@ Method | HTTP request | Description
 
 ## EmailApiCredentialsCreate
 
-> ApiCredential EmailApiCredentialsCreate(ctx).ApiCredential(apiCredential).Execute()
+> ApiCredentialCreated EmailApiCredentialsCreate(ctx).CredentialCreateRequest(credentialCreateRequest).Execute()
 
 
 
@@ -81,16 +80,16 @@ import (
 )
 
 func main() {
-	apiCredential := *openapiclient.NewApiCredential(int32(123), "Label_example", "KeyPrefix_example", "LastUsedAt_example", false, "CreatedAt_example", "RevokedAt_example") // ApiCredential |  (optional)
+	credentialCreateRequest := *openapiclient.NewCredentialCreateRequest() // CredentialCreateRequest |  (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.EmailAPI.EmailApiCredentialsCreate(context.Background()).ApiCredential(apiCredential).Execute()
+	resp, r, err := apiClient.EmailAPI.EmailApiCredentialsCreate(context.Background()).CredentialCreateRequest(credentialCreateRequest).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `EmailAPI.EmailApiCredentialsCreate``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `EmailApiCredentialsCreate`: ApiCredential
+	// response from `EmailApiCredentialsCreate`: ApiCredentialCreated
 	fmt.Fprintf(os.Stdout, "Response from `EmailAPI.EmailApiCredentialsCreate`: %v\n", resp)
 }
 ```
@@ -106,11 +105,11 @@ Other parameters are passed through a pointer to a apiEmailApiCredentialsCreateR
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **apiCredential** | [**ApiCredential**](ApiCredential.md) |  | 
+ **credentialCreateRequest** | [**CredentialCreateRequest**](CredentialCreateRequest.md) |  | 
 
 ### Return type
 
-[**ApiCredential**](ApiCredential.md)
+[**ApiCredentialCreated**](ApiCredentialCreated.md)
 
 ### Authorization
 
@@ -332,7 +331,7 @@ Name | Type | Description  | Notes
 
 ## EmailDomainsCreate
 
-> SendingDomain EmailDomainsCreate(ctx).DomainAdd(domainAdd).Execute()
+> SendingDomain EmailDomainsCreate(ctx).DomainAddRequest(domainAddRequest).Execute()
 
 
 
@@ -351,11 +350,11 @@ import (
 )
 
 func main() {
-	domainAdd := *openapiclient.NewDomainAdd("Name_example", openapiclient.DnsSourceEnum("manual")) // DomainAdd | 
+	domainAddRequest := *openapiclient.NewDomainAddRequest("Name_example", openapiclient.DnsSourceEnum("manual")) // DomainAddRequest | 
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.EmailAPI.EmailDomainsCreate(context.Background()).DomainAdd(domainAdd).Execute()
+	resp, r, err := apiClient.EmailAPI.EmailDomainsCreate(context.Background()).DomainAddRequest(domainAddRequest).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `EmailAPI.EmailDomainsCreate``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -376,7 +375,7 @@ Other parameters are passed through a pointer to a apiEmailDomainsCreateRequest 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **domainAdd** | [**DomainAdd**](DomainAdd.md) |  | 
+ **domainAddRequest** | [**DomainAddRequest**](DomainAddRequest.md) |  | 
 
 ### Return type
 
@@ -398,7 +397,7 @@ Name | Type | Description  | Notes
 
 ## EmailDomainsInboundRoutesCreate
 
-> InboundRoute EmailDomainsInboundRoutesCreate(ctx, domainPk).InboundRoute(inboundRoute).Execute()
+> InboundRouteWriteResponse EmailDomainsInboundRoutesCreate(ctx, domainPk).InboundRouteCreateRequest(inboundRouteCreateRequest).Execute()
 
 
 
@@ -418,16 +417,16 @@ import (
 
 func main() {
 	domainPk := int32(56) // int32 | 
-	inboundRoute := *openapiclient.NewInboundRoute(int32(123), int32(123), "Pattern_example", openapiclient.ModeEnum("webhook"), "CreatedAt_example") // InboundRoute | 
+	inboundRouteCreateRequest := *openapiclient.NewInboundRouteCreateRequest("Pattern_example", openapiclient.ModeEnum("webhook")) // InboundRouteCreateRequest | 
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.EmailAPI.EmailDomainsInboundRoutesCreate(context.Background(), domainPk).InboundRoute(inboundRoute).Execute()
+	resp, r, err := apiClient.EmailAPI.EmailDomainsInboundRoutesCreate(context.Background(), domainPk).InboundRouteCreateRequest(inboundRouteCreateRequest).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `EmailAPI.EmailDomainsInboundRoutesCreate``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `EmailDomainsInboundRoutesCreate`: InboundRoute
+	// response from `EmailDomainsInboundRoutesCreate`: InboundRouteWriteResponse
 	fmt.Fprintf(os.Stdout, "Response from `EmailAPI.EmailDomainsInboundRoutesCreate`: %v\n", resp)
 }
 ```
@@ -448,11 +447,11 @@ Other parameters are passed through a pointer to a apiEmailDomainsInboundRoutesC
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
- **inboundRoute** | [**InboundRoute**](InboundRoute.md) |  | 
+ **inboundRouteCreateRequest** | [**InboundRouteCreateRequest**](InboundRouteCreateRequest.md) |  | 
 
 ### Return type
 
-[**InboundRoute**](InboundRoute.md)
+[**InboundRouteWriteResponse**](InboundRouteWriteResponse.md)
 
 ### Authorization
 
@@ -678,7 +677,7 @@ Name | Type | Description  | Notes
 
 ## EmailDomainsRotateDkimCreate
 
-> SendingDomain EmailDomainsRotateDkimCreate(ctx, id).SendingDomain(sendingDomain).Execute()
+> SendingDomain EmailDomainsRotateDkimCreate(ctx, id).Execute()
 
 
 
@@ -698,11 +697,10 @@ import (
 
 func main() {
 	id := int32(56) // int32 | A unique integer value identifying this sending domain.
-	sendingDomain := *openapiclient.NewSendingDomain(int32(123), "Name_example", openapiclient.SendingDomainStatusEnum("pending"), openapiclient.DnsSourceEnum("manual"), false, "DkimSelector_example", "DkimRecord_example", "SpfRecord_example", "DmarcRecord_example", "VerifiedAt_example", "LastCheckAt_example", interface{}(123)) // SendingDomain |  (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.EmailAPI.EmailDomainsRotateDkimCreate(context.Background(), id).SendingDomain(sendingDomain).Execute()
+	resp, r, err := apiClient.EmailAPI.EmailDomainsRotateDkimCreate(context.Background(), id).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `EmailAPI.EmailDomainsRotateDkimCreate``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -728,7 +726,6 @@ Other parameters are passed through a pointer to a apiEmailDomainsRotateDkimCrea
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
- **sendingDomain** | [**SendingDomain**](SendingDomain.md) |  | 
 
 ### Return type
 
@@ -740,7 +737,7 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
-- **Content-Type**: application/json
+- **Content-Type**: Not defined
 - **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
@@ -750,7 +747,7 @@ Name | Type | Description  | Notes
 
 ## EmailDomainsToggleInboundCreate
 
-> SendingDomain EmailDomainsToggleInboundCreate(ctx, id).SendingDomain(sendingDomain).Execute()
+> SendingDomain EmailDomainsToggleInboundCreate(ctx, id).ToggleInboundRequest(toggleInboundRequest).Execute()
 
 
 
@@ -770,11 +767,11 @@ import (
 
 func main() {
 	id := int32(56) // int32 | A unique integer value identifying this sending domain.
-	sendingDomain := *openapiclient.NewSendingDomain(int32(123), "Name_example", openapiclient.SendingDomainStatusEnum("pending"), openapiclient.DnsSourceEnum("manual"), false, "DkimSelector_example", "DkimRecord_example", "SpfRecord_example", "DmarcRecord_example", "VerifiedAt_example", "LastCheckAt_example", interface{}(123)) // SendingDomain |  (optional)
+	toggleInboundRequest := *openapiclient.NewToggleInboundRequest() // ToggleInboundRequest |  (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.EmailAPI.EmailDomainsToggleInboundCreate(context.Background(), id).SendingDomain(sendingDomain).Execute()
+	resp, r, err := apiClient.EmailAPI.EmailDomainsToggleInboundCreate(context.Background(), id).ToggleInboundRequest(toggleInboundRequest).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `EmailAPI.EmailDomainsToggleInboundCreate``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -800,7 +797,7 @@ Other parameters are passed through a pointer to a apiEmailDomainsToggleInboundC
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
- **sendingDomain** | [**SendingDomain**](SendingDomain.md) |  | 
+ **toggleInboundRequest** | [**ToggleInboundRequest**](ToggleInboundRequest.md) |  | 
 
 ### Return type
 
@@ -822,7 +819,7 @@ Name | Type | Description  | Notes
 
 ## EmailDomainsVerifyCreate
 
-> SendingDomain EmailDomainsVerifyCreate(ctx, id).SendingDomain(sendingDomain).Execute()
+> SendingDomain EmailDomainsVerifyCreate(ctx, id).Execute()
 
 
 
@@ -842,11 +839,10 @@ import (
 
 func main() {
 	id := int32(56) // int32 | A unique integer value identifying this sending domain.
-	sendingDomain := *openapiclient.NewSendingDomain(int32(123), "Name_example", openapiclient.SendingDomainStatusEnum("pending"), openapiclient.DnsSourceEnum("manual"), false, "DkimSelector_example", "DkimRecord_example", "SpfRecord_example", "DmarcRecord_example", "VerifiedAt_example", "LastCheckAt_example", interface{}(123)) // SendingDomain |  (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.EmailAPI.EmailDomainsVerifyCreate(context.Background(), id).SendingDomain(sendingDomain).Execute()
+	resp, r, err := apiClient.EmailAPI.EmailDomainsVerifyCreate(context.Background(), id).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `EmailAPI.EmailDomainsVerifyCreate``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -872,7 +868,6 @@ Other parameters are passed through a pointer to a apiEmailDomainsVerifyCreateRe
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
- **sendingDomain** | [**SendingDomain**](SendingDomain.md) |  | 
 
 ### Return type
 
@@ -884,7 +879,7 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
-- **Content-Type**: application/json
+- **Content-Type**: Not defined
 - **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
@@ -894,7 +889,7 @@ Name | Type | Description  | Notes
 
 ## EmailInboundRoutesCreate
 
-> InboundRoute EmailInboundRoutesCreate(ctx).InboundRoute(inboundRoute).Execute()
+> InboundRouteWriteResponse EmailInboundRoutesCreate(ctx).InboundRouteCreateRequest(inboundRouteCreateRequest).Execute()
 
 
 
@@ -913,16 +908,16 @@ import (
 )
 
 func main() {
-	inboundRoute := *openapiclient.NewInboundRoute(int32(123), int32(123), "Pattern_example", openapiclient.ModeEnum("webhook"), "CreatedAt_example") // InboundRoute | 
+	inboundRouteCreateRequest := *openapiclient.NewInboundRouteCreateRequest("Pattern_example", openapiclient.ModeEnum("webhook")) // InboundRouteCreateRequest | 
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.EmailAPI.EmailInboundRoutesCreate(context.Background()).InboundRoute(inboundRoute).Execute()
+	resp, r, err := apiClient.EmailAPI.EmailInboundRoutesCreate(context.Background()).InboundRouteCreateRequest(inboundRouteCreateRequest).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `EmailAPI.EmailInboundRoutesCreate``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `EmailInboundRoutesCreate`: InboundRoute
+	// response from `EmailInboundRoutesCreate`: InboundRouteWriteResponse
 	fmt.Fprintf(os.Stdout, "Response from `EmailAPI.EmailInboundRoutesCreate`: %v\n", resp)
 }
 ```
@@ -938,11 +933,11 @@ Other parameters are passed through a pointer to a apiEmailInboundRoutesCreateRe
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **inboundRoute** | [**InboundRoute**](InboundRoute.md) |  | 
+ **inboundRouteCreateRequest** | [**InboundRouteCreateRequest**](InboundRouteCreateRequest.md) |  | 
 
 ### Return type
 
-[**InboundRoute**](InboundRoute.md)
+[**InboundRouteWriteResponse**](InboundRouteWriteResponse.md)
 
 ### Authorization
 
@@ -1094,7 +1089,7 @@ Name | Type | Description  | Notes
 
 ## EmailInboundRoutesPartialUpdate
 
-> InboundRoute EmailInboundRoutesPartialUpdate(ctx, id).PatchedInboundRoute(patchedInboundRoute).Execute()
+> InboundRouteWriteResponse EmailInboundRoutesPartialUpdate(ctx, id).PatchedInboundRouteCreateRequest(patchedInboundRouteCreateRequest).Execute()
 
 
 
@@ -1114,16 +1109,16 @@ import (
 
 func main() {
 	id := int32(56) // int32 | A unique integer value identifying this inbound route.
-	patchedInboundRoute := *openapiclient.NewPatchedInboundRoute() // PatchedInboundRoute |  (optional)
+	patchedInboundRouteCreateRequest := *openapiclient.NewPatchedInboundRouteCreateRequest() // PatchedInboundRouteCreateRequest |  (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.EmailAPI.EmailInboundRoutesPartialUpdate(context.Background(), id).PatchedInboundRoute(patchedInboundRoute).Execute()
+	resp, r, err := apiClient.EmailAPI.EmailInboundRoutesPartialUpdate(context.Background(), id).PatchedInboundRouteCreateRequest(patchedInboundRouteCreateRequest).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `EmailAPI.EmailInboundRoutesPartialUpdate``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `EmailInboundRoutesPartialUpdate`: InboundRoute
+	// response from `EmailInboundRoutesPartialUpdate`: InboundRouteWriteResponse
 	fmt.Fprintf(os.Stdout, "Response from `EmailAPI.EmailInboundRoutesPartialUpdate`: %v\n", resp)
 }
 ```
@@ -1144,11 +1139,11 @@ Other parameters are passed through a pointer to a apiEmailInboundRoutesPartialU
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
- **patchedInboundRoute** | [**PatchedInboundRoute**](PatchedInboundRoute.md) |  | 
+ **patchedInboundRouteCreateRequest** | [**PatchedInboundRouteCreateRequest**](PatchedInboundRouteCreateRequest.md) |  | 
 
 ### Return type
 
-[**InboundRoute**](InboundRoute.md)
+[**InboundRouteWriteResponse**](InboundRouteWriteResponse.md)
 
 ### Authorization
 
@@ -1236,7 +1231,7 @@ Name | Type | Description  | Notes
 
 ## EmailMessagesRetrieve
 
-> EmailMessagesRetrieve(ctx, messageId).Execute()
+> map[string]interface{} EmailMessagesRetrieve(ctx, messageId).Execute()
 
 
 
@@ -1259,11 +1254,13 @@ func main() {
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	r, err := apiClient.EmailAPI.EmailMessagesRetrieve(context.Background(), messageId).Execute()
+	resp, r, err := apiClient.EmailAPI.EmailMessagesRetrieve(context.Background(), messageId).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `EmailAPI.EmailMessagesRetrieve``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
+	// response from `EmailMessagesRetrieve`: map[string]interface{}
+	fmt.Fprintf(os.Stdout, "Response from `EmailAPI.EmailMessagesRetrieve`: %v\n", resp)
 }
 ```
 
@@ -1286,7 +1283,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
- (empty response body)
+**map[string]interface{}**
 
 ### Authorization
 
@@ -1295,7 +1292,7 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
 - **Content-Type**: Not defined
-- **Accept**: Not defined
+- **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
 [[Back to Model list]](../README.md#documentation-for-models)
@@ -1304,7 +1301,7 @@ Name | Type | Description  | Notes
 
 ## EmailSandboxAddressesCreate
 
-> SandboxAddress EmailSandboxAddressesCreate(ctx).SandboxAddress(sandboxAddress).Execute()
+> SandboxAddress EmailSandboxAddressesCreate(ctx).SandboxAddressRequest(sandboxAddressRequest).Execute()
 
 
 
@@ -1323,11 +1320,11 @@ import (
 )
 
 func main() {
-	sandboxAddress := *openapiclient.NewSandboxAddress(int32(123), "Address_example", "VerifiedAt_example", "CreatedAt_example") // SandboxAddress | 
+	sandboxAddressRequest := *openapiclient.NewSandboxAddressRequest("Address_example") // SandboxAddressRequest | 
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.EmailAPI.EmailSandboxAddressesCreate(context.Background()).SandboxAddress(sandboxAddress).Execute()
+	resp, r, err := apiClient.EmailAPI.EmailSandboxAddressesCreate(context.Background()).SandboxAddressRequest(sandboxAddressRequest).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `EmailAPI.EmailSandboxAddressesCreate``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -1348,7 +1345,7 @@ Other parameters are passed through a pointer to a apiEmailSandboxAddressesCreat
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **sandboxAddress** | [**SandboxAddress**](SandboxAddress.md) |  | 
+ **sandboxAddressRequest** | [**SandboxAddressRequest**](SandboxAddressRequest.md) |  | 
 
 ### Return type
 
@@ -1574,7 +1571,7 @@ Name | Type | Description  | Notes
 
 ## EmailSendCreate
 
-> EmailSendCreate(ctx).Execute()
+> EmailSendResponse EmailSendCreate(ctx).SendRequest(sendRequest).Execute()
 
 
 
@@ -1591,38 +1588,45 @@ import (
 )
 
 func main() {
+	sendRequest := *openapiclient.NewSendRequest("FromAddress_example", []string{"To_example"}, "Subject_example") // SendRequest | 
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	r, err := apiClient.EmailAPI.EmailSendCreate(context.Background()).Execute()
+	resp, r, err := apiClient.EmailAPI.EmailSendCreate(context.Background()).SendRequest(sendRequest).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `EmailAPI.EmailSendCreate``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
+	// response from `EmailSendCreate`: EmailSendResponse
+	fmt.Fprintf(os.Stdout, "Response from `EmailAPI.EmailSendCreate`: %v\n", resp)
 }
 ```
 
 ### Path Parameters
 
-This endpoint does not need any parameter.
+
 
 ### Other Parameters
 
 Other parameters are passed through a pointer to a apiEmailSendCreateRequest struct via the builder pattern
 
 
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **sendRequest** | [**SendRequest**](SendRequest.md) |  | 
+
 ### Return type
 
- (empty response body)
+[**EmailSendResponse**](EmailSendResponse.md)
 
 ### Authorization
 
-No authorization required
+[emailApiKey](../README.md#emailApiKey)
 
 ### HTTP request headers
 
-- **Content-Type**: Not defined
-- **Accept**: Not defined
+- **Content-Type**: application/json
+- **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
 [[Back to Model list]](../README.md#documentation-for-models)
@@ -1631,7 +1635,7 @@ No authorization required
 
 ## EmailServicesApiCredentialsCreate
 
-> ApiCredential EmailServicesApiCredentialsCreate(ctx, servicePk).ApiCredential(apiCredential).Execute()
+> ApiCredentialCreated EmailServicesApiCredentialsCreate(ctx, servicePk).CredentialCreateRequest(credentialCreateRequest).Execute()
 
 
 
@@ -1651,16 +1655,16 @@ import (
 
 func main() {
 	servicePk := int32(56) // int32 | 
-	apiCredential := *openapiclient.NewApiCredential(int32(123), "Label_example", "KeyPrefix_example", "LastUsedAt_example", false, "CreatedAt_example", "RevokedAt_example") // ApiCredential |  (optional)
+	credentialCreateRequest := *openapiclient.NewCredentialCreateRequest() // CredentialCreateRequest |  (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.EmailAPI.EmailServicesApiCredentialsCreate(context.Background(), servicePk).ApiCredential(apiCredential).Execute()
+	resp, r, err := apiClient.EmailAPI.EmailServicesApiCredentialsCreate(context.Background(), servicePk).CredentialCreateRequest(credentialCreateRequest).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `EmailAPI.EmailServicesApiCredentialsCreate``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `EmailServicesApiCredentialsCreate`: ApiCredential
+	// response from `EmailServicesApiCredentialsCreate`: ApiCredentialCreated
 	fmt.Fprintf(os.Stdout, "Response from `EmailAPI.EmailServicesApiCredentialsCreate`: %v\n", resp)
 }
 ```
@@ -1681,11 +1685,11 @@ Other parameters are passed through a pointer to a apiEmailServicesApiCredential
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
- **apiCredential** | [**ApiCredential**](ApiCredential.md) |  | 
+ **credentialCreateRequest** | [**CredentialCreateRequest**](CredentialCreateRequest.md) |  | 
 
 ### Return type
 
-[**ApiCredential**](ApiCredential.md)
+[**ApiCredentialCreated**](ApiCredentialCreated.md)
 
 ### Authorization
 
@@ -1845,7 +1849,7 @@ Name | Type | Description  | Notes
 
 ## EmailServicesChangeTierPartialUpdate
 
-> EmailService EmailServicesChangeTierPartialUpdate(ctx, id).PatchedSubscribe(patchedSubscribe).Execute()
+> EmailService EmailServicesChangeTierPartialUpdate(ctx, id).SubscribeRequest(subscribeRequest).Execute()
 
 
 
@@ -1865,11 +1869,11 @@ import (
 
 func main() {
 	id := int32(56) // int32 | A unique integer value identifying this email service.
-	patchedSubscribe := *openapiclient.NewPatchedSubscribe() // PatchedSubscribe |  (optional)
+	subscribeRequest := *openapiclient.NewSubscribeRequest(openapiclient.TierEnum("starter")) // SubscribeRequest | 
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.EmailAPI.EmailServicesChangeTierPartialUpdate(context.Background(), id).PatchedSubscribe(patchedSubscribe).Execute()
+	resp, r, err := apiClient.EmailAPI.EmailServicesChangeTierPartialUpdate(context.Background(), id).SubscribeRequest(subscribeRequest).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `EmailAPI.EmailServicesChangeTierPartialUpdate``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -1895,7 +1899,7 @@ Other parameters are passed through a pointer to a apiEmailServicesChangeTierPar
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
- **patchedSubscribe** | [**PatchedSubscribe**](PatchedSubscribe.md) |  | 
+ **subscribeRequest** | [**SubscribeRequest**](SubscribeRequest.md) |  | 
 
 ### Return type
 
@@ -1917,7 +1921,7 @@ Name | Type | Description  | Notes
 
 ## EmailServicesCreate
 
-> EmailService EmailServicesCreate(ctx).Subscribe(subscribe).Execute()
+> EmailService EmailServicesCreate(ctx).SubscribeRequest(subscribeRequest).Execute()
 
 
 
@@ -1936,11 +1940,11 @@ import (
 )
 
 func main() {
-	subscribe := *openapiclient.NewSubscribe(openapiclient.TierEnum("starter")) // Subscribe | 
+	subscribeRequest := *openapiclient.NewSubscribeRequest(openapiclient.TierEnum("starter")) // SubscribeRequest | 
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.EmailAPI.EmailServicesCreate(context.Background()).Subscribe(subscribe).Execute()
+	resp, r, err := apiClient.EmailAPI.EmailServicesCreate(context.Background()).SubscribeRequest(subscribeRequest).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `EmailAPI.EmailServicesCreate``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -1961,7 +1965,7 @@ Other parameters are passed through a pointer to a apiEmailServicesCreateRequest
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **subscribe** | [**Subscribe**](Subscribe.md) |  | 
+ **subscribeRequest** | [**SubscribeRequest**](SubscribeRequest.md) |  | 
 
 ### Return type
 
@@ -2053,7 +2057,7 @@ Name | Type | Description  | Notes
 
 ## EmailServicesDedicatedIpDestroy
 
-> EmailServicesDedicatedIpDestroy(ctx, id).Execute()
+> EmailService EmailServicesDedicatedIpDestroy(ctx, id).Execute()
 
 
 
@@ -2076,11 +2080,13 @@ func main() {
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	r, err := apiClient.EmailAPI.EmailServicesDedicatedIpDestroy(context.Background(), id).Execute()
+	resp, r, err := apiClient.EmailAPI.EmailServicesDedicatedIpDestroy(context.Background(), id).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `EmailAPI.EmailServicesDedicatedIpDestroy``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
+	// response from `EmailServicesDedicatedIpDestroy`: EmailService
+	fmt.Fprintf(os.Stdout, "Response from `EmailAPI.EmailServicesDedicatedIpDestroy`: %v\n", resp)
 }
 ```
 
@@ -2103,7 +2109,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
- (empty response body)
+[**EmailService**](EmailService.md)
 
 ### Authorization
 
@@ -2112,75 +2118,7 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
 - **Content-Type**: Not defined
-- **Accept**: Not defined
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../README.md#documentation-for-models)
-[[Back to README]](../README.md)
-
-
-## EmailServicesDestroy
-
-> EmailServicesDestroy(ctx, id).Execute()
-
-
-
-
-
-### Example
-
-```go
-package main
-
-import (
-	"context"
-	"fmt"
-	"os"
-	openapiclient "github.com/pidginhost/sdk-go"
-)
-
-func main() {
-	id := int32(56) // int32 | A unique integer value identifying this email service.
-
-	configuration := openapiclient.NewConfiguration()
-	apiClient := openapiclient.NewAPIClient(configuration)
-	r, err := apiClient.EmailAPI.EmailServicesDestroy(context.Background(), id).Execute()
-	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error when calling `EmailAPI.EmailServicesDestroy``: %v\n", err)
-		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-	}
-}
-```
-
-### Path Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**id** | **int32** | A unique integer value identifying this email service. | 
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiEmailServicesDestroyRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
-
-### Return type
-
- (empty response body)
-
-### Authorization
-
-[tokenAuth](../README.md#tokenAuth), [cookieAuth](../README.md#cookieAuth)
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
-- **Accept**: Not defined
+- **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
 [[Back to Model list]](../README.md#documentation-for-models)
@@ -2189,7 +2127,7 @@ Name | Type | Description  | Notes
 
 ## EmailServicesDomainsCreate
 
-> SendingDomain EmailServicesDomainsCreate(ctx, servicePk).DomainAdd(domainAdd).Execute()
+> SendingDomain EmailServicesDomainsCreate(ctx, servicePk).DomainAddRequest(domainAddRequest).Execute()
 
 
 
@@ -2209,11 +2147,11 @@ import (
 
 func main() {
 	servicePk := int32(56) // int32 | 
-	domainAdd := *openapiclient.NewDomainAdd("Name_example", openapiclient.DnsSourceEnum("manual")) // DomainAdd | 
+	domainAddRequest := *openapiclient.NewDomainAddRequest("Name_example", openapiclient.DnsSourceEnum("manual")) // DomainAddRequest | 
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.EmailAPI.EmailServicesDomainsCreate(context.Background(), servicePk).DomainAdd(domainAdd).Execute()
+	resp, r, err := apiClient.EmailAPI.EmailServicesDomainsCreate(context.Background(), servicePk).DomainAddRequest(domainAddRequest).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `EmailAPI.EmailServicesDomainsCreate``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -2239,7 +2177,7 @@ Other parameters are passed through a pointer to a apiEmailServicesDomainsCreate
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
- **domainAdd** | [**DomainAdd**](DomainAdd.md) |  | 
+ **domainAddRequest** | [**DomainAddRequest**](DomainAddRequest.md) |  | 
 
 ### Return type
 
@@ -2399,7 +2337,7 @@ Name | Type | Description  | Notes
 
 ## EmailServicesMessagesRetrieve
 
-> EmailServicesMessagesRetrieve(ctx, servicePk).Execute()
+> EmailMessageList EmailServicesMessagesRetrieve(ctx, servicePk).Page(page).PerPage(perPage).Execute()
 
 
 
@@ -2419,14 +2357,18 @@ import (
 
 func main() {
 	servicePk := int32(56) // int32 | 
+	page := int32(56) // int32 | Page number, starting at 1. (optional)
+	perPage := int32(56) // int32 | Page size, capped at 200; defaults to 50. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	r, err := apiClient.EmailAPI.EmailServicesMessagesRetrieve(context.Background(), servicePk).Execute()
+	resp, r, err := apiClient.EmailAPI.EmailServicesMessagesRetrieve(context.Background(), servicePk).Page(page).PerPage(perPage).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `EmailAPI.EmailServicesMessagesRetrieve``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
+	// response from `EmailServicesMessagesRetrieve`: EmailMessageList
+	fmt.Fprintf(os.Stdout, "Response from `EmailAPI.EmailServicesMessagesRetrieve`: %v\n", resp)
 }
 ```
 
@@ -2446,10 +2388,12 @@ Other parameters are passed through a pointer to a apiEmailServicesMessagesRetri
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
+ **page** | **int32** | Page number, starting at 1. | 
+ **perPage** | **int32** | Page size, capped at 200; defaults to 50. | 
 
 ### Return type
 
- (empty response body)
+[**EmailMessageList**](EmailMessageList.md)
 
 ### Authorization
 
@@ -2458,7 +2402,7 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
 - **Content-Type**: Not defined
-- **Accept**: Not defined
+- **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
 [[Back to Model list]](../README.md#documentation-for-models)
@@ -2467,7 +2411,7 @@ Name | Type | Description  | Notes
 
 ## EmailServicesPartialUpdate
 
-> EmailService EmailServicesPartialUpdate(ctx, id).PatchedEmailService(patchedEmailService).Execute()
+> EmailService EmailServicesPartialUpdate(ctx, id).Execute()
 
 
 
@@ -2487,11 +2431,10 @@ import (
 
 func main() {
 	id := int32(56) // int32 | A unique integer value identifying this email service.
-	patchedEmailService := *openapiclient.NewPatchedEmailService() // PatchedEmailService |  (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.EmailAPI.EmailServicesPartialUpdate(context.Background(), id).PatchedEmailService(patchedEmailService).Execute()
+	resp, r, err := apiClient.EmailAPI.EmailServicesPartialUpdate(context.Background(), id).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `EmailAPI.EmailServicesPartialUpdate``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -2517,7 +2460,6 @@ Other parameters are passed through a pointer to a apiEmailServicesPartialUpdate
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
- **patchedEmailService** | [**PatchedEmailService**](PatchedEmailService.md) |  | 
 
 ### Return type
 
@@ -2529,7 +2471,7 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
-- **Content-Type**: application/json
+- **Content-Type**: Not defined
 - **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
@@ -2679,7 +2621,7 @@ Name | Type | Description  | Notes
 
 ## EmailServicesSandboxAddressesCreate
 
-> SandboxAddress EmailServicesSandboxAddressesCreate(ctx, servicePk).SandboxAddress(sandboxAddress).Execute()
+> SandboxAddress EmailServicesSandboxAddressesCreate(ctx, servicePk).SandboxAddressRequest(sandboxAddressRequest).Execute()
 
 
 
@@ -2699,11 +2641,11 @@ import (
 
 func main() {
 	servicePk := int32(56) // int32 | 
-	sandboxAddress := *openapiclient.NewSandboxAddress(int32(123), "Address_example", "VerifiedAt_example", "CreatedAt_example") // SandboxAddress | 
+	sandboxAddressRequest := *openapiclient.NewSandboxAddressRequest("Address_example") // SandboxAddressRequest | 
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.EmailAPI.EmailServicesSandboxAddressesCreate(context.Background(), servicePk).SandboxAddress(sandboxAddress).Execute()
+	resp, r, err := apiClient.EmailAPI.EmailServicesSandboxAddressesCreate(context.Background(), servicePk).SandboxAddressRequest(sandboxAddressRequest).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `EmailAPI.EmailServicesSandboxAddressesCreate``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -2729,7 +2671,7 @@ Other parameters are passed through a pointer to a apiEmailServicesSandboxAddres
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
- **sandboxAddress** | [**SandboxAddress**](SandboxAddress.md) |  | 
+ **sandboxAddressRequest** | [**SandboxAddressRequest**](SandboxAddressRequest.md) |  | 
 
 ### Return type
 
@@ -2823,7 +2765,7 @@ Name | Type | Description  | Notes
 
 ## EmailServicesSmtpCredentialsCreate
 
-> SmtpCredential EmailServicesSmtpCredentialsCreate(ctx, servicePk).SmtpCredential(smtpCredential).Execute()
+> SmtpCredentialCreated EmailServicesSmtpCredentialsCreate(ctx, servicePk).CredentialCreateRequest(credentialCreateRequest).Execute()
 
 
 
@@ -2843,16 +2785,16 @@ import (
 
 func main() {
 	servicePk := int32(56) // int32 | 
-	smtpCredential := *openapiclient.NewSmtpCredential(int32(123), "Label_example", "Username_example", false, "CreatedAt_example", "RevokedAt_example") // SmtpCredential |  (optional)
+	credentialCreateRequest := *openapiclient.NewCredentialCreateRequest() // CredentialCreateRequest |  (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.EmailAPI.EmailServicesSmtpCredentialsCreate(context.Background(), servicePk).SmtpCredential(smtpCredential).Execute()
+	resp, r, err := apiClient.EmailAPI.EmailServicesSmtpCredentialsCreate(context.Background(), servicePk).CredentialCreateRequest(credentialCreateRequest).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `EmailAPI.EmailServicesSmtpCredentialsCreate``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `EmailServicesSmtpCredentialsCreate`: SmtpCredential
+	// response from `EmailServicesSmtpCredentialsCreate`: SmtpCredentialCreated
 	fmt.Fprintf(os.Stdout, "Response from `EmailAPI.EmailServicesSmtpCredentialsCreate`: %v\n", resp)
 }
 ```
@@ -2873,11 +2815,11 @@ Other parameters are passed through a pointer to a apiEmailServicesSmtpCredentia
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
- **smtpCredential** | [**SmtpCredential**](SmtpCredential.md) |  | 
+ **credentialCreateRequest** | [**CredentialCreateRequest**](CredentialCreateRequest.md) |  | 
 
 ### Return type
 
-[**SmtpCredential**](SmtpCredential.md)
+[**SmtpCredentialCreated**](SmtpCredentialCreated.md)
 
 ### Authorization
 
@@ -2967,7 +2909,7 @@ Name | Type | Description  | Notes
 
 ## EmailServicesStatsRetrieve
 
-> EmailServicesStatsRetrieve(ctx, servicePk).Execute()
+> EmailStats EmailServicesStatsRetrieve(ctx, servicePk).End(end).Start(start).Execute()
 
 
 
@@ -2982,19 +2924,24 @@ import (
 	"context"
 	"fmt"
 	"os"
+    "time"
 	openapiclient "github.com/pidginhost/sdk-go"
 )
 
 func main() {
 	servicePk := int32(56) // int32 | 
+	end := time.Now() // string |  (optional)
+	start := time.Now() // string |  (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	r, err := apiClient.EmailAPI.EmailServicesStatsRetrieve(context.Background(), servicePk).Execute()
+	resp, r, err := apiClient.EmailAPI.EmailServicesStatsRetrieve(context.Background(), servicePk).End(end).Start(start).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `EmailAPI.EmailServicesStatsRetrieve``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
+	// response from `EmailServicesStatsRetrieve`: EmailStats
+	fmt.Fprintf(os.Stdout, "Response from `EmailAPI.EmailServicesStatsRetrieve`: %v\n", resp)
 }
 ```
 
@@ -3014,10 +2961,12 @@ Other parameters are passed through a pointer to a apiEmailServicesStatsRetrieve
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
+ **end** | **string** |  | 
+ **start** | **string** |  | 
 
 ### Return type
 
- (empty response body)
+[**EmailStats**](EmailStats.md)
 
 ### Authorization
 
@@ -3026,7 +2975,7 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
 - **Content-Type**: Not defined
-- **Accept**: Not defined
+- **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
 [[Back to Model list]](../README.md#documentation-for-models)
@@ -3035,7 +2984,7 @@ Name | Type | Description  | Notes
 
 ## EmailServicesSuppressionsCreate
 
-> SuppressionEntry EmailServicesSuppressionsCreate(ctx, servicePk).SuppressionEntry(suppressionEntry).Execute()
+> SuppressionEntry EmailServicesSuppressionsCreate(ctx, servicePk).SuppressionAddRequest(suppressionAddRequest).Execute()
 
 
 
@@ -3055,11 +3004,11 @@ import (
 
 func main() {
 	servicePk := int32(56) // int32 | 
-	suppressionEntry := *openapiclient.NewSuppressionEntry(int32(123), "Address_example", openapiclient.ReasonEnum("hard_bounce"), "Detail_example", "CreatedAt_example") // SuppressionEntry |  (optional)
+	suppressionAddRequest := *openapiclient.NewSuppressionAddRequest("Address_example") // SuppressionAddRequest | 
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.EmailAPI.EmailServicesSuppressionsCreate(context.Background(), servicePk).SuppressionEntry(suppressionEntry).Execute()
+	resp, r, err := apiClient.EmailAPI.EmailServicesSuppressionsCreate(context.Background(), servicePk).SuppressionAddRequest(suppressionAddRequest).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `EmailAPI.EmailServicesSuppressionsCreate``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -3085,7 +3034,7 @@ Other parameters are passed through a pointer to a apiEmailServicesSuppressionsC
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
- **suppressionEntry** | [**SuppressionEntry**](SuppressionEntry.md) |  | 
+ **suppressionAddRequest** | [**SuppressionAddRequest**](SuppressionAddRequest.md) |  | 
 
 ### Return type
 
@@ -3179,7 +3128,7 @@ Name | Type | Description  | Notes
 
 ## EmailSmtpCredentialsCreate
 
-> SmtpCredential EmailSmtpCredentialsCreate(ctx).SmtpCredential(smtpCredential).Execute()
+> SmtpCredentialCreated EmailSmtpCredentialsCreate(ctx).CredentialCreateRequest(credentialCreateRequest).Execute()
 
 
 
@@ -3198,16 +3147,16 @@ import (
 )
 
 func main() {
-	smtpCredential := *openapiclient.NewSmtpCredential(int32(123), "Label_example", "Username_example", false, "CreatedAt_example", "RevokedAt_example") // SmtpCredential |  (optional)
+	credentialCreateRequest := *openapiclient.NewCredentialCreateRequest() // CredentialCreateRequest |  (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.EmailAPI.EmailSmtpCredentialsCreate(context.Background()).SmtpCredential(smtpCredential).Execute()
+	resp, r, err := apiClient.EmailAPI.EmailSmtpCredentialsCreate(context.Background()).CredentialCreateRequest(credentialCreateRequest).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `EmailAPI.EmailSmtpCredentialsCreate``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `EmailSmtpCredentialsCreate`: SmtpCredential
+	// response from `EmailSmtpCredentialsCreate`: SmtpCredentialCreated
 	fmt.Fprintf(os.Stdout, "Response from `EmailAPI.EmailSmtpCredentialsCreate`: %v\n", resp)
 }
 ```
@@ -3223,11 +3172,11 @@ Other parameters are passed through a pointer to a apiEmailSmtpCredentialsCreate
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **smtpCredential** | [**SmtpCredential**](SmtpCredential.md) |  | 
+ **credentialCreateRequest** | [**CredentialCreateRequest**](CredentialCreateRequest.md) |  | 
 
 ### Return type
 
-[**SmtpCredential**](SmtpCredential.md)
+[**SmtpCredentialCreated**](SmtpCredentialCreated.md)
 
 ### Authorization
 
@@ -3449,7 +3398,7 @@ Name | Type | Description  | Notes
 
 ## EmailSuppressionsCreate
 
-> SuppressionEntry EmailSuppressionsCreate(ctx).SuppressionEntry(suppressionEntry).Execute()
+> SuppressionEntry EmailSuppressionsCreate(ctx).SuppressionAddRequest(suppressionAddRequest).Execute()
 
 
 
@@ -3468,11 +3417,11 @@ import (
 )
 
 func main() {
-	suppressionEntry := *openapiclient.NewSuppressionEntry(int32(123), "Address_example", openapiclient.ReasonEnum("hard_bounce"), "Detail_example", "CreatedAt_example") // SuppressionEntry |  (optional)
+	suppressionAddRequest := *openapiclient.NewSuppressionAddRequest("Address_example") // SuppressionAddRequest | 
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.EmailAPI.EmailSuppressionsCreate(context.Background()).SuppressionEntry(suppressionEntry).Execute()
+	resp, r, err := apiClient.EmailAPI.EmailSuppressionsCreate(context.Background()).SuppressionAddRequest(suppressionAddRequest).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `EmailAPI.EmailSuppressionsCreate``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -3493,7 +3442,7 @@ Other parameters are passed through a pointer to a apiEmailSuppressionsCreateReq
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **suppressionEntry** | [**SuppressionEntry**](SuppressionEntry.md) |  | 
+ **suppressionAddRequest** | [**SuppressionAddRequest**](SuppressionAddRequest.md) |  | 
 
 ### Return type
 

@@ -15,7 +15,7 @@ Method | HTTP request | Description
 
 ## FreednsDnsActivateCreate
 
-> ActivateFreeDNSResponse FreednsDnsActivateCreate(ctx).ActivateFreeDNS(activateFreeDNS).Execute()
+> ActivateFreeDNSResponse FreednsDnsActivateCreate(ctx).ActivateFreeDNSRequest(activateFreeDNSRequest).Execute()
 
 
 
@@ -34,11 +34,11 @@ import (
 )
 
 func main() {
-	activateFreeDNS := *openapiclient.NewActivateFreeDNS("Domain_example", openapiclient.SourceEnum("internal"), "Ip_example") // ActivateFreeDNS | 
+	activateFreeDNSRequest := *openapiclient.NewActivateFreeDNSRequest("Domain_example", openapiclient.SourceEnum("internal"), "Ip_example") // ActivateFreeDNSRequest | 
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.FreednsAPI.FreednsDnsActivateCreate(context.Background()).ActivateFreeDNS(activateFreeDNS).Execute()
+	resp, r, err := apiClient.FreednsAPI.FreednsDnsActivateCreate(context.Background()).ActivateFreeDNSRequest(activateFreeDNSRequest).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `FreednsAPI.FreednsDnsActivateCreate``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -59,7 +59,7 @@ Other parameters are passed through a pointer to a apiFreednsDnsActivateCreateRe
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **activateFreeDNS** | [**ActivateFreeDNS**](ActivateFreeDNS.md) |  | 
+ **activateFreeDNSRequest** | [**ActivateFreeDNSRequest**](ActivateFreeDNSRequest.md) |  | 
 
 ### Return type
 
@@ -81,7 +81,7 @@ Name | Type | Description  | Notes
 
 ## FreednsDnsAddRecordCreate
 
-> DNSRecordMutateResponse FreednsDnsAddRecordCreate(ctx).Domain(domain).Source(source).DNSRecordCreate(dNSRecordCreate).Execute()
+> DNSRecordMutateResponse FreednsDnsAddRecordCreate(ctx).Domain(domain).Source(source).DNSRecordCreateRequest(dNSRecordCreateRequest).Execute()
 
 
 
@@ -102,11 +102,11 @@ import (
 func main() {
 	domain := "domain_example" // string | Domain name or PK.
 	source := "source_example" // string | 'internal' or 'external'.
-	dNSRecordCreate := *openapiclient.NewDNSRecordCreate("Name_example", int32(123), openapiclient.DNSRecordCreateTypeEnum("A")) // DNSRecordCreate | 
+	dNSRecordCreateRequest := *openapiclient.NewDNSRecordCreateRequest("Name_example", int32(123), openapiclient.DNSRecordCreateTypeEnum("A")) // DNSRecordCreateRequest | 
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.FreednsAPI.FreednsDnsAddRecordCreate(context.Background()).Domain(domain).Source(source).DNSRecordCreate(dNSRecordCreate).Execute()
+	resp, r, err := apiClient.FreednsAPI.FreednsDnsAddRecordCreate(context.Background()).Domain(domain).Source(source).DNSRecordCreateRequest(dNSRecordCreateRequest).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `FreednsAPI.FreednsDnsAddRecordCreate``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -129,7 +129,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **domain** | **string** | Domain name or PK. | 
  **source** | **string** | &#39;internal&#39; or &#39;external&#39;. | 
- **dNSRecordCreate** | [**DNSRecordCreate**](DNSRecordCreate.md) |  | 
+ **dNSRecordCreateRequest** | [**DNSRecordCreateRequest**](DNSRecordCreateRequest.md) |  | 
 
 ### Return type
 
@@ -151,7 +151,7 @@ Name | Type | Description  | Notes
 
 ## FreednsDnsDeactivateCreate
 
-> DeactivateFreeDNSResponse FreednsDnsDeactivateCreate(ctx).DeactivateFreeDNS(deactivateFreeDNS).Execute()
+> DeactivateFreeDNSResponse FreednsDnsDeactivateCreate(ctx).DeactivateFreeDNSRequest(deactivateFreeDNSRequest).Execute()
 
 
 
@@ -170,11 +170,11 @@ import (
 )
 
 func main() {
-	deactivateFreeDNS := *openapiclient.NewDeactivateFreeDNS("Domain_example", openapiclient.SourceEnum("internal")) // DeactivateFreeDNS | 
+	deactivateFreeDNSRequest := *openapiclient.NewDeactivateFreeDNSRequest("Domain_example", openapiclient.SourceEnum("internal")) // DeactivateFreeDNSRequest | 
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.FreednsAPI.FreednsDnsDeactivateCreate(context.Background()).DeactivateFreeDNS(deactivateFreeDNS).Execute()
+	resp, r, err := apiClient.FreednsAPI.FreednsDnsDeactivateCreate(context.Background()).DeactivateFreeDNSRequest(deactivateFreeDNSRequest).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `FreednsAPI.FreednsDnsDeactivateCreate``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -195,7 +195,7 @@ Other parameters are passed through a pointer to a apiFreednsDnsDeactivateCreate
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **deactivateFreeDNS** | [**DeactivateFreeDNS**](DeactivateFreeDNS.md) |  | 
+ **deactivateFreeDNSRequest** | [**DeactivateFreeDNSRequest**](DeactivateFreeDNSRequest.md) |  | 
 
 ### Return type
 
@@ -217,7 +217,7 @@ Name | Type | Description  | Notes
 
 ## FreednsDnsDeleteRecordCreate
 
-> DeleteRecordResponse FreednsDnsDeleteRecordCreate(ctx).Domain(domain).Source(source).DeleteRecord(deleteRecord).Execute()
+> DeleteRecordResponse FreednsDnsDeleteRecordCreate(ctx).Domain(domain).Source(source).DeleteRecordRequest(deleteRecordRequest).Execute()
 
 
 
@@ -238,11 +238,11 @@ import (
 func main() {
 	domain := "domain_example" // string | Domain name or PK.
 	source := "source_example" // string | 'internal' or 'external'.
-	deleteRecord := *openapiclient.NewDeleteRecord(int32(123)) // DeleteRecord | 
+	deleteRecordRequest := *openapiclient.NewDeleteRecordRequest(int32(123)) // DeleteRecordRequest | 
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.FreednsAPI.FreednsDnsDeleteRecordCreate(context.Background()).Domain(domain).Source(source).DeleteRecord(deleteRecord).Execute()
+	resp, r, err := apiClient.FreednsAPI.FreednsDnsDeleteRecordCreate(context.Background()).Domain(domain).Source(source).DeleteRecordRequest(deleteRecordRequest).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `FreednsAPI.FreednsDnsDeleteRecordCreate``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -265,7 +265,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **domain** | **string** | Domain name or PK. | 
  **source** | **string** | &#39;internal&#39; or &#39;external&#39;. | 
- **deleteRecord** | [**DeleteRecord**](DeleteRecord.md) |  | 
+ **deleteRecordRequest** | [**DeleteRecordRequest**](DeleteRecordRequest.md) |  | 
 
 ### Return type
 

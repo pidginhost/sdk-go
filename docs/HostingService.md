@@ -11,15 +11,15 @@ Name | Type | Description | Notes
 **NextInvoice** | **string** |  | [readonly] 
 **Created** | **string** |  | [readonly] 
 **BillingCycle** | **string** |  | [readonly] 
-**PackageName** | **string** |  | [readonly] 
-**NodeUrl** | **string** |  | [readonly] 
-**Username** | **string** |  | [readonly] 
+**PackageName** | **NullableString** |  | [readonly] 
+**NodeUrl** | **NullableString** |  | [readonly] 
+**Username** | **NullableString** |  | [readonly] 
 
 ## Methods
 
 ### NewHostingService
 
-`func NewHostingService(id int32, hostname string, status ServiceStatusEnum, price string, nextInvoice string, created string, billingCycle string, packageName string, nodeUrl string, username string, ) *HostingService`
+`func NewHostingService(id int32, hostname string, status ServiceStatusEnum, price string, nextInvoice string, created string, billingCycle string, packageName NullableString, nodeUrl NullableString, username NullableString, ) *HostingService`
 
 NewHostingService instantiates a new HostingService object
 This constructor will assign default values to properties that have it defined,
@@ -194,6 +194,16 @@ and a boolean to check if the value has been set.
 SetPackageName sets PackageName field to given value.
 
 
+### SetPackageNameNil
+
+`func (o *HostingService) SetPackageNameNil(b bool)`
+
+ SetPackageNameNil sets the value for PackageName to be an explicit nil
+
+### UnsetPackageName
+`func (o *HostingService) UnsetPackageName()`
+
+UnsetPackageName ensures that no value is present for PackageName, not even an explicit nil
 ### GetNodeUrl
 
 `func (o *HostingService) GetNodeUrl() string`
@@ -214,6 +224,16 @@ and a boolean to check if the value has been set.
 SetNodeUrl sets NodeUrl field to given value.
 
 
+### SetNodeUrlNil
+
+`func (o *HostingService) SetNodeUrlNil(b bool)`
+
+ SetNodeUrlNil sets the value for NodeUrl to be an explicit nil
+
+### UnsetNodeUrl
+`func (o *HostingService) UnsetNodeUrl()`
+
+UnsetNodeUrl ensures that no value is present for NodeUrl, not even an explicit nil
 ### GetUsername
 
 `func (o *HostingService) GetUsername() string`
@@ -234,6 +254,16 @@ and a boolean to check if the value has been set.
 SetUsername sets Username field to given value.
 
 
+### SetUsernameNil
+
+`func (o *HostingService) SetUsernameNil(b bool)`
+
+ SetUsernameNil sets the value for Username to be an explicit nil
+
+### UnsetUsername
+`func (o *HostingService) UnsetUsername()`
+
+UnsetUsername ensures that no value is present for Username, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

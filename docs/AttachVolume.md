@@ -4,13 +4,13 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Vm** | **int32** | Server ID | 
+**Attached** | **bool** |  | 
 
 ## Methods
 
 ### NewAttachVolume
 
-`func NewAttachVolume(vm int32, ) *AttachVolume`
+`func NewAttachVolume(attached bool, ) *AttachVolume`
 
 NewAttachVolume instantiates a new AttachVolume object
 This constructor will assign default values to properties that have it defined,
@@ -25,24 +25,24 @@ NewAttachVolumeWithDefaults instantiates a new AttachVolume object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
 
-### GetVm
+### GetAttached
 
-`func (o *AttachVolume) GetVm() int32`
+`func (o *AttachVolume) GetAttached() bool`
 
-GetVm returns the Vm field if non-nil, zero value otherwise.
+GetAttached returns the Attached field if non-nil, zero value otherwise.
 
-### GetVmOk
+### GetAttachedOk
 
-`func (o *AttachVolume) GetVmOk() (*int32, bool)`
+`func (o *AttachVolume) GetAttachedOk() (*bool, bool)`
 
-GetVmOk returns a tuple with the Vm field if it's non-nil, zero value otherwise
+GetAttachedOk returns a tuple with the Attached field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetVm
+### SetAttached
 
-`func (o *AttachVolume) SetVm(v int32)`
+`func (o *AttachVolume) SetAttached(v bool)`
 
-SetVm sets Vm field to given value.
+SetAttached sets Attached field to given value.
 
 
 

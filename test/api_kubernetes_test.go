@@ -115,6 +115,62 @@ func Test_pidginhostsdk_KubernetesAPIService(t *testing.T) {
 
 	})
 
+	t.Run("Test KubernetesAPIService KubernetesClustersEncryptionCreate", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		var id string
+
+		resp, httpRes, err := apiClient.KubernetesAPI.KubernetesClustersEncryptionCreate(context.Background(), id).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test KubernetesAPIService KubernetesClustersEncryptionRecheckCreate", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		var id string
+
+		resp, httpRes, err := apiClient.KubernetesAPI.KubernetesClustersEncryptionRecheckCreate(context.Background(), id).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test KubernetesAPIService KubernetesClustersEncryptionReconcileCreate", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		var id string
+
+		resp, httpRes, err := apiClient.KubernetesAPI.KubernetesClustersEncryptionReconcileCreate(context.Background(), id).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test KubernetesAPIService KubernetesClustersEncryptionRetrieve", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		var id string
+
+		resp, httpRes, err := apiClient.KubernetesAPI.KubernetesClustersEncryptionRetrieve(context.Background(), id).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
 	t.Run("Test KubernetesAPIService KubernetesClustersHttproutesCreate", func(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
@@ -343,6 +399,80 @@ func Test_pidginhostsdk_KubernetesAPIService(t *testing.T) {
 
 	})
 
+	t.Run("Test KubernetesAPIService KubernetesClustersNodeOperationsCancelCreate", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		var clusterId int32
+		var id string
+
+		resp, httpRes, err := apiClient.KubernetesAPI.KubernetesClustersNodeOperationsCancelCreate(context.Background(), clusterId, id).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test KubernetesAPIService KubernetesClustersNodeOperationsList", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		var clusterId int32
+
+		resp, httpRes, err := apiClient.KubernetesAPI.KubernetesClustersNodeOperationsList(context.Background(), clusterId).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test KubernetesAPIService KubernetesClustersNodeOperationsResumeCreate", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		var clusterId int32
+		var id string
+
+		resp, httpRes, err := apiClient.KubernetesAPI.KubernetesClustersNodeOperationsResumeCreate(context.Background(), clusterId, id).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test KubernetesAPIService KubernetesClustersNodeOperationsRetrieve", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		var clusterId int32
+		var id string
+
+		resp, httpRes, err := apiClient.KubernetesAPI.KubernetesClustersNodeOperationsRetrieve(context.Background(), clusterId, id).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test KubernetesAPIService KubernetesClustersNodeOperationsRetryCreate", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		var clusterId int32
+		var id string
+
+		resp, httpRes, err := apiClient.KubernetesAPI.KubernetesClustersNodeOperationsRetryCreate(context.Background(), clusterId, id).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
 	t.Run("Test KubernetesAPIService KubernetesClustersPartialUpdate", func(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
@@ -350,6 +480,50 @@ func Test_pidginhostsdk_KubernetesAPIService(t *testing.T) {
 		var id string
 
 		resp, httpRes, err := apiClient.KubernetesAPI.KubernetesClustersPartialUpdate(context.Background(), id).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test KubernetesAPIService KubernetesClustersPoolRemovalJournalsList", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		var clusterId int32
+
+		resp, httpRes, err := apiClient.KubernetesAPI.KubernetesClustersPoolRemovalJournalsList(context.Background(), clusterId).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test KubernetesAPIService KubernetesClustersPoolRemovalJournalsResumeCreate", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		var clusterId int32
+		var id string
+
+		resp, httpRes, err := apiClient.KubernetesAPI.KubernetesClustersPoolRemovalJournalsResumeCreate(context.Background(), clusterId, id).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test KubernetesAPIService KubernetesClustersPoolRemovalJournalsRetrieve", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		var clusterId int32
+		var id string
+
+		resp, httpRes, err := apiClient.KubernetesAPI.KubernetesClustersPoolRemovalJournalsRetrieve(context.Background(), clusterId, id).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)
@@ -494,9 +668,10 @@ func Test_pidginhostsdk_KubernetesAPIService(t *testing.T) {
 		var id string
 		var poolId int32
 
-		httpRes, err := apiClient.KubernetesAPI.KubernetesClustersResourcePoolsNodesDestroy(context.Background(), clusterId, id, poolId).Execute()
+		resp, httpRes, err := apiClient.KubernetesAPI.KubernetesClustersResourcePoolsNodesDestroy(context.Background(), clusterId, id, poolId).Execute()
 
 		require.Nil(t, err)
+		require.NotNil(t, resp)
 		assert.Equal(t, 200, httpRes.StatusCode)
 
 	})
@@ -525,6 +700,22 @@ func Test_pidginhostsdk_KubernetesAPIService(t *testing.T) {
 		var poolId int32
 
 		resp, httpRes, err := apiClient.KubernetesAPI.KubernetesClustersResourcePoolsNodesMetricsRetrieve(context.Background(), clusterId, id, poolId).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test KubernetesAPIService KubernetesClustersResourcePoolsNodesRebootCreate", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		var clusterId int32
+		var id string
+		var poolId int32
+
+		resp, httpRes, err := apiClient.KubernetesAPI.KubernetesClustersResourcePoolsNodesRebootCreate(context.Background(), clusterId, id, poolId).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)
@@ -846,6 +1037,20 @@ func Test_pidginhostsdk_KubernetesAPIService(t *testing.T) {
 		var id string
 
 		resp, httpRes, err := apiClient.KubernetesAPI.KubernetesClustersUpgradeFeatureCreate(context.Background(), id).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test KubernetesAPIService KubernetesClustersUpgradeLbCreate", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		var id string
+
+		resp, httpRes, err := apiClient.KubernetesAPI.KubernetesClustersUpgradeLbCreate(context.Background(), id).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)

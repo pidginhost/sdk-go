@@ -28,11 +28,11 @@ type BillingAPIService service
 type ApiBillingDepositsCreateRequest struct {
 	ctx context.Context
 	ApiService *BillingAPIService
-	depositCreate *DepositCreate
+	depositCreateRequest *DepositCreateRequest
 }
 
-func (r ApiBillingDepositsCreateRequest) DepositCreate(depositCreate DepositCreate) ApiBillingDepositsCreateRequest {
-	r.depositCreate = &depositCreate
+func (r ApiBillingDepositsCreateRequest) DepositCreateRequest(depositCreateRequest DepositCreateRequest) ApiBillingDepositsCreateRequest {
+	r.depositCreateRequest = &depositCreateRequest
 	return r
 }
 
@@ -75,8 +75,8 @@ func (a *BillingAPIService) BillingDepositsCreateExecute(r ApiBillingDepositsCre
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.depositCreate == nil {
-		return localVarReturnValue, nil, reportError("depositCreate is required and must be specified")
+	if r.depositCreateRequest == nil {
+		return localVarReturnValue, nil, reportError("depositCreateRequest is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -97,7 +97,7 @@ func (a *BillingAPIService) BillingDepositsCreateExecute(r ApiBillingDepositsCre
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.depositCreate
+	localVarPostBody = r.depositCreateRequest
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
@@ -628,11 +628,11 @@ func (a *BillingAPIService) BillingFundsLogListExecute(r ApiBillingFundsLogListR
 type ApiBillingFundsNotificationSettingsCreateRequest struct {
 	ctx context.Context
 	ApiService *BillingAPIService
-	lowBalanceSettings *LowBalanceSettings
+	lowBalanceSettingsRequest *LowBalanceSettingsRequest
 }
 
-func (r ApiBillingFundsNotificationSettingsCreateRequest) LowBalanceSettings(lowBalanceSettings LowBalanceSettings) ApiBillingFundsNotificationSettingsCreateRequest {
-	r.lowBalanceSettings = &lowBalanceSettings
+func (r ApiBillingFundsNotificationSettingsCreateRequest) LowBalanceSettingsRequest(lowBalanceSettingsRequest LowBalanceSettingsRequest) ApiBillingFundsNotificationSettingsCreateRequest {
+	r.lowBalanceSettingsRequest = &lowBalanceSettingsRequest
 	return r
 }
 
@@ -675,8 +675,8 @@ func (a *BillingAPIService) BillingFundsNotificationSettingsCreateExecute(r ApiB
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.lowBalanceSettings == nil {
-		return localVarReturnValue, nil, reportError("lowBalanceSettings is required and must be specified")
+	if r.lowBalanceSettingsRequest == nil {
+		return localVarReturnValue, nil, reportError("lowBalanceSettingsRequest is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -697,7 +697,7 @@ func (a *BillingAPIService) BillingFundsNotificationSettingsCreateExecute(r ApiB
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.lowBalanceSettings
+	localVarPostBody = r.lowBalanceSettingsRequest
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
@@ -1344,11 +1344,11 @@ type ApiBillingServicesChangeBillingCycleCreateRequest struct {
 	ctx context.Context
 	ApiService *BillingAPIService
 	id string
-	changeBillingCycle *ChangeBillingCycle
+	changeBillingCycleRequest *ChangeBillingCycleRequest
 }
 
-func (r ApiBillingServicesChangeBillingCycleCreateRequest) ChangeBillingCycle(changeBillingCycle ChangeBillingCycle) ApiBillingServicesChangeBillingCycleCreateRequest {
-	r.changeBillingCycle = &changeBillingCycle
+func (r ApiBillingServicesChangeBillingCycleCreateRequest) ChangeBillingCycleRequest(changeBillingCycleRequest ChangeBillingCycleRequest) ApiBillingServicesChangeBillingCycleCreateRequest {
+	r.changeBillingCycleRequest = &changeBillingCycleRequest
 	return r
 }
 
@@ -1394,8 +1394,8 @@ func (a *BillingAPIService) BillingServicesChangeBillingCycleCreateExecute(r Api
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.changeBillingCycle == nil {
-		return localVarReturnValue, nil, reportError("changeBillingCycle is required and must be specified")
+	if r.changeBillingCycleRequest == nil {
+		return localVarReturnValue, nil, reportError("changeBillingCycleRequest is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -1416,7 +1416,7 @@ func (a *BillingAPIService) BillingServicesChangeBillingCycleCreateExecute(r Api
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.changeBillingCycle
+	localVarPostBody = r.changeBillingCycleRequest
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
@@ -1472,11 +1472,11 @@ type ApiBillingServicesChangeCompanyCreateRequest struct {
 	ctx context.Context
 	ApiService *BillingAPIService
 	id string
-	changeCompany *ChangeCompany
+	changeCompanyRequest *ChangeCompanyRequest
 }
 
-func (r ApiBillingServicesChangeCompanyCreateRequest) ChangeCompany(changeCompany ChangeCompany) ApiBillingServicesChangeCompanyCreateRequest {
-	r.changeCompany = &changeCompany
+func (r ApiBillingServicesChangeCompanyCreateRequest) ChangeCompanyRequest(changeCompanyRequest ChangeCompanyRequest) ApiBillingServicesChangeCompanyCreateRequest {
+	r.changeCompanyRequest = &changeCompanyRequest
 	return r
 }
 
@@ -1541,7 +1541,7 @@ func (a *BillingAPIService) BillingServicesChangeCompanyCreateExecute(r ApiBilli
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.changeCompany
+	localVarPostBody = r.changeCompanyRequest
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {

@@ -33,9 +33,8 @@ type ServerDetail struct {
 	Generation string `json:"generation"`
 	Machine map[string]interface{} `json:"machine"`
 	Volumes []Volume `json:"volumes"`
-	Networks map[string]interface{} `json:"networks"`
+	Networks ServerNetworks `json:"networks"`
 	FloatingIps []FloatingIPSummary `json:"floating_ips"`
-	Password *string `json:"password,omitempty"`
 	// Public key to apply for SSH login. Applying a non-empty key regenerates cloud-init and reboots a running server. Clearing removes the key from future cloud-init data, but does not revoke keys already in the guest.
 	SshPubKey *string `json:"ssh_pub_key,omitempty"`
 	Status ResourceStatusEnum `json:"status"`
@@ -57,7 +56,7 @@ type _ServerDetail ServerDetail
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewServerDetail(id int32, hostname string, image string, package_ string, cpus int32, memory int32, diskSize int32, generation string, machine map[string]interface{}, volumes []Volume, networks map[string]interface{}, floatingIps []FloatingIPSummary, status ResourceStatusEnum, username string, destroyProtection bool, haEnabled bool, customOs bool, rescueMode bool, bootIso NullableString, rescueSupported bool) *ServerDetail {
+func NewServerDetail(id int32, hostname string, image string, package_ string, cpus int32, memory int32, diskSize int32, generation string, machine map[string]interface{}, volumes []Volume, networks ServerNetworks, floatingIps []FloatingIPSummary, status ResourceStatusEnum, username string, destroyProtection bool, haEnabled bool, customOs bool, rescueMode bool, bootIso NullableString, rescueSupported bool) *ServerDetail {
 	this := ServerDetail{}
 	this.Id = id
 	this.Hostname = hostname
@@ -363,9 +362,9 @@ func (o *ServerDetail) SetVolumes(v []Volume) {
 }
 
 // GetNetworks returns the Networks field value
-func (o *ServerDetail) GetNetworks() map[string]interface{} {
+func (o *ServerDetail) GetNetworks() ServerNetworks {
 	if o == nil {
-		var ret map[string]interface{}
+		var ret ServerNetworks
 		return ret
 	}
 
@@ -374,15 +373,15 @@ func (o *ServerDetail) GetNetworks() map[string]interface{} {
 
 // GetNetworksOk returns a tuple with the Networks field value
 // and a boolean to check if the value has been set.
-func (o *ServerDetail) GetNetworksOk() (map[string]interface{}, bool) {
+func (o *ServerDetail) GetNetworksOk() (*ServerNetworks, bool) {
 	if o == nil {
-		return map[string]interface{}{}, false
+		return nil, false
 	}
-	return o.Networks, true
+	return &o.Networks, true
 }
 
 // SetNetworks sets field value
-func (o *ServerDetail) SetNetworks(v map[string]interface{}) {
+func (o *ServerDetail) SetNetworks(v ServerNetworks) {
 	o.Networks = v
 }
 
@@ -408,38 +407,6 @@ func (o *ServerDetail) GetFloatingIpsOk() ([]FloatingIPSummary, bool) {
 // SetFloatingIps sets field value
 func (o *ServerDetail) SetFloatingIps(v []FloatingIPSummary) {
 	o.FloatingIps = v
-}
-
-// GetPassword returns the Password field value if set, zero value otherwise.
-func (o *ServerDetail) GetPassword() string {
-	if o == nil || IsNil(o.Password) {
-		var ret string
-		return ret
-	}
-	return *o.Password
-}
-
-// GetPasswordOk returns a tuple with the Password field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *ServerDetail) GetPasswordOk() (*string, bool) {
-	if o == nil || IsNil(o.Password) {
-		return nil, false
-	}
-	return o.Password, true
-}
-
-// HasPassword returns a boolean if a field has been set.
-func (o *ServerDetail) HasPassword() bool {
-	if o != nil && !IsNil(o.Password) {
-		return true
-	}
-
-	return false
-}
-
-// SetPassword gets a reference to the given string and assigns it to the Password field.
-func (o *ServerDetail) SetPassword(v string) {
-	o.Password = &v
 }
 
 // GetSshPubKey returns the SshPubKey field value if set, zero value otherwise.
@@ -693,9 +660,6 @@ func (o ServerDetail) ToMap() (map[string]interface{}, error) {
 	toSerialize["volumes"] = o.Volumes
 	toSerialize["networks"] = o.Networks
 	toSerialize["floating_ips"] = o.FloatingIps
-	if !IsNil(o.Password) {
-		toSerialize["password"] = o.Password
-	}
 	if !IsNil(o.SshPubKey) {
 		toSerialize["ssh_pub_key"] = o.SshPubKey
 	}

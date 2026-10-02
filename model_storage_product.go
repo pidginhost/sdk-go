@@ -29,8 +29,8 @@ type StorageProduct struct {
 	Unit string `json:"unit"`
 	// price per quantity units per month (if applicable)
 	Price string `json:"price" validate:"regexp=^-?\\d{0\\,6}(?:\\.\\d{0\\,4})?$"`
-	MinSize string `json:"min_size"`
-	MaxSize string `json:"max_size"`
+	MinSize int32 `json:"min_size"`
+	MaxSize int32 `json:"max_size"`
 }
 
 type _StorageProduct StorageProduct
@@ -39,7 +39,7 @@ type _StorageProduct StorageProduct
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewStorageProduct(id int32, slug string, name string, type_ string, unit string, price string, minSize string, maxSize string) *StorageProduct {
+func NewStorageProduct(id int32, slug string, name string, type_ string, unit string, price string, minSize int32, maxSize int32) *StorageProduct {
 	this := StorageProduct{}
 	this.Id = id
 	this.Slug = slug
@@ -205,9 +205,9 @@ func (o *StorageProduct) SetPrice(v string) {
 }
 
 // GetMinSize returns the MinSize field value
-func (o *StorageProduct) GetMinSize() string {
+func (o *StorageProduct) GetMinSize() int32 {
 	if o == nil {
-		var ret string
+		var ret int32
 		return ret
 	}
 
@@ -216,7 +216,7 @@ func (o *StorageProduct) GetMinSize() string {
 
 // GetMinSizeOk returns a tuple with the MinSize field value
 // and a boolean to check if the value has been set.
-func (o *StorageProduct) GetMinSizeOk() (*string, bool) {
+func (o *StorageProduct) GetMinSizeOk() (*int32, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -224,14 +224,14 @@ func (o *StorageProduct) GetMinSizeOk() (*string, bool) {
 }
 
 // SetMinSize sets field value
-func (o *StorageProduct) SetMinSize(v string) {
+func (o *StorageProduct) SetMinSize(v int32) {
 	o.MinSize = v
 }
 
 // GetMaxSize returns the MaxSize field value
-func (o *StorageProduct) GetMaxSize() string {
+func (o *StorageProduct) GetMaxSize() int32 {
 	if o == nil {
-		var ret string
+		var ret int32
 		return ret
 	}
 
@@ -240,7 +240,7 @@ func (o *StorageProduct) GetMaxSize() string {
 
 // GetMaxSizeOk returns a tuple with the MaxSize field value
 // and a boolean to check if the value has been set.
-func (o *StorageProduct) GetMaxSizeOk() (*string, bool) {
+func (o *StorageProduct) GetMaxSizeOk() (*int32, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -248,7 +248,7 @@ func (o *StorageProduct) GetMaxSizeOk() (*string, bool) {
 }
 
 // SetMaxSize sets field value
-func (o *StorageProduct) SetMaxSize(v string) {
+func (o *StorageProduct) SetMaxSize(v int32) {
 	o.MaxSize = v
 }
 

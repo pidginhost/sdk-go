@@ -22,8 +22,7 @@ var _ MappedNullable = &AttachVolume{}
 
 // AttachVolume struct for AttachVolume
 type AttachVolume struct {
-	// Server ID
-	Vm int32 `json:"vm"`
+	Attached bool `json:"attached"`
 }
 
 type _AttachVolume AttachVolume
@@ -32,9 +31,9 @@ type _AttachVolume AttachVolume
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewAttachVolume(vm int32) *AttachVolume {
+func NewAttachVolume(attached bool) *AttachVolume {
 	this := AttachVolume{}
-	this.Vm = vm
+	this.Attached = attached
 	return &this
 }
 
@@ -46,28 +45,28 @@ func NewAttachVolumeWithDefaults() *AttachVolume {
 	return &this
 }
 
-// GetVm returns the Vm field value
-func (o *AttachVolume) GetVm() int32 {
+// GetAttached returns the Attached field value
+func (o *AttachVolume) GetAttached() bool {
 	if o == nil {
-		var ret int32
+		var ret bool
 		return ret
 	}
 
-	return o.Vm
+	return o.Attached
 }
 
-// GetVmOk returns a tuple with the Vm field value
+// GetAttachedOk returns a tuple with the Attached field value
 // and a boolean to check if the value has been set.
-func (o *AttachVolume) GetVmOk() (*int32, bool) {
+func (o *AttachVolume) GetAttachedOk() (*bool, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return &o.Vm, true
+	return &o.Attached, true
 }
 
-// SetVm sets field value
-func (o *AttachVolume) SetVm(v int32) {
-	o.Vm = v
+// SetAttached sets field value
+func (o *AttachVolume) SetAttached(v bool) {
+	o.Attached = v
 }
 
 func (o AttachVolume) MarshalJSON() ([]byte, error) {
@@ -80,7 +79,7 @@ func (o AttachVolume) MarshalJSON() ([]byte, error) {
 
 func (o AttachVolume) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	toSerialize["vm"] = o.Vm
+	toSerialize["attached"] = o.Attached
 	return toSerialize, nil
 }
 
@@ -89,7 +88,7 @@ func (o *AttachVolume) UnmarshalJSON(data []byte) (err error) {
 	// by unmarshalling the object into a generic map with string keys and checking
 	// that every required field exists as a key in the generic map.
 	requiredProperties := []string{
-		"vm",
+		"attached",
 	}
 
 	allProperties := make(map[string]interface{})

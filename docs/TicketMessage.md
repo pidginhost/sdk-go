@@ -8,14 +8,14 @@ Name | Type | Description | Notes
 **Date** | **string** |  | [readonly] 
 **Message** | **string** |  | [readonly] 
 **AuthorName** | **string** |  | [readonly] 
-**HasAttachment** | **string** |  | [readonly] 
+**HasAttachment** | **bool** |  | [readonly] 
 **AttachmentFilename** | **string** |  | [readonly] 
 
 ## Methods
 
 ### NewTicketMessage
 
-`func NewTicketMessage(id int32, date string, message string, authorName string, hasAttachment string, attachmentFilename string, ) *TicketMessage`
+`func NewTicketMessage(id int32, date string, message string, authorName string, hasAttachment bool, attachmentFilename string, ) *TicketMessage`
 
 NewTicketMessage instantiates a new TicketMessage object
 This constructor will assign default values to properties that have it defined,
@@ -112,20 +112,20 @@ SetAuthorName sets AuthorName field to given value.
 
 ### GetHasAttachment
 
-`func (o *TicketMessage) GetHasAttachment() string`
+`func (o *TicketMessage) GetHasAttachment() bool`
 
 GetHasAttachment returns the HasAttachment field if non-nil, zero value otherwise.
 
 ### GetHasAttachmentOk
 
-`func (o *TicketMessage) GetHasAttachmentOk() (*string, bool)`
+`func (o *TicketMessage) GetHasAttachmentOk() (*bool, bool)`
 
 GetHasAttachmentOk returns a tuple with the HasAttachment field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetHasAttachment
 
-`func (o *TicketMessage) SetHasAttachment(v string)`
+`func (o *TicketMessage) SetHasAttachment(v bool)`
 
 SetHasAttachment sets HasAttachment field to given value.
 

@@ -28,7 +28,7 @@ Method | HTTP request | Description
 
 ## AccountApiTokensCreate
 
-> APITokenCreate AccountApiTokensCreate(ctx).APITokenCreate(aPITokenCreate).Execute()
+> APITokenCreate AccountApiTokensCreate(ctx).APITokenCreateRequest(aPITokenCreateRequest).Execute()
 
 
 
@@ -47,11 +47,11 @@ import (
 )
 
 func main() {
-	aPITokenCreate := *openapiclient.NewAPITokenCreate(int32(123), "Name_example", "Key_example", "Created_example", "Account_example", "MembershipStatus_example") // APITokenCreate | 
+	aPITokenCreateRequest := *openapiclient.NewAPITokenCreateRequest("Name_example") // APITokenCreateRequest | 
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.AccountAPI.AccountApiTokensCreate(context.Background()).APITokenCreate(aPITokenCreate).Execute()
+	resp, r, err := apiClient.AccountAPI.AccountApiTokensCreate(context.Background()).APITokenCreateRequest(aPITokenCreateRequest).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `AccountAPI.AccountApiTokensCreate``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -72,7 +72,7 @@ Other parameters are passed through a pointer to a apiAccountApiTokensCreateRequ
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **aPITokenCreate** | [**APITokenCreate**](APITokenCreate.md) |  | 
+ **aPITokenCreateRequest** | [**APITokenCreateRequest**](APITokenCreateRequest.md) |  | 
 
 ### Return type
 
@@ -228,7 +228,7 @@ Name | Type | Description  | Notes
 
 ## AccountCompaniesCreate
 
-> Company AccountCompaniesCreate(ctx).Company(company).Execute()
+> Company AccountCompaniesCreate(ctx).CompanyRequest(companyRequest).Execute()
 
 
 
@@ -247,11 +247,11 @@ import (
 )
 
 func main() {
-	company := *openapiclient.NewCompany(int32(123), "Name_example") // Company | 
+	companyRequest := *openapiclient.NewCompanyRequest("Name_example") // CompanyRequest | 
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.AccountAPI.AccountCompaniesCreate(context.Background()).Company(company).Execute()
+	resp, r, err := apiClient.AccountAPI.AccountCompaniesCreate(context.Background()).CompanyRequest(companyRequest).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `AccountAPI.AccountCompaniesCreate``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -272,7 +272,7 @@ Other parameters are passed through a pointer to a apiAccountCompaniesCreateRequ
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **company** | [**Company**](Company.md) |  | 
+ **companyRequest** | [**CompanyRequest**](CompanyRequest.md) |  | 
 
 ### Return type
 
@@ -428,7 +428,7 @@ Name | Type | Description  | Notes
 
 ## AccountCompaniesPartialUpdate
 
-> Company AccountCompaniesPartialUpdate(ctx, id).PatchedCompany(patchedCompany).Execute()
+> Company AccountCompaniesPartialUpdate(ctx, id).PatchedCompanyRequest(patchedCompanyRequest).Execute()
 
 
 
@@ -448,11 +448,11 @@ import (
 
 func main() {
 	id := int32(56) // int32 | A unique integer value identifying this company.
-	patchedCompany := *openapiclient.NewPatchedCompany() // PatchedCompany |  (optional)
+	patchedCompanyRequest := *openapiclient.NewPatchedCompanyRequest() // PatchedCompanyRequest |  (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.AccountAPI.AccountCompaniesPartialUpdate(context.Background(), id).PatchedCompany(patchedCompany).Execute()
+	resp, r, err := apiClient.AccountAPI.AccountCompaniesPartialUpdate(context.Background(), id).PatchedCompanyRequest(patchedCompanyRequest).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `AccountAPI.AccountCompaniesPartialUpdate``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -478,7 +478,7 @@ Other parameters are passed through a pointer to a apiAccountCompaniesPartialUpd
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
- **patchedCompany** | [**PatchedCompany**](PatchedCompany.md) |  | 
+ **patchedCompanyRequest** | [**PatchedCompanyRequest**](PatchedCompanyRequest.md) |  | 
 
 ### Return type
 
@@ -570,7 +570,7 @@ Name | Type | Description  | Notes
 
 ## AccountCompaniesUpdate
 
-> Company AccountCompaniesUpdate(ctx, id).Company(company).Execute()
+> Company AccountCompaniesUpdate(ctx, id).CompanyRequest(companyRequest).Execute()
 
 
 
@@ -590,11 +590,11 @@ import (
 
 func main() {
 	id := int32(56) // int32 | A unique integer value identifying this company.
-	company := *openapiclient.NewCompany(int32(123), "Name_example") // Company | 
+	companyRequest := *openapiclient.NewCompanyRequest("Name_example") // CompanyRequest | 
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.AccountAPI.AccountCompaniesUpdate(context.Background(), id).Company(company).Execute()
+	resp, r, err := apiClient.AccountAPI.AccountCompaniesUpdate(context.Background(), id).CompanyRequest(companyRequest).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `AccountAPI.AccountCompaniesUpdate``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -620,7 +620,7 @@ Other parameters are passed through a pointer to a apiAccountCompaniesUpdateRequ
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
- **company** | [**Company**](Company.md) |  | 
+ **companyRequest** | [**CompanyRequest**](CompanyRequest.md) |  | 
 
 ### Return type
 
@@ -708,7 +708,7 @@ Name | Type | Description  | Notes
 
 ## AccountProfilePartialUpdate
 
-> Profile AccountProfilePartialUpdate(ctx).PatchedProfile(patchedProfile).Execute()
+> Profile AccountProfilePartialUpdate(ctx).PatchedProfileRequest(patchedProfileRequest).Execute()
 
 
 
@@ -727,11 +727,11 @@ import (
 )
 
 func main() {
-	patchedProfile := *openapiclient.NewPatchedProfile() // PatchedProfile |  (optional)
+	patchedProfileRequest := *openapiclient.NewPatchedProfileRequest() // PatchedProfileRequest |  (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.AccountAPI.AccountProfilePartialUpdate(context.Background()).PatchedProfile(patchedProfile).Execute()
+	resp, r, err := apiClient.AccountAPI.AccountProfilePartialUpdate(context.Background()).PatchedProfileRequest(patchedProfileRequest).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `AccountAPI.AccountProfilePartialUpdate``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -752,7 +752,7 @@ Other parameters are passed through a pointer to a apiAccountProfilePartialUpdat
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **patchedProfile** | [**PatchedProfile**](PatchedProfile.md) |  | 
+ **patchedProfileRequest** | [**PatchedProfileRequest**](PatchedProfileRequest.md) |  | 
 
 ### Return type
 
@@ -835,7 +835,7 @@ Other parameters are passed through a pointer to a apiAccountProfileRetrieveRequ
 
 ## AccountProfileUpdate
 
-> Profile AccountProfileUpdate(ctx).Profile(profile).Execute()
+> Profile AccountProfileUpdate(ctx).ProfileRequest(profileRequest).Execute()
 
 
 
@@ -854,11 +854,11 @@ import (
 )
 
 func main() {
-	profile := *openapiclient.NewProfile("FirstName_example", "LastName_example", "Funds_example", "Phone_example") // Profile | 
+	profileRequest := *openapiclient.NewProfileRequest("FirstName_example", "LastName_example", "Phone_example") // ProfileRequest | 
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.AccountAPI.AccountProfileUpdate(context.Background()).Profile(profile).Execute()
+	resp, r, err := apiClient.AccountAPI.AccountProfileUpdate(context.Background()).ProfileRequest(profileRequest).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `AccountAPI.AccountProfileUpdate``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -879,7 +879,7 @@ Other parameters are passed through a pointer to a apiAccountProfileUpdateReques
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **profile** | [**Profile**](Profile.md) |  | 
+ **profileRequest** | [**ProfileRequest**](ProfileRequest.md) |  | 
 
 ### Return type
 
@@ -901,7 +901,7 @@ Name | Type | Description  | Notes
 
 ## AccountSshKeysCreate
 
-> SSHKey AccountSshKeysCreate(ctx).SSHKey(sSHKey).Execute()
+> SSHKey AccountSshKeysCreate(ctx).SSHKeyRequest(sSHKeyRequest).Execute()
 
 
 
@@ -920,11 +920,11 @@ import (
 )
 
 func main() {
-	sSHKey := *openapiclient.NewSSHKey(int32(123), "Fingerprint_example", "Key_example") // SSHKey |  (optional)
+	sSHKeyRequest := *openapiclient.NewSSHKeyRequest("Key_example") // SSHKeyRequest | 
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.AccountAPI.AccountSshKeysCreate(context.Background()).SSHKey(sSHKey).Execute()
+	resp, r, err := apiClient.AccountAPI.AccountSshKeysCreate(context.Background()).SSHKeyRequest(sSHKeyRequest).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `AccountAPI.AccountSshKeysCreate``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -945,7 +945,7 @@ Other parameters are passed through a pointer to a apiAccountSshKeysCreateReques
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **sSHKey** | [**SSHKey**](SSHKey.md) |  | 
+ **sSHKeyRequest** | [**SSHKeyRequest**](SSHKeyRequest.md) |  | 
 
 ### Return type
 
@@ -1101,7 +1101,7 @@ Name | Type | Description  | Notes
 
 ## AccountSshKeysPartialUpdate
 
-> SSHKey AccountSshKeysPartialUpdate(ctx, id).PatchedSSHKey(patchedSSHKey).Execute()
+> SSHKey AccountSshKeysPartialUpdate(ctx, id).PatchedSSHKeyUpdateRequest(patchedSSHKeyUpdateRequest).Execute()
 
 
 
@@ -1121,11 +1121,11 @@ import (
 
 func main() {
 	id := "id_example" // string | 
-	patchedSSHKey := *openapiclient.NewPatchedSSHKey() // PatchedSSHKey |  (optional)
+	patchedSSHKeyUpdateRequest := *openapiclient.NewPatchedSSHKeyUpdateRequest() // PatchedSSHKeyUpdateRequest |  (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.AccountAPI.AccountSshKeysPartialUpdate(context.Background(), id).PatchedSSHKey(patchedSSHKey).Execute()
+	resp, r, err := apiClient.AccountAPI.AccountSshKeysPartialUpdate(context.Background(), id).PatchedSSHKeyUpdateRequest(patchedSSHKeyUpdateRequest).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `AccountAPI.AccountSshKeysPartialUpdate``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -1151,7 +1151,7 @@ Other parameters are passed through a pointer to a apiAccountSshKeysPartialUpdat
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
- **patchedSSHKey** | [**PatchedSSHKey**](PatchedSSHKey.md) |  | 
+ **patchedSSHKeyUpdateRequest** | [**PatchedSSHKeyUpdateRequest**](PatchedSSHKeyUpdateRequest.md) |  | 
 
 ### Return type
 
@@ -1243,7 +1243,7 @@ Name | Type | Description  | Notes
 
 ## AccountSshKeysUpdate
 
-> SSHKey AccountSshKeysUpdate(ctx, id).SSHKey(sSHKey).Execute()
+> SSHKey AccountSshKeysUpdate(ctx, id).SSHKeyUpdateRequest(sSHKeyUpdateRequest).Execute()
 
 
 
@@ -1263,11 +1263,11 @@ import (
 
 func main() {
 	id := "id_example" // string | 
-	sSHKey := *openapiclient.NewSSHKey(int32(123), "Fingerprint_example", "Key_example") // SSHKey |  (optional)
+	sSHKeyUpdateRequest := *openapiclient.NewSSHKeyUpdateRequest() // SSHKeyUpdateRequest |  (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.AccountAPI.AccountSshKeysUpdate(context.Background(), id).SSHKey(sSHKey).Execute()
+	resp, r, err := apiClient.AccountAPI.AccountSshKeysUpdate(context.Background(), id).SSHKeyUpdateRequest(sSHKeyUpdateRequest).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `AccountAPI.AccountSshKeysUpdate``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -1293,7 +1293,7 @@ Other parameters are passed through a pointer to a apiAccountSshKeysUpdateReques
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
- **sSHKey** | [**SSHKey**](SSHKey.md) |  | 
+ **sSHKeyUpdateRequest** | [**SSHKeyUpdateRequest**](SSHKeyUpdateRequest.md) |  | 
 
 ### Return type
 

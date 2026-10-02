@@ -11,6 +11,10 @@ Method | HTTP request | Description
 [**KubernetesClustersDestroy**](KubernetesAPI.md#KubernetesClustersDestroy) | **Delete** /api/kubernetes/clusters/{id}/ | 
 [**KubernetesClustersDisconnectVmCreate**](KubernetesAPI.md#KubernetesClustersDisconnectVmCreate) | **Post** /api/kubernetes/clusters/{id}/disconnect-vm/ | 
 [**KubernetesClustersEligibleVmsRetrieve**](KubernetesAPI.md#KubernetesClustersEligibleVmsRetrieve) | **Get** /api/kubernetes/clusters/{id}/eligible-vms/ | 
+[**KubernetesClustersEncryptionCreate**](KubernetesAPI.md#KubernetesClustersEncryptionCreate) | **Post** /api/kubernetes/clusters/{id}/encryption/ | 
+[**KubernetesClustersEncryptionRecheckCreate**](KubernetesAPI.md#KubernetesClustersEncryptionRecheckCreate) | **Post** /api/kubernetes/clusters/{id}/encryption/recheck/ | 
+[**KubernetesClustersEncryptionReconcileCreate**](KubernetesAPI.md#KubernetesClustersEncryptionReconcileCreate) | **Post** /api/kubernetes/clusters/{id}/encryption/reconcile/ | 
+[**KubernetesClustersEncryptionRetrieve**](KubernetesAPI.md#KubernetesClustersEncryptionRetrieve) | **Get** /api/kubernetes/clusters/{id}/encryption/ | 
 [**KubernetesClustersHttproutesCreate**](KubernetesAPI.md#KubernetesClustersHttproutesCreate) | **Post** /api/kubernetes/clusters/{cluster_id}/httproutes/ | 
 [**KubernetesClustersHttproutesDestroy**](KubernetesAPI.md#KubernetesClustersHttproutesDestroy) | **Delete** /api/kubernetes/clusters/{cluster_id}/httproutes/{id}/ | 
 [**KubernetesClustersHttproutesList**](KubernetesAPI.md#KubernetesClustersHttproutesList) | **Get** /api/kubernetes/clusters/{cluster_id}/httproutes/ | 
@@ -27,7 +31,15 @@ Method | HTTP request | Description
 [**KubernetesClustersLbFirewallRetrieve**](KubernetesAPI.md#KubernetesClustersLbFirewallRetrieve) | **Get** /api/kubernetes/clusters/{cluster_id}/lb-firewall/{id}/ | 
 [**KubernetesClustersLbFirewallUpdate**](KubernetesAPI.md#KubernetesClustersLbFirewallUpdate) | **Put** /api/kubernetes/clusters/{cluster_id}/lb-firewall/{id}/ | 
 [**KubernetesClustersList**](KubernetesAPI.md#KubernetesClustersList) | **Get** /api/kubernetes/clusters/ | 
+[**KubernetesClustersNodeOperationsCancelCreate**](KubernetesAPI.md#KubernetesClustersNodeOperationsCancelCreate) | **Post** /api/kubernetes/clusters/{cluster_id}/node-operations/{id}/cancel/ | 
+[**KubernetesClustersNodeOperationsList**](KubernetesAPI.md#KubernetesClustersNodeOperationsList) | **Get** /api/kubernetes/clusters/{cluster_id}/node-operations/ | 
+[**KubernetesClustersNodeOperationsResumeCreate**](KubernetesAPI.md#KubernetesClustersNodeOperationsResumeCreate) | **Post** /api/kubernetes/clusters/{cluster_id}/node-operations/{id}/resume/ | 
+[**KubernetesClustersNodeOperationsRetrieve**](KubernetesAPI.md#KubernetesClustersNodeOperationsRetrieve) | **Get** /api/kubernetes/clusters/{cluster_id}/node-operations/{id}/ | 
+[**KubernetesClustersNodeOperationsRetryCreate**](KubernetesAPI.md#KubernetesClustersNodeOperationsRetryCreate) | **Post** /api/kubernetes/clusters/{cluster_id}/node-operations/{id}/retry/ | 
 [**KubernetesClustersPartialUpdate**](KubernetesAPI.md#KubernetesClustersPartialUpdate) | **Patch** /api/kubernetes/clusters/{id}/ | 
+[**KubernetesClustersPoolRemovalJournalsList**](KubernetesAPI.md#KubernetesClustersPoolRemovalJournalsList) | **Get** /api/kubernetes/clusters/{cluster_id}/pool-removal-journals/ | 
+[**KubernetesClustersPoolRemovalJournalsResumeCreate**](KubernetesAPI.md#KubernetesClustersPoolRemovalJournalsResumeCreate) | **Post** /api/kubernetes/clusters/{cluster_id}/pool-removal-journals/{id}/resume/ | 
+[**KubernetesClustersPoolRemovalJournalsRetrieve**](KubernetesAPI.md#KubernetesClustersPoolRemovalJournalsRetrieve) | **Get** /api/kubernetes/clusters/{cluster_id}/pool-removal-journals/{id}/ | 
 [**KubernetesClustersPortForwardsCreate**](KubernetesAPI.md#KubernetesClustersPortForwardsCreate) | **Post** /api/kubernetes/clusters/{cluster_id}/port-forwards/ | 
 [**KubernetesClustersPortForwardsDestroy**](KubernetesAPI.md#KubernetesClustersPortForwardsDestroy) | **Delete** /api/kubernetes/clusters/{cluster_id}/port-forwards/{id}/ | 
 [**KubernetesClustersPortForwardsList**](KubernetesAPI.md#KubernetesClustersPortForwardsList) | **Get** /api/kubernetes/clusters/{cluster_id}/port-forwards/ | 
@@ -40,6 +52,7 @@ Method | HTTP request | Description
 [**KubernetesClustersResourcePoolsNodesDestroy**](KubernetesAPI.md#KubernetesClustersResourcePoolsNodesDestroy) | **Delete** /api/kubernetes/clusters/{cluster_id}/resource-pools/{pool_id}/nodes/{id}/ | 
 [**KubernetesClustersResourcePoolsNodesList**](KubernetesAPI.md#KubernetesClustersResourcePoolsNodesList) | **Get** /api/kubernetes/clusters/{cluster_id}/resource-pools/{pool_id}/nodes/ | 
 [**KubernetesClustersResourcePoolsNodesMetricsRetrieve**](KubernetesAPI.md#KubernetesClustersResourcePoolsNodesMetricsRetrieve) | **Get** /api/kubernetes/clusters/{cluster_id}/resource-pools/{pool_id}/nodes/{id}/metrics/ | 
+[**KubernetesClustersResourcePoolsNodesRebootCreate**](KubernetesAPI.md#KubernetesClustersResourcePoolsNodesRebootCreate) | **Post** /api/kubernetes/clusters/{cluster_id}/resource-pools/{pool_id}/nodes/{id}/reboot/ | 
 [**KubernetesClustersResourcePoolsNodesRetrieve**](KubernetesAPI.md#KubernetesClustersResourcePoolsNodesRetrieve) | **Get** /api/kubernetes/clusters/{cluster_id}/resource-pools/{pool_id}/nodes/{id}/ | 
 [**KubernetesClustersResourcePoolsNodesRrdRetrieve**](KubernetesAPI.md#KubernetesClustersResourcePoolsNodesRrdRetrieve) | **Get** /api/kubernetes/clusters/{cluster_id}/resource-pools/{pool_id}/nodes/{id}/rrd/ | 
 [**KubernetesClustersResourcePoolsPartialUpdate**](KubernetesAPI.md#KubernetesClustersResourcePoolsPartialUpdate) | **Patch** /api/kubernetes/clusters/{cluster_id}/resource-pools/{id}/ | 
@@ -62,6 +75,7 @@ Method | HTTP request | Description
 [**KubernetesClustersUdproutesUpdate**](KubernetesAPI.md#KubernetesClustersUdproutesUpdate) | **Put** /api/kubernetes/clusters/{cluster_id}/udproutes/{id}/ | 
 [**KubernetesClustersUpdate**](KubernetesAPI.md#KubernetesClustersUpdate) | **Put** /api/kubernetes/clusters/{id}/ | 
 [**KubernetesClustersUpgradeFeatureCreate**](KubernetesAPI.md#KubernetesClustersUpgradeFeatureCreate) | **Post** /api/kubernetes/clusters/{id}/upgrade-feature/ | 
+[**KubernetesClustersUpgradeLbCreate**](KubernetesAPI.md#KubernetesClustersUpgradeLbCreate) | **Post** /api/kubernetes/clusters/{id}/upgrade-lb/ | 
 
 
 
@@ -275,7 +289,7 @@ Name | Type | Description  | Notes
 
 ## KubernetesClustersCreate
 
-> ClusterAddResponse KubernetesClustersCreate(ctx).ClusterAdd(clusterAdd).Execute()
+> ClusterAddResponse KubernetesClustersCreate(ctx).ClusterAddRequest(clusterAddRequest).Execute()
 
 
 
@@ -294,11 +308,11 @@ import (
 )
 
 func main() {
-	clusterAdd := *openapiclient.NewClusterAdd(openapiclient.ClusterTypeEnum("dev"), "ResourcePoolPackage_example") // ClusterAdd | 
+	clusterAddRequest := *openapiclient.NewClusterAddRequest(openapiclient.ClusterTypeEnum("dev"), "ResourcePoolPackage_example") // ClusterAddRequest | 
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.KubernetesAPI.KubernetesClustersCreate(context.Background()).ClusterAdd(clusterAdd).Execute()
+	resp, r, err := apiClient.KubernetesAPI.KubernetesClustersCreate(context.Background()).ClusterAddRequest(clusterAddRequest).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `KubernetesAPI.KubernetesClustersCreate``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -319,7 +333,7 @@ Other parameters are passed through a pointer to a apiKubernetesClustersCreateRe
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **clusterAdd** | [**ClusterAdd**](ClusterAdd.md) |  | 
+ **clusterAddRequest** | [**ClusterAddRequest**](ClusterAddRequest.md) |  | 
 
 ### Return type
 
@@ -549,9 +563,293 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
+## KubernetesClustersEncryptionCreate
+
+> ClusterEncryptionOperation KubernetesClustersEncryptionCreate(ctx, id).ClusterEncryptionRequest(clusterEncryptionRequest).Execute()
+
+
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/pidginhost/sdk-go"
+)
+
+func main() {
+	id := "id_example" // string | 
+	clusterEncryptionRequest := *openapiclient.NewClusterEncryptionRequest(openapiclient.EncryptionModeEnum("none")) // ClusterEncryptionRequest | 
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.KubernetesAPI.KubernetesClustersEncryptionCreate(context.Background(), id).ClusterEncryptionRequest(clusterEncryptionRequest).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `KubernetesAPI.KubernetesClustersEncryptionCreate``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `KubernetesClustersEncryptionCreate`: ClusterEncryptionOperation
+	fmt.Fprintf(os.Stdout, "Response from `KubernetesAPI.KubernetesClustersEncryptionCreate`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**id** | **string** |  | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiKubernetesClustersEncryptionCreateRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+ **clusterEncryptionRequest** | [**ClusterEncryptionRequest**](ClusterEncryptionRequest.md) |  | 
+
+### Return type
+
+[**ClusterEncryptionOperation**](ClusterEncryptionOperation.md)
+
+### Authorization
+
+[tokenAuth](../README.md#tokenAuth), [cookieAuth](../README.md#cookieAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## KubernetesClustersEncryptionRecheckCreate
+
+> ClusterEncryption KubernetesClustersEncryptionRecheckCreate(ctx, id).Execute()
+
+
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/pidginhost/sdk-go"
+)
+
+func main() {
+	id := "id_example" // string | 
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.KubernetesAPI.KubernetesClustersEncryptionRecheckCreate(context.Background(), id).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `KubernetesAPI.KubernetesClustersEncryptionRecheckCreate``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `KubernetesClustersEncryptionRecheckCreate`: ClusterEncryption
+	fmt.Fprintf(os.Stdout, "Response from `KubernetesAPI.KubernetesClustersEncryptionRecheckCreate`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**id** | **string** |  | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiKubernetesClustersEncryptionRecheckCreateRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+### Return type
+
+[**ClusterEncryption**](ClusterEncryption.md)
+
+### Authorization
+
+[tokenAuth](../README.md#tokenAuth), [cookieAuth](../README.md#cookieAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## KubernetesClustersEncryptionReconcileCreate
+
+> ClusterEncryptionOperation KubernetesClustersEncryptionReconcileCreate(ctx, id).ClusterEncryptionReconcileRequest(clusterEncryptionReconcileRequest).Execute()
+
+
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/pidginhost/sdk-go"
+)
+
+func main() {
+	id := "id_example" // string | 
+	clusterEncryptionReconcileRequest := *openapiclient.NewClusterEncryptionReconcileRequest(openapiclient.EncryptionModeEnum("none")) // ClusterEncryptionReconcileRequest | 
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.KubernetesAPI.KubernetesClustersEncryptionReconcileCreate(context.Background(), id).ClusterEncryptionReconcileRequest(clusterEncryptionReconcileRequest).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `KubernetesAPI.KubernetesClustersEncryptionReconcileCreate``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `KubernetesClustersEncryptionReconcileCreate`: ClusterEncryptionOperation
+	fmt.Fprintf(os.Stdout, "Response from `KubernetesAPI.KubernetesClustersEncryptionReconcileCreate`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**id** | **string** |  | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiKubernetesClustersEncryptionReconcileCreateRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+ **clusterEncryptionReconcileRequest** | [**ClusterEncryptionReconcileRequest**](ClusterEncryptionReconcileRequest.md) |  | 
+
+### Return type
+
+[**ClusterEncryptionOperation**](ClusterEncryptionOperation.md)
+
+### Authorization
+
+[tokenAuth](../README.md#tokenAuth), [cookieAuth](../README.md#cookieAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## KubernetesClustersEncryptionRetrieve
+
+> ClusterEncryption KubernetesClustersEncryptionRetrieve(ctx, id).Execute()
+
+
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/pidginhost/sdk-go"
+)
+
+func main() {
+	id := "id_example" // string | 
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.KubernetesAPI.KubernetesClustersEncryptionRetrieve(context.Background(), id).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `KubernetesAPI.KubernetesClustersEncryptionRetrieve``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `KubernetesClustersEncryptionRetrieve`: ClusterEncryption
+	fmt.Fprintf(os.Stdout, "Response from `KubernetesAPI.KubernetesClustersEncryptionRetrieve`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**id** | **string** |  | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiKubernetesClustersEncryptionRetrieveRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+### Return type
+
+[**ClusterEncryption**](ClusterEncryption.md)
+
+### Authorization
+
+[tokenAuth](../README.md#tokenAuth), [cookieAuth](../README.md#cookieAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
 ## KubernetesClustersHttproutesCreate
 
-> HTTPRoute KubernetesClustersHttproutesCreate(ctx, clusterId).HTTPRoute(hTTPRoute).Execute()
+> HTTPRoute KubernetesClustersHttproutesCreate(ctx, clusterId).HTTPRouteRequest(hTTPRouteRequest).Execute()
 
 
 
@@ -571,11 +869,11 @@ import (
 
 func main() {
 	clusterId := int32(56) // int32 | 
-	hTTPRoute := *openapiclient.NewHTTPRoute(int32(123), "Name_example", []string{"Hostnames_example"}, "BackendServiceName_example", int32(123), false, "StatusMessage_example", "Created_example", "Updated_example") // HTTPRoute | 
+	hTTPRouteRequest := *openapiclient.NewHTTPRouteRequest("Name_example", []string{"Hostnames_example"}, "BackendServiceName_example", int32(123)) // HTTPRouteRequest | 
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.KubernetesAPI.KubernetesClustersHttproutesCreate(context.Background(), clusterId).HTTPRoute(hTTPRoute).Execute()
+	resp, r, err := apiClient.KubernetesAPI.KubernetesClustersHttproutesCreate(context.Background(), clusterId).HTTPRouteRequest(hTTPRouteRequest).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `KubernetesAPI.KubernetesClustersHttproutesCreate``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -601,7 +899,7 @@ Other parameters are passed through a pointer to a apiKubernetesClustersHttprout
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
- **hTTPRoute** | [**HTTPRoute**](HTTPRoute.md) |  | 
+ **hTTPRouteRequest** | [**HTTPRouteRequest**](HTTPRouteRequest.md) |  | 
 
 ### Return type
 
@@ -766,7 +1064,7 @@ Name | Type | Description  | Notes
 
 ## KubernetesClustersHttproutesPartialUpdate
 
-> HTTPRoute KubernetesClustersHttproutesPartialUpdate(ctx, clusterId, id).PatchedHTTPRoute(patchedHTTPRoute).Execute()
+> HTTPRoute KubernetesClustersHttproutesPartialUpdate(ctx, clusterId, id).PatchedHTTPRouteRequest(patchedHTTPRouteRequest).Execute()
 
 
 
@@ -787,11 +1085,11 @@ import (
 func main() {
 	clusterId := int32(56) // int32 | 
 	id := "id_example" // string | 
-	patchedHTTPRoute := *openapiclient.NewPatchedHTTPRoute() // PatchedHTTPRoute |  (optional)
+	patchedHTTPRouteRequest := *openapiclient.NewPatchedHTTPRouteRequest() // PatchedHTTPRouteRequest |  (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.KubernetesAPI.KubernetesClustersHttproutesPartialUpdate(context.Background(), clusterId, id).PatchedHTTPRoute(patchedHTTPRoute).Execute()
+	resp, r, err := apiClient.KubernetesAPI.KubernetesClustersHttproutesPartialUpdate(context.Background(), clusterId, id).PatchedHTTPRouteRequest(patchedHTTPRouteRequest).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `KubernetesAPI.KubernetesClustersHttproutesPartialUpdate``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -819,7 +1117,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
 
- **patchedHTTPRoute** | [**PatchedHTTPRoute**](PatchedHTTPRoute.md) |  | 
+ **patchedHTTPRouteRequest** | [**PatchedHTTPRouteRequest**](PatchedHTTPRouteRequest.md) |  | 
 
 ### Return type
 
@@ -914,7 +1212,7 @@ Name | Type | Description  | Notes
 
 ## KubernetesClustersHttproutesUpdate
 
-> HTTPRoute KubernetesClustersHttproutesUpdate(ctx, clusterId, id).HTTPRoute(hTTPRoute).Execute()
+> HTTPRoute KubernetesClustersHttproutesUpdate(ctx, clusterId, id).HTTPRouteRequest(hTTPRouteRequest).Execute()
 
 
 
@@ -935,11 +1233,11 @@ import (
 func main() {
 	clusterId := int32(56) // int32 | 
 	id := "id_example" // string | 
-	hTTPRoute := *openapiclient.NewHTTPRoute(int32(123), "Name_example", []string{"Hostnames_example"}, "BackendServiceName_example", int32(123), false, "StatusMessage_example", "Created_example", "Updated_example") // HTTPRoute | 
+	hTTPRouteRequest := *openapiclient.NewHTTPRouteRequest("Name_example", []string{"Hostnames_example"}, "BackendServiceName_example", int32(123)) // HTTPRouteRequest | 
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.KubernetesAPI.KubernetesClustersHttproutesUpdate(context.Background(), clusterId, id).HTTPRoute(hTTPRoute).Execute()
+	resp, r, err := apiClient.KubernetesAPI.KubernetesClustersHttproutesUpdate(context.Background(), clusterId, id).HTTPRouteRequest(hTTPRouteRequest).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `KubernetesAPI.KubernetesClustersHttproutesUpdate``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -967,7 +1265,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
 
- **hTTPRoute** | [**HTTPRoute**](HTTPRoute.md) |  | 
+ **hTTPRouteRequest** | [**HTTPRouteRequest**](HTTPRouteRequest.md) |  | 
 
 ### Return type
 
@@ -1199,7 +1497,7 @@ Name | Type | Description  | Notes
 
 ## KubernetesClustersLbFirewallCreate
 
-> LBFirewallRule KubernetesClustersLbFirewallCreate(ctx, clusterId).LBFirewallRule(lBFirewallRule).Execute()
+> LBFirewallRule KubernetesClustersLbFirewallCreate(ctx, clusterId).LBFirewallRuleRequest(lBFirewallRuleRequest).Execute()
 
 
 
@@ -1219,11 +1517,11 @@ import (
 
 func main() {
 	clusterId := int32(56) // int32 | 
-	lBFirewallRule := *openapiclient.NewLBFirewallRule(int32(123), "Created_example", "Updated_example") // LBFirewallRule |  (optional)
+	lBFirewallRuleRequest := *openapiclient.NewLBFirewallRuleRequest() // LBFirewallRuleRequest |  (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.KubernetesAPI.KubernetesClustersLbFirewallCreate(context.Background(), clusterId).LBFirewallRule(lBFirewallRule).Execute()
+	resp, r, err := apiClient.KubernetesAPI.KubernetesClustersLbFirewallCreate(context.Background(), clusterId).LBFirewallRuleRequest(lBFirewallRuleRequest).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `KubernetesAPI.KubernetesClustersLbFirewallCreate``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -1249,7 +1547,7 @@ Other parameters are passed through a pointer to a apiKubernetesClustersLbFirewa
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
- **lBFirewallRule** | [**LBFirewallRule**](LBFirewallRule.md) |  | 
+ **lBFirewallRuleRequest** | [**LBFirewallRuleRequest**](LBFirewallRuleRequest.md) |  | 
 
 ### Return type
 
@@ -1414,7 +1712,7 @@ Name | Type | Description  | Notes
 
 ## KubernetesClustersLbFirewallPartialUpdate
 
-> LBFirewallRule KubernetesClustersLbFirewallPartialUpdate(ctx, clusterId, id).PatchedLBFirewallRule(patchedLBFirewallRule).Execute()
+> LBFirewallRule KubernetesClustersLbFirewallPartialUpdate(ctx, clusterId, id).PatchedLBFirewallRuleRequest(patchedLBFirewallRuleRequest).Execute()
 
 
 
@@ -1435,11 +1733,11 @@ import (
 func main() {
 	clusterId := int32(56) // int32 | 
 	id := "id_example" // string | 
-	patchedLBFirewallRule := *openapiclient.NewPatchedLBFirewallRule() // PatchedLBFirewallRule |  (optional)
+	patchedLBFirewallRuleRequest := *openapiclient.NewPatchedLBFirewallRuleRequest() // PatchedLBFirewallRuleRequest |  (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.KubernetesAPI.KubernetesClustersLbFirewallPartialUpdate(context.Background(), clusterId, id).PatchedLBFirewallRule(patchedLBFirewallRule).Execute()
+	resp, r, err := apiClient.KubernetesAPI.KubernetesClustersLbFirewallPartialUpdate(context.Background(), clusterId, id).PatchedLBFirewallRuleRequest(patchedLBFirewallRuleRequest).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `KubernetesAPI.KubernetesClustersLbFirewallPartialUpdate``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -1467,7 +1765,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
 
- **patchedLBFirewallRule** | [**PatchedLBFirewallRule**](PatchedLBFirewallRule.md) |  | 
+ **patchedLBFirewallRuleRequest** | [**PatchedLBFirewallRuleRequest**](PatchedLBFirewallRuleRequest.md) |  | 
 
 ### Return type
 
@@ -1562,7 +1860,7 @@ Name | Type | Description  | Notes
 
 ## KubernetesClustersLbFirewallUpdate
 
-> LBFirewallRule KubernetesClustersLbFirewallUpdate(ctx, clusterId, id).LBFirewallRule(lBFirewallRule).Execute()
+> LBFirewallRule KubernetesClustersLbFirewallUpdate(ctx, clusterId, id).LBFirewallRuleRequest(lBFirewallRuleRequest).Execute()
 
 
 
@@ -1583,11 +1881,11 @@ import (
 func main() {
 	clusterId := int32(56) // int32 | 
 	id := "id_example" // string | 
-	lBFirewallRule := *openapiclient.NewLBFirewallRule(int32(123), "Created_example", "Updated_example") // LBFirewallRule |  (optional)
+	lBFirewallRuleRequest := *openapiclient.NewLBFirewallRuleRequest() // LBFirewallRuleRequest |  (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.KubernetesAPI.KubernetesClustersLbFirewallUpdate(context.Background(), clusterId, id).LBFirewallRule(lBFirewallRule).Execute()
+	resp, r, err := apiClient.KubernetesAPI.KubernetesClustersLbFirewallUpdate(context.Background(), clusterId, id).LBFirewallRuleRequest(lBFirewallRuleRequest).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `KubernetesAPI.KubernetesClustersLbFirewallUpdate``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -1615,7 +1913,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
 
- **lBFirewallRule** | [**LBFirewallRule**](LBFirewallRule.md) |  | 
+ **lBFirewallRuleRequest** | [**LBFirewallRuleRequest**](LBFirewallRuleRequest.md) |  | 
 
 ### Return type
 
@@ -1701,9 +1999,375 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
+## KubernetesClustersNodeOperationsCancelCreate
+
+> NodeOperation KubernetesClustersNodeOperationsCancelCreate(ctx, clusterId, id).Execute()
+
+
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/pidginhost/sdk-go"
+)
+
+func main() {
+	clusterId := int32(56) // int32 | 
+	id := "id_example" // string | 
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.KubernetesAPI.KubernetesClustersNodeOperationsCancelCreate(context.Background(), clusterId, id).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `KubernetesAPI.KubernetesClustersNodeOperationsCancelCreate``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `KubernetesClustersNodeOperationsCancelCreate`: NodeOperation
+	fmt.Fprintf(os.Stdout, "Response from `KubernetesAPI.KubernetesClustersNodeOperationsCancelCreate`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**clusterId** | **int32** |  | 
+**id** | **string** |  | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiKubernetesClustersNodeOperationsCancelCreateRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+
+### Return type
+
+[**NodeOperation**](NodeOperation.md)
+
+### Authorization
+
+[tokenAuth](../README.md#tokenAuth), [cookieAuth](../README.md#cookieAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## KubernetesClustersNodeOperationsList
+
+> PaginatedNodeOperationList KubernetesClustersNodeOperationsList(ctx, clusterId).Page(page).Execute()
+
+
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/pidginhost/sdk-go"
+)
+
+func main() {
+	clusterId := int32(56) // int32 | 
+	page := int32(56) // int32 | A page number within the paginated result set. (optional)
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.KubernetesAPI.KubernetesClustersNodeOperationsList(context.Background(), clusterId).Page(page).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `KubernetesAPI.KubernetesClustersNodeOperationsList``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `KubernetesClustersNodeOperationsList`: PaginatedNodeOperationList
+	fmt.Fprintf(os.Stdout, "Response from `KubernetesAPI.KubernetesClustersNodeOperationsList`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**clusterId** | **int32** |  | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiKubernetesClustersNodeOperationsListRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+ **page** | **int32** | A page number within the paginated result set. | 
+
+### Return type
+
+[**PaginatedNodeOperationList**](PaginatedNodeOperationList.md)
+
+### Authorization
+
+[tokenAuth](../README.md#tokenAuth), [cookieAuth](../README.md#cookieAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## KubernetesClustersNodeOperationsResumeCreate
+
+> NodeOperation KubernetesClustersNodeOperationsResumeCreate(ctx, clusterId, id).Execute()
+
+
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/pidginhost/sdk-go"
+)
+
+func main() {
+	clusterId := int32(56) // int32 | 
+	id := "id_example" // string | 
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.KubernetesAPI.KubernetesClustersNodeOperationsResumeCreate(context.Background(), clusterId, id).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `KubernetesAPI.KubernetesClustersNodeOperationsResumeCreate``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `KubernetesClustersNodeOperationsResumeCreate`: NodeOperation
+	fmt.Fprintf(os.Stdout, "Response from `KubernetesAPI.KubernetesClustersNodeOperationsResumeCreate`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**clusterId** | **int32** |  | 
+**id** | **string** |  | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiKubernetesClustersNodeOperationsResumeCreateRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+
+### Return type
+
+[**NodeOperation**](NodeOperation.md)
+
+### Authorization
+
+[tokenAuth](../README.md#tokenAuth), [cookieAuth](../README.md#cookieAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## KubernetesClustersNodeOperationsRetrieve
+
+> NodeOperation KubernetesClustersNodeOperationsRetrieve(ctx, clusterId, id).Execute()
+
+
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/pidginhost/sdk-go"
+)
+
+func main() {
+	clusterId := int32(56) // int32 | 
+	id := "id_example" // string | 
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.KubernetesAPI.KubernetesClustersNodeOperationsRetrieve(context.Background(), clusterId, id).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `KubernetesAPI.KubernetesClustersNodeOperationsRetrieve``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `KubernetesClustersNodeOperationsRetrieve`: NodeOperation
+	fmt.Fprintf(os.Stdout, "Response from `KubernetesAPI.KubernetesClustersNodeOperationsRetrieve`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**clusterId** | **int32** |  | 
+**id** | **string** |  | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiKubernetesClustersNodeOperationsRetrieveRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+
+### Return type
+
+[**NodeOperation**](NodeOperation.md)
+
+### Authorization
+
+[tokenAuth](../README.md#tokenAuth), [cookieAuth](../README.md#cookieAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## KubernetesClustersNodeOperationsRetryCreate
+
+> NodeOperation KubernetesClustersNodeOperationsRetryCreate(ctx, clusterId, id).NodeOperationRetryRequest(nodeOperationRetryRequest).Execute()
+
+
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/pidginhost/sdk-go"
+)
+
+func main() {
+	clusterId := int32(56) // int32 | 
+	id := "id_example" // string | 
+	nodeOperationRetryRequest := *openapiclient.NewNodeOperationRetryRequest() // NodeOperationRetryRequest |  (optional)
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.KubernetesAPI.KubernetesClustersNodeOperationsRetryCreate(context.Background(), clusterId, id).NodeOperationRetryRequest(nodeOperationRetryRequest).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `KubernetesAPI.KubernetesClustersNodeOperationsRetryCreate``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `KubernetesClustersNodeOperationsRetryCreate`: NodeOperation
+	fmt.Fprintf(os.Stdout, "Response from `KubernetesAPI.KubernetesClustersNodeOperationsRetryCreate`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**clusterId** | **int32** |  | 
+**id** | **string** |  | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiKubernetesClustersNodeOperationsRetryCreateRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+ **nodeOperationRetryRequest** | [**NodeOperationRetryRequest**](NodeOperationRetryRequest.md) |  | 
+
+### Return type
+
+[**NodeOperation**](NodeOperation.md)
+
+### Authorization
+
+[tokenAuth](../README.md#tokenAuth), [cookieAuth](../README.md#cookieAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
 ## KubernetesClustersPartialUpdate
 
-> ClusterDetail KubernetesClustersPartialUpdate(ctx, id).PatchedClusterDetail(patchedClusterDetail).Execute()
+> ClusterDetail KubernetesClustersPartialUpdate(ctx, id).PatchedClusterDetailRequest(patchedClusterDetailRequest).Execute()
 
 
 
@@ -1723,11 +2387,11 @@ import (
 
 func main() {
 	id := "id_example" // string | 
-	patchedClusterDetail := *openapiclient.NewPatchedClusterDetail() // PatchedClusterDetail |  (optional)
+	patchedClusterDetailRequest := *openapiclient.NewPatchedClusterDetailRequest() // PatchedClusterDetailRequest |  (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.KubernetesAPI.KubernetesClustersPartialUpdate(context.Background(), id).PatchedClusterDetail(patchedClusterDetail).Execute()
+	resp, r, err := apiClient.KubernetesAPI.KubernetesClustersPartialUpdate(context.Background(), id).PatchedClusterDetailRequest(patchedClusterDetailRequest).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `KubernetesAPI.KubernetesClustersPartialUpdate``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -1753,7 +2417,7 @@ Other parameters are passed through a pointer to a apiKubernetesClustersPartialU
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
- **patchedClusterDetail** | [**PatchedClusterDetail**](PatchedClusterDetail.md) |  | 
+ **patchedClusterDetailRequest** | [**PatchedClusterDetailRequest**](PatchedClusterDetailRequest.md) |  | 
 
 ### Return type
 
@@ -1773,9 +2437,9 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
-## KubernetesClustersPortForwardsCreate
+## KubernetesClustersPoolRemovalJournalsList
 
-> K8sPortForward KubernetesClustersPortForwardsCreate(ctx, clusterId).K8sPortForward(k8sPortForward).Execute()
+> PaginatedPoolRemovalJournalList KubernetesClustersPoolRemovalJournalsList(ctx, clusterId).Page(page).Execute()
 
 
 
@@ -1795,11 +2459,229 @@ import (
 
 func main() {
 	clusterId := int32(56) // int32 | 
-	k8sPortForward := *openapiclient.NewK8sPortForward(int32(123), "InternalIp_example", int32(123), openapiclient.ProtocolEnum("tcp")) // K8sPortForward | 
+	page := int32(56) // int32 | A page number within the paginated result set. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.KubernetesAPI.KubernetesClustersPortForwardsCreate(context.Background(), clusterId).K8sPortForward(k8sPortForward).Execute()
+	resp, r, err := apiClient.KubernetesAPI.KubernetesClustersPoolRemovalJournalsList(context.Background(), clusterId).Page(page).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `KubernetesAPI.KubernetesClustersPoolRemovalJournalsList``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `KubernetesClustersPoolRemovalJournalsList`: PaginatedPoolRemovalJournalList
+	fmt.Fprintf(os.Stdout, "Response from `KubernetesAPI.KubernetesClustersPoolRemovalJournalsList`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**clusterId** | **int32** |  | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiKubernetesClustersPoolRemovalJournalsListRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+ **page** | **int32** | A page number within the paginated result set. | 
+
+### Return type
+
+[**PaginatedPoolRemovalJournalList**](PaginatedPoolRemovalJournalList.md)
+
+### Authorization
+
+[tokenAuth](../README.md#tokenAuth), [cookieAuth](../README.md#cookieAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## KubernetesClustersPoolRemovalJournalsResumeCreate
+
+> PoolRemovalJournal KubernetesClustersPoolRemovalJournalsResumeCreate(ctx, clusterId, id).Execute()
+
+
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/pidginhost/sdk-go"
+)
+
+func main() {
+	clusterId := int32(56) // int32 | 
+	id := "id_example" // string | 
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.KubernetesAPI.KubernetesClustersPoolRemovalJournalsResumeCreate(context.Background(), clusterId, id).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `KubernetesAPI.KubernetesClustersPoolRemovalJournalsResumeCreate``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `KubernetesClustersPoolRemovalJournalsResumeCreate`: PoolRemovalJournal
+	fmt.Fprintf(os.Stdout, "Response from `KubernetesAPI.KubernetesClustersPoolRemovalJournalsResumeCreate`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**clusterId** | **int32** |  | 
+**id** | **string** |  | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiKubernetesClustersPoolRemovalJournalsResumeCreateRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+
+### Return type
+
+[**PoolRemovalJournal**](PoolRemovalJournal.md)
+
+### Authorization
+
+[tokenAuth](../README.md#tokenAuth), [cookieAuth](../README.md#cookieAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## KubernetesClustersPoolRemovalJournalsRetrieve
+
+> PoolRemovalJournal KubernetesClustersPoolRemovalJournalsRetrieve(ctx, clusterId, id).Execute()
+
+
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/pidginhost/sdk-go"
+)
+
+func main() {
+	clusterId := int32(56) // int32 | 
+	id := "id_example" // string | 
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.KubernetesAPI.KubernetesClustersPoolRemovalJournalsRetrieve(context.Background(), clusterId, id).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `KubernetesAPI.KubernetesClustersPoolRemovalJournalsRetrieve``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `KubernetesClustersPoolRemovalJournalsRetrieve`: PoolRemovalJournal
+	fmt.Fprintf(os.Stdout, "Response from `KubernetesAPI.KubernetesClustersPoolRemovalJournalsRetrieve`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**clusterId** | **int32** |  | 
+**id** | **string** |  | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiKubernetesClustersPoolRemovalJournalsRetrieveRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+
+### Return type
+
+[**PoolRemovalJournal**](PoolRemovalJournal.md)
+
+### Authorization
+
+[tokenAuth](../README.md#tokenAuth), [cookieAuth](../README.md#cookieAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## KubernetesClustersPortForwardsCreate
+
+> K8sPortForward KubernetesClustersPortForwardsCreate(ctx, clusterId).K8sPortForwardRequest(k8sPortForwardRequest).Execute()
+
+
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/pidginhost/sdk-go"
+)
+
+func main() {
+	clusterId := int32(56) // int32 | 
+	k8sPortForwardRequest := *openapiclient.NewK8sPortForwardRequest("InternalIp_example", int32(123), openapiclient.ProtocolEnum("tcp")) // K8sPortForwardRequest | 
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.KubernetesAPI.KubernetesClustersPortForwardsCreate(context.Background(), clusterId).K8sPortForwardRequest(k8sPortForwardRequest).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `KubernetesAPI.KubernetesClustersPortForwardsCreate``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -1825,7 +2707,7 @@ Other parameters are passed through a pointer to a apiKubernetesClustersPortForw
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
- **k8sPortForward** | [**K8sPortForward**](K8sPortForward.md) |  | 
+ **k8sPortForwardRequest** | [**K8sPortForwardRequest**](K8sPortForwardRequest.md) |  | 
 
 ### Return type
 
@@ -1990,7 +2872,7 @@ Name | Type | Description  | Notes
 
 ## KubernetesClustersPortForwardsPartialUpdate
 
-> K8sPortForward KubernetesClustersPortForwardsPartialUpdate(ctx, clusterId, id).PatchedK8sPortForward(patchedK8sPortForward).Execute()
+> K8sPortForward KubernetesClustersPortForwardsPartialUpdate(ctx, clusterId, id).PatchedK8sPortForwardRequest(patchedK8sPortForwardRequest).Execute()
 
 
 
@@ -2011,11 +2893,11 @@ import (
 func main() {
 	clusterId := int32(56) // int32 | 
 	id := "id_example" // string | 
-	patchedK8sPortForward := *openapiclient.NewPatchedK8sPortForward() // PatchedK8sPortForward |  (optional)
+	patchedK8sPortForwardRequest := *openapiclient.NewPatchedK8sPortForwardRequest() // PatchedK8sPortForwardRequest |  (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.KubernetesAPI.KubernetesClustersPortForwardsPartialUpdate(context.Background(), clusterId, id).PatchedK8sPortForward(patchedK8sPortForward).Execute()
+	resp, r, err := apiClient.KubernetesAPI.KubernetesClustersPortForwardsPartialUpdate(context.Background(), clusterId, id).PatchedK8sPortForwardRequest(patchedK8sPortForwardRequest).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `KubernetesAPI.KubernetesClustersPortForwardsPartialUpdate``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -2043,7 +2925,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
 
- **patchedK8sPortForward** | [**PatchedK8sPortForward**](PatchedK8sPortForward.md) |  | 
+ **patchedK8sPortForwardRequest** | [**PatchedK8sPortForwardRequest**](PatchedK8sPortForwardRequest.md) |  | 
 
 ### Return type
 
@@ -2138,7 +3020,7 @@ Name | Type | Description  | Notes
 
 ## KubernetesClustersPortForwardsUpdate
 
-> K8sPortForward KubernetesClustersPortForwardsUpdate(ctx, clusterId, id).K8sPortForward(k8sPortForward).Execute()
+> K8sPortForward KubernetesClustersPortForwardsUpdate(ctx, clusterId, id).K8sPortForwardRequest(k8sPortForwardRequest).Execute()
 
 
 
@@ -2159,11 +3041,11 @@ import (
 func main() {
 	clusterId := int32(56) // int32 | 
 	id := "id_example" // string | 
-	k8sPortForward := *openapiclient.NewK8sPortForward(int32(123), "InternalIp_example", int32(123), openapiclient.ProtocolEnum("tcp")) // K8sPortForward | 
+	k8sPortForwardRequest := *openapiclient.NewK8sPortForwardRequest("InternalIp_example", int32(123), openapiclient.ProtocolEnum("tcp")) // K8sPortForwardRequest | 
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.KubernetesAPI.KubernetesClustersPortForwardsUpdate(context.Background(), clusterId, id).K8sPortForward(k8sPortForward).Execute()
+	resp, r, err := apiClient.KubernetesAPI.KubernetesClustersPortForwardsUpdate(context.Background(), clusterId, id).K8sPortForwardRequest(k8sPortForwardRequest).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `KubernetesAPI.KubernetesClustersPortForwardsUpdate``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -2191,7 +3073,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
 
- **k8sPortForward** | [**K8sPortForward**](K8sPortForward.md) |  | 
+ **k8sPortForwardRequest** | [**K8sPortForwardRequest**](K8sPortForwardRequest.md) |  | 
 
 ### Return type
 
@@ -2213,7 +3095,7 @@ Name | Type | Description  | Notes
 
 ## KubernetesClustersResourcePoolsCreate
 
-> ResourcePoolAddResponse KubernetesClustersResourcePoolsCreate(ctx, clusterId).ResourcePoolAdd(resourcePoolAdd).Execute()
+> ResourcePoolAddResponse KubernetesClustersResourcePoolsCreate(ctx, clusterId).ResourcePoolAddRequest(resourcePoolAddRequest).Execute()
 
 
 
@@ -2233,11 +3115,11 @@ import (
 
 func main() {
 	clusterId := int32(56) // int32 | 
-	resourcePoolAdd := *openapiclient.NewResourcePoolAdd("ResourcePoolPackage_example", int32(123)) // ResourcePoolAdd | 
+	resourcePoolAddRequest := *openapiclient.NewResourcePoolAddRequest("ResourcePoolPackage_example", int32(123)) // ResourcePoolAddRequest | 
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.KubernetesAPI.KubernetesClustersResourcePoolsCreate(context.Background(), clusterId).ResourcePoolAdd(resourcePoolAdd).Execute()
+	resp, r, err := apiClient.KubernetesAPI.KubernetesClustersResourcePoolsCreate(context.Background(), clusterId).ResourcePoolAddRequest(resourcePoolAddRequest).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `KubernetesAPI.KubernetesClustersResourcePoolsCreate``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -2263,7 +3145,7 @@ Other parameters are passed through a pointer to a apiKubernetesClustersResource
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
- **resourcePoolAdd** | [**ResourcePoolAdd**](ResourcePoolAdd.md) |  | 
+ **resourcePoolAddRequest** | [**ResourcePoolAddRequest**](ResourcePoolAddRequest.md) |  | 
 
 ### Return type
 
@@ -2428,7 +3310,7 @@ Name | Type | Description  | Notes
 
 ## KubernetesClustersResourcePoolsNodesDestroy
 
-> KubernetesClustersResourcePoolsNodesDestroy(ctx, clusterId, id, poolId).Execute()
+> NodeOperation KubernetesClustersResourcePoolsNodesDestroy(ctx, clusterId, id, poolId).Execute()
 
 
 
@@ -2453,11 +3335,13 @@ func main() {
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	r, err := apiClient.KubernetesAPI.KubernetesClustersResourcePoolsNodesDestroy(context.Background(), clusterId, id, poolId).Execute()
+	resp, r, err := apiClient.KubernetesAPI.KubernetesClustersResourcePoolsNodesDestroy(context.Background(), clusterId, id, poolId).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `KubernetesAPI.KubernetesClustersResourcePoolsNodesDestroy``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
+	// response from `KubernetesClustersResourcePoolsNodesDestroy`: NodeOperation
+	fmt.Fprintf(os.Stdout, "Response from `KubernetesAPI.KubernetesClustersResourcePoolsNodesDestroy`: %v\n", resp)
 }
 ```
 
@@ -2484,7 +3368,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
- (empty response body)
+[**NodeOperation**](NodeOperation.md)
 
 ### Authorization
 
@@ -2493,7 +3377,7 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
 - **Content-Type**: Not defined
-- **Accept**: Not defined
+- **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
 [[Back to Model list]](../README.md#documentation-for-models)
@@ -2644,6 +3528,84 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
 - **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## KubernetesClustersResourcePoolsNodesRebootCreate
+
+> NodeOperation KubernetesClustersResourcePoolsNodesRebootCreate(ctx, clusterId, id, poolId).NodeOperationRebootRequest(nodeOperationRebootRequest).Execute()
+
+
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/pidginhost/sdk-go"
+)
+
+func main() {
+	clusterId := int32(56) // int32 | 
+	id := "id_example" // string | 
+	poolId := int32(56) // int32 | 
+	nodeOperationRebootRequest := *openapiclient.NewNodeOperationRebootRequest() // NodeOperationRebootRequest |  (optional)
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.KubernetesAPI.KubernetesClustersResourcePoolsNodesRebootCreate(context.Background(), clusterId, id, poolId).NodeOperationRebootRequest(nodeOperationRebootRequest).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `KubernetesAPI.KubernetesClustersResourcePoolsNodesRebootCreate``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `KubernetesClustersResourcePoolsNodesRebootCreate`: NodeOperation
+	fmt.Fprintf(os.Stdout, "Response from `KubernetesAPI.KubernetesClustersResourcePoolsNodesRebootCreate`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**clusterId** | **int32** |  | 
+**id** | **string** |  | 
+**poolId** | **int32** |  | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiKubernetesClustersResourcePoolsNodesRebootCreateRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+
+ **nodeOperationRebootRequest** | [**NodeOperationRebootRequest**](NodeOperationRebootRequest.md) |  | 
+
+### Return type
+
+[**NodeOperation**](NodeOperation.md)
+
+### Authorization
+
+[tokenAuth](../README.md#tokenAuth), [cookieAuth](../README.md#cookieAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
 - **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
@@ -2807,7 +3769,7 @@ Name | Type | Description  | Notes
 
 ## KubernetesClustersResourcePoolsPartialUpdate
 
-> ResourcePool KubernetesClustersResourcePoolsPartialUpdate(ctx, clusterId, id).PatchedResourcePool(patchedResourcePool).Execute()
+> ResourcePool KubernetesClustersResourcePoolsPartialUpdate(ctx, clusterId, id).PatchedResourcePoolRequest(patchedResourcePoolRequest).Execute()
 
 
 
@@ -2828,11 +3790,11 @@ import (
 func main() {
 	clusterId := int32(56) // int32 | 
 	id := "id_example" // string | 
-	patchedResourcePool := *openapiclient.NewPatchedResourcePool() // PatchedResourcePool |  (optional)
+	patchedResourcePoolRequest := *openapiclient.NewPatchedResourcePoolRequest() // PatchedResourcePoolRequest |  (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.KubernetesAPI.KubernetesClustersResourcePoolsPartialUpdate(context.Background(), clusterId, id).PatchedResourcePool(patchedResourcePool).Execute()
+	resp, r, err := apiClient.KubernetesAPI.KubernetesClustersResourcePoolsPartialUpdate(context.Background(), clusterId, id).PatchedResourcePoolRequest(patchedResourcePoolRequest).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `KubernetesAPI.KubernetesClustersResourcePoolsPartialUpdate``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -2860,7 +3822,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
 
- **patchedResourcePool** | [**PatchedResourcePool**](PatchedResourcePool.md) |  | 
+ **patchedResourcePoolRequest** | [**PatchedResourcePoolRequest**](PatchedResourcePoolRequest.md) |  | 
 
 ### Return type
 
@@ -2955,7 +3917,7 @@ Name | Type | Description  | Notes
 
 ## KubernetesClustersResourcePoolsUpdate
 
-> ResourcePool KubernetesClustersResourcePoolsUpdate(ctx, clusterId, id).ResourcePool(resourcePool).Execute()
+> ResourcePool KubernetesClustersResourcePoolsUpdate(ctx, clusterId, id).ResourcePoolRequest(resourcePoolRequest).Execute()
 
 
 
@@ -2976,11 +3938,11 @@ import (
 func main() {
 	clusterId := int32(56) // int32 | 
 	id := "id_example" // string | 
-	resourcePool := *openapiclient.NewResourcePool(int32(123), "Package_example", "Generation_example", "Size_example", []openapiclient.ResourcePoolNode{*openapiclient.NewResourcePoolNode(int32(123), "Name_example", "Ip_example")}) // ResourcePool |  (optional)
+	resourcePoolRequest := *openapiclient.NewResourcePoolRequest() // ResourcePoolRequest |  (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.KubernetesAPI.KubernetesClustersResourcePoolsUpdate(context.Background(), clusterId, id).ResourcePool(resourcePool).Execute()
+	resp, r, err := apiClient.KubernetesAPI.KubernetesClustersResourcePoolsUpdate(context.Background(), clusterId, id).ResourcePoolRequest(resourcePoolRequest).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `KubernetesAPI.KubernetesClustersResourcePoolsUpdate``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -3008,7 +3970,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
 
- **resourcePool** | [**ResourcePool**](ResourcePool.md) |  | 
+ **resourcePoolRequest** | [**ResourcePoolRequest**](ResourcePoolRequest.md) |  | 
 
 ### Return type
 
@@ -3170,7 +4132,7 @@ Name | Type | Description  | Notes
 
 ## KubernetesClustersTcproutesCreate
 
-> TCPRoute KubernetesClustersTcproutesCreate(ctx, clusterId).TCPRoute(tCPRoute).Execute()
+> TCPRoute KubernetesClustersTcproutesCreate(ctx, clusterId).TCPRouteRequest(tCPRouteRequest).Execute()
 
 
 
@@ -3190,11 +4152,11 @@ import (
 
 func main() {
 	clusterId := int32(56) // int32 | 
-	tCPRoute := *openapiclient.NewTCPRoute(int32(123), "Name_example", int32(123), "BackendServiceName_example", int32(123), false, "StatusMessage_example", "Created_example", "Updated_example") // TCPRoute | 
+	tCPRouteRequest := *openapiclient.NewTCPRouteRequest("Name_example", int32(123), "BackendServiceName_example", int32(123)) // TCPRouteRequest | 
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.KubernetesAPI.KubernetesClustersTcproutesCreate(context.Background(), clusterId).TCPRoute(tCPRoute).Execute()
+	resp, r, err := apiClient.KubernetesAPI.KubernetesClustersTcproutesCreate(context.Background(), clusterId).TCPRouteRequest(tCPRouteRequest).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `KubernetesAPI.KubernetesClustersTcproutesCreate``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -3220,7 +4182,7 @@ Other parameters are passed through a pointer to a apiKubernetesClustersTcproute
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
- **tCPRoute** | [**TCPRoute**](TCPRoute.md) |  | 
+ **tCPRouteRequest** | [**TCPRouteRequest**](TCPRouteRequest.md) |  | 
 
 ### Return type
 
@@ -3385,7 +4347,7 @@ Name | Type | Description  | Notes
 
 ## KubernetesClustersTcproutesPartialUpdate
 
-> TCPRoute KubernetesClustersTcproutesPartialUpdate(ctx, clusterId, id).PatchedTCPRoute(patchedTCPRoute).Execute()
+> TCPRoute KubernetesClustersTcproutesPartialUpdate(ctx, clusterId, id).PatchedTCPRouteRequest(patchedTCPRouteRequest).Execute()
 
 
 
@@ -3406,11 +4368,11 @@ import (
 func main() {
 	clusterId := int32(56) // int32 | 
 	id := "id_example" // string | 
-	patchedTCPRoute := *openapiclient.NewPatchedTCPRoute() // PatchedTCPRoute |  (optional)
+	patchedTCPRouteRequest := *openapiclient.NewPatchedTCPRouteRequest() // PatchedTCPRouteRequest |  (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.KubernetesAPI.KubernetesClustersTcproutesPartialUpdate(context.Background(), clusterId, id).PatchedTCPRoute(patchedTCPRoute).Execute()
+	resp, r, err := apiClient.KubernetesAPI.KubernetesClustersTcproutesPartialUpdate(context.Background(), clusterId, id).PatchedTCPRouteRequest(patchedTCPRouteRequest).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `KubernetesAPI.KubernetesClustersTcproutesPartialUpdate``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -3438,7 +4400,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
 
- **patchedTCPRoute** | [**PatchedTCPRoute**](PatchedTCPRoute.md) |  | 
+ **patchedTCPRouteRequest** | [**PatchedTCPRouteRequest**](PatchedTCPRouteRequest.md) |  | 
 
 ### Return type
 
@@ -3533,7 +4495,7 @@ Name | Type | Description  | Notes
 
 ## KubernetesClustersTcproutesUpdate
 
-> TCPRoute KubernetesClustersTcproutesUpdate(ctx, clusterId, id).TCPRoute(tCPRoute).Execute()
+> TCPRoute KubernetesClustersTcproutesUpdate(ctx, clusterId, id).TCPRouteRequest(tCPRouteRequest).Execute()
 
 
 
@@ -3554,11 +4516,11 @@ import (
 func main() {
 	clusterId := int32(56) // int32 | 
 	id := "id_example" // string | 
-	tCPRoute := *openapiclient.NewTCPRoute(int32(123), "Name_example", int32(123), "BackendServiceName_example", int32(123), false, "StatusMessage_example", "Created_example", "Updated_example") // TCPRoute | 
+	tCPRouteRequest := *openapiclient.NewTCPRouteRequest("Name_example", int32(123), "BackendServiceName_example", int32(123)) // TCPRouteRequest | 
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.KubernetesAPI.KubernetesClustersTcproutesUpdate(context.Background(), clusterId, id).TCPRoute(tCPRoute).Execute()
+	resp, r, err := apiClient.KubernetesAPI.KubernetesClustersTcproutesUpdate(context.Background(), clusterId, id).TCPRouteRequest(tCPRouteRequest).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `KubernetesAPI.KubernetesClustersTcproutesUpdate``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -3586,7 +4548,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
 
- **tCPRoute** | [**TCPRoute**](TCPRoute.md) |  | 
+ **tCPRouteRequest** | [**TCPRouteRequest**](TCPRouteRequest.md) |  | 
 
 ### Return type
 
@@ -3678,7 +4640,7 @@ Name | Type | Description  | Notes
 
 ## KubernetesClustersUdproutesCreate
 
-> UDPRoute KubernetesClustersUdproutesCreate(ctx, clusterId).UDPRoute(uDPRoute).Execute()
+> UDPRoute KubernetesClustersUdproutesCreate(ctx, clusterId).UDPRouteRequest(uDPRouteRequest).Execute()
 
 
 
@@ -3698,11 +4660,11 @@ import (
 
 func main() {
 	clusterId := int32(56) // int32 | 
-	uDPRoute := *openapiclient.NewUDPRoute(int32(123), "Name_example", int32(123), "BackendServiceName_example", int32(123), false, "StatusMessage_example", "Created_example", "Updated_example") // UDPRoute | 
+	uDPRouteRequest := *openapiclient.NewUDPRouteRequest("Name_example", int32(123), "BackendServiceName_example", int32(123)) // UDPRouteRequest | 
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.KubernetesAPI.KubernetesClustersUdproutesCreate(context.Background(), clusterId).UDPRoute(uDPRoute).Execute()
+	resp, r, err := apiClient.KubernetesAPI.KubernetesClustersUdproutesCreate(context.Background(), clusterId).UDPRouteRequest(uDPRouteRequest).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `KubernetesAPI.KubernetesClustersUdproutesCreate``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -3728,7 +4690,7 @@ Other parameters are passed through a pointer to a apiKubernetesClustersUdproute
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
- **uDPRoute** | [**UDPRoute**](UDPRoute.md) |  | 
+ **uDPRouteRequest** | [**UDPRouteRequest**](UDPRouteRequest.md) |  | 
 
 ### Return type
 
@@ -3893,7 +4855,7 @@ Name | Type | Description  | Notes
 
 ## KubernetesClustersUdproutesPartialUpdate
 
-> UDPRoute KubernetesClustersUdproutesPartialUpdate(ctx, clusterId, id).PatchedUDPRoute(patchedUDPRoute).Execute()
+> UDPRoute KubernetesClustersUdproutesPartialUpdate(ctx, clusterId, id).PatchedUDPRouteRequest(patchedUDPRouteRequest).Execute()
 
 
 
@@ -3914,11 +4876,11 @@ import (
 func main() {
 	clusterId := int32(56) // int32 | 
 	id := "id_example" // string | 
-	patchedUDPRoute := *openapiclient.NewPatchedUDPRoute() // PatchedUDPRoute |  (optional)
+	patchedUDPRouteRequest := *openapiclient.NewPatchedUDPRouteRequest() // PatchedUDPRouteRequest |  (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.KubernetesAPI.KubernetesClustersUdproutesPartialUpdate(context.Background(), clusterId, id).PatchedUDPRoute(patchedUDPRoute).Execute()
+	resp, r, err := apiClient.KubernetesAPI.KubernetesClustersUdproutesPartialUpdate(context.Background(), clusterId, id).PatchedUDPRouteRequest(patchedUDPRouteRequest).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `KubernetesAPI.KubernetesClustersUdproutesPartialUpdate``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -3946,7 +4908,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
 
- **patchedUDPRoute** | [**PatchedUDPRoute**](PatchedUDPRoute.md) |  | 
+ **patchedUDPRouteRequest** | [**PatchedUDPRouteRequest**](PatchedUDPRouteRequest.md) |  | 
 
 ### Return type
 
@@ -4041,7 +5003,7 @@ Name | Type | Description  | Notes
 
 ## KubernetesClustersUdproutesUpdate
 
-> UDPRoute KubernetesClustersUdproutesUpdate(ctx, clusterId, id).UDPRoute(uDPRoute).Execute()
+> UDPRoute KubernetesClustersUdproutesUpdate(ctx, clusterId, id).UDPRouteRequest(uDPRouteRequest).Execute()
 
 
 
@@ -4062,11 +5024,11 @@ import (
 func main() {
 	clusterId := int32(56) // int32 | 
 	id := "id_example" // string | 
-	uDPRoute := *openapiclient.NewUDPRoute(int32(123), "Name_example", int32(123), "BackendServiceName_example", int32(123), false, "StatusMessage_example", "Created_example", "Updated_example") // UDPRoute | 
+	uDPRouteRequest := *openapiclient.NewUDPRouteRequest("Name_example", int32(123), "BackendServiceName_example", int32(123)) // UDPRouteRequest | 
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.KubernetesAPI.KubernetesClustersUdproutesUpdate(context.Background(), clusterId, id).UDPRoute(uDPRoute).Execute()
+	resp, r, err := apiClient.KubernetesAPI.KubernetesClustersUdproutesUpdate(context.Background(), clusterId, id).UDPRouteRequest(uDPRouteRequest).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `KubernetesAPI.KubernetesClustersUdproutesUpdate``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -4094,7 +5056,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
 
- **uDPRoute** | [**UDPRoute**](UDPRoute.md) |  | 
+ **uDPRouteRequest** | [**UDPRouteRequest**](UDPRouteRequest.md) |  | 
 
 ### Return type
 
@@ -4116,7 +5078,7 @@ Name | Type | Description  | Notes
 
 ## KubernetesClustersUpdate
 
-> ClusterDetail KubernetesClustersUpdate(ctx, id).ClusterDetail(clusterDetail).Execute()
+> ClusterDetail KubernetesClustersUpdate(ctx, id).ClusterDetailRequest(clusterDetailRequest).Execute()
 
 
 
@@ -4136,11 +5098,11 @@ import (
 
 func main() {
 	id := "id_example" // string | 
-	clusterDetail := *openapiclient.NewClusterDetail(int32(123), openapiclient.ResourceStatusEnum("pending"), "Generation_example", "ClusterType_example", "KubeVersion_example", "PricePerMonth_example", float64(123), false, "KubeconfigValidUntil_example", "Ipv4Address_example", "Ipv6Address_example", false, "TalosVersion_example", false, "TalosNextVersion_example", int32(123), int64(123), "LastStorageSyncAt_example") // ClusterDetail | 
+	clusterDetailRequest := *openapiclient.NewClusterDetailRequest("PricePerMonth_example") // ClusterDetailRequest | 
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.KubernetesAPI.KubernetesClustersUpdate(context.Background(), id).ClusterDetail(clusterDetail).Execute()
+	resp, r, err := apiClient.KubernetesAPI.KubernetesClustersUpdate(context.Background(), id).ClusterDetailRequest(clusterDetailRequest).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `KubernetesAPI.KubernetesClustersUpdate``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -4166,7 +5128,7 @@ Other parameters are passed through a pointer to a apiKubernetesClustersUpdateRe
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
- **clusterDetail** | [**ClusterDetail**](ClusterDetail.md) |  | 
+ **clusterDetailRequest** | [**ClusterDetailRequest**](ClusterDetailRequest.md) |  | 
 
 ### Return type
 
@@ -4243,6 +5205,78 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**FeatureUpgradeResponse**](FeatureUpgradeResponse.md)
+
+### Authorization
+
+[tokenAuth](../README.md#tokenAuth), [cookieAuth](../README.md#cookieAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## KubernetesClustersUpgradeLbCreate
+
+> LBUpgradePlanResponse KubernetesClustersUpgradeLbCreate(ctx, id).LBUpgradeRequest(lBUpgradeRequest).Execute()
+
+
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/pidginhost/sdk-go"
+)
+
+func main() {
+	id := "id_example" // string | 
+	lBUpgradeRequest := *openapiclient.NewLBUpgradeRequest() // LBUpgradeRequest |  (optional)
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.KubernetesAPI.KubernetesClustersUpgradeLbCreate(context.Background(), id).LBUpgradeRequest(lBUpgradeRequest).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `KubernetesAPI.KubernetesClustersUpgradeLbCreate``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `KubernetesClustersUpgradeLbCreate`: LBUpgradePlanResponse
+	fmt.Fprintf(os.Stdout, "Response from `KubernetesAPI.KubernetesClustersUpgradeLbCreate`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**id** | **string** |  | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiKubernetesClustersUpgradeLbCreateRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+ **lBUpgradeRequest** | [**LBUpgradeRequest**](LBUpgradeRequest.md) |  | 
+
+### Return type
+
+[**LBUpgradePlanResponse**](LBUpgradePlanResponse.md)
 
 ### Authorization
 

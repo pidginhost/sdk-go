@@ -258,11 +258,11 @@ func (a *SupportAPIService) SupportTicketsCloseCreateExecute(r ApiSupportTickets
 type ApiSupportTicketsCreateRequest struct {
 	ctx context.Context
 	ApiService *SupportAPIService
-	ticketCreate *TicketCreate
+	ticketCreateRequest *TicketCreateRequest
 }
 
-func (r ApiSupportTicketsCreateRequest) TicketCreate(ticketCreate TicketCreate) ApiSupportTicketsCreateRequest {
-	r.ticketCreate = &ticketCreate
+func (r ApiSupportTicketsCreateRequest) TicketCreateRequest(ticketCreateRequest TicketCreateRequest) ApiSupportTicketsCreateRequest {
+	r.ticketCreateRequest = &ticketCreateRequest
 	return r
 }
 
@@ -305,8 +305,8 @@ func (a *SupportAPIService) SupportTicketsCreateExecute(r ApiSupportTicketsCreat
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.ticketCreate == nil {
-		return localVarReturnValue, nil, reportError("ticketCreate is required and must be specified")
+	if r.ticketCreateRequest == nil {
+		return localVarReturnValue, nil, reportError("ticketCreateRequest is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -327,7 +327,7 @@ func (a *SupportAPIService) SupportTicketsCreateExecute(r ApiSupportTicketsCreat
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.ticketCreate
+	localVarPostBody = r.ticketCreateRequest
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
@@ -744,11 +744,11 @@ type ApiSupportTicketsReplyCreateRequest struct {
 	ctx context.Context
 	ApiService *SupportAPIService
 	id string
-	ticketReply *TicketReply
+	ticketReplyRequest *TicketReplyRequest
 }
 
-func (r ApiSupportTicketsReplyCreateRequest) TicketReply(ticketReply TicketReply) ApiSupportTicketsReplyCreateRequest {
-	r.ticketReply = &ticketReply
+func (r ApiSupportTicketsReplyCreateRequest) TicketReplyRequest(ticketReplyRequest TicketReplyRequest) ApiSupportTicketsReplyCreateRequest {
+	r.ticketReplyRequest = &ticketReplyRequest
 	return r
 }
 
@@ -794,8 +794,8 @@ func (a *SupportAPIService) SupportTicketsReplyCreateExecute(r ApiSupportTickets
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.ticketReply == nil {
-		return localVarReturnValue, nil, reportError("ticketReply is required and must be specified")
+	if r.ticketReplyRequest == nil {
+		return localVarReturnValue, nil, reportError("ticketReplyRequest is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -816,7 +816,7 @@ func (a *SupportAPIService) SupportTicketsReplyCreateExecute(r ApiSupportTickets
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.ticketReply
+	localVarPostBody = r.ticketReplyRequest
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {

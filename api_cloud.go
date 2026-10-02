@@ -27,11 +27,11 @@ type CloudAPIService service
 type ApiCloudBucketsCreateRequest struct {
 	ctx context.Context
 	ApiService *CloudAPIService
-	bucketCreate *BucketCreate
+	bucketCreateRequest *BucketCreateRequest
 }
 
-func (r ApiCloudBucketsCreateRequest) BucketCreate(bucketCreate BucketCreate) ApiCloudBucketsCreateRequest {
-	r.bucketCreate = &bucketCreate
+func (r ApiCloudBucketsCreateRequest) BucketCreateRequest(bucketCreateRequest BucketCreateRequest) ApiCloudBucketsCreateRequest {
+	r.bucketCreateRequest = &bucketCreateRequest
 	return r
 }
 
@@ -74,8 +74,8 @@ func (a *CloudAPIService) CloudBucketsCreateExecute(r ApiCloudBucketsCreateReque
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.bucketCreate == nil {
-		return localVarReturnValue, nil, reportError("bucketCreate is required and must be specified")
+	if r.bucketCreateRequest == nil {
+		return localVarReturnValue, nil, reportError("bucketCreateRequest is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -96,7 +96,7 @@ func (a *CloudAPIService) CloudBucketsCreateExecute(r ApiCloudBucketsCreateReque
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.bucketCreate
+	localVarPostBody = r.bucketCreateRequest
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
@@ -623,11 +623,11 @@ type ApiCloudBucketsResizeCreateRequest struct {
 	ctx context.Context
 	ApiService *CloudAPIService
 	id int32
-	bucketResize *BucketResize
+	bucketResizeRequest *BucketResizeRequest
 }
 
-func (r ApiCloudBucketsResizeCreateRequest) BucketResize(bucketResize BucketResize) ApiCloudBucketsResizeCreateRequest {
-	r.bucketResize = &bucketResize
+func (r ApiCloudBucketsResizeCreateRequest) BucketResizeRequest(bucketResizeRequest BucketResizeRequest) ApiCloudBucketsResizeCreateRequest {
+	r.bucketResizeRequest = &bucketResizeRequest
 	return r
 }
 
@@ -673,8 +673,8 @@ func (a *CloudAPIService) CloudBucketsResizeCreateExecute(r ApiCloudBucketsResiz
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.bucketResize == nil {
-		return localVarReturnValue, nil, reportError("bucketResize is required and must be specified")
+	if r.bucketResizeRequest == nil {
+		return localVarReturnValue, nil, reportError("bucketResizeRequest is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -695,7 +695,7 @@ func (a *CloudAPIService) CloudBucketsResizeCreateExecute(r ApiCloudBucketsResiz
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.bucketResize
+	localVarPostBody = r.bucketResizeRequest
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
@@ -875,11 +875,11 @@ type ApiCloudBucketsVisibilityCreateRequest struct {
 	ctx context.Context
 	ApiService *CloudAPIService
 	id int32
-	bucketVisibility *BucketVisibility
+	bucketVisibilityRequest *BucketVisibilityRequest
 }
 
-func (r ApiCloudBucketsVisibilityCreateRequest) BucketVisibility(bucketVisibility BucketVisibility) ApiCloudBucketsVisibilityCreateRequest {
-	r.bucketVisibility = &bucketVisibility
+func (r ApiCloudBucketsVisibilityCreateRequest) BucketVisibilityRequest(bucketVisibilityRequest BucketVisibilityRequest) ApiCloudBucketsVisibilityCreateRequest {
+	r.bucketVisibilityRequest = &bucketVisibilityRequest
 	return r
 }
 
@@ -925,8 +925,8 @@ func (a *CloudAPIService) CloudBucketsVisibilityCreateExecute(r ApiCloudBucketsV
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.bucketVisibility == nil {
-		return localVarReturnValue, nil, reportError("bucketVisibility is required and must be specified")
+	if r.bucketVisibilityRequest == nil {
+		return localVarReturnValue, nil, reportError("bucketVisibilityRequest is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -947,7 +947,7 @@ func (a *CloudAPIService) CloudBucketsVisibilityCreateExecute(r ApiCloudBucketsV
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.bucketVisibility
+	localVarPostBody = r.bucketVisibilityRequest
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
@@ -1002,11 +1002,11 @@ func (a *CloudAPIService) CloudBucketsVisibilityCreateExecute(r ApiCloudBucketsV
 type ApiCloudFirewallRulesSetCreateRequest struct {
 	ctx context.Context
 	ApiService *CloudAPIService
-	firewallRulesSet *FirewallRulesSet
+	firewallRulesSetRequest *FirewallRulesSetRequest
 }
 
-func (r ApiCloudFirewallRulesSetCreateRequest) FirewallRulesSet(firewallRulesSet FirewallRulesSet) ApiCloudFirewallRulesSetCreateRequest {
-	r.firewallRulesSet = &firewallRulesSet
+func (r ApiCloudFirewallRulesSetCreateRequest) FirewallRulesSetRequest(firewallRulesSetRequest FirewallRulesSetRequest) ApiCloudFirewallRulesSetCreateRequest {
+	r.firewallRulesSetRequest = &firewallRulesSetRequest
 	return r
 }
 
@@ -1056,8 +1056,8 @@ func (a *CloudAPIService) CloudFirewallRulesSetCreateExecute(r ApiCloudFirewallR
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.firewallRulesSet == nil {
-		return localVarReturnValue, nil, reportError("firewallRulesSet is required and must be specified")
+	if r.firewallRulesSetRequest == nil {
+		return localVarReturnValue, nil, reportError("firewallRulesSetRequest is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -1078,7 +1078,7 @@ func (a *CloudAPIService) CloudFirewallRulesSetCreateExecute(r ApiCloudFirewallR
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.firewallRulesSet
+	localVarPostBody = r.firewallRulesSetRequest
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
@@ -1367,11 +1367,11 @@ type ApiCloudFirewallRulesSetPartialUpdateRequest struct {
 	ctx context.Context
 	ApiService *CloudAPIService
 	id int32
-	patchedFirewallRulesSet *PatchedFirewallRulesSet
+	patchedFirewallRulesSetRequest *PatchedFirewallRulesSetRequest
 }
 
-func (r ApiCloudFirewallRulesSetPartialUpdateRequest) PatchedFirewallRulesSet(patchedFirewallRulesSet PatchedFirewallRulesSet) ApiCloudFirewallRulesSetPartialUpdateRequest {
-	r.patchedFirewallRulesSet = &patchedFirewallRulesSet
+func (r ApiCloudFirewallRulesSetPartialUpdateRequest) PatchedFirewallRulesSetRequest(patchedFirewallRulesSetRequest PatchedFirewallRulesSetRequest) ApiCloudFirewallRulesSetPartialUpdateRequest {
+	r.patchedFirewallRulesSetRequest = &patchedFirewallRulesSetRequest
 	return r
 }
 
@@ -1443,7 +1443,7 @@ func (a *CloudAPIService) CloudFirewallRulesSetPartialUpdateExecute(r ApiCloudFi
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.patchedFirewallRulesSet
+	localVarPostBody = r.patchedFirewallRulesSetRequest
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
@@ -1623,11 +1623,11 @@ type ApiCloudFirewallRulesSetRulesCreateRequest struct {
 	ctx context.Context
 	ApiService *CloudAPIService
 	rulesSetId string
-	firewallRule *FirewallRule
+	firewallRuleRequest *FirewallRuleRequest
 }
 
-func (r ApiCloudFirewallRulesSetRulesCreateRequest) FirewallRule(firewallRule FirewallRule) ApiCloudFirewallRulesSetRulesCreateRequest {
-	r.firewallRule = &firewallRule
+func (r ApiCloudFirewallRulesSetRulesCreateRequest) FirewallRuleRequest(firewallRuleRequest FirewallRuleRequest) ApiCloudFirewallRulesSetRulesCreateRequest {
+	r.firewallRuleRequest = &firewallRuleRequest
 	return r
 }
 
@@ -1680,8 +1680,8 @@ func (a *CloudAPIService) CloudFirewallRulesSetRulesCreateExecute(r ApiCloudFire
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.firewallRule == nil {
-		return localVarReturnValue, nil, reportError("firewallRule is required and must be specified")
+	if r.firewallRuleRequest == nil {
+		return localVarReturnValue, nil, reportError("firewallRuleRequest is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -1702,7 +1702,7 @@ func (a *CloudAPIService) CloudFirewallRulesSetRulesCreateExecute(r ApiCloudFire
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.firewallRule
+	localVarPostBody = r.firewallRuleRequest
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
@@ -2000,11 +2000,11 @@ type ApiCloudFirewallRulesSetRulesPartialUpdateRequest struct {
 	ApiService *CloudAPIService
 	ruleId string
 	rulesSetId string
-	patchedFirewallRule *PatchedFirewallRule
+	patchedFirewallRuleRequest *PatchedFirewallRuleRequest
 }
 
-func (r ApiCloudFirewallRulesSetRulesPartialUpdateRequest) PatchedFirewallRule(patchedFirewallRule PatchedFirewallRule) ApiCloudFirewallRulesSetRulesPartialUpdateRequest {
-	r.patchedFirewallRule = &patchedFirewallRule
+func (r ApiCloudFirewallRulesSetRulesPartialUpdateRequest) PatchedFirewallRuleRequest(patchedFirewallRuleRequest PatchedFirewallRuleRequest) ApiCloudFirewallRulesSetRulesPartialUpdateRequest {
+	r.patchedFirewallRuleRequest = &patchedFirewallRuleRequest
 	return r
 }
 
@@ -2079,7 +2079,7 @@ func (a *CloudAPIService) CloudFirewallRulesSetRulesPartialUpdateExecute(r ApiCl
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.patchedFirewallRule
+	localVarPostBody = r.patchedFirewallRuleRequest
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
@@ -2264,11 +2264,11 @@ type ApiCloudFirewallRulesSetRulesUpdateRequest struct {
 	ApiService *CloudAPIService
 	ruleId string
 	rulesSetId string
-	firewallRule *FirewallRule
+	firewallRuleRequest *FirewallRuleRequest
 }
 
-func (r ApiCloudFirewallRulesSetRulesUpdateRequest) FirewallRule(firewallRule FirewallRule) ApiCloudFirewallRulesSetRulesUpdateRequest {
-	r.firewallRule = &firewallRule
+func (r ApiCloudFirewallRulesSetRulesUpdateRequest) FirewallRuleRequest(firewallRuleRequest FirewallRuleRequest) ApiCloudFirewallRulesSetRulesUpdateRequest {
+	r.firewallRuleRequest = &firewallRuleRequest
 	return r
 }
 
@@ -2324,8 +2324,8 @@ func (a *CloudAPIService) CloudFirewallRulesSetRulesUpdateExecute(r ApiCloudFire
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.firewallRule == nil {
-		return localVarReturnValue, nil, reportError("firewallRule is required and must be specified")
+	if r.firewallRuleRequest == nil {
+		return localVarReturnValue, nil, reportError("firewallRuleRequest is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -2346,7 +2346,7 @@ func (a *CloudAPIService) CloudFirewallRulesSetRulesUpdateExecute(r ApiCloudFire
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.firewallRule
+	localVarPostBody = r.firewallRuleRequest
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
@@ -2402,11 +2402,11 @@ type ApiCloudFirewallRulesSetUpdateRequest struct {
 	ctx context.Context
 	ApiService *CloudAPIService
 	id int32
-	firewallRulesSet *FirewallRulesSet
+	firewallRulesSetRequest *FirewallRulesSetRequest
 }
 
-func (r ApiCloudFirewallRulesSetUpdateRequest) FirewallRulesSet(firewallRulesSet FirewallRulesSet) ApiCloudFirewallRulesSetUpdateRequest {
-	r.firewallRulesSet = &firewallRulesSet
+func (r ApiCloudFirewallRulesSetUpdateRequest) FirewallRulesSetRequest(firewallRulesSetRequest FirewallRulesSetRequest) ApiCloudFirewallRulesSetUpdateRequest {
+	r.firewallRulesSetRequest = &firewallRulesSetRequest
 	return r
 }
 
@@ -2459,8 +2459,8 @@ func (a *CloudAPIService) CloudFirewallRulesSetUpdateExecute(r ApiCloudFirewallR
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.firewallRulesSet == nil {
-		return localVarReturnValue, nil, reportError("firewallRulesSet is required and must be specified")
+	if r.firewallRulesSetRequest == nil {
+		return localVarReturnValue, nil, reportError("firewallRulesSetRequest is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -2481,7 +2481,7 @@ func (a *CloudAPIService) CloudFirewallRulesSetUpdateExecute(r ApiCloudFirewallR
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.firewallRulesSet
+	localVarPostBody = r.firewallRulesSetRequest
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
@@ -2795,11 +2795,11 @@ func (a *CloudAPIService) CloudFloatingIpv4AuthorizeCreateExecute(r ApiCloudFloa
 type ApiCloudFloatingIpv4CreateRequest struct {
 	ctx context.Context
 	ApiService *CloudAPIService
-	floatingIPv4Create *FloatingIPv4Create
+	floatingIPv4CreateRequest *FloatingIPv4CreateRequest
 }
 
-func (r ApiCloudFloatingIpv4CreateRequest) FloatingIPv4Create(floatingIPv4Create FloatingIPv4Create) ApiCloudFloatingIpv4CreateRequest {
-	r.floatingIPv4Create = &floatingIPv4Create
+func (r ApiCloudFloatingIpv4CreateRequest) FloatingIPv4CreateRequest(floatingIPv4CreateRequest FloatingIPv4CreateRequest) ApiCloudFloatingIpv4CreateRequest {
+	r.floatingIPv4CreateRequest = &floatingIPv4CreateRequest
 	return r
 }
 
@@ -2863,7 +2863,7 @@ func (a *CloudAPIService) CloudFloatingIpv4CreateExecute(r ApiCloudFloatingIpv4C
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.floatingIPv4Create
+	localVarPostBody = r.floatingIPv4CreateRequest
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
@@ -3152,11 +3152,11 @@ type ApiCloudFloatingIpv4RdnsCreateRequest struct {
 	ctx context.Context
 	ApiService *CloudAPIService
 	id int32
-	reverseDNS *ReverseDNS
+	reverseDNSRequest *ReverseDNSRequest
 }
 
-func (r ApiCloudFloatingIpv4RdnsCreateRequest) ReverseDNS(reverseDNS ReverseDNS) ApiCloudFloatingIpv4RdnsCreateRequest {
-	r.reverseDNS = &reverseDNS
+func (r ApiCloudFloatingIpv4RdnsCreateRequest) ReverseDNSRequest(reverseDNSRequest ReverseDNSRequest) ApiCloudFloatingIpv4RdnsCreateRequest {
+	r.reverseDNSRequest = &reverseDNSRequest
 	return r
 }
 
@@ -3202,8 +3202,8 @@ func (a *CloudAPIService) CloudFloatingIpv4RdnsCreateExecute(r ApiCloudFloatingI
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.reverseDNS == nil {
-		return localVarReturnValue, nil, reportError("reverseDNS is required and must be specified")
+	if r.reverseDNSRequest == nil {
+		return localVarReturnValue, nil, reportError("reverseDNSRequest is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -3224,7 +3224,7 @@ func (a *CloudAPIService) CloudFloatingIpv4RdnsCreateExecute(r ApiCloudFloatingI
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.reverseDNS
+	localVarPostBody = r.reverseDNSRequest
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
@@ -3900,11 +3900,11 @@ func (a *CloudAPIService) CloudFloatingIpv6AuthorizeCreateExecute(r ApiCloudFloa
 type ApiCloudFloatingIpv6CreateRequest struct {
 	ctx context.Context
 	ApiService *CloudAPIService
-	floatingIPv6Create *FloatingIPv6Create
+	floatingIPv6CreateRequest *FloatingIPv6CreateRequest
 }
 
-func (r ApiCloudFloatingIpv6CreateRequest) FloatingIPv6Create(floatingIPv6Create FloatingIPv6Create) ApiCloudFloatingIpv6CreateRequest {
-	r.floatingIPv6Create = &floatingIPv6Create
+func (r ApiCloudFloatingIpv6CreateRequest) FloatingIPv6CreateRequest(floatingIPv6CreateRequest FloatingIPv6CreateRequest) ApiCloudFloatingIpv6CreateRequest {
+	r.floatingIPv6CreateRequest = &floatingIPv6CreateRequest
 	return r
 }
 
@@ -3966,7 +3966,7 @@ func (a *CloudAPIService) CloudFloatingIpv6CreateExecute(r ApiCloudFloatingIpv6C
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.floatingIPv6Create
+	localVarPostBody = r.floatingIPv6CreateRequest
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
@@ -4251,11 +4251,11 @@ type ApiCloudFloatingIpv6RdnsCreateRequest struct {
 	ctx context.Context
 	ApiService *CloudAPIService
 	id int32
-	reverseDNS *ReverseDNS
+	reverseDNSRequest *ReverseDNSRequest
 }
 
-func (r ApiCloudFloatingIpv6RdnsCreateRequest) ReverseDNS(reverseDNS ReverseDNS) ApiCloudFloatingIpv6RdnsCreateRequest {
-	r.reverseDNS = &reverseDNS
+func (r ApiCloudFloatingIpv6RdnsCreateRequest) ReverseDNSRequest(reverseDNSRequest ReverseDNSRequest) ApiCloudFloatingIpv6RdnsCreateRequest {
+	r.reverseDNSRequest = &reverseDNSRequest
 	return r
 }
 
@@ -4301,8 +4301,8 @@ func (a *CloudAPIService) CloudFloatingIpv6RdnsCreateExecute(r ApiCloudFloatingI
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.reverseDNS == nil {
-		return localVarReturnValue, nil, reportError("reverseDNS is required and must be specified")
+	if r.reverseDNSRequest == nil {
+		return localVarReturnValue, nil, reportError("reverseDNSRequest is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -4323,7 +4323,7 @@ func (a *CloudAPIService) CloudFloatingIpv6RdnsCreateExecute(r ApiCloudFloatingI
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.reverseDNS
+	localVarPostBody = r.reverseDNSRequest
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
@@ -5224,12 +5224,6 @@ func (a *CloudAPIService) CloudImagesRetrieveExecute(r ApiCloudImagesRetrieveReq
 type ApiCloudIpv4CreateRequest struct {
 	ctx context.Context
 	ApiService *CloudAPIService
-	publicIPv4 *PublicIPv4
-}
-
-func (r ApiCloudIpv4CreateRequest) PublicIPv4(publicIPv4 PublicIPv4) ApiCloudIpv4CreateRequest {
-	r.publicIPv4 = &publicIPv4
-	return r
 }
 
 func (r ApiCloudIpv4CreateRequest) Execute() (*PublicIPv4, *http.Response, error) {
@@ -5280,7 +5274,7 @@ func (a *CloudAPIService) CloudIpv4CreateExecute(r ApiCloudIpv4CreateRequest) (*
 	localVarFormParams := url.Values{}
 
 	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{"application/json"}
+	localVarHTTPContentTypes := []string{}
 
 	// set Content-Type header
 	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
@@ -5296,8 +5290,6 @@ func (a *CloudAPIService) CloudIpv4CreateExecute(r ApiCloudIpv4CreateRequest) (*
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	// body params
-	localVarPostBody = r.publicIPv4
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
@@ -5466,12 +5458,6 @@ type ApiCloudIpv4DetachCreateRequest struct {
 	ctx context.Context
 	ApiService *CloudAPIService
 	id int32
-	publicIPv4 *PublicIPv4
-}
-
-func (r ApiCloudIpv4DetachCreateRequest) PublicIPv4(publicIPv4 PublicIPv4) ApiCloudIpv4DetachCreateRequest {
-	r.publicIPv4 = &publicIPv4
-	return r
 }
 
 func (r ApiCloudIpv4DetachCreateRequest) Execute() (*DetachIPv4Response, *http.Response, error) {
@@ -5525,7 +5511,7 @@ func (a *CloudAPIService) CloudIpv4DetachCreateExecute(r ApiCloudIpv4DetachCreat
 	localVarFormParams := url.Values{}
 
 	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{"application/json"}
+	localVarHTTPContentTypes := []string{}
 
 	// set Content-Type header
 	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
@@ -5541,8 +5527,6 @@ func (a *CloudAPIService) CloudIpv4DetachCreateExecute(r ApiCloudIpv4DetachCreat
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	// body params
-	localVarPostBody = r.publicIPv4
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
@@ -5728,11 +5712,11 @@ type ApiCloudIpv4RdnsCreateRequest struct {
 	ctx context.Context
 	ApiService *CloudAPIService
 	id int32
-	reverseDNS *ReverseDNS
+	reverseDNSRequest *ReverseDNSRequest
 }
 
-func (r ApiCloudIpv4RdnsCreateRequest) ReverseDNS(reverseDNS ReverseDNS) ApiCloudIpv4RdnsCreateRequest {
-	r.reverseDNS = &reverseDNS
+func (r ApiCloudIpv4RdnsCreateRequest) ReverseDNSRequest(reverseDNSRequest ReverseDNSRequest) ApiCloudIpv4RdnsCreateRequest {
+	r.reverseDNSRequest = &reverseDNSRequest
 	return r
 }
 
@@ -5778,8 +5762,8 @@ func (a *CloudAPIService) CloudIpv4RdnsCreateExecute(r ApiCloudIpv4RdnsCreateReq
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.reverseDNS == nil {
-		return localVarReturnValue, nil, reportError("reverseDNS is required and must be specified")
+	if r.reverseDNSRequest == nil {
+		return localVarReturnValue, nil, reportError("reverseDNSRequest is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -5800,7 +5784,7 @@ func (a *CloudAPIService) CloudIpv4RdnsCreateExecute(r ApiCloudIpv4RdnsCreateReq
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.reverseDNS
+	localVarPostBody = r.reverseDNSRequest
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
@@ -6096,12 +6080,6 @@ func (a *CloudAPIService) CloudIpv4RetrieveExecute(r ApiCloudIpv4RetrieveRequest
 type ApiCloudIpv6CreateRequest struct {
 	ctx context.Context
 	ApiService *CloudAPIService
-	publicIPv6 *PublicIPv6
-}
-
-func (r ApiCloudIpv6CreateRequest) PublicIPv6(publicIPv6 PublicIPv6) ApiCloudIpv6CreateRequest {
-	r.publicIPv6 = &publicIPv6
-	return r
 }
 
 func (r ApiCloudIpv6CreateRequest) Execute() (*PublicIPv6, *http.Response, error) {
@@ -6152,7 +6130,7 @@ func (a *CloudAPIService) CloudIpv6CreateExecute(r ApiCloudIpv6CreateRequest) (*
 	localVarFormParams := url.Values{}
 
 	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{"application/json"}
+	localVarHTTPContentTypes := []string{}
 
 	// set Content-Type header
 	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
@@ -6168,8 +6146,6 @@ func (a *CloudAPIService) CloudIpv6CreateExecute(r ApiCloudIpv6CreateRequest) (*
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	// body params
-	localVarPostBody = r.publicIPv6
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
@@ -6338,12 +6314,6 @@ type ApiCloudIpv6DetachCreateRequest struct {
 	ctx context.Context
 	ApiService *CloudAPIService
 	id int32
-	publicIPv6 *PublicIPv6
-}
-
-func (r ApiCloudIpv6DetachCreateRequest) PublicIPv6(publicIPv6 PublicIPv6) ApiCloudIpv6DetachCreateRequest {
-	r.publicIPv6 = &publicIPv6
-	return r
 }
 
 func (r ApiCloudIpv6DetachCreateRequest) Execute() (*DetachIPv6Response, *http.Response, error) {
@@ -6397,7 +6367,7 @@ func (a *CloudAPIService) CloudIpv6DetachCreateExecute(r ApiCloudIpv6DetachCreat
 	localVarFormParams := url.Values{}
 
 	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{"application/json"}
+	localVarHTTPContentTypes := []string{}
 
 	// set Content-Type header
 	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
@@ -6413,8 +6383,6 @@ func (a *CloudAPIService) CloudIpv6DetachCreateExecute(r ApiCloudIpv6DetachCreat
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	// body params
-	localVarPostBody = r.publicIPv6
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
@@ -6600,11 +6568,11 @@ type ApiCloudIpv6RdnsCreateRequest struct {
 	ctx context.Context
 	ApiService *CloudAPIService
 	id int32
-	reverseDNS *ReverseDNS
+	reverseDNSRequest *ReverseDNSRequest
 }
 
-func (r ApiCloudIpv6RdnsCreateRequest) ReverseDNS(reverseDNS ReverseDNS) ApiCloudIpv6RdnsCreateRequest {
-	r.reverseDNS = &reverseDNS
+func (r ApiCloudIpv6RdnsCreateRequest) ReverseDNSRequest(reverseDNSRequest ReverseDNSRequest) ApiCloudIpv6RdnsCreateRequest {
+	r.reverseDNSRequest = &reverseDNSRequest
 	return r
 }
 
@@ -6650,8 +6618,8 @@ func (a *CloudAPIService) CloudIpv6RdnsCreateExecute(r ApiCloudIpv6RdnsCreateReq
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.reverseDNS == nil {
-		return localVarReturnValue, nil, reportError("reverseDNS is required and must be specified")
+	if r.reverseDNSRequest == nil {
+		return localVarReturnValue, nil, reportError("reverseDNSRequest is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -6672,7 +6640,7 @@ func (a *CloudAPIService) CloudIpv6RdnsCreateExecute(r ApiCloudIpv6RdnsCreateReq
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.reverseDNS
+	localVarPostBody = r.reverseDNSRequest
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
@@ -6969,11 +6937,11 @@ type ApiCloudPrivateNetworksAddServerCreateRequest struct {
 	ctx context.Context
 	ApiService *CloudAPIService
 	id int32
-	privateNetworkAddHost *PrivateNetworkAddHost
+	privateNetworkAddHostRequest *PrivateNetworkAddHostRequest
 }
 
-func (r ApiCloudPrivateNetworksAddServerCreateRequest) PrivateNetworkAddHost(privateNetworkAddHost PrivateNetworkAddHost) ApiCloudPrivateNetworksAddServerCreateRequest {
-	r.privateNetworkAddHost = &privateNetworkAddHost
+func (r ApiCloudPrivateNetworksAddServerCreateRequest) PrivateNetworkAddHostRequest(privateNetworkAddHostRequest PrivateNetworkAddHostRequest) ApiCloudPrivateNetworksAddServerCreateRequest {
+	r.privateNetworkAddHostRequest = &privateNetworkAddHostRequest
 	return r
 }
 
@@ -7019,8 +6987,8 @@ func (a *CloudAPIService) CloudPrivateNetworksAddServerCreateExecute(r ApiCloudP
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.privateNetworkAddHost == nil {
-		return localVarReturnValue, nil, reportError("privateNetworkAddHost is required and must be specified")
+	if r.privateNetworkAddHostRequest == nil {
+		return localVarReturnValue, nil, reportError("privateNetworkAddHostRequest is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -7041,7 +7009,7 @@ func (a *CloudAPIService) CloudPrivateNetworksAddServerCreateExecute(r ApiCloudP
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.privateNetworkAddHost
+	localVarPostBody = r.privateNetworkAddHostRequest
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
@@ -7096,11 +7064,11 @@ func (a *CloudAPIService) CloudPrivateNetworksAddServerCreateExecute(r ApiCloudP
 type ApiCloudPrivateNetworksCreateRequest struct {
 	ctx context.Context
 	ApiService *CloudAPIService
-	privateNetwork *PrivateNetwork
+	privateNetworkRequest *PrivateNetworkRequest
 }
 
-func (r ApiCloudPrivateNetworksCreateRequest) PrivateNetwork(privateNetwork PrivateNetwork) ApiCloudPrivateNetworksCreateRequest {
-	r.privateNetwork = &privateNetwork
+func (r ApiCloudPrivateNetworksCreateRequest) PrivateNetworkRequest(privateNetworkRequest PrivateNetworkRequest) ApiCloudPrivateNetworksCreateRequest {
+	r.privateNetworkRequest = &privateNetworkRequest
 	return r
 }
 
@@ -7143,8 +7111,8 @@ func (a *CloudAPIService) CloudPrivateNetworksCreateExecute(r ApiCloudPrivateNet
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.privateNetwork == nil {
-		return localVarReturnValue, nil, reportError("privateNetwork is required and must be specified")
+	if r.privateNetworkRequest == nil {
+		return localVarReturnValue, nil, reportError("privateNetworkRequest is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -7165,7 +7133,7 @@ func (a *CloudAPIService) CloudPrivateNetworksCreateExecute(r ApiCloudPrivateNet
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.privateNetwork
+	localVarPostBody = r.privateNetworkRequest
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
@@ -7450,11 +7418,11 @@ type ApiCloudPrivateNetworksPartialUpdateRequest struct {
 	ctx context.Context
 	ApiService *CloudAPIService
 	id int32
-	patchedPrivateNetwork *PatchedPrivateNetwork
+	patchedPrivateNetworkUpdateRequest *PatchedPrivateNetworkUpdateRequest
 }
 
-func (r ApiCloudPrivateNetworksPartialUpdateRequest) PatchedPrivateNetwork(patchedPrivateNetwork PatchedPrivateNetwork) ApiCloudPrivateNetworksPartialUpdateRequest {
-	r.patchedPrivateNetwork = &patchedPrivateNetwork
+func (r ApiCloudPrivateNetworksPartialUpdateRequest) PatchedPrivateNetworkUpdateRequest(patchedPrivateNetworkUpdateRequest PatchedPrivateNetworkUpdateRequest) ApiCloudPrivateNetworksPartialUpdateRequest {
+	r.patchedPrivateNetworkUpdateRequest = &patchedPrivateNetworkUpdateRequest
 	return r
 }
 
@@ -7519,7 +7487,7 @@ func (a *CloudAPIService) CloudPrivateNetworksPartialUpdateExecute(r ApiCloudPri
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.patchedPrivateNetwork
+	localVarPostBody = r.patchedPrivateNetworkUpdateRequest
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
@@ -7575,11 +7543,11 @@ type ApiCloudPrivateNetworksRemoveServerCreateRequest struct {
 	ctx context.Context
 	ApiService *CloudAPIService
 	id int32
-	privateNetworkRemoveHost *PrivateNetworkRemoveHost
+	privateNetworkRemoveHostRequest *PrivateNetworkRemoveHostRequest
 }
 
-func (r ApiCloudPrivateNetworksRemoveServerCreateRequest) PrivateNetworkRemoveHost(privateNetworkRemoveHost PrivateNetworkRemoveHost) ApiCloudPrivateNetworksRemoveServerCreateRequest {
-	r.privateNetworkRemoveHost = &privateNetworkRemoveHost
+func (r ApiCloudPrivateNetworksRemoveServerCreateRequest) PrivateNetworkRemoveHostRequest(privateNetworkRemoveHostRequest PrivateNetworkRemoveHostRequest) ApiCloudPrivateNetworksRemoveServerCreateRequest {
+	r.privateNetworkRemoveHostRequest = &privateNetworkRemoveHostRequest
 	return r
 }
 
@@ -7625,8 +7593,8 @@ func (a *CloudAPIService) CloudPrivateNetworksRemoveServerCreateExecute(r ApiClo
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.privateNetworkRemoveHost == nil {
-		return localVarReturnValue, nil, reportError("privateNetworkRemoveHost is required and must be specified")
+	if r.privateNetworkRemoveHostRequest == nil {
+		return localVarReturnValue, nil, reportError("privateNetworkRemoveHostRequest is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -7647,7 +7615,7 @@ func (a *CloudAPIService) CloudPrivateNetworksRemoveServerCreateExecute(r ApiClo
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.privateNetworkRemoveHost
+	localVarPostBody = r.privateNetworkRemoveHostRequest
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
@@ -7820,11 +7788,11 @@ type ApiCloudPrivateNetworksUpdateRequest struct {
 	ctx context.Context
 	ApiService *CloudAPIService
 	id int32
-	privateNetwork *PrivateNetwork
+	privateNetworkUpdateRequest *PrivateNetworkUpdateRequest
 }
 
-func (r ApiCloudPrivateNetworksUpdateRequest) PrivateNetwork(privateNetwork PrivateNetwork) ApiCloudPrivateNetworksUpdateRequest {
-	r.privateNetwork = &privateNetwork
+func (r ApiCloudPrivateNetworksUpdateRequest) PrivateNetworkUpdateRequest(privateNetworkUpdateRequest PrivateNetworkUpdateRequest) ApiCloudPrivateNetworksUpdateRequest {
+	r.privateNetworkUpdateRequest = &privateNetworkUpdateRequest
 	return r
 }
 
@@ -7870,9 +7838,6 @@ func (a *CloudAPIService) CloudPrivateNetworksUpdateExecute(r ApiCloudPrivateNet
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.privateNetwork == nil {
-		return localVarReturnValue, nil, reportError("privateNetwork is required and must be specified")
-	}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{"application/json"}
@@ -7892,7 +7857,7 @@ func (a *CloudAPIService) CloudPrivateNetworksUpdateExecute(r ApiCloudPrivateNet
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.privateNetwork
+	localVarPostBody = r.privateNetworkUpdateRequest
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
@@ -8684,16 +8649,9 @@ type ApiCloudServersBootIsosListRequest struct {
 	ctx context.Context
 	ApiService *CloudAPIService
 	id int32
-	page *int32
 }
 
-// A page number within the paginated result set.
-func (r ApiCloudServersBootIsosListRequest) Page(page int32) ApiCloudServersBootIsosListRequest {
-	r.page = &page
-	return r
-}
-
-func (r ApiCloudServersBootIsosListRequest) Execute() (*PaginatedBootISOList, *http.Response, error) {
+func (r ApiCloudServersBootIsosListRequest) Execute() ([]BootISO, *http.Response, error) {
 	return r.ApiService.CloudServersBootIsosListExecute(r)
 }
 
@@ -8715,13 +8673,13 @@ func (a *CloudAPIService) CloudServersBootIsosList(ctx context.Context, id int32
 }
 
 // Execute executes the request
-//  @return PaginatedBootISOList
-func (a *CloudAPIService) CloudServersBootIsosListExecute(r ApiCloudServersBootIsosListRequest) (*PaginatedBootISOList, *http.Response, error) {
+//  @return []BootISO
+func (a *CloudAPIService) CloudServersBootIsosListExecute(r ApiCloudServersBootIsosListRequest) ([]BootISO, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *PaginatedBootISOList
+		localVarReturnValue  []BootISO
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CloudAPIService.CloudServersBootIsosList")
@@ -8736,9 +8694,6 @@ func (a *CloudAPIService) CloudServersBootIsosListExecute(r ApiCloudServersBootI
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
-	if r.page != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "page", r.page, "form", "")
-	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -8927,11 +8882,11 @@ func (a *CloudAPIService) CloudServersConsoleCreateExecute(r ApiCloudServersCons
 type ApiCloudServersCreateRequest struct {
 	ctx context.Context
 	ApiService *CloudAPIService
-	serverAdd *ServerAdd
+	serverAddRequest *ServerAddRequest
 }
 
-func (r ApiCloudServersCreateRequest) ServerAdd(serverAdd ServerAdd) ApiCloudServersCreateRequest {
-	r.serverAdd = &serverAdd
+func (r ApiCloudServersCreateRequest) ServerAddRequest(serverAddRequest ServerAddRequest) ApiCloudServersCreateRequest {
+	r.serverAddRequest = &serverAddRequest
 	return r
 }
 
@@ -8974,8 +8929,8 @@ func (a *CloudAPIService) CloudServersCreateExecute(r ApiCloudServersCreateReque
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.serverAdd == nil {
-		return localVarReturnValue, nil, reportError("serverAdd is required and must be specified")
+	if r.serverAddRequest == nil {
+		return localVarReturnValue, nil, reportError("serverAddRequest is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -8996,7 +8951,7 @@ func (a *CloudAPIService) CloudServersCreateExecute(r ApiCloudServersCreateReque
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.serverAdd
+	localVarPostBody = r.serverAddRequest
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
@@ -9158,11 +9113,11 @@ type ApiCloudServersDestroyProtectionCreateRequest struct {
 	ctx context.Context
 	ApiService *CloudAPIService
 	id int32
-	destroyProtection *DestroyProtection
+	destroyProtectionRequest *DestroyProtectionRequest
 }
 
-func (r ApiCloudServersDestroyProtectionCreateRequest) DestroyProtection(destroyProtection DestroyProtection) ApiCloudServersDestroyProtectionCreateRequest {
-	r.destroyProtection = &destroyProtection
+func (r ApiCloudServersDestroyProtectionCreateRequest) DestroyProtectionRequest(destroyProtectionRequest DestroyProtectionRequest) ApiCloudServersDestroyProtectionCreateRequest {
+	r.destroyProtectionRequest = &destroyProtectionRequest
 	return r
 }
 
@@ -9208,8 +9163,8 @@ func (a *CloudAPIService) CloudServersDestroyProtectionCreateExecute(r ApiCloudS
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.destroyProtection == nil {
-		return localVarReturnValue, nil, reportError("destroyProtection is required and must be specified")
+	if r.destroyProtectionRequest == nil {
+		return localVarReturnValue, nil, reportError("destroyProtectionRequest is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -9230,7 +9185,7 @@ func (a *CloudAPIService) CloudServersDestroyProtectionCreateExecute(r ApiCloudS
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.destroyProtection
+	localVarPostBody = r.destroyProtectionRequest
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
@@ -9653,11 +9608,11 @@ type ApiCloudServersModifyPackageCreateRequest struct {
 	ctx context.Context
 	ApiService *CloudAPIService
 	id int32
-	serverProductUpgrade *ServerProductUpgrade
+	serverProductUpgradeRequest *ServerProductUpgradeRequest
 }
 
-func (r ApiCloudServersModifyPackageCreateRequest) ServerProductUpgrade(serverProductUpgrade ServerProductUpgrade) ApiCloudServersModifyPackageCreateRequest {
-	r.serverProductUpgrade = &serverProductUpgrade
+func (r ApiCloudServersModifyPackageCreateRequest) ServerProductUpgradeRequest(serverProductUpgradeRequest ServerProductUpgradeRequest) ApiCloudServersModifyPackageCreateRequest {
+	r.serverProductUpgradeRequest = &serverProductUpgradeRequest
 	return r
 }
 
@@ -9703,8 +9658,8 @@ func (a *CloudAPIService) CloudServersModifyPackageCreateExecute(r ApiCloudServe
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.serverProductUpgrade == nil {
-		return localVarReturnValue, nil, reportError("serverProductUpgrade is required and must be specified")
+	if r.serverProductUpgradeRequest == nil {
+		return localVarReturnValue, nil, reportError("serverProductUpgradeRequest is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -9725,7 +9680,7 @@ func (a *CloudAPIService) CloudServersModifyPackageCreateExecute(r ApiCloudServe
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.serverProductUpgrade
+	localVarPostBody = r.serverProductUpgradeRequest
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
@@ -9781,11 +9736,11 @@ type ApiCloudServersPartialUpdateRequest struct {
 	ctx context.Context
 	ApiService *CloudAPIService
 	id int32
-	patchedServerDetail *PatchedServerDetail
+	patchedServerDetailRequest *PatchedServerDetailRequest
 }
 
-func (r ApiCloudServersPartialUpdateRequest) PatchedServerDetail(patchedServerDetail PatchedServerDetail) ApiCloudServersPartialUpdateRequest {
-	r.patchedServerDetail = &patchedServerDetail
+func (r ApiCloudServersPartialUpdateRequest) PatchedServerDetailRequest(patchedServerDetailRequest PatchedServerDetailRequest) ApiCloudServersPartialUpdateRequest {
+	r.patchedServerDetailRequest = &patchedServerDetailRequest
 	return r
 }
 
@@ -9850,7 +9805,7 @@ func (a *CloudAPIService) CloudServersPartialUpdateExecute(r ApiCloudServersPart
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.patchedServerDetail
+	localVarPostBody = r.patchedServerDetailRequest
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
@@ -10151,11 +10106,11 @@ type ApiCloudServersPublicInterfaceCreateRequest struct {
 	ctx context.Context
 	ApiService *CloudAPIService
 	id int32
-	publicInterface *PublicInterface
+	publicInterfaceRequest *PublicInterfaceRequest
 }
 
-func (r ApiCloudServersPublicInterfaceCreateRequest) PublicInterface(publicInterface PublicInterface) ApiCloudServersPublicInterfaceCreateRequest {
-	r.publicInterface = &publicInterface
+func (r ApiCloudServersPublicInterfaceCreateRequest) PublicInterfaceRequest(publicInterfaceRequest PublicInterfaceRequest) ApiCloudServersPublicInterfaceCreateRequest {
+	r.publicInterfaceRequest = &publicInterfaceRequest
 	return r
 }
 
@@ -10220,7 +10175,7 @@ func (a *CloudAPIService) CloudServersPublicInterfaceCreateExecute(r ApiCloudSer
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.publicInterface
+	localVarPostBody = r.publicInterfaceRequest
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
@@ -10975,29 +10930,22 @@ type ApiCloudServersSnapshotsCreateRequest struct {
 	ctx context.Context
 	ApiService *CloudAPIService
 	id int32
-	snapshotCreate *SnapshotCreate
-	page *int32
+	snapshotCreateRequest *SnapshotCreateRequest
 }
 
-func (r ApiCloudServersSnapshotsCreateRequest) SnapshotCreate(snapshotCreate SnapshotCreate) ApiCloudServersSnapshotsCreateRequest {
-	r.snapshotCreate = &snapshotCreate
+func (r ApiCloudServersSnapshotsCreateRequest) SnapshotCreateRequest(snapshotCreateRequest SnapshotCreateRequest) ApiCloudServersSnapshotsCreateRequest {
+	r.snapshotCreateRequest = &snapshotCreateRequest
 	return r
 }
 
-// A page number within the paginated result set.
-func (r ApiCloudServersSnapshotsCreateRequest) Page(page int32) ApiCloudServersSnapshotsCreateRequest {
-	r.page = &page
-	return r
-}
-
-func (r ApiCloudServersSnapshotsCreateRequest) Execute() (*PaginatedSnapshotList, *http.Response, error) {
+func (r ApiCloudServersSnapshotsCreateRequest) Execute() (*SnapshotCreateQueued, *http.Response, error) {
 	return r.ApiService.CloudServersSnapshotsCreateExecute(r)
 }
 
 /*
 CloudServersSnapshotsCreate Method for CloudServersSnapshotsCreate
 
-List snapshots for this server or queue a new snapshot.
+Cloud servers
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param id A unique integer value identifying this virtual machine.
@@ -11012,13 +10960,13 @@ func (a *CloudAPIService) CloudServersSnapshotsCreate(ctx context.Context, id in
 }
 
 // Execute executes the request
-//  @return PaginatedSnapshotList
-func (a *CloudAPIService) CloudServersSnapshotsCreateExecute(r ApiCloudServersSnapshotsCreateRequest) (*PaginatedSnapshotList, *http.Response, error) {
+//  @return SnapshotCreateQueued
+func (a *CloudAPIService) CloudServersSnapshotsCreateExecute(r ApiCloudServersSnapshotsCreateRequest) (*SnapshotCreateQueued, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *PaginatedSnapshotList
+		localVarReturnValue  *SnapshotCreateQueued
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CloudAPIService.CloudServersSnapshotsCreate")
@@ -11032,13 +10980,10 @@ func (a *CloudAPIService) CloudServersSnapshotsCreateExecute(r ApiCloudServersSn
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.snapshotCreate == nil {
-		return localVarReturnValue, nil, reportError("snapshotCreate is required and must be specified")
+	if r.snapshotCreateRequest == nil {
+		return localVarReturnValue, nil, reportError("snapshotCreateRequest is required and must be specified")
 	}
 
-	if r.page != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "page", r.page, "form", "")
-	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{"application/json"}
 
@@ -11057,7 +11002,7 @@ func (a *CloudAPIService) CloudServersSnapshotsCreateExecute(r ApiCloudServersSn
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.snapshotCreate
+	localVarPostBody = r.snapshotCreateRequest
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
@@ -11234,16 +11179,9 @@ type ApiCloudServersSnapshotsListRequest struct {
 	ctx context.Context
 	ApiService *CloudAPIService
 	id int32
-	page *int32
 }
 
-// A page number within the paginated result set.
-func (r ApiCloudServersSnapshotsListRequest) Page(page int32) ApiCloudServersSnapshotsListRequest {
-	r.page = &page
-	return r
-}
-
-func (r ApiCloudServersSnapshotsListRequest) Execute() (*PaginatedSnapshotList, *http.Response, error) {
+func (r ApiCloudServersSnapshotsListRequest) Execute() ([]Snapshot, *http.Response, error) {
 	return r.ApiService.CloudServersSnapshotsListExecute(r)
 }
 
@@ -11265,13 +11203,13 @@ func (a *CloudAPIService) CloudServersSnapshotsList(ctx context.Context, id int3
 }
 
 // Execute executes the request
-//  @return PaginatedSnapshotList
-func (a *CloudAPIService) CloudServersSnapshotsListExecute(r ApiCloudServersSnapshotsListRequest) (*PaginatedSnapshotList, *http.Response, error) {
+//  @return []Snapshot
+func (a *CloudAPIService) CloudServersSnapshotsListExecute(r ApiCloudServersSnapshotsListRequest) ([]Snapshot, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *PaginatedSnapshotList
+		localVarReturnValue  []Snapshot
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CloudAPIService.CloudServersSnapshotsList")
@@ -11286,9 +11224,6 @@ func (a *CloudAPIService) CloudServersSnapshotsListExecute(r ApiCloudServersSnap
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
-	if r.page != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "page", r.page, "form", "")
-	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -11478,15 +11413,132 @@ func (a *CloudAPIService) CloudServersSnapshotsRollbackCreateExecute(r ApiCloudS
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
+type ApiCloudServersTrafficRetrieveRequest struct {
+	ctx context.Context
+	ApiService *CloudAPIService
+	id int32
+}
+
+func (r ApiCloudServersTrafficRetrieveRequest) Execute() (*ServerTrafficResponse, *http.Response, error) {
+	return r.ApiService.CloudServersTrafficRetrieveExecute(r)
+}
+
+/*
+CloudServersTrafficRetrieve Method for CloudServersTrafficRetrieve
+
+Get this month's traffic usage for a server.
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param id A unique integer value identifying this virtual machine.
+ @return ApiCloudServersTrafficRetrieveRequest
+*/
+func (a *CloudAPIService) CloudServersTrafficRetrieve(ctx context.Context, id int32) ApiCloudServersTrafficRetrieveRequest {
+	return ApiCloudServersTrafficRetrieveRequest{
+		ApiService: a,
+		ctx: ctx,
+		id: id,
+	}
+}
+
+// Execute executes the request
+//  @return ServerTrafficResponse
+func (a *CloudAPIService) CloudServersTrafficRetrieveExecute(r ApiCloudServersTrafficRetrieveRequest) (*ServerTrafficResponse, *http.Response, error) {
+	var (
+		localVarHTTPMethod   = http.MethodGet
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *ServerTrafficResponse
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CloudAPIService.CloudServersTrafficRetrieve")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/api/cloud/servers/{id}/traffic/"
+	localVarPath = strings.Replace(localVarPath, "{"+"id"+"}", url.PathEscape(parameterValueToString(r.id, "id")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	if r.ctx != nil {
+		// API Key Authentication
+		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
+			if apiKey, ok := auth["tokenAuth"]; ok {
+				var key string
+				if apiKey.Prefix != "" {
+					key = apiKey.Prefix + " " + apiKey.Key
+				} else {
+					key = apiKey.Key
+				}
+				localVarHeaderParams["Authorization"] = key
+			}
+		}
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
 type ApiCloudServersUpdateRequest struct {
 	ctx context.Context
 	ApiService *CloudAPIService
 	id int32
-	serverDetail *ServerDetail
+	serverDetailRequest *ServerDetailRequest
 }
 
-func (r ApiCloudServersUpdateRequest) ServerDetail(serverDetail ServerDetail) ApiCloudServersUpdateRequest {
-	r.serverDetail = &serverDetail
+func (r ApiCloudServersUpdateRequest) ServerDetailRequest(serverDetailRequest ServerDetailRequest) ApiCloudServersUpdateRequest {
+	r.serverDetailRequest = &serverDetailRequest
 	return r
 }
 
@@ -11551,7 +11603,7 @@ func (a *CloudAPIService) CloudServersUpdateExecute(r ApiCloudServersUpdateReque
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.serverDetail
+	localVarPostBody = r.serverDetailRequest
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
@@ -11724,11 +11776,11 @@ type ApiCloudServersVolumesCreateRequest struct {
 	ctx context.Context
 	ApiService *CloudAPIService
 	serverId string
-	volume *Volume
+	volumeRequest *VolumeRequest
 }
 
-func (r ApiCloudServersVolumesCreateRequest) Volume(volume Volume) ApiCloudServersVolumesCreateRequest {
-	r.volume = &volume
+func (r ApiCloudServersVolumesCreateRequest) VolumeRequest(volumeRequest VolumeRequest) ApiCloudServersVolumesCreateRequest {
+	r.volumeRequest = &volumeRequest
 	return r
 }
 
@@ -11781,8 +11833,8 @@ func (a *CloudAPIService) CloudServersVolumesCreateExecute(r ApiCloudServersVolu
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.volume == nil {
-		return localVarReturnValue, nil, reportError("volume is required and must be specified")
+	if r.volumeRequest == nil {
+		return localVarReturnValue, nil, reportError("volumeRequest is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -11803,7 +11855,7 @@ func (a *CloudAPIService) CloudServersVolumesCreateExecute(r ApiCloudServersVolu
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.volume
+	localVarPostBody = r.volumeRequest
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
@@ -12101,11 +12153,11 @@ type ApiCloudServersVolumesPartialUpdateRequest struct {
 	ApiService *CloudAPIService
 	serverId string
 	volumeId string
-	patchedVolume *PatchedVolume
+	patchedVolumeUpdateRequest *PatchedVolumeUpdateRequest
 }
 
-func (r ApiCloudServersVolumesPartialUpdateRequest) PatchedVolume(patchedVolume PatchedVolume) ApiCloudServersVolumesPartialUpdateRequest {
-	r.patchedVolume = &patchedVolume
+func (r ApiCloudServersVolumesPartialUpdateRequest) PatchedVolumeUpdateRequest(patchedVolumeUpdateRequest PatchedVolumeUpdateRequest) ApiCloudServersVolumesPartialUpdateRequest {
+	r.patchedVolumeUpdateRequest = &patchedVolumeUpdateRequest
 	return r
 }
 
@@ -12180,7 +12232,7 @@ func (a *CloudAPIService) CloudServersVolumesPartialUpdateExecute(r ApiCloudServ
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.patchedVolume
+	localVarPostBody = r.patchedVolumeUpdateRequest
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
@@ -12365,11 +12417,11 @@ type ApiCloudServersVolumesUpdateRequest struct {
 	ApiService *CloudAPIService
 	serverId string
 	volumeId string
-	volume *Volume
+	volumeUpdateRequest *VolumeUpdateRequest
 }
 
-func (r ApiCloudServersVolumesUpdateRequest) Volume(volume Volume) ApiCloudServersVolumesUpdateRequest {
-	r.volume = &volume
+func (r ApiCloudServersVolumesUpdateRequest) VolumeUpdateRequest(volumeUpdateRequest VolumeUpdateRequest) ApiCloudServersVolumesUpdateRequest {
+	r.volumeUpdateRequest = &volumeUpdateRequest
 	return r
 }
 
@@ -12425,8 +12477,8 @@ func (a *CloudAPIService) CloudServersVolumesUpdateExecute(r ApiCloudServersVolu
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.volume == nil {
-		return localVarReturnValue, nil, reportError("volume is required and must be specified")
+	if r.volumeUpdateRequest == nil {
+		return localVarReturnValue, nil, reportError("volumeUpdateRequest is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -12447,7 +12499,7 @@ func (a *CloudAPIService) CloudServersVolumesUpdateExecute(r ApiCloudServersVolu
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.volume
+	localVarPostBody = r.volumeUpdateRequest
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
@@ -12743,11 +12795,11 @@ type ApiCloudVolumesAttachCreateRequest struct {
 	ctx context.Context
 	ApiService *CloudAPIService
 	id int32
-	attachVolume *AttachVolume
+	attachVolumeRequest *AttachVolumeRequest
 }
 
-func (r ApiCloudVolumesAttachCreateRequest) AttachVolume(attachVolume AttachVolume) ApiCloudVolumesAttachCreateRequest {
-	r.attachVolume = &attachVolume
+func (r ApiCloudVolumesAttachCreateRequest) AttachVolumeRequest(attachVolumeRequest AttachVolumeRequest) ApiCloudVolumesAttachCreateRequest {
+	r.attachVolumeRequest = &attachVolumeRequest
 	return r
 }
 
@@ -12793,8 +12845,8 @@ func (a *CloudAPIService) CloudVolumesAttachCreateExecute(r ApiCloudVolumesAttac
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.attachVolume == nil {
-		return localVarReturnValue, nil, reportError("attachVolume is required and must be specified")
+	if r.attachVolumeRequest == nil {
+		return localVarReturnValue, nil, reportError("attachVolumeRequest is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -12815,7 +12867,7 @@ func (a *CloudAPIService) CloudVolumesAttachCreateExecute(r ApiCloudVolumesAttac
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.attachVolume
+	localVarPostBody = r.attachVolumeRequest
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
@@ -12977,12 +13029,6 @@ type ApiCloudVolumesDetachCreateRequest struct {
 	ctx context.Context
 	ApiService *CloudAPIService
 	id int32
-	volume *Volume
-}
-
-func (r ApiCloudVolumesDetachCreateRequest) Volume(volume Volume) ApiCloudVolumesDetachCreateRequest {
-	r.volume = &volume
-	return r
 }
 
 func (r ApiCloudVolumesDetachCreateRequest) Execute() (*DetachVolume, *http.Response, error) {
@@ -13027,12 +13073,9 @@ func (a *CloudAPIService) CloudVolumesDetachCreateExecute(r ApiCloudVolumesDetac
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.volume == nil {
-		return localVarReturnValue, nil, reportError("volume is required and must be specified")
-	}
 
 	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{"application/json"}
+	localVarHTTPContentTypes := []string{}
 
 	// set Content-Type header
 	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
@@ -13048,8 +13091,6 @@ func (a *CloudAPIService) CloudVolumesDetachCreateExecute(r ApiCloudVolumesDetac
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	// body params
-	localVarPostBody = r.volume
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
@@ -13218,11 +13259,11 @@ type ApiCloudVolumesPartialUpdateRequest struct {
 	ctx context.Context
 	ApiService *CloudAPIService
 	id int32
-	patchedVolume *PatchedVolume
+	patchedVolumeUpdateRequest *PatchedVolumeUpdateRequest
 }
 
-func (r ApiCloudVolumesPartialUpdateRequest) PatchedVolume(patchedVolume PatchedVolume) ApiCloudVolumesPartialUpdateRequest {
-	r.patchedVolume = &patchedVolume
+func (r ApiCloudVolumesPartialUpdateRequest) PatchedVolumeUpdateRequest(patchedVolumeUpdateRequest PatchedVolumeUpdateRequest) ApiCloudVolumesPartialUpdateRequest {
+	r.patchedVolumeUpdateRequest = &patchedVolumeUpdateRequest
 	return r
 }
 
@@ -13287,7 +13328,7 @@ func (a *CloudAPIService) CloudVolumesPartialUpdateExecute(r ApiCloudVolumesPart
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.patchedVolume
+	localVarPostBody = r.patchedVolumeUpdateRequest
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
@@ -13460,11 +13501,11 @@ type ApiCloudVolumesUpdateRequest struct {
 	ctx context.Context
 	ApiService *CloudAPIService
 	id int32
-	volume *Volume
+	volumeUpdateRequest *VolumeUpdateRequest
 }
 
-func (r ApiCloudVolumesUpdateRequest) Volume(volume Volume) ApiCloudVolumesUpdateRequest {
-	r.volume = &volume
+func (r ApiCloudVolumesUpdateRequest) VolumeUpdateRequest(volumeUpdateRequest VolumeUpdateRequest) ApiCloudVolumesUpdateRequest {
+	r.volumeUpdateRequest = &volumeUpdateRequest
 	return r
 }
 
@@ -13510,8 +13551,8 @@ func (a *CloudAPIService) CloudVolumesUpdateExecute(r ApiCloudVolumesUpdateReque
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.volume == nil {
-		return localVarReturnValue, nil, reportError("volume is required and must be specified")
+	if r.volumeUpdateRequest == nil {
+		return localVarReturnValue, nil, reportError("volumeUpdateRequest is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -13532,7 +13573,7 @@ func (a *CloudAPIService) CloudVolumesUpdateExecute(r ApiCloudVolumesUpdateReque
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.volume
+	localVarPostBody = r.volumeUpdateRequest
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {

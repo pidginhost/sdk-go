@@ -252,9 +252,10 @@ func Test_pidginhostsdk_EmailAPIService(t *testing.T) {
 
 		var messageId string
 
-		httpRes, err := apiClient.EmailAPI.EmailMessagesRetrieve(context.Background(), messageId).Execute()
+		resp, httpRes, err := apiClient.EmailAPI.EmailMessagesRetrieve(context.Background(), messageId).Execute()
 
 		require.Nil(t, err)
+		require.NotNil(t, resp)
 		assert.Equal(t, 200, httpRes.StatusCode)
 
 	})
@@ -314,9 +315,10 @@ func Test_pidginhostsdk_EmailAPIService(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
 
-		httpRes, err := apiClient.EmailAPI.EmailSendCreate(context.Background()).Execute()
+		resp, httpRes, err := apiClient.EmailAPI.EmailSendCreate(context.Background()).Execute()
 
 		require.Nil(t, err)
+		require.NotNil(t, resp)
 		assert.Equal(t, 200, httpRes.StatusCode)
 
 	})
@@ -409,22 +411,10 @@ func Test_pidginhostsdk_EmailAPIService(t *testing.T) {
 
 		var id int32
 
-		httpRes, err := apiClient.EmailAPI.EmailServicesDedicatedIpDestroy(context.Background(), id).Execute()
+		resp, httpRes, err := apiClient.EmailAPI.EmailServicesDedicatedIpDestroy(context.Background(), id).Execute()
 
 		require.Nil(t, err)
-		assert.Equal(t, 200, httpRes.StatusCode)
-
-	})
-
-	t.Run("Test EmailAPIService EmailServicesDestroy", func(t *testing.T) {
-
-		t.Skip("skip test")  // remove to run test
-
-		var id int32
-
-		httpRes, err := apiClient.EmailAPI.EmailServicesDestroy(context.Background(), id).Execute()
-
-		require.Nil(t, err)
+		require.NotNil(t, resp)
 		assert.Equal(t, 200, httpRes.StatusCode)
 
 	})
@@ -475,9 +465,10 @@ func Test_pidginhostsdk_EmailAPIService(t *testing.T) {
 
 		var servicePk int32
 
-		httpRes, err := apiClient.EmailAPI.EmailServicesMessagesRetrieve(context.Background(), servicePk).Execute()
+		resp, httpRes, err := apiClient.EmailAPI.EmailServicesMessagesRetrieve(context.Background(), servicePk).Execute()
 
 		require.Nil(t, err)
+		require.NotNil(t, resp)
 		assert.Equal(t, 200, httpRes.StatusCode)
 
 	})
@@ -586,9 +577,10 @@ func Test_pidginhostsdk_EmailAPIService(t *testing.T) {
 
 		var servicePk int32
 
-		httpRes, err := apiClient.EmailAPI.EmailServicesStatsRetrieve(context.Background(), servicePk).Execute()
+		resp, httpRes, err := apiClient.EmailAPI.EmailServicesStatsRetrieve(context.Background(), servicePk).Execute()
 
 		require.Nil(t, err)
+		require.NotNil(t, resp)
 		assert.Equal(t, 200, httpRes.StatusCode)
 
 	})

@@ -26,11 +26,11 @@ type FreednsAPIService service
 type ApiFreednsDnsActivateCreateRequest struct {
 	ctx context.Context
 	ApiService *FreednsAPIService
-	activateFreeDNS *ActivateFreeDNS
+	activateFreeDNSRequest *ActivateFreeDNSRequest
 }
 
-func (r ApiFreednsDnsActivateCreateRequest) ActivateFreeDNS(activateFreeDNS ActivateFreeDNS) ApiFreednsDnsActivateCreateRequest {
-	r.activateFreeDNS = &activateFreeDNS
+func (r ApiFreednsDnsActivateCreateRequest) ActivateFreeDNSRequest(activateFreeDNSRequest ActivateFreeDNSRequest) ApiFreednsDnsActivateCreateRequest {
+	r.activateFreeDNSRequest = &activateFreeDNSRequest
 	return r
 }
 
@@ -73,8 +73,8 @@ func (a *FreednsAPIService) FreednsDnsActivateCreateExecute(r ApiFreednsDnsActiv
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.activateFreeDNS == nil {
-		return localVarReturnValue, nil, reportError("activateFreeDNS is required and must be specified")
+	if r.activateFreeDNSRequest == nil {
+		return localVarReturnValue, nil, reportError("activateFreeDNSRequest is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -95,7 +95,7 @@ func (a *FreednsAPIService) FreednsDnsActivateCreateExecute(r ApiFreednsDnsActiv
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.activateFreeDNS
+	localVarPostBody = r.activateFreeDNSRequest
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
@@ -152,7 +152,7 @@ type ApiFreednsDnsAddRecordCreateRequest struct {
 	ApiService *FreednsAPIService
 	domain *string
 	source *string
-	dNSRecordCreate *DNSRecordCreate
+	dNSRecordCreateRequest *DNSRecordCreateRequest
 }
 
 // Domain name or PK.
@@ -167,8 +167,8 @@ func (r ApiFreednsDnsAddRecordCreateRequest) Source(source string) ApiFreednsDns
 	return r
 }
 
-func (r ApiFreednsDnsAddRecordCreateRequest) DNSRecordCreate(dNSRecordCreate DNSRecordCreate) ApiFreednsDnsAddRecordCreateRequest {
-	r.dNSRecordCreate = &dNSRecordCreate
+func (r ApiFreednsDnsAddRecordCreateRequest) DNSRecordCreateRequest(dNSRecordCreateRequest DNSRecordCreateRequest) ApiFreednsDnsAddRecordCreateRequest {
+	r.dNSRecordCreateRequest = &dNSRecordCreateRequest
 	return r
 }
 
@@ -217,8 +217,8 @@ func (a *FreednsAPIService) FreednsDnsAddRecordCreateExecute(r ApiFreednsDnsAddR
 	if r.source == nil {
 		return localVarReturnValue, nil, reportError("source is required and must be specified")
 	}
-	if r.dNSRecordCreate == nil {
-		return localVarReturnValue, nil, reportError("dNSRecordCreate is required and must be specified")
+	if r.dNSRecordCreateRequest == nil {
+		return localVarReturnValue, nil, reportError("dNSRecordCreateRequest is required and must be specified")
 	}
 
 	parameterAddToHeaderOrQuery(localVarQueryParams, "domain", r.domain, "form", "")
@@ -241,7 +241,7 @@ func (a *FreednsAPIService) FreednsDnsAddRecordCreateExecute(r ApiFreednsDnsAddR
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.dNSRecordCreate
+	localVarPostBody = r.dNSRecordCreateRequest
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
@@ -296,11 +296,11 @@ func (a *FreednsAPIService) FreednsDnsAddRecordCreateExecute(r ApiFreednsDnsAddR
 type ApiFreednsDnsDeactivateCreateRequest struct {
 	ctx context.Context
 	ApiService *FreednsAPIService
-	deactivateFreeDNS *DeactivateFreeDNS
+	deactivateFreeDNSRequest *DeactivateFreeDNSRequest
 }
 
-func (r ApiFreednsDnsDeactivateCreateRequest) DeactivateFreeDNS(deactivateFreeDNS DeactivateFreeDNS) ApiFreednsDnsDeactivateCreateRequest {
-	r.deactivateFreeDNS = &deactivateFreeDNS
+func (r ApiFreednsDnsDeactivateCreateRequest) DeactivateFreeDNSRequest(deactivateFreeDNSRequest DeactivateFreeDNSRequest) ApiFreednsDnsDeactivateCreateRequest {
+	r.deactivateFreeDNSRequest = &deactivateFreeDNSRequest
 	return r
 }
 
@@ -343,8 +343,8 @@ func (a *FreednsAPIService) FreednsDnsDeactivateCreateExecute(r ApiFreednsDnsDea
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.deactivateFreeDNS == nil {
-		return localVarReturnValue, nil, reportError("deactivateFreeDNS is required and must be specified")
+	if r.deactivateFreeDNSRequest == nil {
+		return localVarReturnValue, nil, reportError("deactivateFreeDNSRequest is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -365,7 +365,7 @@ func (a *FreednsAPIService) FreednsDnsDeactivateCreateExecute(r ApiFreednsDnsDea
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.deactivateFreeDNS
+	localVarPostBody = r.deactivateFreeDNSRequest
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
@@ -422,7 +422,7 @@ type ApiFreednsDnsDeleteRecordCreateRequest struct {
 	ApiService *FreednsAPIService
 	domain *string
 	source *string
-	deleteRecord *DeleteRecord
+	deleteRecordRequest *DeleteRecordRequest
 }
 
 // Domain name or PK.
@@ -437,8 +437,8 @@ func (r ApiFreednsDnsDeleteRecordCreateRequest) Source(source string) ApiFreedns
 	return r
 }
 
-func (r ApiFreednsDnsDeleteRecordCreateRequest) DeleteRecord(deleteRecord DeleteRecord) ApiFreednsDnsDeleteRecordCreateRequest {
-	r.deleteRecord = &deleteRecord
+func (r ApiFreednsDnsDeleteRecordCreateRequest) DeleteRecordRequest(deleteRecordRequest DeleteRecordRequest) ApiFreednsDnsDeleteRecordCreateRequest {
+	r.deleteRecordRequest = &deleteRecordRequest
 	return r
 }
 
@@ -487,8 +487,8 @@ func (a *FreednsAPIService) FreednsDnsDeleteRecordCreateExecute(r ApiFreednsDnsD
 	if r.source == nil {
 		return localVarReturnValue, nil, reportError("source is required and must be specified")
 	}
-	if r.deleteRecord == nil {
-		return localVarReturnValue, nil, reportError("deleteRecord is required and must be specified")
+	if r.deleteRecordRequest == nil {
+		return localVarReturnValue, nil, reportError("deleteRecordRequest is required and must be specified")
 	}
 
 	parameterAddToHeaderOrQuery(localVarQueryParams, "domain", r.domain, "form", "")
@@ -511,7 +511,7 @@ func (a *FreednsAPIService) FreednsDnsDeleteRecordCreateExecute(r ApiFreednsDnsD
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.deleteRecord
+	localVarPostBody = r.deleteRecordRequest
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {

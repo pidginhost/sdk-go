@@ -29,8 +29,8 @@ type APITokenList struct {
 	Created string `json:"created"`
 	LastUsed NullableString `json:"last_used"`
 	RequestCount int32 `json:"request_count"`
-	Account NullableString `json:"account"`
-	MembershipStatus NullableString `json:"membership_status"`
+	Account NullableString `json:"account,omitempty"`
+	MembershipStatus NullableString `json:"membership_status,omitempty"`
 }
 
 type _APITokenList APITokenList
@@ -39,7 +39,7 @@ type _APITokenList APITokenList
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewAPITokenList(id int32, name string, scope ScopeEnum, keyPrefix string, created string, lastUsed NullableString, requestCount int32, account NullableString, membershipStatus NullableString) *APITokenList {
+func NewAPITokenList(id int32, name string, scope ScopeEnum, keyPrefix string, created string, lastUsed NullableString, requestCount int32) *APITokenList {
 	this := APITokenList{}
 	this.Id = id
 	this.Name = name
@@ -48,8 +48,6 @@ func NewAPITokenList(id int32, name string, scope ScopeEnum, keyPrefix string, c
 	this.Created = created
 	this.LastUsed = lastUsed
 	this.RequestCount = requestCount
-	this.Account = account
-	this.MembershipStatus = membershipStatus
 	return &this
 }
 
@@ -231,18 +229,16 @@ func (o *APITokenList) SetRequestCount(v int32) {
 	o.RequestCount = v
 }
 
-// GetAccount returns the Account field value
-// If the value is explicit nil, the zero value for string will be returned
+// GetAccount returns the Account field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *APITokenList) GetAccount() string {
-	if o == nil || o.Account.Get() == nil {
+	if o == nil || IsNil(o.Account.Get()) {
 		var ret string
 		return ret
 	}
-
 	return *o.Account.Get()
 }
 
-// GetAccountOk returns a tuple with the Account field value
+// GetAccountOk returns a tuple with the Account field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *APITokenList) GetAccountOk() (*string, bool) {
@@ -252,23 +248,39 @@ func (o *APITokenList) GetAccountOk() (*string, bool) {
 	return o.Account.Get(), o.Account.IsSet()
 }
 
-// SetAccount sets field value
+// HasAccount returns a boolean if a field has been set.
+func (o *APITokenList) HasAccount() bool {
+	if o != nil && o.Account.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetAccount gets a reference to the given NullableString and assigns it to the Account field.
 func (o *APITokenList) SetAccount(v string) {
 	o.Account.Set(&v)
 }
+// SetAccountNil sets the value for Account to be an explicit nil
+func (o *APITokenList) SetAccountNil() {
+	o.Account.Set(nil)
+}
 
-// GetMembershipStatus returns the MembershipStatus field value
-// If the value is explicit nil, the zero value for string will be returned
+// UnsetAccount ensures that no value is present for Account, not even an explicit nil
+func (o *APITokenList) UnsetAccount() {
+	o.Account.Unset()
+}
+
+// GetMembershipStatus returns the MembershipStatus field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *APITokenList) GetMembershipStatus() string {
-	if o == nil || o.MembershipStatus.Get() == nil {
+	if o == nil || IsNil(o.MembershipStatus.Get()) {
 		var ret string
 		return ret
 	}
-
 	return *o.MembershipStatus.Get()
 }
 
-// GetMembershipStatusOk returns a tuple with the MembershipStatus field value
+// GetMembershipStatusOk returns a tuple with the MembershipStatus field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *APITokenList) GetMembershipStatusOk() (*string, bool) {
@@ -278,9 +290,27 @@ func (o *APITokenList) GetMembershipStatusOk() (*string, bool) {
 	return o.MembershipStatus.Get(), o.MembershipStatus.IsSet()
 }
 
-// SetMembershipStatus sets field value
+// HasMembershipStatus returns a boolean if a field has been set.
+func (o *APITokenList) HasMembershipStatus() bool {
+	if o != nil && o.MembershipStatus.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetMembershipStatus gets a reference to the given NullableString and assigns it to the MembershipStatus field.
 func (o *APITokenList) SetMembershipStatus(v string) {
 	o.MembershipStatus.Set(&v)
+}
+// SetMembershipStatusNil sets the value for MembershipStatus to be an explicit nil
+func (o *APITokenList) SetMembershipStatusNil() {
+	o.MembershipStatus.Set(nil)
+}
+
+// UnsetMembershipStatus ensures that no value is present for MembershipStatus, not even an explicit nil
+func (o *APITokenList) UnsetMembershipStatus() {
+	o.MembershipStatus.Unset()
 }
 
 func (o APITokenList) MarshalJSON() ([]byte, error) {
@@ -300,8 +330,12 @@ func (o APITokenList) ToMap() (map[string]interface{}, error) {
 	toSerialize["created"] = o.Created
 	toSerialize["last_used"] = o.LastUsed.Get()
 	toSerialize["request_count"] = o.RequestCount
-	toSerialize["account"] = o.Account.Get()
-	toSerialize["membership_status"] = o.MembershipStatus.Get()
+	if o.Account.IsSet() {
+		toSerialize["account"] = o.Account.Get()
+	}
+	if o.MembershipStatus.IsSet() {
+		toSerialize["membership_status"] = o.MembershipStatus.Get()
+	}
 	return toSerialize, nil
 }
 
@@ -317,8 +351,6 @@ func (o *APITokenList) UnmarshalJSON(data []byte) (err error) {
 		"created",
 		"last_used",
 		"request_count",
-		"account",
-		"membership_status",
 	}
 
 	allProperties := make(map[string]interface{})

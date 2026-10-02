@@ -80,7 +80,7 @@ Name | Type | Description  | Notes
 
 ## DedicatedServersPowerCreate
 
-> PowerActionResponse DedicatedServersPowerCreate(ctx, id).PowerAction(powerAction).Execute()
+> PowerActionResponse DedicatedServersPowerCreate(ctx, id).PowerActionRequest(powerActionRequest).Execute()
 
 
 
@@ -100,11 +100,11 @@ import (
 
 func main() {
 	id := "id_example" // string | 
-	powerAction := *openapiclient.NewPowerAction(openapiclient.PowerActionActionEnum("start")) // PowerAction | 
+	powerActionRequest := *openapiclient.NewPowerActionRequest(openapiclient.PowerActionActionEnum("start")) // PowerActionRequest | 
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.DedicatedAPI.DedicatedServersPowerCreate(context.Background(), id).PowerAction(powerAction).Execute()
+	resp, r, err := apiClient.DedicatedAPI.DedicatedServersPowerCreate(context.Background(), id).PowerActionRequest(powerActionRequest).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `DedicatedAPI.DedicatedServersPowerCreate``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -130,7 +130,7 @@ Other parameters are passed through a pointer to a apiDedicatedServersPowerCreat
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
- **powerAction** | [**PowerAction**](PowerAction.md) |  | 
+ **powerActionRequest** | [**PowerActionRequest**](PowerActionRequest.md) |  | 
 
 ### Return type
 
@@ -152,7 +152,7 @@ Name | Type | Description  | Notes
 
 ## DedicatedServersRdnsCreate
 
-> RDNSUpdateResponse DedicatedServersRdnsCreate(ctx, id).DedicatedRDNS(dedicatedRDNS).Execute()
+> RDNSUpdateResponse DedicatedServersRdnsCreate(ctx, id).DedicatedRDNSRequest(dedicatedRDNSRequest).Execute()
 
 
 
@@ -172,11 +172,11 @@ import (
 
 func main() {
 	id := "id_example" // string | 
-	dedicatedRDNS := *openapiclient.NewDedicatedRDNS(int32(123), "ReverseDns_example") // DedicatedRDNS | 
+	dedicatedRDNSRequest := *openapiclient.NewDedicatedRDNSRequest(int32(123), "ReverseDns_example") // DedicatedRDNSRequest | 
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.DedicatedAPI.DedicatedServersRdnsCreate(context.Background(), id).DedicatedRDNS(dedicatedRDNS).Execute()
+	resp, r, err := apiClient.DedicatedAPI.DedicatedServersRdnsCreate(context.Background(), id).DedicatedRDNSRequest(dedicatedRDNSRequest).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `DedicatedAPI.DedicatedServersRdnsCreate``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -202,7 +202,7 @@ Other parameters are passed through a pointer to a apiDedicatedServersRdnsCreate
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
- **dedicatedRDNS** | [**DedicatedRDNS**](DedicatedRDNS.md) |  | 
+ **dedicatedRDNSRequest** | [**DedicatedRDNSRequest**](DedicatedRDNSRequest.md) |  | 
 
 ### Return type
 
@@ -224,7 +224,7 @@ Name | Type | Description  | Notes
 
 ## DedicatedServersReinstallCreate
 
-> ReinstallResponse DedicatedServersReinstallCreate(ctx, id).Reinstall(reinstall).Execute()
+> ReinstallResponse DedicatedServersReinstallCreate(ctx, id).ReinstallRequest(reinstallRequest).Execute()
 
 
 
@@ -244,11 +244,11 @@ import (
 
 func main() {
 	id := "id_example" // string | 
-	reinstall := *openapiclient.NewReinstall(int32(123)) // Reinstall | 
+	reinstallRequest := *openapiclient.NewReinstallRequest(int32(123)) // ReinstallRequest | 
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.DedicatedAPI.DedicatedServersReinstallCreate(context.Background(), id).Reinstall(reinstall).Execute()
+	resp, r, err := apiClient.DedicatedAPI.DedicatedServersReinstallCreate(context.Background(), id).ReinstallRequest(reinstallRequest).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `DedicatedAPI.DedicatedServersReinstallCreate``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -274,7 +274,7 @@ Other parameters are passed through a pointer to a apiDedicatedServersReinstallC
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
- **reinstall** | [**Reinstall**](Reinstall.md) |  | 
+ **reinstallRequest** | [**ReinstallRequest**](ReinstallRequest.md) |  | 
 
 ### Return type
 

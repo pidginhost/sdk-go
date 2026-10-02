@@ -27,7 +27,7 @@ Method | HTTP request | Description
 
 ## BillingDepositsCreate
 
-> Deposit BillingDepositsCreate(ctx).DepositCreate(depositCreate).Execute()
+> Deposit BillingDepositsCreate(ctx).DepositCreateRequest(depositCreateRequest).Execute()
 
 
 
@@ -46,11 +46,11 @@ import (
 )
 
 func main() {
-	depositCreate := *openapiclient.NewDepositCreate(int32(123)) // DepositCreate | 
+	depositCreateRequest := *openapiclient.NewDepositCreateRequest(int32(123)) // DepositCreateRequest | 
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.BillingAPI.BillingDepositsCreate(context.Background()).DepositCreate(depositCreate).Execute()
+	resp, r, err := apiClient.BillingAPI.BillingDepositsCreate(context.Background()).DepositCreateRequest(depositCreateRequest).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `BillingAPI.BillingDepositsCreate``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -71,7 +71,7 @@ Other parameters are passed through a pointer to a apiBillingDepositsCreateReque
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **depositCreate** | [**DepositCreate**](DepositCreate.md) |  | 
+ **depositCreateRequest** | [**DepositCreateRequest**](DepositCreateRequest.md) |  | 
 
 ### Return type
 
@@ -356,7 +356,7 @@ Name | Type | Description  | Notes
 
 ## BillingFundsNotificationSettingsCreate
 
-> NotificationSettingsResponse BillingFundsNotificationSettingsCreate(ctx).LowBalanceSettings(lowBalanceSettings).Execute()
+> NotificationSettingsResponse BillingFundsNotificationSettingsCreate(ctx).LowBalanceSettingsRequest(lowBalanceSettingsRequest).Execute()
 
 
 
@@ -375,11 +375,11 @@ import (
 )
 
 func main() {
-	lowBalanceSettings := *openapiclient.NewLowBalanceSettings(openapiclient.ThresholdTypeEnum("disabled")) // LowBalanceSettings | 
+	lowBalanceSettingsRequest := *openapiclient.NewLowBalanceSettingsRequest(openapiclient.ThresholdTypeEnum("disabled")) // LowBalanceSettingsRequest | 
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.BillingAPI.BillingFundsNotificationSettingsCreate(context.Background()).LowBalanceSettings(lowBalanceSettings).Execute()
+	resp, r, err := apiClient.BillingAPI.BillingFundsNotificationSettingsCreate(context.Background()).LowBalanceSettingsRequest(lowBalanceSettingsRequest).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `BillingAPI.BillingFundsNotificationSettingsCreate``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -400,7 +400,7 @@ Other parameters are passed through a pointer to a apiBillingFundsNotificationSe
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **lowBalanceSettings** | [**LowBalanceSettings**](LowBalanceSettings.md) |  | 
+ **lowBalanceSettingsRequest** | [**LowBalanceSettingsRequest**](LowBalanceSettingsRequest.md) |  | 
 
 ### Return type
 
@@ -768,7 +768,7 @@ Name | Type | Description  | Notes
 
 ## BillingServicesChangeBillingCycleCreate
 
-> ChangeBillingCycleResponse BillingServicesChangeBillingCycleCreate(ctx, id).ChangeBillingCycle(changeBillingCycle).Execute()
+> ChangeBillingCycleResponse BillingServicesChangeBillingCycleCreate(ctx, id).ChangeBillingCycleRequest(changeBillingCycleRequest).Execute()
 
 
 
@@ -788,11 +788,11 @@ import (
 
 func main() {
 	id := "id_example" // string | 
-	changeBillingCycle := *openapiclient.NewChangeBillingCycle(int32(123)) // ChangeBillingCycle | 
+	changeBillingCycleRequest := *openapiclient.NewChangeBillingCycleRequest(int32(123)) // ChangeBillingCycleRequest | 
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.BillingAPI.BillingServicesChangeBillingCycleCreate(context.Background(), id).ChangeBillingCycle(changeBillingCycle).Execute()
+	resp, r, err := apiClient.BillingAPI.BillingServicesChangeBillingCycleCreate(context.Background(), id).ChangeBillingCycleRequest(changeBillingCycleRequest).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `BillingAPI.BillingServicesChangeBillingCycleCreate``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -818,7 +818,7 @@ Other parameters are passed through a pointer to a apiBillingServicesChangeBilli
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
- **changeBillingCycle** | [**ChangeBillingCycle**](ChangeBillingCycle.md) |  | 
+ **changeBillingCycleRequest** | [**ChangeBillingCycleRequest**](ChangeBillingCycleRequest.md) |  | 
 
 ### Return type
 
@@ -840,7 +840,7 @@ Name | Type | Description  | Notes
 
 ## BillingServicesChangeCompanyCreate
 
-> ChangeCompanyResponse BillingServicesChangeCompanyCreate(ctx, id).ChangeCompany(changeCompany).Execute()
+> ChangeCompanyResponse BillingServicesChangeCompanyCreate(ctx, id).ChangeCompanyRequest(changeCompanyRequest).Execute()
 
 
 
@@ -860,11 +860,11 @@ import (
 
 func main() {
 	id := "id_example" // string | 
-	changeCompany := *openapiclient.NewChangeCompany() // ChangeCompany |  (optional)
+	changeCompanyRequest := *openapiclient.NewChangeCompanyRequest() // ChangeCompanyRequest |  (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.BillingAPI.BillingServicesChangeCompanyCreate(context.Background(), id).ChangeCompany(changeCompany).Execute()
+	resp, r, err := apiClient.BillingAPI.BillingServicesChangeCompanyCreate(context.Background(), id).ChangeCompanyRequest(changeCompanyRequest).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `BillingAPI.BillingServicesChangeCompanyCreate``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -890,7 +890,7 @@ Other parameters are passed through a pointer to a apiBillingServicesChangeCompa
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
- **changeCompany** | [**ChangeCompany**](ChangeCompany.md) |  | 
+ **changeCompanyRequest** | [**ChangeCompanyRequest**](ChangeCompanyRequest.md) |  | 
 
 ### Return type
 

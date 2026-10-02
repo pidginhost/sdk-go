@@ -30,9 +30,9 @@ type DedicatedServer struct {
 	NextInvoice string `json:"next_invoice"`
 	Created string `json:"created"`
 	BillingCycle string `json:"billing_cycle"`
-	ServerStatus string `json:"server_status"`
-	Ips string `json:"ips"`
-	OsName string `json:"os_name"`
+	ServerStatus NullableDedicatedServerStatus `json:"server_status"`
+	Ips []DedicatedServerIP `json:"ips"`
+	OsName NullableString `json:"os_name"`
 }
 
 type _DedicatedServer DedicatedServer
@@ -41,7 +41,7 @@ type _DedicatedServer DedicatedServer
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewDedicatedServer(id int32, hostname string, status ServiceStatusEnum, price string, nextInvoice string, created string, billingCycle string, serverStatus string, ips string, osName string) *DedicatedServer {
+func NewDedicatedServer(id int32, hostname string, status ServiceStatusEnum, price string, nextInvoice string, created string, billingCycle string, serverStatus NullableDedicatedServerStatus, ips []DedicatedServerIP, osName NullableString) *DedicatedServer {
 	this := DedicatedServer{}
 	this.Id = id
 	this.Hostname = hostname
@@ -233,33 +233,35 @@ func (o *DedicatedServer) SetBillingCycle(v string) {
 }
 
 // GetServerStatus returns the ServerStatus field value
-func (o *DedicatedServer) GetServerStatus() string {
-	if o == nil {
-		var ret string
+// If the value is explicit nil, the zero value for DedicatedServerStatus will be returned
+func (o *DedicatedServer) GetServerStatus() DedicatedServerStatus {
+	if o == nil || o.ServerStatus.Get() == nil {
+		var ret DedicatedServerStatus
 		return ret
 	}
 
-	return o.ServerStatus
+	return *o.ServerStatus.Get()
 }
 
 // GetServerStatusOk returns a tuple with the ServerStatus field value
 // and a boolean to check if the value has been set.
-func (o *DedicatedServer) GetServerStatusOk() (*string, bool) {
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *DedicatedServer) GetServerStatusOk() (*DedicatedServerStatus, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return &o.ServerStatus, true
+	return o.ServerStatus.Get(), o.ServerStatus.IsSet()
 }
 
 // SetServerStatus sets field value
-func (o *DedicatedServer) SetServerStatus(v string) {
-	o.ServerStatus = v
+func (o *DedicatedServer) SetServerStatus(v DedicatedServerStatus) {
+	o.ServerStatus.Set(&v)
 }
 
 // GetIps returns the Ips field value
-func (o *DedicatedServer) GetIps() string {
+func (o *DedicatedServer) GetIps() []DedicatedServerIP {
 	if o == nil {
-		var ret string
+		var ret []DedicatedServerIP
 		return ret
 	}
 
@@ -268,40 +270,42 @@ func (o *DedicatedServer) GetIps() string {
 
 // GetIpsOk returns a tuple with the Ips field value
 // and a boolean to check if the value has been set.
-func (o *DedicatedServer) GetIpsOk() (*string, bool) {
+func (o *DedicatedServer) GetIpsOk() ([]DedicatedServerIP, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return &o.Ips, true
+	return o.Ips, true
 }
 
 // SetIps sets field value
-func (o *DedicatedServer) SetIps(v string) {
+func (o *DedicatedServer) SetIps(v []DedicatedServerIP) {
 	o.Ips = v
 }
 
 // GetOsName returns the OsName field value
+// If the value is explicit nil, the zero value for string will be returned
 func (o *DedicatedServer) GetOsName() string {
-	if o == nil {
+	if o == nil || o.OsName.Get() == nil {
 		var ret string
 		return ret
 	}
 
-	return o.OsName
+	return *o.OsName.Get()
 }
 
 // GetOsNameOk returns a tuple with the OsName field value
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *DedicatedServer) GetOsNameOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return &o.OsName, true
+	return o.OsName.Get(), o.OsName.IsSet()
 }
 
 // SetOsName sets field value
 func (o *DedicatedServer) SetOsName(v string) {
-	o.OsName = v
+	o.OsName.Set(&v)
 }
 
 func (o DedicatedServer) MarshalJSON() ([]byte, error) {
@@ -321,9 +325,9 @@ func (o DedicatedServer) ToMap() (map[string]interface{}, error) {
 	toSerialize["next_invoice"] = o.NextInvoice
 	toSerialize["created"] = o.Created
 	toSerialize["billing_cycle"] = o.BillingCycle
-	toSerialize["server_status"] = o.ServerStatus
+	toSerialize["server_status"] = o.ServerStatus.Get()
 	toSerialize["ips"] = o.Ips
-	toSerialize["os_name"] = o.OsName
+	toSerialize["os_name"] = o.OsName.Get()
 	return toSerialize, nil
 }
 

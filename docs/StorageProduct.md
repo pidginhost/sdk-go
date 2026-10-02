@@ -10,14 +10,14 @@ Name | Type | Description | Notes
 **Type** | **string** |  | [readonly] 
 **Unit** | **string** |  | [readonly] 
 **Price** | **string** | price per quantity units per month (if applicable) | 
-**MinSize** | **string** |  | [readonly] 
-**MaxSize** | **string** |  | [readonly] 
+**MinSize** | **int32** |  | [readonly] 
+**MaxSize** | **int32** |  | [readonly] 
 
 ## Methods
 
 ### NewStorageProduct
 
-`func NewStorageProduct(id int32, slug string, name string, type_ string, unit string, price string, minSize string, maxSize string, ) *StorageProduct`
+`func NewStorageProduct(id int32, slug string, name string, type_ string, unit string, price string, minSize int32, maxSize int32, ) *StorageProduct`
 
 NewStorageProduct instantiates a new StorageProduct object
 This constructor will assign default values to properties that have it defined,
@@ -154,40 +154,40 @@ SetPrice sets Price field to given value.
 
 ### GetMinSize
 
-`func (o *StorageProduct) GetMinSize() string`
+`func (o *StorageProduct) GetMinSize() int32`
 
 GetMinSize returns the MinSize field if non-nil, zero value otherwise.
 
 ### GetMinSizeOk
 
-`func (o *StorageProduct) GetMinSizeOk() (*string, bool)`
+`func (o *StorageProduct) GetMinSizeOk() (*int32, bool)`
 
 GetMinSizeOk returns a tuple with the MinSize field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetMinSize
 
-`func (o *StorageProduct) SetMinSize(v string)`
+`func (o *StorageProduct) SetMinSize(v int32)`
 
 SetMinSize sets MinSize field to given value.
 
 
 ### GetMaxSize
 
-`func (o *StorageProduct) GetMaxSize() string`
+`func (o *StorageProduct) GetMaxSize() int32`
 
 GetMaxSize returns the MaxSize field if non-nil, zero value otherwise.
 
 ### GetMaxSizeOk
 
-`func (o *StorageProduct) GetMaxSizeOk() (*string, bool)`
+`func (o *StorageProduct) GetMaxSizeOk() (*int32, bool)`
 
 GetMaxSizeOk returns a tuple with the MaxSize field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetMaxSize
 
-`func (o *StorageProduct) SetMaxSize(v string)`
+`func (o *StorageProduct) SetMaxSize(v int32)`
 
 SetMaxSize sets MaxSize field to given value.
 

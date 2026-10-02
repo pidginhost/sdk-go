@@ -7,7 +7,7 @@ Name | Type | Description | Notes
 **Id** | **int32** |  | [readonly] 
 **Alias** | Pointer to **string** |  | [optional] 
 **Fingerprint** | **string** |  | [readonly] 
-**Key** | **string** |  | [readonly] 
+**Key** | **string** |  | 
 
 ## Methods
 

@@ -27,11 +27,11 @@ type AccountAPIService service
 type ApiAccountApiTokensCreateRequest struct {
 	ctx context.Context
 	ApiService *AccountAPIService
-	aPITokenCreate *APITokenCreate
+	aPITokenCreateRequest *APITokenCreateRequest
 }
 
-func (r ApiAccountApiTokensCreateRequest) APITokenCreate(aPITokenCreate APITokenCreate) ApiAccountApiTokensCreateRequest {
-	r.aPITokenCreate = &aPITokenCreate
+func (r ApiAccountApiTokensCreateRequest) APITokenCreateRequest(aPITokenCreateRequest APITokenCreateRequest) ApiAccountApiTokensCreateRequest {
+	r.aPITokenCreateRequest = &aPITokenCreateRequest
 	return r
 }
 
@@ -74,8 +74,8 @@ func (a *AccountAPIService) AccountApiTokensCreateExecute(r ApiAccountApiTokensC
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.aPITokenCreate == nil {
-		return localVarReturnValue, nil, reportError("aPITokenCreate is required and must be specified")
+	if r.aPITokenCreateRequest == nil {
+		return localVarReturnValue, nil, reportError("aPITokenCreateRequest is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -96,7 +96,7 @@ func (a *AccountAPIService) AccountApiTokensCreateExecute(r ApiAccountApiTokensC
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.aPITokenCreate
+	localVarPostBody = r.aPITokenCreateRequest
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
@@ -380,11 +380,11 @@ func (a *AccountAPIService) AccountApiTokensListExecute(r ApiAccountApiTokensLis
 type ApiAccountCompaniesCreateRequest struct {
 	ctx context.Context
 	ApiService *AccountAPIService
-	company *Company
+	companyRequest *CompanyRequest
 }
 
-func (r ApiAccountCompaniesCreateRequest) Company(company Company) ApiAccountCompaniesCreateRequest {
-	r.company = &company
+func (r ApiAccountCompaniesCreateRequest) CompanyRequest(companyRequest CompanyRequest) ApiAccountCompaniesCreateRequest {
+	r.companyRequest = &companyRequest
 	return r
 }
 
@@ -427,8 +427,8 @@ func (a *AccountAPIService) AccountCompaniesCreateExecute(r ApiAccountCompaniesC
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.company == nil {
-		return localVarReturnValue, nil, reportError("company is required and must be specified")
+	if r.companyRequest == nil {
+		return localVarReturnValue, nil, reportError("companyRequest is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -449,7 +449,7 @@ func (a *AccountAPIService) AccountCompaniesCreateExecute(r ApiAccountCompaniesC
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.company
+	localVarPostBody = r.companyRequest
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
@@ -734,11 +734,11 @@ type ApiAccountCompaniesPartialUpdateRequest struct {
 	ctx context.Context
 	ApiService *AccountAPIService
 	id int32
-	patchedCompany *PatchedCompany
+	patchedCompanyRequest *PatchedCompanyRequest
 }
 
-func (r ApiAccountCompaniesPartialUpdateRequest) PatchedCompany(patchedCompany PatchedCompany) ApiAccountCompaniesPartialUpdateRequest {
-	r.patchedCompany = &patchedCompany
+func (r ApiAccountCompaniesPartialUpdateRequest) PatchedCompanyRequest(patchedCompanyRequest PatchedCompanyRequest) ApiAccountCompaniesPartialUpdateRequest {
+	r.patchedCompanyRequest = &patchedCompanyRequest
 	return r
 }
 
@@ -803,7 +803,7 @@ func (a *AccountAPIService) AccountCompaniesPartialUpdateExecute(r ApiAccountCom
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.patchedCompany
+	localVarPostBody = r.patchedCompanyRequest
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
@@ -976,11 +976,11 @@ type ApiAccountCompaniesUpdateRequest struct {
 	ctx context.Context
 	ApiService *AccountAPIService
 	id int32
-	company *Company
+	companyRequest *CompanyRequest
 }
 
-func (r ApiAccountCompaniesUpdateRequest) Company(company Company) ApiAccountCompaniesUpdateRequest {
-	r.company = &company
+func (r ApiAccountCompaniesUpdateRequest) CompanyRequest(companyRequest CompanyRequest) ApiAccountCompaniesUpdateRequest {
+	r.companyRequest = &companyRequest
 	return r
 }
 
@@ -1026,8 +1026,8 @@ func (a *AccountAPIService) AccountCompaniesUpdateExecute(r ApiAccountCompaniesU
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.company == nil {
-		return localVarReturnValue, nil, reportError("company is required and must be specified")
+	if r.companyRequest == nil {
+		return localVarReturnValue, nil, reportError("companyRequest is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -1048,7 +1048,7 @@ func (a *AccountAPIService) AccountCompaniesUpdateExecute(r ApiAccountCompaniesU
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.company
+	localVarPostBody = r.companyRequest
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
@@ -1226,11 +1226,11 @@ func (a *AccountAPIService) AccountEmailsListExecute(r ApiAccountEmailsListReque
 type ApiAccountProfilePartialUpdateRequest struct {
 	ctx context.Context
 	ApiService *AccountAPIService
-	patchedProfile *PatchedProfile
+	patchedProfileRequest *PatchedProfileRequest
 }
 
-func (r ApiAccountProfilePartialUpdateRequest) PatchedProfile(patchedProfile PatchedProfile) ApiAccountProfilePartialUpdateRequest {
-	r.patchedProfile = &patchedProfile
+func (r ApiAccountProfilePartialUpdateRequest) PatchedProfileRequest(patchedProfileRequest PatchedProfileRequest) ApiAccountProfilePartialUpdateRequest {
+	r.patchedProfileRequest = &patchedProfileRequest
 	return r
 }
 
@@ -1292,7 +1292,7 @@ func (a *AccountAPIService) AccountProfilePartialUpdateExecute(r ApiAccountProfi
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.patchedProfile
+	localVarPostBody = r.patchedProfileRequest
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
@@ -1460,11 +1460,11 @@ func (a *AccountAPIService) AccountProfileRetrieveExecute(r ApiAccountProfileRet
 type ApiAccountProfileUpdateRequest struct {
 	ctx context.Context
 	ApiService *AccountAPIService
-	profile *Profile
+	profileRequest *ProfileRequest
 }
 
-func (r ApiAccountProfileUpdateRequest) Profile(profile Profile) ApiAccountProfileUpdateRequest {
-	r.profile = &profile
+func (r ApiAccountProfileUpdateRequest) ProfileRequest(profileRequest ProfileRequest) ApiAccountProfileUpdateRequest {
+	r.profileRequest = &profileRequest
 	return r
 }
 
@@ -1507,8 +1507,8 @@ func (a *AccountAPIService) AccountProfileUpdateExecute(r ApiAccountProfileUpdat
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.profile == nil {
-		return localVarReturnValue, nil, reportError("profile is required and must be specified")
+	if r.profileRequest == nil {
+		return localVarReturnValue, nil, reportError("profileRequest is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -1529,7 +1529,7 @@ func (a *AccountAPIService) AccountProfileUpdateExecute(r ApiAccountProfileUpdat
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.profile
+	localVarPostBody = r.profileRequest
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
@@ -1584,11 +1584,11 @@ func (a *AccountAPIService) AccountProfileUpdateExecute(r ApiAccountProfileUpdat
 type ApiAccountSshKeysCreateRequest struct {
 	ctx context.Context
 	ApiService *AccountAPIService
-	sSHKey *SSHKey
+	sSHKeyRequest *SSHKeyRequest
 }
 
-func (r ApiAccountSshKeysCreateRequest) SSHKey(sSHKey SSHKey) ApiAccountSshKeysCreateRequest {
-	r.sSHKey = &sSHKey
+func (r ApiAccountSshKeysCreateRequest) SSHKeyRequest(sSHKeyRequest SSHKeyRequest) ApiAccountSshKeysCreateRequest {
+	r.sSHKeyRequest = &sSHKeyRequest
 	return r
 }
 
@@ -1633,6 +1633,9 @@ func (a *AccountAPIService) AccountSshKeysCreateExecute(r ApiAccountSshKeysCreat
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
+	if r.sSHKeyRequest == nil {
+		return localVarReturnValue, nil, reportError("sSHKeyRequest is required and must be specified")
+	}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{"application/json"}
@@ -1652,7 +1655,7 @@ func (a *AccountAPIService) AccountSshKeysCreateExecute(r ApiAccountSshKeysCreat
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.sSHKey
+	localVarPostBody = r.sSHKeyRequest
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
@@ -1941,11 +1944,11 @@ type ApiAccountSshKeysPartialUpdateRequest struct {
 	ctx context.Context
 	ApiService *AccountAPIService
 	id string
-	patchedSSHKey *PatchedSSHKey
+	patchedSSHKeyUpdateRequest *PatchedSSHKeyUpdateRequest
 }
 
-func (r ApiAccountSshKeysPartialUpdateRequest) PatchedSSHKey(patchedSSHKey PatchedSSHKey) ApiAccountSshKeysPartialUpdateRequest {
-	r.patchedSSHKey = &patchedSSHKey
+func (r ApiAccountSshKeysPartialUpdateRequest) PatchedSSHKeyUpdateRequest(patchedSSHKeyUpdateRequest PatchedSSHKeyUpdateRequest) ApiAccountSshKeysPartialUpdateRequest {
+	r.patchedSSHKeyUpdateRequest = &patchedSSHKeyUpdateRequest
 	return r
 }
 
@@ -2012,7 +2015,7 @@ func (a *AccountAPIService) AccountSshKeysPartialUpdateExecute(r ApiAccountSshKe
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.patchedSSHKey
+	localVarPostBody = r.patchedSSHKeyUpdateRequest
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
@@ -2187,11 +2190,11 @@ type ApiAccountSshKeysUpdateRequest struct {
 	ctx context.Context
 	ApiService *AccountAPIService
 	id string
-	sSHKey *SSHKey
+	sSHKeyUpdateRequest *SSHKeyUpdateRequest
 }
 
-func (r ApiAccountSshKeysUpdateRequest) SSHKey(sSHKey SSHKey) ApiAccountSshKeysUpdateRequest {
-	r.sSHKey = &sSHKey
+func (r ApiAccountSshKeysUpdateRequest) SSHKeyUpdateRequest(sSHKeyUpdateRequest SSHKeyUpdateRequest) ApiAccountSshKeysUpdateRequest {
+	r.sSHKeyUpdateRequest = &sSHKeyUpdateRequest
 	return r
 }
 
@@ -2258,7 +2261,7 @@ func (a *AccountAPIService) AccountSshKeysUpdateExecute(r ApiAccountSshKeysUpdat
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.sSHKey
+	localVarPostBody = r.sSHKeyUpdateRequest
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {

@@ -15,9 +15,8 @@ Name | Type | Description | Notes
 **Generation** | **string** |  | [readonly] 
 **Machine** | **map[string]interface{}** |  | [readonly] 
 **Volumes** | [**[]Volume**](Volume.md) |  | [readonly] 
-**Networks** | **map[string]interface{}** |  | [readonly] 
+**Networks** | [**ServerNetworks**](ServerNetworks.md) |  | [readonly] 
 **FloatingIps** | [**[]FloatingIPSummary**](FloatingIPSummary.md) |  | [readonly] 
-**Password** | Pointer to **string** |  | [optional] 
 **SshPubKey** | Pointer to **string** | Public key to apply for SSH login. Applying a non-empty key regenerates cloud-init and reboots a running server. Clearing removes the key from future cloud-init data, but does not revoke keys already in the guest. | [optional] 
 **Status** | [**ResourceStatusEnum**](ResourceStatusEnum.md) |  | [readonly] 
 **Username** | **string** |  | [readonly] 
@@ -32,7 +31,7 @@ Name | Type | Description | Notes
 
 ### NewServerDetail
 
-`func NewServerDetail(id int32, hostname string, image string, package_ string, cpus int32, memory int32, diskSize int32, generation string, machine map[string]interface{}, volumes []Volume, networks map[string]interface{}, floatingIps []FloatingIPSummary, status ResourceStatusEnum, username string, destroyProtection bool, haEnabled bool, customOs bool, rescueMode bool, bootIso NullableString, rescueSupported bool, ) *ServerDetail`
+`func NewServerDetail(id int32, hostname string, image string, package_ string, cpus int32, memory int32, diskSize int32, generation string, machine map[string]interface{}, volumes []Volume, networks ServerNetworks, floatingIps []FloatingIPSummary, status ResourceStatusEnum, username string, destroyProtection bool, haEnabled bool, customOs bool, rescueMode bool, bootIso NullableString, rescueSupported bool, ) *ServerDetail`
 
 NewServerDetail instantiates a new ServerDetail object
 This constructor will assign default values to properties that have it defined,
@@ -274,20 +273,20 @@ SetVolumes sets Volumes field to given value.
 
 ### GetNetworks
 
-`func (o *ServerDetail) GetNetworks() map[string]interface{}`
+`func (o *ServerDetail) GetNetworks() ServerNetworks`
 
 GetNetworks returns the Networks field if non-nil, zero value otherwise.
 
 ### GetNetworksOk
 
-`func (o *ServerDetail) GetNetworksOk() (*map[string]interface{}, bool)`
+`func (o *ServerDetail) GetNetworksOk() (*ServerNetworks, bool)`
 
 GetNetworksOk returns a tuple with the Networks field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetNetworks
 
-`func (o *ServerDetail) SetNetworks(v map[string]interface{})`
+`func (o *ServerDetail) SetNetworks(v ServerNetworks)`
 
 SetNetworks sets Networks field to given value.
 
@@ -311,31 +310,6 @@ and a boolean to check if the value has been set.
 
 SetFloatingIps sets FloatingIps field to given value.
 
-
-### GetPassword
-
-`func (o *ServerDetail) GetPassword() string`
-
-GetPassword returns the Password field if non-nil, zero value otherwise.
-
-### GetPasswordOk
-
-`func (o *ServerDetail) GetPasswordOk() (*string, bool)`
-
-GetPasswordOk returns a tuple with the Password field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetPassword
-
-`func (o *ServerDetail) SetPassword(v string)`
-
-SetPassword sets Password field to given value.
-
-### HasPassword
-
-`func (o *ServerDetail) HasPassword() bool`
-
-HasPassword returns a boolean if a field has been set.
 
 ### GetSshPubKey
 

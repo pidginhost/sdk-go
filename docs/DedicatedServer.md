@@ -11,15 +11,15 @@ Name | Type | Description | Notes
 **NextInvoice** | **string** |  | [readonly] 
 **Created** | **string** |  | [readonly] 
 **BillingCycle** | **string** |  | [readonly] 
-**ServerStatus** | **string** |  | [readonly] 
-**Ips** | **string** |  | [readonly] 
-**OsName** | **string** |  | [readonly] 
+**ServerStatus** | [**NullableDedicatedServerStatus**](DedicatedServerStatus.md) |  | [readonly] 
+**Ips** | [**[]DedicatedServerIP**](DedicatedServerIP.md) |  | [readonly] 
+**OsName** | **NullableString** |  | [readonly] 
 
 ## Methods
 
 ### NewDedicatedServer
 
-`func NewDedicatedServer(id int32, hostname string, status ServiceStatusEnum, price string, nextInvoice string, created string, billingCycle string, serverStatus string, ips string, osName string, ) *DedicatedServer`
+`func NewDedicatedServer(id int32, hostname string, status ServiceStatusEnum, price string, nextInvoice string, created string, billingCycle string, serverStatus NullableDedicatedServerStatus, ips []DedicatedServerIP, osName NullableString, ) *DedicatedServer`
 
 NewDedicatedServer instantiates a new DedicatedServer object
 This constructor will assign default values to properties that have it defined,
@@ -176,40 +176,50 @@ SetBillingCycle sets BillingCycle field to given value.
 
 ### GetServerStatus
 
-`func (o *DedicatedServer) GetServerStatus() string`
+`func (o *DedicatedServer) GetServerStatus() DedicatedServerStatus`
 
 GetServerStatus returns the ServerStatus field if non-nil, zero value otherwise.
 
 ### GetServerStatusOk
 
-`func (o *DedicatedServer) GetServerStatusOk() (*string, bool)`
+`func (o *DedicatedServer) GetServerStatusOk() (*DedicatedServerStatus, bool)`
 
 GetServerStatusOk returns a tuple with the ServerStatus field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetServerStatus
 
-`func (o *DedicatedServer) SetServerStatus(v string)`
+`func (o *DedicatedServer) SetServerStatus(v DedicatedServerStatus)`
 
 SetServerStatus sets ServerStatus field to given value.
 
 
+### SetServerStatusNil
+
+`func (o *DedicatedServer) SetServerStatusNil(b bool)`
+
+ SetServerStatusNil sets the value for ServerStatus to be an explicit nil
+
+### UnsetServerStatus
+`func (o *DedicatedServer) UnsetServerStatus()`
+
+UnsetServerStatus ensures that no value is present for ServerStatus, not even an explicit nil
 ### GetIps
 
-`func (o *DedicatedServer) GetIps() string`
+`func (o *DedicatedServer) GetIps() []DedicatedServerIP`
 
 GetIps returns the Ips field if non-nil, zero value otherwise.
 
 ### GetIpsOk
 
-`func (o *DedicatedServer) GetIpsOk() (*string, bool)`
+`func (o *DedicatedServer) GetIpsOk() (*[]DedicatedServerIP, bool)`
 
 GetIpsOk returns a tuple with the Ips field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetIps
 
-`func (o *DedicatedServer) SetIps(v string)`
+`func (o *DedicatedServer) SetIps(v []DedicatedServerIP)`
 
 SetIps sets Ips field to given value.
 
@@ -234,6 +244,16 @@ and a boolean to check if the value has been set.
 SetOsName sets OsName field to given value.
 
 
+### SetOsNameNil
+
+`func (o *DedicatedServer) SetOsNameNil(b bool)`
+
+ SetOsNameNil sets the value for OsName to be an explicit nil
+
+### UnsetOsName
+`func (o *DedicatedServer) UnsetOsName()`
+
+UnsetOsName ensures that no value is present for OsName, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

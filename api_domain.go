@@ -144,11 +144,11 @@ func (a *DomainAPIService) DomainDomainCancelCreateExecute(r ApiDomainDomainCanc
 type ApiDomainDomainCheckAvailabilityCreateRequest struct {
 	ctx context.Context
 	ApiService *DomainAPIService
-	checkAvailability *CheckAvailability
+	checkAvailabilityRequest *CheckAvailabilityRequest
 }
 
-func (r ApiDomainDomainCheckAvailabilityCreateRequest) CheckAvailability(checkAvailability CheckAvailability) ApiDomainDomainCheckAvailabilityCreateRequest {
-	r.checkAvailability = &checkAvailability
+func (r ApiDomainDomainCheckAvailabilityCreateRequest) CheckAvailabilityRequest(checkAvailabilityRequest CheckAvailabilityRequest) ApiDomainDomainCheckAvailabilityCreateRequest {
+	r.checkAvailabilityRequest = &checkAvailabilityRequest
 	return r
 }
 
@@ -191,8 +191,8 @@ func (a *DomainAPIService) DomainDomainCheckAvailabilityCreateExecute(r ApiDomai
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.checkAvailability == nil {
-		return localVarReturnValue, nil, reportError("checkAvailability is required and must be specified")
+	if r.checkAvailabilityRequest == nil {
+		return localVarReturnValue, nil, reportError("checkAvailabilityRequest is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -213,7 +213,7 @@ func (a *DomainAPIService) DomainDomainCheckAvailabilityCreateExecute(r ApiDomai
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.checkAvailability
+	localVarPostBody = r.checkAvailabilityRequest
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
@@ -269,11 +269,11 @@ type ApiDomainDomainContactsCreateRequest struct {
 	ctx context.Context
 	ApiService *DomainAPIService
 	domain string
-	contactsUpdate *ContactsUpdate
+	contactsUpdateRequest *ContactsUpdateRequest
 }
 
-func (r ApiDomainDomainContactsCreateRequest) ContactsUpdate(contactsUpdate ContactsUpdate) ApiDomainDomainContactsCreateRequest {
-	r.contactsUpdate = &contactsUpdate
+func (r ApiDomainDomainContactsCreateRequest) ContactsUpdateRequest(contactsUpdateRequest ContactsUpdateRequest) ApiDomainDomainContactsCreateRequest {
+	r.contactsUpdateRequest = &contactsUpdateRequest
 	return r
 }
 
@@ -319,8 +319,8 @@ func (a *DomainAPIService) DomainDomainContactsCreateExecute(r ApiDomainDomainCo
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.contactsUpdate == nil {
-		return localVarReturnValue, nil, reportError("contactsUpdate is required and must be specified")
+	if r.contactsUpdateRequest == nil {
+		return localVarReturnValue, nil, reportError("contactsUpdateRequest is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -341,7 +341,7 @@ func (a *DomainAPIService) DomainDomainContactsCreateExecute(r ApiDomainDomainCo
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.contactsUpdate
+	localVarPostBody = r.contactsUpdateRequest
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
@@ -396,11 +396,11 @@ func (a *DomainAPIService) DomainDomainContactsCreateExecute(r ApiDomainDomainCo
 type ApiDomainDomainCreateRequest struct {
 	ctx context.Context
 	ApiService *DomainAPIService
-	domainCreate *DomainCreate
+	domainCreateRequest *DomainCreateRequest
 }
 
-func (r ApiDomainDomainCreateRequest) DomainCreate(domainCreate DomainCreate) ApiDomainDomainCreateRequest {
-	r.domainCreate = &domainCreate
+func (r ApiDomainDomainCreateRequest) DomainCreateRequest(domainCreateRequest DomainCreateRequest) ApiDomainDomainCreateRequest {
+	r.domainCreateRequest = &domainCreateRequest
 	return r
 }
 
@@ -443,8 +443,8 @@ func (a *DomainAPIService) DomainDomainCreateExecute(r ApiDomainDomainCreateRequ
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.domainCreate == nil {
-		return localVarReturnValue, nil, reportError("domainCreate is required and must be specified")
+	if r.domainCreateRequest == nil {
+		return localVarReturnValue, nil, reportError("domainCreateRequest is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -465,7 +465,7 @@ func (a *DomainAPIService) DomainDomainCreateExecute(r ApiDomainDomainCreateRequ
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.domainCreate
+	localVarPostBody = r.domainCreateRequest
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
@@ -521,11 +521,11 @@ type ApiDomainDomainDnsCreateRequest struct {
 	ctx context.Context
 	ApiService *DomainAPIService
 	domain string
-	dNSGlue *DNSGlue
+	dNSGlueRequest *DNSGlueRequest
 }
 
-func (r ApiDomainDomainDnsCreateRequest) DNSGlue(dNSGlue DNSGlue) ApiDomainDomainDnsCreateRequest {
-	r.dNSGlue = &dNSGlue
+func (r ApiDomainDomainDnsCreateRequest) DNSGlueRequest(dNSGlueRequest DNSGlueRequest) ApiDomainDomainDnsCreateRequest {
+	r.dNSGlueRequest = &dNSGlueRequest
 	return r
 }
 
@@ -572,8 +572,8 @@ func (a *DomainAPIService) DomainDomainDnsCreateExecute(r ApiDomainDomainDnsCrea
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.dNSGlue == nil {
-		return localVarReturnValue, nil, reportError("dNSGlue is required and must be specified")
+	if r.dNSGlueRequest == nil {
+		return localVarReturnValue, nil, reportError("dNSGlueRequest is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -594,7 +594,7 @@ func (a *DomainAPIService) DomainDomainDnsCreateExecute(r ApiDomainDomainDnsCrea
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.dNSGlue
+	localVarPostBody = r.dNSGlueRequest
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
@@ -1012,11 +1012,11 @@ type ApiDomainDomainNameserversCreateRequest struct {
 	ctx context.Context
 	ApiService *DomainAPIService
 	domain string
-	nameserversUpdate *NameserversUpdate
+	nameserversUpdateRequest *NameserversUpdateRequest
 }
 
-func (r ApiDomainDomainNameserversCreateRequest) NameserversUpdate(nameserversUpdate NameserversUpdate) ApiDomainDomainNameserversCreateRequest {
-	r.nameserversUpdate = &nameserversUpdate
+func (r ApiDomainDomainNameserversCreateRequest) NameserversUpdateRequest(nameserversUpdateRequest NameserversUpdateRequest) ApiDomainDomainNameserversCreateRequest {
+	r.nameserversUpdateRequest = &nameserversUpdateRequest
 	return r
 }
 
@@ -1062,8 +1062,8 @@ func (a *DomainAPIService) DomainDomainNameserversCreateExecute(r ApiDomainDomai
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.nameserversUpdate == nil {
-		return localVarReturnValue, nil, reportError("nameserversUpdate is required and must be specified")
+	if r.nameserversUpdateRequest == nil {
+		return localVarReturnValue, nil, reportError("nameserversUpdateRequest is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -1084,7 +1084,7 @@ func (a *DomainAPIService) DomainDomainNameserversCreateExecute(r ApiDomainDomai
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.nameserversUpdate
+	localVarPostBody = r.nameserversUpdateRequest
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
@@ -1140,11 +1140,11 @@ type ApiDomainDomainPartialUpdateRequest struct {
 	ctx context.Context
 	ApiService *DomainAPIService
 	domain string
-	patchedDomain *PatchedDomain
+	patchedDomainRequest *PatchedDomainRequest
 }
 
-func (r ApiDomainDomainPartialUpdateRequest) PatchedDomain(patchedDomain PatchedDomain) ApiDomainDomainPartialUpdateRequest {
-	r.patchedDomain = &patchedDomain
+func (r ApiDomainDomainPartialUpdateRequest) PatchedDomainRequest(patchedDomainRequest PatchedDomainRequest) ApiDomainDomainPartialUpdateRequest {
+	r.patchedDomainRequest = &patchedDomainRequest
 	return r
 }
 
@@ -1209,7 +1209,7 @@ func (a *DomainAPIService) DomainDomainPartialUpdateExecute(r ApiDomainDomainPar
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.patchedDomain
+	localVarPostBody = r.patchedDomainRequest
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
@@ -1265,11 +1265,11 @@ type ApiDomainDomainRenewCreateRequest struct {
 	ctx context.Context
 	ApiService *DomainAPIService
 	domain string
-	renewDomain *RenewDomain
+	renewDomainRequest *RenewDomainRequest
 }
 
-func (r ApiDomainDomainRenewCreateRequest) RenewDomain(renewDomain RenewDomain) ApiDomainDomainRenewCreateRequest {
-	r.renewDomain = &renewDomain
+func (r ApiDomainDomainRenewCreateRequest) RenewDomainRequest(renewDomainRequest RenewDomainRequest) ApiDomainDomainRenewCreateRequest {
+	r.renewDomainRequest = &renewDomainRequest
 	return r
 }
 
@@ -1315,8 +1315,8 @@ func (a *DomainAPIService) DomainDomainRenewCreateExecute(r ApiDomainDomainRenew
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.renewDomain == nil {
-		return localVarReturnValue, nil, reportError("renewDomain is required and must be specified")
+	if r.renewDomainRequest == nil {
+		return localVarReturnValue, nil, reportError("renewDomainRequest is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -1337,7 +1337,7 @@ func (a *DomainAPIService) DomainDomainRenewCreateExecute(r ApiDomainDomainRenew
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.renewDomain
+	localVarPostBody = r.renewDomainRequest
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
@@ -1509,11 +1509,11 @@ func (a *DomainAPIService) DomainDomainRetrieveExecute(r ApiDomainDomainRetrieve
 type ApiDomainDomainTransferRoDomainCreateRequest struct {
 	ctx context.Context
 	ApiService *DomainAPIService
-	transferRoDomain *TransferRoDomain
+	transferRoDomainRequest *TransferRoDomainRequest
 }
 
-func (r ApiDomainDomainTransferRoDomainCreateRequest) TransferRoDomain(transferRoDomain TransferRoDomain) ApiDomainDomainTransferRoDomainCreateRequest {
-	r.transferRoDomain = &transferRoDomain
+func (r ApiDomainDomainTransferRoDomainCreateRequest) TransferRoDomainRequest(transferRoDomainRequest TransferRoDomainRequest) ApiDomainDomainTransferRoDomainCreateRequest {
+	r.transferRoDomainRequest = &transferRoDomainRequest
 	return r
 }
 
@@ -1556,8 +1556,8 @@ func (a *DomainAPIService) DomainDomainTransferRoDomainCreateExecute(r ApiDomain
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.transferRoDomain == nil {
-		return localVarReturnValue, nil, reportError("transferRoDomain is required and must be specified")
+	if r.transferRoDomainRequest == nil {
+		return localVarReturnValue, nil, reportError("transferRoDomainRequest is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -1578,7 +1578,7 @@ func (a *DomainAPIService) DomainDomainTransferRoDomainCreateExecute(r ApiDomain
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.transferRoDomain
+	localVarPostBody = r.transferRoDomainRequest
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
@@ -1634,11 +1634,11 @@ type ApiDomainDomainUpdateRequest struct {
 	ctx context.Context
 	ApiService *DomainAPIService
 	domain string
-	domain2 *Domain
+	domainRequest *DomainRequest
 }
 
-func (r ApiDomainDomainUpdateRequest) Domain2(domain2 Domain) ApiDomainDomainUpdateRequest {
-	r.domain2 = &domain2
+func (r ApiDomainDomainUpdateRequest) DomainRequest(domainRequest DomainRequest) ApiDomainDomainUpdateRequest {
+	r.domainRequest = &domainRequest
 	return r
 }
 
@@ -1703,7 +1703,7 @@ func (a *DomainAPIService) DomainDomainUpdateExecute(r ApiDomainDomainUpdateRequ
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.domain2
+	localVarPostBody = r.domainRequest
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
@@ -1758,11 +1758,11 @@ func (a *DomainAPIService) DomainDomainUpdateExecute(r ApiDomainDomainUpdateRequ
 type ApiDomainRegistrantsCreateRequest struct {
 	ctx context.Context
 	ApiService *DomainAPIService
-	domainRegistrant *DomainRegistrant
+	domainRegistrantRequest *DomainRegistrantRequest
 }
 
-func (r ApiDomainRegistrantsCreateRequest) DomainRegistrant(domainRegistrant DomainRegistrant) ApiDomainRegistrantsCreateRequest {
-	r.domainRegistrant = &domainRegistrant
+func (r ApiDomainRegistrantsCreateRequest) DomainRegistrantRequest(domainRegistrantRequest DomainRegistrantRequest) ApiDomainRegistrantsCreateRequest {
+	r.domainRegistrantRequest = &domainRegistrantRequest
 	return r
 }
 
@@ -1805,8 +1805,8 @@ func (a *DomainAPIService) DomainRegistrantsCreateExecute(r ApiDomainRegistrants
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.domainRegistrant == nil {
-		return localVarReturnValue, nil, reportError("domainRegistrant is required and must be specified")
+	if r.domainRegistrantRequest == nil {
+		return localVarReturnValue, nil, reportError("domainRegistrantRequest is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -1827,7 +1827,7 @@ func (a *DomainAPIService) DomainRegistrantsCreateExecute(r ApiDomainRegistrants
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.domainRegistrant
+	localVarPostBody = r.domainRegistrantRequest
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
@@ -2112,11 +2112,11 @@ type ApiDomainRegistrantsPartialUpdateRequest struct {
 	ctx context.Context
 	ApiService *DomainAPIService
 	id string
-	patchedDomainRegistrant *PatchedDomainRegistrant
+	patchedDomainRegistrantRequest *PatchedDomainRegistrantRequest
 }
 
-func (r ApiDomainRegistrantsPartialUpdateRequest) PatchedDomainRegistrant(patchedDomainRegistrant PatchedDomainRegistrant) ApiDomainRegistrantsPartialUpdateRequest {
-	r.patchedDomainRegistrant = &patchedDomainRegistrant
+func (r ApiDomainRegistrantsPartialUpdateRequest) PatchedDomainRegistrantRequest(patchedDomainRegistrantRequest PatchedDomainRegistrantRequest) ApiDomainRegistrantsPartialUpdateRequest {
+	r.patchedDomainRegistrantRequest = &patchedDomainRegistrantRequest
 	return r
 }
 
@@ -2181,7 +2181,7 @@ func (a *DomainAPIService) DomainRegistrantsPartialUpdateExecute(r ApiDomainRegi
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.patchedDomainRegistrant
+	localVarPostBody = r.patchedDomainRegistrantRequest
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
@@ -2354,11 +2354,11 @@ type ApiDomainRegistrantsUpdateRequest struct {
 	ctx context.Context
 	ApiService *DomainAPIService
 	id string
-	domainRegistrant *DomainRegistrant
+	domainRegistrantRequest *DomainRegistrantRequest
 }
 
-func (r ApiDomainRegistrantsUpdateRequest) DomainRegistrant(domainRegistrant DomainRegistrant) ApiDomainRegistrantsUpdateRequest {
-	r.domainRegistrant = &domainRegistrant
+func (r ApiDomainRegistrantsUpdateRequest) DomainRegistrantRequest(domainRegistrantRequest DomainRegistrantRequest) ApiDomainRegistrantsUpdateRequest {
+	r.domainRegistrantRequest = &domainRegistrantRequest
 	return r
 }
 
@@ -2404,8 +2404,8 @@ func (a *DomainAPIService) DomainRegistrantsUpdateExecute(r ApiDomainRegistrants
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.domainRegistrant == nil {
-		return localVarReturnValue, nil, reportError("domainRegistrant is required and must be specified")
+	if r.domainRegistrantRequest == nil {
+		return localVarReturnValue, nil, reportError("domainRegistrantRequest is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -2426,7 +2426,7 @@ func (a *DomainAPIService) DomainRegistrantsUpdateExecute(r ApiDomainRegistrants
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.domainRegistrant
+	localVarPostBody = r.domainRegistrantRequest
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {

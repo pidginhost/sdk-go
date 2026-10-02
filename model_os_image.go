@@ -26,7 +26,7 @@ type OSImage struct {
 	Slug string `json:"slug" validate:"regexp=^[-a-zA-Z0-9_]+$"`
 	// Display name for users
 	Name string `json:"name"`
-	FamilyName string `json:"family_name"`
+	FamilyName NullableString `json:"family_name"`
 	// Default version within this family (shown pre-selected)
 	IsDefault *bool `json:"is_default,omitempty"`
 	// Account the image provisions for SSH login.
@@ -39,7 +39,7 @@ type _OSImage OSImage
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewOSImage(id int32, slug string, name string, familyName string, defaultUsername string) *OSImage {
+func NewOSImage(id int32, slug string, name string, familyName NullableString, defaultUsername string) *OSImage {
 	this := OSImage{}
 	this.Id = id
 	this.Slug = slug
@@ -130,27 +130,29 @@ func (o *OSImage) SetName(v string) {
 }
 
 // GetFamilyName returns the FamilyName field value
+// If the value is explicit nil, the zero value for string will be returned
 func (o *OSImage) GetFamilyName() string {
-	if o == nil {
+	if o == nil || o.FamilyName.Get() == nil {
 		var ret string
 		return ret
 	}
 
-	return o.FamilyName
+	return *o.FamilyName.Get()
 }
 
 // GetFamilyNameOk returns a tuple with the FamilyName field value
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *OSImage) GetFamilyNameOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return &o.FamilyName, true
+	return o.FamilyName.Get(), o.FamilyName.IsSet()
 }
 
 // SetFamilyName sets field value
 func (o *OSImage) SetFamilyName(v string) {
-	o.FamilyName = v
+	o.FamilyName.Set(&v)
 }
 
 // GetIsDefault returns the IsDefault field value if set, zero value otherwise.
@@ -222,7 +224,7 @@ func (o OSImage) ToMap() (map[string]interface{}, error) {
 	toSerialize["id"] = o.Id
 	toSerialize["slug"] = o.Slug
 	toSerialize["name"] = o.Name
-	toSerialize["family_name"] = o.FamilyName
+	toSerialize["family_name"] = o.FamilyName.Get()
 	if !IsNil(o.IsDefault) {
 		toSerialize["is_default"] = o.IsDefault
 	}

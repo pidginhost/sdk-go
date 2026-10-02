@@ -11,14 +11,14 @@ Name | Type | Description | Notes
 **Created** | **string** |  | [readonly] 
 **LastUsed** | **NullableString** |  | [readonly] 
 **RequestCount** | **int32** |  | [readonly] 
-**Account** | **NullableString** |  | [readonly] 
-**MembershipStatus** | **NullableString** |  | [readonly] 
+**Account** | Pointer to **NullableString** |  | [optional] 
+**MembershipStatus** | Pointer to **NullableString** |  | [optional] 
 
 ## Methods
 
 ### NewAPITokenList
 
-`func NewAPITokenList(id int32, name string, scope ScopeEnum, keyPrefix string, created string, lastUsed NullableString, requestCount int32, account NullableString, membershipStatus NullableString, ) *APITokenList`
+`func NewAPITokenList(id int32, name string, scope ScopeEnum, keyPrefix string, created string, lastUsed NullableString, requestCount int32, ) *APITokenList`
 
 NewAPITokenList instantiates a new APITokenList object
 This constructor will assign default values to properties that have it defined,
@@ -202,6 +202,11 @@ and a boolean to check if the value has been set.
 
 SetAccount sets Account field to given value.
 
+### HasAccount
+
+`func (o *APITokenList) HasAccount() bool`
+
+HasAccount returns a boolean if a field has been set.
 
 ### SetAccountNil
 
@@ -232,6 +237,11 @@ and a boolean to check if the value has been set.
 
 SetMembershipStatus sets MembershipStatus field to given value.
 
+### HasMembershipStatus
+
+`func (o *APITokenList) HasMembershipStatus() bool`
+
+HasMembershipStatus returns a boolean if a field has been set.
 
 ### SetMembershipStatusNil
 

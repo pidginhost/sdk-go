@@ -402,11 +402,11 @@ func (a *KubernetesAPIService) KubernetesClustersConnectedVmsRetrieveExecute(r A
 type ApiKubernetesClustersCreateRequest struct {
 	ctx context.Context
 	ApiService *KubernetesAPIService
-	clusterAdd *ClusterAdd
+	clusterAddRequest *ClusterAddRequest
 }
 
-func (r ApiKubernetesClustersCreateRequest) ClusterAdd(clusterAdd ClusterAdd) ApiKubernetesClustersCreateRequest {
-	r.clusterAdd = &clusterAdd
+func (r ApiKubernetesClustersCreateRequest) ClusterAddRequest(clusterAddRequest ClusterAddRequest) ApiKubernetesClustersCreateRequest {
+	r.clusterAddRequest = &clusterAddRequest
 	return r
 }
 
@@ -449,8 +449,8 @@ func (a *KubernetesAPIService) KubernetesClustersCreateExecute(r ApiKubernetesCl
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clusterAdd == nil {
-		return localVarReturnValue, nil, reportError("clusterAdd is required and must be specified")
+	if r.clusterAddRequest == nil {
+		return localVarReturnValue, nil, reportError("clusterAddRequest is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -471,7 +471,7 @@ func (a *KubernetesAPIService) KubernetesClustersCreateExecute(r ApiKubernetesCl
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.clusterAdd
+	localVarPostBody = r.clusterAddRequest
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
@@ -881,15 +881,688 @@ func (a *KubernetesAPIService) KubernetesClustersEligibleVmsRetrieveExecute(r Ap
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
+type ApiKubernetesClustersEncryptionCreateRequest struct {
+	ctx context.Context
+	ApiService *KubernetesAPIService
+	id string
+	clusterEncryptionRequest *ClusterEncryptionRequest
+}
+
+func (r ApiKubernetesClustersEncryptionCreateRequest) ClusterEncryptionRequest(clusterEncryptionRequest ClusterEncryptionRequest) ApiKubernetesClustersEncryptionCreateRequest {
+	r.clusterEncryptionRequest = &clusterEncryptionRequest
+	return r
+}
+
+func (r ApiKubernetesClustersEncryptionCreateRequest) Execute() (*ClusterEncryptionOperation, *http.Response, error) {
+	return r.ApiService.KubernetesClustersEncryptionCreateExecute(r)
+}
+
+/*
+KubernetesClustersEncryptionCreate Method for KubernetesClustersEncryptionCreate
+
+Enable or disable WireGuard encryption for cluster traffic.
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param id
+ @return ApiKubernetesClustersEncryptionCreateRequest
+*/
+func (a *KubernetesAPIService) KubernetesClustersEncryptionCreate(ctx context.Context, id string) ApiKubernetesClustersEncryptionCreateRequest {
+	return ApiKubernetesClustersEncryptionCreateRequest{
+		ApiService: a,
+		ctx: ctx,
+		id: id,
+	}
+}
+
+// Execute executes the request
+//  @return ClusterEncryptionOperation
+func (a *KubernetesAPIService) KubernetesClustersEncryptionCreateExecute(r ApiKubernetesClustersEncryptionCreateRequest) (*ClusterEncryptionOperation, *http.Response, error) {
+	var (
+		localVarHTTPMethod   = http.MethodPost
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *ClusterEncryptionOperation
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "KubernetesAPIService.KubernetesClustersEncryptionCreate")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/api/kubernetes/clusters/{id}/encryption/"
+	localVarPath = strings.Replace(localVarPath, "{"+"id"+"}", url.PathEscape(parameterValueToString(r.id, "id")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+	if r.clusterEncryptionRequest == nil {
+		return localVarReturnValue, nil, reportError("clusterEncryptionRequest is required and must be specified")
+	}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{"application/json"}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	// body params
+	localVarPostBody = r.clusterEncryptionRequest
+	if r.ctx != nil {
+		// API Key Authentication
+		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
+			if apiKey, ok := auth["tokenAuth"]; ok {
+				var key string
+				if apiKey.Prefix != "" {
+					key = apiKey.Prefix + " " + apiKey.Key
+				} else {
+					key = apiKey.Key
+				}
+				localVarHeaderParams["Authorization"] = key
+			}
+		}
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v ClusterEncryptionError
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 403 {
+			var v ClusterEncryptionError
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 404 {
+			var v ClusterEncryptionError
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 409 {
+			var v ClusterEncryptionError
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiKubernetesClustersEncryptionRecheckCreateRequest struct {
+	ctx context.Context
+	ApiService *KubernetesAPIService
+	id string
+}
+
+func (r ApiKubernetesClustersEncryptionRecheckCreateRequest) Execute() (*ClusterEncryption, *http.Response, error) {
+	return r.ApiService.KubernetesClustersEncryptionRecheckCreateExecute(r)
+}
+
+/*
+KubernetesClustersEncryptionRecheckCreate Method for KubernetesClustersEncryptionRecheckCreate
+
+Re-count the workloads that still predate the encryption change.
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param id
+ @return ApiKubernetesClustersEncryptionRecheckCreateRequest
+*/
+func (a *KubernetesAPIService) KubernetesClustersEncryptionRecheckCreate(ctx context.Context, id string) ApiKubernetesClustersEncryptionRecheckCreateRequest {
+	return ApiKubernetesClustersEncryptionRecheckCreateRequest{
+		ApiService: a,
+		ctx: ctx,
+		id: id,
+	}
+}
+
+// Execute executes the request
+//  @return ClusterEncryption
+func (a *KubernetesAPIService) KubernetesClustersEncryptionRecheckCreateExecute(r ApiKubernetesClustersEncryptionRecheckCreateRequest) (*ClusterEncryption, *http.Response, error) {
+	var (
+		localVarHTTPMethod   = http.MethodPost
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *ClusterEncryption
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "KubernetesAPIService.KubernetesClustersEncryptionRecheckCreate")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/api/kubernetes/clusters/{id}/encryption/recheck/"
+	localVarPath = strings.Replace(localVarPath, "{"+"id"+"}", url.PathEscape(parameterValueToString(r.id, "id")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	if r.ctx != nil {
+		// API Key Authentication
+		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
+			if apiKey, ok := auth["tokenAuth"]; ok {
+				var key string
+				if apiKey.Prefix != "" {
+					key = apiKey.Prefix + " " + apiKey.Key
+				} else {
+					key = apiKey.Key
+				}
+				localVarHeaderParams["Authorization"] = key
+			}
+		}
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v ClusterEncryptionError
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 403 {
+			var v ClusterEncryptionError
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 404 {
+			var v ClusterEncryptionError
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 409 {
+			var v ClusterEncryptionError
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 429 {
+			var v ClusterEncryptionError
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 503 {
+			var v ClusterEncryptionRefusal
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiKubernetesClustersEncryptionReconcileCreateRequest struct {
+	ctx context.Context
+	ApiService *KubernetesAPIService
+	id string
+	clusterEncryptionReconcileRequest *ClusterEncryptionReconcileRequest
+}
+
+func (r ApiKubernetesClustersEncryptionReconcileCreateRequest) ClusterEncryptionReconcileRequest(clusterEncryptionReconcileRequest ClusterEncryptionReconcileRequest) ApiKubernetesClustersEncryptionReconcileCreateRequest {
+	r.clusterEncryptionReconcileRequest = &clusterEncryptionReconcileRequest
+	return r
+}
+
+func (r ApiKubernetesClustersEncryptionReconcileCreateRequest) Execute() (*ClusterEncryptionOperation, *http.Response, error) {
+	return r.ApiService.KubernetesClustersEncryptionReconcileCreateExecute(r)
+}
+
+/*
+KubernetesClustersEncryptionReconcileCreate Method for KubernetesClustersEncryptionReconcileCreate
+
+Staff only: resolve a cluster whose encryption state is unknown.
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param id
+ @return ApiKubernetesClustersEncryptionReconcileCreateRequest
+*/
+func (a *KubernetesAPIService) KubernetesClustersEncryptionReconcileCreate(ctx context.Context, id string) ApiKubernetesClustersEncryptionReconcileCreateRequest {
+	return ApiKubernetesClustersEncryptionReconcileCreateRequest{
+		ApiService: a,
+		ctx: ctx,
+		id: id,
+	}
+}
+
+// Execute executes the request
+//  @return ClusterEncryptionOperation
+func (a *KubernetesAPIService) KubernetesClustersEncryptionReconcileCreateExecute(r ApiKubernetesClustersEncryptionReconcileCreateRequest) (*ClusterEncryptionOperation, *http.Response, error) {
+	var (
+		localVarHTTPMethod   = http.MethodPost
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *ClusterEncryptionOperation
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "KubernetesAPIService.KubernetesClustersEncryptionReconcileCreate")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/api/kubernetes/clusters/{id}/encryption/reconcile/"
+	localVarPath = strings.Replace(localVarPath, "{"+"id"+"}", url.PathEscape(parameterValueToString(r.id, "id")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+	if r.clusterEncryptionReconcileRequest == nil {
+		return localVarReturnValue, nil, reportError("clusterEncryptionReconcileRequest is required and must be specified")
+	}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{"application/json"}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	// body params
+	localVarPostBody = r.clusterEncryptionReconcileRequest
+	if r.ctx != nil {
+		// API Key Authentication
+		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
+			if apiKey, ok := auth["tokenAuth"]; ok {
+				var key string
+				if apiKey.Prefix != "" {
+					key = apiKey.Prefix + " " + apiKey.Key
+				} else {
+					key = apiKey.Key
+				}
+				localVarHeaderParams["Authorization"] = key
+			}
+		}
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v ClusterEncryptionError
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 403 {
+			var v ClusterEncryptionError
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 404 {
+			var v ClusterEncryptionError
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 409 {
+			var v ClusterEncryptionError
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiKubernetesClustersEncryptionRetrieveRequest struct {
+	ctx context.Context
+	ApiService *KubernetesAPIService
+	id string
+}
+
+func (r ApiKubernetesClustersEncryptionRetrieveRequest) Execute() (*ClusterEncryption, *http.Response, error) {
+	return r.ApiService.KubernetesClustersEncryptionRetrieveExecute(r)
+}
+
+/*
+KubernetesClustersEncryptionRetrieve Method for KubernetesClustersEncryptionRetrieve
+
+Read the cluster's encryption state, restart gate and per-node verification evidence.
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param id
+ @return ApiKubernetesClustersEncryptionRetrieveRequest
+*/
+func (a *KubernetesAPIService) KubernetesClustersEncryptionRetrieve(ctx context.Context, id string) ApiKubernetesClustersEncryptionRetrieveRequest {
+	return ApiKubernetesClustersEncryptionRetrieveRequest{
+		ApiService: a,
+		ctx: ctx,
+		id: id,
+	}
+}
+
+// Execute executes the request
+//  @return ClusterEncryption
+func (a *KubernetesAPIService) KubernetesClustersEncryptionRetrieveExecute(r ApiKubernetesClustersEncryptionRetrieveRequest) (*ClusterEncryption, *http.Response, error) {
+	var (
+		localVarHTTPMethod   = http.MethodGet
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *ClusterEncryption
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "KubernetesAPIService.KubernetesClustersEncryptionRetrieve")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/api/kubernetes/clusters/{id}/encryption/"
+	localVarPath = strings.Replace(localVarPath, "{"+"id"+"}", url.PathEscape(parameterValueToString(r.id, "id")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	if r.ctx != nil {
+		// API Key Authentication
+		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
+			if apiKey, ok := auth["tokenAuth"]; ok {
+				var key string
+				if apiKey.Prefix != "" {
+					key = apiKey.Prefix + " " + apiKey.Key
+				} else {
+					key = apiKey.Key
+				}
+				localVarHeaderParams["Authorization"] = key
+			}
+		}
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 403 {
+			var v ClusterEncryptionError
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 404 {
+			var v ClusterEncryptionError
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 409 {
+			var v ClusterEncryptionError
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
 type ApiKubernetesClustersHttproutesCreateRequest struct {
 	ctx context.Context
 	ApiService *KubernetesAPIService
 	clusterId int32
-	hTTPRoute *HTTPRoute
+	hTTPRouteRequest *HTTPRouteRequest
 }
 
-func (r ApiKubernetesClustersHttproutesCreateRequest) HTTPRoute(hTTPRoute HTTPRoute) ApiKubernetesClustersHttproutesCreateRequest {
-	r.hTTPRoute = &hTTPRoute
+func (r ApiKubernetesClustersHttproutesCreateRequest) HTTPRouteRequest(hTTPRouteRequest HTTPRouteRequest) ApiKubernetesClustersHttproutesCreateRequest {
+	r.hTTPRouteRequest = &hTTPRouteRequest
 	return r
 }
 
@@ -935,8 +1608,8 @@ func (a *KubernetesAPIService) KubernetesClustersHttproutesCreateExecute(r ApiKu
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.hTTPRoute == nil {
-		return localVarReturnValue, nil, reportError("hTTPRoute is required and must be specified")
+	if r.hTTPRouteRequest == nil {
+		return localVarReturnValue, nil, reportError("hTTPRouteRequest is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -957,7 +1630,7 @@ func (a *KubernetesAPIService) KubernetesClustersHttproutesCreateExecute(r ApiKu
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.hTTPRoute
+	localVarPostBody = r.hTTPRouteRequest
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
@@ -1255,11 +1928,11 @@ type ApiKubernetesClustersHttproutesPartialUpdateRequest struct {
 	ApiService *KubernetesAPIService
 	clusterId int32
 	id string
-	patchedHTTPRoute *PatchedHTTPRoute
+	patchedHTTPRouteRequest *PatchedHTTPRouteRequest
 }
 
-func (r ApiKubernetesClustersHttproutesPartialUpdateRequest) PatchedHTTPRoute(patchedHTTPRoute PatchedHTTPRoute) ApiKubernetesClustersHttproutesPartialUpdateRequest {
-	r.patchedHTTPRoute = &patchedHTTPRoute
+func (r ApiKubernetesClustersHttproutesPartialUpdateRequest) PatchedHTTPRouteRequest(patchedHTTPRouteRequest PatchedHTTPRouteRequest) ApiKubernetesClustersHttproutesPartialUpdateRequest {
+	r.patchedHTTPRouteRequest = &patchedHTTPRouteRequest
 	return r
 }
 
@@ -1327,7 +2000,7 @@ func (a *KubernetesAPIService) KubernetesClustersHttproutesPartialUpdateExecute(
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.patchedHTTPRoute
+	localVarPostBody = r.patchedHTTPRouteRequest
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
@@ -1507,11 +2180,11 @@ type ApiKubernetesClustersHttproutesUpdateRequest struct {
 	ApiService *KubernetesAPIService
 	clusterId int32
 	id string
-	hTTPRoute *HTTPRoute
+	hTTPRouteRequest *HTTPRouteRequest
 }
 
-func (r ApiKubernetesClustersHttproutesUpdateRequest) HTTPRoute(hTTPRoute HTTPRoute) ApiKubernetesClustersHttproutesUpdateRequest {
-	r.hTTPRoute = &hTTPRoute
+func (r ApiKubernetesClustersHttproutesUpdateRequest) HTTPRouteRequest(hTTPRouteRequest HTTPRouteRequest) ApiKubernetesClustersHttproutesUpdateRequest {
+	r.hTTPRouteRequest = &hTTPRouteRequest
 	return r
 }
 
@@ -1560,8 +2233,8 @@ func (a *KubernetesAPIService) KubernetesClustersHttproutesUpdateExecute(r ApiKu
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.hTTPRoute == nil {
-		return localVarReturnValue, nil, reportError("hTTPRoute is required and must be specified")
+	if r.hTTPRouteRequest == nil {
+		return localVarReturnValue, nil, reportError("hTTPRouteRequest is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -1582,7 +2255,7 @@ func (a *KubernetesAPIService) KubernetesClustersHttproutesUpdateExecute(r ApiKu
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.hTTPRoute
+	localVarPostBody = r.hTTPRouteRequest
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
@@ -1989,11 +2662,11 @@ type ApiKubernetesClustersLbFirewallCreateRequest struct {
 	ctx context.Context
 	ApiService *KubernetesAPIService
 	clusterId int32
-	lBFirewallRule *LBFirewallRule
+	lBFirewallRuleRequest *LBFirewallRuleRequest
 }
 
-func (r ApiKubernetesClustersLbFirewallCreateRequest) LBFirewallRule(lBFirewallRule LBFirewallRule) ApiKubernetesClustersLbFirewallCreateRequest {
-	r.lBFirewallRule = &lBFirewallRule
+func (r ApiKubernetesClustersLbFirewallCreateRequest) LBFirewallRuleRequest(lBFirewallRuleRequest LBFirewallRuleRequest) ApiKubernetesClustersLbFirewallCreateRequest {
+	r.lBFirewallRuleRequest = &lBFirewallRuleRequest
 	return r
 }
 
@@ -2065,7 +2738,7 @@ func (a *KubernetesAPIService) KubernetesClustersLbFirewallCreateExecute(r ApiKu
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.lBFirewallRule
+	localVarPostBody = r.lBFirewallRuleRequest
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
@@ -2373,11 +3046,11 @@ type ApiKubernetesClustersLbFirewallPartialUpdateRequest struct {
 	ApiService *KubernetesAPIService
 	clusterId int32
 	id string
-	patchedLBFirewallRule *PatchedLBFirewallRule
+	patchedLBFirewallRuleRequest *PatchedLBFirewallRuleRequest
 }
 
-func (r ApiKubernetesClustersLbFirewallPartialUpdateRequest) PatchedLBFirewallRule(patchedLBFirewallRule PatchedLBFirewallRule) ApiKubernetesClustersLbFirewallPartialUpdateRequest {
-	r.patchedLBFirewallRule = &patchedLBFirewallRule
+func (r ApiKubernetesClustersLbFirewallPartialUpdateRequest) PatchedLBFirewallRuleRequest(patchedLBFirewallRuleRequest PatchedLBFirewallRuleRequest) ApiKubernetesClustersLbFirewallPartialUpdateRequest {
+	r.patchedLBFirewallRuleRequest = &patchedLBFirewallRuleRequest
 	return r
 }
 
@@ -2452,7 +3125,7 @@ func (a *KubernetesAPIService) KubernetesClustersLbFirewallPartialUpdateExecute(
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.patchedLBFirewallRule
+	localVarPostBody = r.patchedLBFirewallRuleRequest
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
@@ -2637,11 +3310,11 @@ type ApiKubernetesClustersLbFirewallUpdateRequest struct {
 	ApiService *KubernetesAPIService
 	clusterId int32
 	id string
-	lBFirewallRule *LBFirewallRule
+	lBFirewallRuleRequest *LBFirewallRuleRequest
 }
 
-func (r ApiKubernetesClustersLbFirewallUpdateRequest) LBFirewallRule(lBFirewallRule LBFirewallRule) ApiKubernetesClustersLbFirewallUpdateRequest {
-	r.lBFirewallRule = &lBFirewallRule
+func (r ApiKubernetesClustersLbFirewallUpdateRequest) LBFirewallRuleRequest(lBFirewallRuleRequest LBFirewallRuleRequest) ApiKubernetesClustersLbFirewallUpdateRequest {
+	r.lBFirewallRuleRequest = &lBFirewallRuleRequest
 	return r
 }
 
@@ -2716,7 +3389,7 @@ func (a *KubernetesAPIService) KubernetesClustersLbFirewallUpdateExecute(r ApiKu
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.lBFirewallRule
+	localVarPostBody = r.lBFirewallRuleRequest
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
@@ -2898,15 +3571,652 @@ func (a *KubernetesAPIService) KubernetesClustersListExecute(r ApiKubernetesClus
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
+type ApiKubernetesClustersNodeOperationsCancelCreateRequest struct {
+	ctx context.Context
+	ApiService *KubernetesAPIService
+	clusterId int32
+	id string
+}
+
+func (r ApiKubernetesClustersNodeOperationsCancelCreateRequest) Execute() (*NodeOperation, *http.Response, error) {
+	return r.ApiService.KubernetesClustersNodeOperationsCancelCreateExecute(r)
+}
+
+/*
+KubernetesClustersNodeOperationsCancelCreate Method for KubernetesClustersNodeOperationsCancelCreate
+
+Uncordon the node and abort a blocked operation.
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param clusterId
+ @param id
+ @return ApiKubernetesClustersNodeOperationsCancelCreateRequest
+*/
+func (a *KubernetesAPIService) KubernetesClustersNodeOperationsCancelCreate(ctx context.Context, clusterId int32, id string) ApiKubernetesClustersNodeOperationsCancelCreateRequest {
+	return ApiKubernetesClustersNodeOperationsCancelCreateRequest{
+		ApiService: a,
+		ctx: ctx,
+		clusterId: clusterId,
+		id: id,
+	}
+}
+
+// Execute executes the request
+//  @return NodeOperation
+func (a *KubernetesAPIService) KubernetesClustersNodeOperationsCancelCreateExecute(r ApiKubernetesClustersNodeOperationsCancelCreateRequest) (*NodeOperation, *http.Response, error) {
+	var (
+		localVarHTTPMethod   = http.MethodPost
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *NodeOperation
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "KubernetesAPIService.KubernetesClustersNodeOperationsCancelCreate")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/api/kubernetes/clusters/{cluster_id}/node-operations/{id}/cancel/"
+	localVarPath = strings.Replace(localVarPath, "{"+"cluster_id"+"}", url.PathEscape(parameterValueToString(r.clusterId, "clusterId")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"id"+"}", url.PathEscape(parameterValueToString(r.id, "id")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	if r.ctx != nil {
+		// API Key Authentication
+		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
+			if apiKey, ok := auth["tokenAuth"]; ok {
+				var key string
+				if apiKey.Prefix != "" {
+					key = apiKey.Prefix + " " + apiKey.Key
+				} else {
+					key = apiKey.Key
+				}
+				localVarHeaderParams["Authorization"] = key
+			}
+		}
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiKubernetesClustersNodeOperationsListRequest struct {
+	ctx context.Context
+	ApiService *KubernetesAPIService
+	clusterId int32
+	page *int32
+}
+
+// A page number within the paginated result set.
+func (r ApiKubernetesClustersNodeOperationsListRequest) Page(page int32) ApiKubernetesClustersNodeOperationsListRequest {
+	r.page = &page
+	return r
+}
+
+func (r ApiKubernetesClustersNodeOperationsListRequest) Execute() (*PaginatedNodeOperationList, *http.Response, error) {
+	return r.ApiService.KubernetesClustersNodeOperationsListExecute(r)
+}
+
+/*
+KubernetesClustersNodeOperationsList Method for KubernetesClustersNodeOperationsList
+
+Operation history, status, and the three recovery actions.
+
+Cluster-level rather than node-level on purpose: a successful delete
+removes the VM row, so an operation addressable only through its node would
+stop being readable exactly when the customer wants to see how it ended.
+
+None of these routes is gated on `K8S_NODE_OPERATIONS_ENABLED`. Turning new
+starts off must never strand an operation that is already running -- a
+cluster with a blocked operation and no way to answer it is a cluster
+nobody can mutate at all.
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param clusterId
+ @return ApiKubernetesClustersNodeOperationsListRequest
+*/
+func (a *KubernetesAPIService) KubernetesClustersNodeOperationsList(ctx context.Context, clusterId int32) ApiKubernetesClustersNodeOperationsListRequest {
+	return ApiKubernetesClustersNodeOperationsListRequest{
+		ApiService: a,
+		ctx: ctx,
+		clusterId: clusterId,
+	}
+}
+
+// Execute executes the request
+//  @return PaginatedNodeOperationList
+func (a *KubernetesAPIService) KubernetesClustersNodeOperationsListExecute(r ApiKubernetesClustersNodeOperationsListRequest) (*PaginatedNodeOperationList, *http.Response, error) {
+	var (
+		localVarHTTPMethod   = http.MethodGet
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *PaginatedNodeOperationList
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "KubernetesAPIService.KubernetesClustersNodeOperationsList")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/api/kubernetes/clusters/{cluster_id}/node-operations/"
+	localVarPath = strings.Replace(localVarPath, "{"+"cluster_id"+"}", url.PathEscape(parameterValueToString(r.clusterId, "clusterId")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	if r.page != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "page", r.page, "form", "")
+	}
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	if r.ctx != nil {
+		// API Key Authentication
+		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
+			if apiKey, ok := auth["tokenAuth"]; ok {
+				var key string
+				if apiKey.Prefix != "" {
+					key = apiKey.Prefix + " " + apiKey.Key
+				} else {
+					key = apiKey.Key
+				}
+				localVarHeaderParams["Authorization"] = key
+			}
+		}
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiKubernetesClustersNodeOperationsResumeCreateRequest struct {
+	ctx context.Context
+	ApiService *KubernetesAPIService
+	clusterId int32
+	id string
+}
+
+func (r ApiKubernetesClustersNodeOperationsResumeCreateRequest) Execute() (*NodeOperation, *http.Response, error) {
+	return r.ApiService.KubernetesClustersNodeOperationsResumeCreateExecute(r)
+}
+
+/*
+KubernetesClustersNodeOperationsResumeCreate Method for KubernetesClustersNodeOperationsResumeCreate
+
+Staff-only resume of an operation waiting for support.
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param clusterId
+ @param id
+ @return ApiKubernetesClustersNodeOperationsResumeCreateRequest
+*/
+func (a *KubernetesAPIService) KubernetesClustersNodeOperationsResumeCreate(ctx context.Context, clusterId int32, id string) ApiKubernetesClustersNodeOperationsResumeCreateRequest {
+	return ApiKubernetesClustersNodeOperationsResumeCreateRequest{
+		ApiService: a,
+		ctx: ctx,
+		clusterId: clusterId,
+		id: id,
+	}
+}
+
+// Execute executes the request
+//  @return NodeOperation
+func (a *KubernetesAPIService) KubernetesClustersNodeOperationsResumeCreateExecute(r ApiKubernetesClustersNodeOperationsResumeCreateRequest) (*NodeOperation, *http.Response, error) {
+	var (
+		localVarHTTPMethod   = http.MethodPost
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *NodeOperation
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "KubernetesAPIService.KubernetesClustersNodeOperationsResumeCreate")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/api/kubernetes/clusters/{cluster_id}/node-operations/{id}/resume/"
+	localVarPath = strings.Replace(localVarPath, "{"+"cluster_id"+"}", url.PathEscape(parameterValueToString(r.clusterId, "clusterId")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"id"+"}", url.PathEscape(parameterValueToString(r.id, "id")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	if r.ctx != nil {
+		// API Key Authentication
+		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
+			if apiKey, ok := auth["tokenAuth"]; ok {
+				var key string
+				if apiKey.Prefix != "" {
+					key = apiKey.Prefix + " " + apiKey.Key
+				} else {
+					key = apiKey.Key
+				}
+				localVarHeaderParams["Authorization"] = key
+			}
+		}
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiKubernetesClustersNodeOperationsRetrieveRequest struct {
+	ctx context.Context
+	ApiService *KubernetesAPIService
+	clusterId int32
+	id string
+}
+
+func (r ApiKubernetesClustersNodeOperationsRetrieveRequest) Execute() (*NodeOperation, *http.Response, error) {
+	return r.ApiService.KubernetesClustersNodeOperationsRetrieveExecute(r)
+}
+
+/*
+KubernetesClustersNodeOperationsRetrieve Method for KubernetesClustersNodeOperationsRetrieve
+
+Operation history, status, and the three recovery actions.
+
+Cluster-level rather than node-level on purpose: a successful delete
+removes the VM row, so an operation addressable only through its node would
+stop being readable exactly when the customer wants to see how it ended.
+
+None of these routes is gated on `K8S_NODE_OPERATIONS_ENABLED`. Turning new
+starts off must never strand an operation that is already running -- a
+cluster with a blocked operation and no way to answer it is a cluster
+nobody can mutate at all.
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param clusterId
+ @param id
+ @return ApiKubernetesClustersNodeOperationsRetrieveRequest
+*/
+func (a *KubernetesAPIService) KubernetesClustersNodeOperationsRetrieve(ctx context.Context, clusterId int32, id string) ApiKubernetesClustersNodeOperationsRetrieveRequest {
+	return ApiKubernetesClustersNodeOperationsRetrieveRequest{
+		ApiService: a,
+		ctx: ctx,
+		clusterId: clusterId,
+		id: id,
+	}
+}
+
+// Execute executes the request
+//  @return NodeOperation
+func (a *KubernetesAPIService) KubernetesClustersNodeOperationsRetrieveExecute(r ApiKubernetesClustersNodeOperationsRetrieveRequest) (*NodeOperation, *http.Response, error) {
+	var (
+		localVarHTTPMethod   = http.MethodGet
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *NodeOperation
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "KubernetesAPIService.KubernetesClustersNodeOperationsRetrieve")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/api/kubernetes/clusters/{cluster_id}/node-operations/{id}/"
+	localVarPath = strings.Replace(localVarPath, "{"+"cluster_id"+"}", url.PathEscape(parameterValueToString(r.clusterId, "clusterId")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"id"+"}", url.PathEscape(parameterValueToString(r.id, "id")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	if r.ctx != nil {
+		// API Key Authentication
+		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
+			if apiKey, ok := auth["tokenAuth"]; ok {
+				var key string
+				if apiKey.Prefix != "" {
+					key = apiKey.Prefix + " " + apiKey.Key
+				} else {
+					key = apiKey.Key
+				}
+				localVarHeaderParams["Authorization"] = key
+			}
+		}
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiKubernetesClustersNodeOperationsRetryCreateRequest struct {
+	ctx context.Context
+	ApiService *KubernetesAPIService
+	clusterId int32
+	id string
+	nodeOperationRetryRequest *NodeOperationRetryRequest
+}
+
+func (r ApiKubernetesClustersNodeOperationsRetryCreateRequest) NodeOperationRetryRequest(nodeOperationRetryRequest NodeOperationRetryRequest) ApiKubernetesClustersNodeOperationsRetryCreateRequest {
+	r.nodeOperationRetryRequest = &nodeOperationRetryRequest
+	return r
+}
+
+func (r ApiKubernetesClustersNodeOperationsRetryCreateRequest) Execute() (*NodeOperation, *http.Response, error) {
+	return r.ApiService.KubernetesClustersNodeOperationsRetryCreateExecute(r)
+}
+
+/*
+KubernetesClustersNodeOperationsRetryCreate Method for KubernetesClustersNodeOperationsRetryCreate
+
+Retry a blocked operation with the overrides that answer its blocker.
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param clusterId
+ @param id
+ @return ApiKubernetesClustersNodeOperationsRetryCreateRequest
+*/
+func (a *KubernetesAPIService) KubernetesClustersNodeOperationsRetryCreate(ctx context.Context, clusterId int32, id string) ApiKubernetesClustersNodeOperationsRetryCreateRequest {
+	return ApiKubernetesClustersNodeOperationsRetryCreateRequest{
+		ApiService: a,
+		ctx: ctx,
+		clusterId: clusterId,
+		id: id,
+	}
+}
+
+// Execute executes the request
+//  @return NodeOperation
+func (a *KubernetesAPIService) KubernetesClustersNodeOperationsRetryCreateExecute(r ApiKubernetesClustersNodeOperationsRetryCreateRequest) (*NodeOperation, *http.Response, error) {
+	var (
+		localVarHTTPMethod   = http.MethodPost
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *NodeOperation
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "KubernetesAPIService.KubernetesClustersNodeOperationsRetryCreate")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/api/kubernetes/clusters/{cluster_id}/node-operations/{id}/retry/"
+	localVarPath = strings.Replace(localVarPath, "{"+"cluster_id"+"}", url.PathEscape(parameterValueToString(r.clusterId, "clusterId")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"id"+"}", url.PathEscape(parameterValueToString(r.id, "id")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{"application/json"}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	// body params
+	localVarPostBody = r.nodeOperationRetryRequest
+	if r.ctx != nil {
+		// API Key Authentication
+		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
+			if apiKey, ok := auth["tokenAuth"]; ok {
+				var key string
+				if apiKey.Prefix != "" {
+					key = apiKey.Prefix + " " + apiKey.Key
+				} else {
+					key = apiKey.Key
+				}
+				localVarHeaderParams["Authorization"] = key
+			}
+		}
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
 type ApiKubernetesClustersPartialUpdateRequest struct {
 	ctx context.Context
 	ApiService *KubernetesAPIService
 	id string
-	patchedClusterDetail *PatchedClusterDetail
+	patchedClusterDetailRequest *PatchedClusterDetailRequest
 }
 
-func (r ApiKubernetesClustersPartialUpdateRequest) PatchedClusterDetail(patchedClusterDetail PatchedClusterDetail) ApiKubernetesClustersPartialUpdateRequest {
-	r.patchedClusterDetail = &patchedClusterDetail
+func (r ApiKubernetesClustersPartialUpdateRequest) PatchedClusterDetailRequest(patchedClusterDetailRequest PatchedClusterDetailRequest) ApiKubernetesClustersPartialUpdateRequest {
+	r.patchedClusterDetailRequest = &patchedClusterDetailRequest
 	return r
 }
 
@@ -2978,7 +4288,386 @@ func (a *KubernetesAPIService) KubernetesClustersPartialUpdateExecute(r ApiKuber
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.patchedClusterDetail
+	localVarPostBody = r.patchedClusterDetailRequest
+	if r.ctx != nil {
+		// API Key Authentication
+		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
+			if apiKey, ok := auth["tokenAuth"]; ok {
+				var key string
+				if apiKey.Prefix != "" {
+					key = apiKey.Prefix + " " + apiKey.Key
+				} else {
+					key = apiKey.Key
+				}
+				localVarHeaderParams["Authorization"] = key
+			}
+		}
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiKubernetesClustersPoolRemovalJournalsListRequest struct {
+	ctx context.Context
+	ApiService *KubernetesAPIService
+	clusterId int32
+	page *int32
+}
+
+// A page number within the paginated result set.
+func (r ApiKubernetesClustersPoolRemovalJournalsListRequest) Page(page int32) ApiKubernetesClustersPoolRemovalJournalsListRequest {
+	r.page = &page
+	return r
+}
+
+func (r ApiKubernetesClustersPoolRemovalJournalsListRequest) Execute() (*PaginatedPoolRemovalJournalList, *http.Response, error) {
+	return r.ApiService.KubernetesClustersPoolRemovalJournalsListExecute(r)
+}
+
+/*
+KubernetesClustersPoolRemovalJournalsList Method for KubernetesClustersPoolRemovalJournalsList
+
+A downsize or pool deletion, its milestones, and its staff resume.
+
+The list route is not in the spec's table and is here anyway: with retrieve
+as the only route, a customer whose downsize parked has no way to learn the
+journal id, and the panel's poll would be the sole path to a published REST
+resource.
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param clusterId
+ @return ApiKubernetesClustersPoolRemovalJournalsListRequest
+*/
+func (a *KubernetesAPIService) KubernetesClustersPoolRemovalJournalsList(ctx context.Context, clusterId int32) ApiKubernetesClustersPoolRemovalJournalsListRequest {
+	return ApiKubernetesClustersPoolRemovalJournalsListRequest{
+		ApiService: a,
+		ctx: ctx,
+		clusterId: clusterId,
+	}
+}
+
+// Execute executes the request
+//  @return PaginatedPoolRemovalJournalList
+func (a *KubernetesAPIService) KubernetesClustersPoolRemovalJournalsListExecute(r ApiKubernetesClustersPoolRemovalJournalsListRequest) (*PaginatedPoolRemovalJournalList, *http.Response, error) {
+	var (
+		localVarHTTPMethod   = http.MethodGet
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *PaginatedPoolRemovalJournalList
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "KubernetesAPIService.KubernetesClustersPoolRemovalJournalsList")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/api/kubernetes/clusters/{cluster_id}/pool-removal-journals/"
+	localVarPath = strings.Replace(localVarPath, "{"+"cluster_id"+"}", url.PathEscape(parameterValueToString(r.clusterId, "clusterId")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	if r.page != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "page", r.page, "form", "")
+	}
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	if r.ctx != nil {
+		// API Key Authentication
+		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
+			if apiKey, ok := auth["tokenAuth"]; ok {
+				var key string
+				if apiKey.Prefix != "" {
+					key = apiKey.Prefix + " " + apiKey.Key
+				} else {
+					key = apiKey.Key
+				}
+				localVarHeaderParams["Authorization"] = key
+			}
+		}
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiKubernetesClustersPoolRemovalJournalsResumeCreateRequest struct {
+	ctx context.Context
+	ApiService *KubernetesAPIService
+	clusterId int32
+	id string
+}
+
+func (r ApiKubernetesClustersPoolRemovalJournalsResumeCreateRequest) Execute() (*PoolRemovalJournal, *http.Response, error) {
+	return r.ApiService.KubernetesClustersPoolRemovalJournalsResumeCreateExecute(r)
+}
+
+/*
+KubernetesClustersPoolRemovalJournalsResumeCreate Method for KubernetesClustersPoolRemovalJournalsResumeCreate
+
+Staff-only resume of a pool removal waiting for support.
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param clusterId
+ @param id
+ @return ApiKubernetesClustersPoolRemovalJournalsResumeCreateRequest
+*/
+func (a *KubernetesAPIService) KubernetesClustersPoolRemovalJournalsResumeCreate(ctx context.Context, clusterId int32, id string) ApiKubernetesClustersPoolRemovalJournalsResumeCreateRequest {
+	return ApiKubernetesClustersPoolRemovalJournalsResumeCreateRequest{
+		ApiService: a,
+		ctx: ctx,
+		clusterId: clusterId,
+		id: id,
+	}
+}
+
+// Execute executes the request
+//  @return PoolRemovalJournal
+func (a *KubernetesAPIService) KubernetesClustersPoolRemovalJournalsResumeCreateExecute(r ApiKubernetesClustersPoolRemovalJournalsResumeCreateRequest) (*PoolRemovalJournal, *http.Response, error) {
+	var (
+		localVarHTTPMethod   = http.MethodPost
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *PoolRemovalJournal
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "KubernetesAPIService.KubernetesClustersPoolRemovalJournalsResumeCreate")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/api/kubernetes/clusters/{cluster_id}/pool-removal-journals/{id}/resume/"
+	localVarPath = strings.Replace(localVarPath, "{"+"cluster_id"+"}", url.PathEscape(parameterValueToString(r.clusterId, "clusterId")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"id"+"}", url.PathEscape(parameterValueToString(r.id, "id")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	if r.ctx != nil {
+		// API Key Authentication
+		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
+			if apiKey, ok := auth["tokenAuth"]; ok {
+				var key string
+				if apiKey.Prefix != "" {
+					key = apiKey.Prefix + " " + apiKey.Key
+				} else {
+					key = apiKey.Key
+				}
+				localVarHeaderParams["Authorization"] = key
+			}
+		}
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiKubernetesClustersPoolRemovalJournalsRetrieveRequest struct {
+	ctx context.Context
+	ApiService *KubernetesAPIService
+	clusterId int32
+	id string
+}
+
+func (r ApiKubernetesClustersPoolRemovalJournalsRetrieveRequest) Execute() (*PoolRemovalJournal, *http.Response, error) {
+	return r.ApiService.KubernetesClustersPoolRemovalJournalsRetrieveExecute(r)
+}
+
+/*
+KubernetesClustersPoolRemovalJournalsRetrieve Method for KubernetesClustersPoolRemovalJournalsRetrieve
+
+A downsize or pool deletion, its milestones, and its staff resume.
+
+The list route is not in the spec's table and is here anyway: with retrieve
+as the only route, a customer whose downsize parked has no way to learn the
+journal id, and the panel's poll would be the sole path to a published REST
+resource.
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param clusterId
+ @param id
+ @return ApiKubernetesClustersPoolRemovalJournalsRetrieveRequest
+*/
+func (a *KubernetesAPIService) KubernetesClustersPoolRemovalJournalsRetrieve(ctx context.Context, clusterId int32, id string) ApiKubernetesClustersPoolRemovalJournalsRetrieveRequest {
+	return ApiKubernetesClustersPoolRemovalJournalsRetrieveRequest{
+		ApiService: a,
+		ctx: ctx,
+		clusterId: clusterId,
+		id: id,
+	}
+}
+
+// Execute executes the request
+//  @return PoolRemovalJournal
+func (a *KubernetesAPIService) KubernetesClustersPoolRemovalJournalsRetrieveExecute(r ApiKubernetesClustersPoolRemovalJournalsRetrieveRequest) (*PoolRemovalJournal, *http.Response, error) {
+	var (
+		localVarHTTPMethod   = http.MethodGet
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *PoolRemovalJournal
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "KubernetesAPIService.KubernetesClustersPoolRemovalJournalsRetrieve")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/api/kubernetes/clusters/{cluster_id}/pool-removal-journals/{id}/"
+	localVarPath = strings.Replace(localVarPath, "{"+"cluster_id"+"}", url.PathEscape(parameterValueToString(r.clusterId, "clusterId")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"id"+"}", url.PathEscape(parameterValueToString(r.id, "id")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
@@ -3034,11 +4723,11 @@ type ApiKubernetesClustersPortForwardsCreateRequest struct {
 	ctx context.Context
 	ApiService *KubernetesAPIService
 	clusterId int32
-	k8sPortForward *K8sPortForward
+	k8sPortForwardRequest *K8sPortForwardRequest
 }
 
-func (r ApiKubernetesClustersPortForwardsCreateRequest) K8sPortForward(k8sPortForward K8sPortForward) ApiKubernetesClustersPortForwardsCreateRequest {
-	r.k8sPortForward = &k8sPortForward
+func (r ApiKubernetesClustersPortForwardsCreateRequest) K8sPortForwardRequest(k8sPortForwardRequest K8sPortForwardRequest) ApiKubernetesClustersPortForwardsCreateRequest {
+	r.k8sPortForwardRequest = &k8sPortForwardRequest
 	return r
 }
 
@@ -3091,8 +4780,8 @@ func (a *KubernetesAPIService) KubernetesClustersPortForwardsCreateExecute(r Api
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.k8sPortForward == nil {
-		return localVarReturnValue, nil, reportError("k8sPortForward is required and must be specified")
+	if r.k8sPortForwardRequest == nil {
+		return localVarReturnValue, nil, reportError("k8sPortForwardRequest is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -3113,7 +4802,7 @@ func (a *KubernetesAPIService) KubernetesClustersPortForwardsCreateExecute(r Api
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.k8sPortForward
+	localVarPostBody = r.k8sPortForwardRequest
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
@@ -3421,11 +5110,11 @@ type ApiKubernetesClustersPortForwardsPartialUpdateRequest struct {
 	ApiService *KubernetesAPIService
 	clusterId int32
 	id string
-	patchedK8sPortForward *PatchedK8sPortForward
+	patchedK8sPortForwardRequest *PatchedK8sPortForwardRequest
 }
 
-func (r ApiKubernetesClustersPortForwardsPartialUpdateRequest) PatchedK8sPortForward(patchedK8sPortForward PatchedK8sPortForward) ApiKubernetesClustersPortForwardsPartialUpdateRequest {
-	r.patchedK8sPortForward = &patchedK8sPortForward
+func (r ApiKubernetesClustersPortForwardsPartialUpdateRequest) PatchedK8sPortForwardRequest(patchedK8sPortForwardRequest PatchedK8sPortForwardRequest) ApiKubernetesClustersPortForwardsPartialUpdateRequest {
+	r.patchedK8sPortForwardRequest = &patchedK8sPortForwardRequest
 	return r
 }
 
@@ -3500,7 +5189,7 @@ func (a *KubernetesAPIService) KubernetesClustersPortForwardsPartialUpdateExecut
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.patchedK8sPortForward
+	localVarPostBody = r.patchedK8sPortForwardRequest
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
@@ -3685,11 +5374,11 @@ type ApiKubernetesClustersPortForwardsUpdateRequest struct {
 	ApiService *KubernetesAPIService
 	clusterId int32
 	id string
-	k8sPortForward *K8sPortForward
+	k8sPortForwardRequest *K8sPortForwardRequest
 }
 
-func (r ApiKubernetesClustersPortForwardsUpdateRequest) K8sPortForward(k8sPortForward K8sPortForward) ApiKubernetesClustersPortForwardsUpdateRequest {
-	r.k8sPortForward = &k8sPortForward
+func (r ApiKubernetesClustersPortForwardsUpdateRequest) K8sPortForwardRequest(k8sPortForwardRequest K8sPortForwardRequest) ApiKubernetesClustersPortForwardsUpdateRequest {
+	r.k8sPortForwardRequest = &k8sPortForwardRequest
 	return r
 }
 
@@ -3745,8 +5434,8 @@ func (a *KubernetesAPIService) KubernetesClustersPortForwardsUpdateExecute(r Api
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.k8sPortForward == nil {
-		return localVarReturnValue, nil, reportError("k8sPortForward is required and must be specified")
+	if r.k8sPortForwardRequest == nil {
+		return localVarReturnValue, nil, reportError("k8sPortForwardRequest is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -3767,7 +5456,7 @@ func (a *KubernetesAPIService) KubernetesClustersPortForwardsUpdateExecute(r Api
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.k8sPortForward
+	localVarPostBody = r.k8sPortForwardRequest
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
@@ -3823,11 +5512,11 @@ type ApiKubernetesClustersResourcePoolsCreateRequest struct {
 	ctx context.Context
 	ApiService *KubernetesAPIService
 	clusterId int32
-	resourcePoolAdd *ResourcePoolAdd
+	resourcePoolAddRequest *ResourcePoolAddRequest
 }
 
-func (r ApiKubernetesClustersResourcePoolsCreateRequest) ResourcePoolAdd(resourcePoolAdd ResourcePoolAdd) ApiKubernetesClustersResourcePoolsCreateRequest {
-	r.resourcePoolAdd = &resourcePoolAdd
+func (r ApiKubernetesClustersResourcePoolsCreateRequest) ResourcePoolAddRequest(resourcePoolAddRequest ResourcePoolAddRequest) ApiKubernetesClustersResourcePoolsCreateRequest {
+	r.resourcePoolAddRequest = &resourcePoolAddRequest
 	return r
 }
 
@@ -3873,8 +5562,8 @@ func (a *KubernetesAPIService) KubernetesClustersResourcePoolsCreateExecute(r Ap
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.resourcePoolAdd == nil {
-		return localVarReturnValue, nil, reportError("resourcePoolAdd is required and must be specified")
+	if r.resourcePoolAddRequest == nil {
+		return localVarReturnValue, nil, reportError("resourcePoolAddRequest is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -3895,7 +5584,7 @@ func (a *KubernetesAPIService) KubernetesClustersResourcePoolsCreateExecute(r Ap
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.resourcePoolAdd
+	localVarPostBody = r.resourcePoolAddRequest
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
@@ -4206,21 +5895,14 @@ type ApiKubernetesClustersResourcePoolsNodesDestroyRequest struct {
 	poolId int32
 }
 
-func (r ApiKubernetesClustersResourcePoolsNodesDestroyRequest) Execute() (*http.Response, error) {
+func (r ApiKubernetesClustersResourcePoolsNodesDestroyRequest) Execute() (*NodeOperation, *http.Response, error) {
 	return r.ApiService.KubernetesClustersResourcePoolsNodesDestroyExecute(r)
 }
 
 /*
 KubernetesClustersResourcePoolsNodesDestroy Method for KubernetesClustersResourcePoolsNodesDestroy
 
-Adds :class:`~account.iam_enforcement.IAMActionPermission` as an
-intersection with the route's existing permission classes (spec §6).
-
-Detail routes (``self.detail``) defer the role/scope check to
-``has_object_permission`` so the account-scoped ``get_object`` answers 404
-for foreign IDs before any role denial; every other route enforces in
-``has_permission``. A detail action that never calls ``get_object`` would
-skip enforcement — the route probes pin the denial for each route.
+Start a safe delete of one worker node.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param clusterId
@@ -4239,16 +5921,18 @@ func (a *KubernetesAPIService) KubernetesClustersResourcePoolsNodesDestroy(ctx c
 }
 
 // Execute executes the request
-func (a *KubernetesAPIService) KubernetesClustersResourcePoolsNodesDestroyExecute(r ApiKubernetesClustersResourcePoolsNodesDestroyRequest) (*http.Response, error) {
+//  @return NodeOperation
+func (a *KubernetesAPIService) KubernetesClustersResourcePoolsNodesDestroyExecute(r ApiKubernetesClustersResourcePoolsNodesDestroyRequest) (*NodeOperation, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodDelete
 		localVarPostBody     interface{}
 		formFiles            []formFile
+		localVarReturnValue  *NodeOperation
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "KubernetesAPIService.KubernetesClustersResourcePoolsNodesDestroy")
 	if err != nil {
-		return nil, &GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/kubernetes/clusters/{cluster_id}/resource-pools/{pool_id}/nodes/{id}/"
@@ -4270,7 +5954,7 @@ func (a *KubernetesAPIService) KubernetesClustersResourcePoolsNodesDestroyExecut
 	}
 
 	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{}
+	localVarHTTPHeaderAccepts := []string{"application/json"}
 
 	// set Accept header
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
@@ -4293,19 +5977,19 @@ func (a *KubernetesAPIService) KubernetesClustersResourcePoolsNodesDestroyExecut
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
-		return nil, err
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarHTTPResponse, err
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarHTTPResponse, err
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -4313,10 +5997,19 @@ func (a *KubernetesAPIService) KubernetesClustersResourcePoolsNodesDestroyExecut
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
-		return localVarHTTPResponse, newErr
+		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarHTTPResponse, nil
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiKubernetesClustersResourcePoolsNodesListRequest struct {
@@ -4531,6 +6224,139 @@ func (a *KubernetesAPIService) KubernetesClustersResourcePoolsNodesMetricsRetrie
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
+	if r.ctx != nil {
+		// API Key Authentication
+		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
+			if apiKey, ok := auth["tokenAuth"]; ok {
+				var key string
+				if apiKey.Prefix != "" {
+					key = apiKey.Prefix + " " + apiKey.Key
+				} else {
+					key = apiKey.Key
+				}
+				localVarHeaderParams["Authorization"] = key
+			}
+		}
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiKubernetesClustersResourcePoolsNodesRebootCreateRequest struct {
+	ctx context.Context
+	ApiService *KubernetesAPIService
+	clusterId int32
+	id string
+	poolId int32
+	nodeOperationRebootRequest *NodeOperationRebootRequest
+}
+
+func (r ApiKubernetesClustersResourcePoolsNodesRebootCreateRequest) NodeOperationRebootRequest(nodeOperationRebootRequest NodeOperationRebootRequest) ApiKubernetesClustersResourcePoolsNodesRebootCreateRequest {
+	r.nodeOperationRebootRequest = &nodeOperationRebootRequest
+	return r
+}
+
+func (r ApiKubernetesClustersResourcePoolsNodesRebootCreateRequest) Execute() (*NodeOperation, *http.Response, error) {
+	return r.ApiService.KubernetesClustersResourcePoolsNodesRebootCreateExecute(r)
+}
+
+/*
+KubernetesClustersResourcePoolsNodesRebootCreate Method for KubernetesClustersResourcePoolsNodesRebootCreate
+
+Restart one worker node, draining it first.
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param clusterId
+ @param id
+ @param poolId
+ @return ApiKubernetesClustersResourcePoolsNodesRebootCreateRequest
+*/
+func (a *KubernetesAPIService) KubernetesClustersResourcePoolsNodesRebootCreate(ctx context.Context, clusterId int32, id string, poolId int32) ApiKubernetesClustersResourcePoolsNodesRebootCreateRequest {
+	return ApiKubernetesClustersResourcePoolsNodesRebootCreateRequest{
+		ApiService: a,
+		ctx: ctx,
+		clusterId: clusterId,
+		id: id,
+		poolId: poolId,
+	}
+}
+
+// Execute executes the request
+//  @return NodeOperation
+func (a *KubernetesAPIService) KubernetesClustersResourcePoolsNodesRebootCreateExecute(r ApiKubernetesClustersResourcePoolsNodesRebootCreateRequest) (*NodeOperation, *http.Response, error) {
+	var (
+		localVarHTTPMethod   = http.MethodPost
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *NodeOperation
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "KubernetesAPIService.KubernetesClustersResourcePoolsNodesRebootCreate")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/api/kubernetes/clusters/{cluster_id}/resource-pools/{pool_id}/nodes/{id}/reboot/"
+	localVarPath = strings.Replace(localVarPath, "{"+"cluster_id"+"}", url.PathEscape(parameterValueToString(r.clusterId, "clusterId")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"id"+"}", url.PathEscape(parameterValueToString(r.id, "id")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"pool_id"+"}", url.PathEscape(parameterValueToString(r.poolId, "poolId")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{"application/json"}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	// body params
+	localVarPostBody = r.nodeOperationRebootRequest
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
@@ -4858,11 +6684,11 @@ type ApiKubernetesClustersResourcePoolsPartialUpdateRequest struct {
 	ApiService *KubernetesAPIService
 	clusterId int32
 	id string
-	patchedResourcePool *PatchedResourcePool
+	patchedResourcePoolRequest *PatchedResourcePoolRequest
 }
 
-func (r ApiKubernetesClustersResourcePoolsPartialUpdateRequest) PatchedResourcePool(patchedResourcePool PatchedResourcePool) ApiKubernetesClustersResourcePoolsPartialUpdateRequest {
-	r.patchedResourcePool = &patchedResourcePool
+func (r ApiKubernetesClustersResourcePoolsPartialUpdateRequest) PatchedResourcePoolRequest(patchedResourcePoolRequest PatchedResourcePoolRequest) ApiKubernetesClustersResourcePoolsPartialUpdateRequest {
+	r.patchedResourcePoolRequest = &patchedResourcePoolRequest
 	return r
 }
 
@@ -4937,7 +6763,7 @@ func (a *KubernetesAPIService) KubernetesClustersResourcePoolsPartialUpdateExecu
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.patchedResourcePool
+	localVarPostBody = r.patchedResourcePoolRequest
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
@@ -5122,11 +6948,11 @@ type ApiKubernetesClustersResourcePoolsUpdateRequest struct {
 	ApiService *KubernetesAPIService
 	clusterId int32
 	id string
-	resourcePool *ResourcePool
+	resourcePoolRequest *ResourcePoolRequest
 }
 
-func (r ApiKubernetesClustersResourcePoolsUpdateRequest) ResourcePool(resourcePool ResourcePool) ApiKubernetesClustersResourcePoolsUpdateRequest {
-	r.resourcePool = &resourcePool
+func (r ApiKubernetesClustersResourcePoolsUpdateRequest) ResourcePoolRequest(resourcePoolRequest ResourcePoolRequest) ApiKubernetesClustersResourcePoolsUpdateRequest {
+	r.resourcePoolRequest = &resourcePoolRequest
 	return r
 }
 
@@ -5201,7 +7027,7 @@ func (a *KubernetesAPIService) KubernetesClustersResourcePoolsUpdateExecute(r Ap
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.resourcePool
+	localVarPostBody = r.resourcePoolRequest
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
@@ -5498,11 +7324,11 @@ type ApiKubernetesClustersTcproutesCreateRequest struct {
 	ctx context.Context
 	ApiService *KubernetesAPIService
 	clusterId int32
-	tCPRoute *TCPRoute
+	tCPRouteRequest *TCPRouteRequest
 }
 
-func (r ApiKubernetesClustersTcproutesCreateRequest) TCPRoute(tCPRoute TCPRoute) ApiKubernetesClustersTcproutesCreateRequest {
-	r.tCPRoute = &tCPRoute
+func (r ApiKubernetesClustersTcproutesCreateRequest) TCPRouteRequest(tCPRouteRequest TCPRouteRequest) ApiKubernetesClustersTcproutesCreateRequest {
+	r.tCPRouteRequest = &tCPRouteRequest
 	return r
 }
 
@@ -5548,8 +7374,8 @@ func (a *KubernetesAPIService) KubernetesClustersTcproutesCreateExecute(r ApiKub
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.tCPRoute == nil {
-		return localVarReturnValue, nil, reportError("tCPRoute is required and must be specified")
+	if r.tCPRouteRequest == nil {
+		return localVarReturnValue, nil, reportError("tCPRouteRequest is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -5570,7 +7396,7 @@ func (a *KubernetesAPIService) KubernetesClustersTcproutesCreateExecute(r ApiKub
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.tCPRoute
+	localVarPostBody = r.tCPRouteRequest
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
@@ -5870,11 +7696,11 @@ type ApiKubernetesClustersTcproutesPartialUpdateRequest struct {
 	ApiService *KubernetesAPIService
 	clusterId int32
 	id string
-	patchedTCPRoute *PatchedTCPRoute
+	patchedTCPRouteRequest *PatchedTCPRouteRequest
 }
 
-func (r ApiKubernetesClustersTcproutesPartialUpdateRequest) PatchedTCPRoute(patchedTCPRoute PatchedTCPRoute) ApiKubernetesClustersTcproutesPartialUpdateRequest {
-	r.patchedTCPRoute = &patchedTCPRoute
+func (r ApiKubernetesClustersTcproutesPartialUpdateRequest) PatchedTCPRouteRequest(patchedTCPRouteRequest PatchedTCPRouteRequest) ApiKubernetesClustersTcproutesPartialUpdateRequest {
+	r.patchedTCPRouteRequest = &patchedTCPRouteRequest
 	return r
 }
 
@@ -5942,7 +7768,7 @@ func (a *KubernetesAPIService) KubernetesClustersTcproutesPartialUpdateExecute(r
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.patchedTCPRoute
+	localVarPostBody = r.patchedTCPRouteRequest
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
@@ -6123,11 +7949,11 @@ type ApiKubernetesClustersTcproutesUpdateRequest struct {
 	ApiService *KubernetesAPIService
 	clusterId int32
 	id string
-	tCPRoute *TCPRoute
+	tCPRouteRequest *TCPRouteRequest
 }
 
-func (r ApiKubernetesClustersTcproutesUpdateRequest) TCPRoute(tCPRoute TCPRoute) ApiKubernetesClustersTcproutesUpdateRequest {
-	r.tCPRoute = &tCPRoute
+func (r ApiKubernetesClustersTcproutesUpdateRequest) TCPRouteRequest(tCPRouteRequest TCPRouteRequest) ApiKubernetesClustersTcproutesUpdateRequest {
+	r.tCPRouteRequest = &tCPRouteRequest
 	return r
 }
 
@@ -6176,8 +8002,8 @@ func (a *KubernetesAPIService) KubernetesClustersTcproutesUpdateExecute(r ApiKub
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.tCPRoute == nil {
-		return localVarReturnValue, nil, reportError("tCPRoute is required and must be specified")
+	if r.tCPRouteRequest == nil {
+		return localVarReturnValue, nil, reportError("tCPRouteRequest is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -6198,7 +8024,7 @@ func (a *KubernetesAPIService) KubernetesClustersTcproutesUpdateExecute(r ApiKub
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.tCPRoute
+	localVarPostBody = r.tCPRouteRequest
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
@@ -6371,11 +8197,11 @@ type ApiKubernetesClustersUdproutesCreateRequest struct {
 	ctx context.Context
 	ApiService *KubernetesAPIService
 	clusterId int32
-	uDPRoute *UDPRoute
+	uDPRouteRequest *UDPRouteRequest
 }
 
-func (r ApiKubernetesClustersUdproutesCreateRequest) UDPRoute(uDPRoute UDPRoute) ApiKubernetesClustersUdproutesCreateRequest {
-	r.uDPRoute = &uDPRoute
+func (r ApiKubernetesClustersUdproutesCreateRequest) UDPRouteRequest(uDPRouteRequest UDPRouteRequest) ApiKubernetesClustersUdproutesCreateRequest {
+	r.uDPRouteRequest = &uDPRouteRequest
 	return r
 }
 
@@ -6421,8 +8247,8 @@ func (a *KubernetesAPIService) KubernetesClustersUdproutesCreateExecute(r ApiKub
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.uDPRoute == nil {
-		return localVarReturnValue, nil, reportError("uDPRoute is required and must be specified")
+	if r.uDPRouteRequest == nil {
+		return localVarReturnValue, nil, reportError("uDPRouteRequest is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -6443,7 +8269,7 @@ func (a *KubernetesAPIService) KubernetesClustersUdproutesCreateExecute(r ApiKub
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.uDPRoute
+	localVarPostBody = r.uDPRouteRequest
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
@@ -6741,11 +8567,11 @@ type ApiKubernetesClustersUdproutesPartialUpdateRequest struct {
 	ApiService *KubernetesAPIService
 	clusterId int32
 	id string
-	patchedUDPRoute *PatchedUDPRoute
+	patchedUDPRouteRequest *PatchedUDPRouteRequest
 }
 
-func (r ApiKubernetesClustersUdproutesPartialUpdateRequest) PatchedUDPRoute(patchedUDPRoute PatchedUDPRoute) ApiKubernetesClustersUdproutesPartialUpdateRequest {
-	r.patchedUDPRoute = &patchedUDPRoute
+func (r ApiKubernetesClustersUdproutesPartialUpdateRequest) PatchedUDPRouteRequest(patchedUDPRouteRequest PatchedUDPRouteRequest) ApiKubernetesClustersUdproutesPartialUpdateRequest {
+	r.patchedUDPRouteRequest = &patchedUDPRouteRequest
 	return r
 }
 
@@ -6813,7 +8639,7 @@ func (a *KubernetesAPIService) KubernetesClustersUdproutesPartialUpdateExecute(r
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.patchedUDPRoute
+	localVarPostBody = r.patchedUDPRouteRequest
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
@@ -6993,11 +8819,11 @@ type ApiKubernetesClustersUdproutesUpdateRequest struct {
 	ApiService *KubernetesAPIService
 	clusterId int32
 	id string
-	uDPRoute *UDPRoute
+	uDPRouteRequest *UDPRouteRequest
 }
 
-func (r ApiKubernetesClustersUdproutesUpdateRequest) UDPRoute(uDPRoute UDPRoute) ApiKubernetesClustersUdproutesUpdateRequest {
-	r.uDPRoute = &uDPRoute
+func (r ApiKubernetesClustersUdproutesUpdateRequest) UDPRouteRequest(uDPRouteRequest UDPRouteRequest) ApiKubernetesClustersUdproutesUpdateRequest {
+	r.uDPRouteRequest = &uDPRouteRequest
 	return r
 }
 
@@ -7046,8 +8872,8 @@ func (a *KubernetesAPIService) KubernetesClustersUdproutesUpdateExecute(r ApiKub
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.uDPRoute == nil {
-		return localVarReturnValue, nil, reportError("uDPRoute is required and must be specified")
+	if r.uDPRouteRequest == nil {
+		return localVarReturnValue, nil, reportError("uDPRouteRequest is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -7068,7 +8894,7 @@ func (a *KubernetesAPIService) KubernetesClustersUdproutesUpdateExecute(r ApiKub
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.uDPRoute
+	localVarPostBody = r.uDPRouteRequest
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
@@ -7124,11 +8950,11 @@ type ApiKubernetesClustersUpdateRequest struct {
 	ctx context.Context
 	ApiService *KubernetesAPIService
 	id string
-	clusterDetail *ClusterDetail
+	clusterDetailRequest *ClusterDetailRequest
 }
 
-func (r ApiKubernetesClustersUpdateRequest) ClusterDetail(clusterDetail ClusterDetail) ApiKubernetesClustersUpdateRequest {
-	r.clusterDetail = &clusterDetail
+func (r ApiKubernetesClustersUpdateRequest) ClusterDetailRequest(clusterDetailRequest ClusterDetailRequest) ApiKubernetesClustersUpdateRequest {
+	r.clusterDetailRequest = &clusterDetailRequest
 	return r
 }
 
@@ -7181,8 +9007,8 @@ func (a *KubernetesAPIService) KubernetesClustersUpdateExecute(r ApiKubernetesCl
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.clusterDetail == nil {
-		return localVarReturnValue, nil, reportError("clusterDetail is required and must be specified")
+	if r.clusterDetailRequest == nil {
+		return localVarReturnValue, nil, reportError("clusterDetailRequest is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -7203,7 +9029,7 @@ func (a *KubernetesAPIService) KubernetesClustersUpdateExecute(r ApiKubernetesCl
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.clusterDetail
+	localVarPostBody = r.clusterDetailRequest
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
@@ -7332,6 +9158,131 @@ func (a *KubernetesAPIService) KubernetesClustersUpgradeFeatureCreateExecute(r A
 	}
 	// body params
 	localVarPostBody = r.featureUpgradeRequest
+	if r.ctx != nil {
+		// API Key Authentication
+		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
+			if apiKey, ok := auth["tokenAuth"]; ok {
+				var key string
+				if apiKey.Prefix != "" {
+					key = apiKey.Prefix + " " + apiKey.Key
+				} else {
+					key = apiKey.Key
+				}
+				localVarHeaderParams["Authorization"] = key
+			}
+		}
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiKubernetesClustersUpgradeLbCreateRequest struct {
+	ctx context.Context
+	ApiService *KubernetesAPIService
+	id string
+	lBUpgradeRequest *LBUpgradeRequest
+}
+
+func (r ApiKubernetesClustersUpgradeLbCreateRequest) LBUpgradeRequest(lBUpgradeRequest LBUpgradeRequest) ApiKubernetesClustersUpgradeLbCreateRequest {
+	r.lBUpgradeRequest = &lBUpgradeRequest
+	return r
+}
+
+func (r ApiKubernetesClustersUpgradeLbCreateRequest) Execute() (*LBUpgradePlanResponse, *http.Response, error) {
+	return r.ApiService.KubernetesClustersUpgradeLbCreateExecute(r)
+}
+
+/*
+KubernetesClustersUpgradeLbCreate Method for KubernetesClustersUpgradeLbCreate
+
+Inspect or perform the load-balancer upgrade the server computes for this cluster. The caller never selects a level.
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param id
+ @return ApiKubernetesClustersUpgradeLbCreateRequest
+*/
+func (a *KubernetesAPIService) KubernetesClustersUpgradeLbCreate(ctx context.Context, id string) ApiKubernetesClustersUpgradeLbCreateRequest {
+	return ApiKubernetesClustersUpgradeLbCreateRequest{
+		ApiService: a,
+		ctx: ctx,
+		id: id,
+	}
+}
+
+// Execute executes the request
+//  @return LBUpgradePlanResponse
+func (a *KubernetesAPIService) KubernetesClustersUpgradeLbCreateExecute(r ApiKubernetesClustersUpgradeLbCreateRequest) (*LBUpgradePlanResponse, *http.Response, error) {
+	var (
+		localVarHTTPMethod   = http.MethodPost
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *LBUpgradePlanResponse
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "KubernetesAPIService.KubernetesClustersUpgradeLbCreate")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/api/kubernetes/clusters/{id}/upgrade-lb/"
+	localVarPath = strings.Replace(localVarPath, "{"+"id"+"}", url.PathEscape(parameterValueToString(r.id, "id")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{"application/json"}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	// body params
+	localVarPostBody = r.lBUpgradeRequest
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {

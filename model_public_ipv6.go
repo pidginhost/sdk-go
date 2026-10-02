@@ -28,7 +28,10 @@ type PublicIPv6 struct {
 	Gateway string `json:"gateway"`
 	Prefix int32 `json:"prefix"`
 	Attached bool `json:"attached"`
+	// Hostname of the server this address is attached to. Empty when it is not attached.
 	Server string `json:"server"`
+	// ID of the attached server, as used by /api/cloud/servers/{id}/. Null when the address is not attached to a cloud server.
+	ServerId NullableInt32 `json:"server_id"`
 }
 
 type _PublicIPv6 PublicIPv6
@@ -37,7 +40,7 @@ type _PublicIPv6 PublicIPv6
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewPublicIPv6(id int32, slug string, address string, gateway string, prefix int32, attached bool, server string) *PublicIPv6 {
+func NewPublicIPv6(id int32, slug string, address string, gateway string, prefix int32, attached bool, server string, serverId NullableInt32) *PublicIPv6 {
 	this := PublicIPv6{}
 	this.Id = id
 	this.Slug = slug
@@ -46,6 +49,7 @@ func NewPublicIPv6(id int32, slug string, address string, gateway string, prefix
 	this.Prefix = prefix
 	this.Attached = attached
 	this.Server = server
+	this.ServerId = serverId
 	return &this
 }
 
@@ -225,6 +229,32 @@ func (o *PublicIPv6) SetServer(v string) {
 	o.Server = v
 }
 
+// GetServerId returns the ServerId field value
+// If the value is explicit nil, the zero value for int32 will be returned
+func (o *PublicIPv6) GetServerId() int32 {
+	if o == nil || o.ServerId.Get() == nil {
+		var ret int32
+		return ret
+	}
+
+	return *o.ServerId.Get()
+}
+
+// GetServerIdOk returns a tuple with the ServerId field value
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *PublicIPv6) GetServerIdOk() (*int32, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.ServerId.Get(), o.ServerId.IsSet()
+}
+
+// SetServerId sets field value
+func (o *PublicIPv6) SetServerId(v int32) {
+	o.ServerId.Set(&v)
+}
+
 func (o PublicIPv6) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -242,6 +272,7 @@ func (o PublicIPv6) ToMap() (map[string]interface{}, error) {
 	toSerialize["prefix"] = o.Prefix
 	toSerialize["attached"] = o.Attached
 	toSerialize["server"] = o.Server
+	toSerialize["server_id"] = o.ServerId.Get()
 	return toSerialize, nil
 }
 
@@ -257,6 +288,7 @@ func (o *PublicIPv6) UnmarshalJSON(data []byte) (err error) {
 		"prefix",
 		"attached",
 		"server",
+		"server_id",
 	}
 
 	allProperties := make(map[string]interface{})

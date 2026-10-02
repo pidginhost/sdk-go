@@ -38,7 +38,7 @@ type Server struct {
 	HaEnabled bool `json:"ha_enabled"`
 	// Customer installed their own OS from an ISO; cloud-init features no longer apply
 	CustomOs bool `json:"custom_os"`
-	Networks map[string]interface{} `json:"networks"`
+	Networks ServerNetworks `json:"networks"`
 	RescueMode bool `json:"rescue_mode"`
 	BootIso NullableString `json:"boot_iso"`
 	RescueSupported bool `json:"rescue_supported"`
@@ -50,7 +50,7 @@ type _Server Server
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewServer(id int32, image string, package_ string, cpus int32, memory int32, diskSize int32, generation string, destroyProtection bool, haEnabled bool, customOs bool, networks map[string]interface{}, rescueMode bool, bootIso NullableString, rescueSupported bool) *Server {
+func NewServer(id int32, image string, package_ string, cpus int32, memory int32, diskSize int32, generation string, destroyProtection bool, haEnabled bool, customOs bool, networks ServerNetworks, rescueMode bool, bootIso NullableString, rescueSupported bool) *Server {
 	this := Server{}
 	this.Id = id
 	this.Image = image
@@ -414,9 +414,9 @@ func (o *Server) SetCustomOs(v bool) {
 }
 
 // GetNetworks returns the Networks field value
-func (o *Server) GetNetworks() map[string]interface{} {
+func (o *Server) GetNetworks() ServerNetworks {
 	if o == nil {
-		var ret map[string]interface{}
+		var ret ServerNetworks
 		return ret
 	}
 
@@ -425,15 +425,15 @@ func (o *Server) GetNetworks() map[string]interface{} {
 
 // GetNetworksOk returns a tuple with the Networks field value
 // and a boolean to check if the value has been set.
-func (o *Server) GetNetworksOk() (map[string]interface{}, bool) {
+func (o *Server) GetNetworksOk() (*ServerNetworks, bool) {
 	if o == nil {
-		return map[string]interface{}{}, false
+		return nil, false
 	}
-	return o.Networks, true
+	return &o.Networks, true
 }
 
 // SetNetworks sets field value
-func (o *Server) SetNetworks(v map[string]interface{}) {
+func (o *Server) SetNetworks(v ServerNetworks) {
 	o.Networks = v
 }
 
