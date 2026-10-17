@@ -24,6 +24,9 @@ Method | HTTP request | Description
 [**KubernetesClustersKubeVersionUpgradeCreate**](KubernetesAPI.md#KubernetesClustersKubeVersionUpgradeCreate) | **Post** /api/kubernetes/clusters/{id}/kube-version-upgrade/ | 
 [**KubernetesClustersKubeconfigCreate**](KubernetesAPI.md#KubernetesClustersKubeconfigCreate) | **Post** /api/kubernetes/clusters/{id}/kubeconfig/ | 
 [**KubernetesClustersKubeconfigRetrieve**](KubernetesAPI.md#KubernetesClustersKubeconfigRetrieve) | **Get** /api/kubernetes/clusters/{id}/kubeconfig/ | 
+[**KubernetesClustersL3CutoverCreate**](KubernetesAPI.md#KubernetesClustersL3CutoverCreate) | **Post** /api/kubernetes/clusters/{id}/l3/cutover/ | 
+[**KubernetesClustersL3Retrieve**](KubernetesAPI.md#KubernetesClustersL3Retrieve) | **Get** /api/kubernetes/clusters/{id}/l3/ | 
+[**KubernetesClustersL3RevertCreate**](KubernetesAPI.md#KubernetesClustersL3RevertCreate) | **Post** /api/kubernetes/clusters/{id}/l3/revert/ | 
 [**KubernetesClustersLbFirewallCreate**](KubernetesAPI.md#KubernetesClustersLbFirewallCreate) | **Post** /api/kubernetes/clusters/{cluster_id}/lb-firewall/ | 
 [**KubernetesClustersLbFirewallDestroy**](KubernetesAPI.md#KubernetesClustersLbFirewallDestroy) | **Delete** /api/kubernetes/clusters/{cluster_id}/lb-firewall/{id}/ | 
 [**KubernetesClustersLbFirewallList**](KubernetesAPI.md#KubernetesClustersLbFirewallList) | **Get** /api/kubernetes/clusters/{cluster_id}/lb-firewall/ | 
@@ -1489,6 +1492,220 @@ Name | Type | Description  | Notes
 
 - **Content-Type**: Not defined
 - **Accept**: text/plain
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## KubernetesClustersL3CutoverCreate
+
+> ClusterDetail KubernetesClustersL3CutoverCreate(ctx, id).ClusterDetailRequest(clusterDetailRequest).Execute()
+
+
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/pidginhost/sdk-go"
+)
+
+func main() {
+	id := "id_example" // string | 
+	clusterDetailRequest := *openapiclient.NewClusterDetailRequest() // ClusterDetailRequest |  (optional)
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.KubernetesAPI.KubernetesClustersL3CutoverCreate(context.Background(), id).ClusterDetailRequest(clusterDetailRequest).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `KubernetesAPI.KubernetesClustersL3CutoverCreate``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `KubernetesClustersL3CutoverCreate`: ClusterDetail
+	fmt.Fprintf(os.Stdout, "Response from `KubernetesAPI.KubernetesClustersL3CutoverCreate`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**id** | **string** |  | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiKubernetesClustersL3CutoverCreateRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+ **clusterDetailRequest** | [**ClusterDetailRequest**](ClusterDetailRequest.md) |  | 
+
+### Return type
+
+[**ClusterDetail**](ClusterDetail.md)
+
+### Authorization
+
+[tokenAuth](../README.md#tokenAuth), [cookieAuth](../README.md#cookieAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## KubernetesClustersL3Retrieve
+
+> ClusterDetail KubernetesClustersL3Retrieve(ctx, id).Execute()
+
+
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/pidginhost/sdk-go"
+)
+
+func main() {
+	id := "id_example" // string | 
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.KubernetesAPI.KubernetesClustersL3Retrieve(context.Background(), id).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `KubernetesAPI.KubernetesClustersL3Retrieve``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `KubernetesClustersL3Retrieve`: ClusterDetail
+	fmt.Fprintf(os.Stdout, "Response from `KubernetesAPI.KubernetesClustersL3Retrieve`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**id** | **string** |  | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiKubernetesClustersL3RetrieveRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+### Return type
+
+[**ClusterDetail**](ClusterDetail.md)
+
+### Authorization
+
+[tokenAuth](../README.md#tokenAuth), [cookieAuth](../README.md#cookieAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## KubernetesClustersL3RevertCreate
+
+> ClusterDetail KubernetesClustersL3RevertCreate(ctx, id).ClusterDetailRequest(clusterDetailRequest).Execute()
+
+
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/pidginhost/sdk-go"
+)
+
+func main() {
+	id := "id_example" // string | 
+	clusterDetailRequest := *openapiclient.NewClusterDetailRequest() // ClusterDetailRequest |  (optional)
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.KubernetesAPI.KubernetesClustersL3RevertCreate(context.Background(), id).ClusterDetailRequest(clusterDetailRequest).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `KubernetesAPI.KubernetesClustersL3RevertCreate``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `KubernetesClustersL3RevertCreate`: ClusterDetail
+	fmt.Fprintf(os.Stdout, "Response from `KubernetesAPI.KubernetesClustersL3RevertCreate`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**id** | **string** |  | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiKubernetesClustersL3RevertCreateRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+ **clusterDetailRequest** | [**ClusterDetailRequest**](ClusterDetailRequest.md) |  | 
+
+### Return type
+
+[**ClusterDetail**](ClusterDetail.md)
+
+### Authorization
+
+[tokenAuth](../README.md#tokenAuth), [cookieAuth](../README.md#cookieAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
 [[Back to Model list]](../README.md#documentation-for-models)
@@ -3167,7 +3384,7 @@ Name | Type | Description  | Notes
 
 ## KubernetesClustersResourcePoolsDestroy
 
-> KubernetesClustersResourcePoolsDestroy(ctx, clusterId, id).Execute()
+> KubernetesClustersResourcePoolsDestroy(ctx, clusterId, id).ResourcePoolDeleteRequest(resourcePoolDeleteRequest).Execute()
 
 
 
@@ -3188,10 +3405,11 @@ import (
 func main() {
 	clusterId := int32(56) // int32 | 
 	id := "id_example" // string | 
+	resourcePoolDeleteRequest := *openapiclient.NewResourcePoolDeleteRequest() // ResourcePoolDeleteRequest |  (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	r, err := apiClient.KubernetesAPI.KubernetesClustersResourcePoolsDestroy(context.Background(), clusterId, id).Execute()
+	r, err := apiClient.KubernetesAPI.KubernetesClustersResourcePoolsDestroy(context.Background(), clusterId, id).ResourcePoolDeleteRequest(resourcePoolDeleteRequest).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `KubernetesAPI.KubernetesClustersResourcePoolsDestroy``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -3217,6 +3435,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
 
+ **resourcePoolDeleteRequest** | [**ResourcePoolDeleteRequest**](ResourcePoolDeleteRequest.md) |  | 
 
 ### Return type
 
@@ -3228,7 +3447,7 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
-- **Content-Type**: Not defined
+- **Content-Type**: application/json
 - **Accept**: Not defined
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
@@ -3310,7 +3529,7 @@ Name | Type | Description  | Notes
 
 ## KubernetesClustersResourcePoolsNodesDestroy
 
-> NodeOperation KubernetesClustersResourcePoolsNodesDestroy(ctx, clusterId, id, poolId).Execute()
+> NodeOperation KubernetesClustersResourcePoolsNodesDestroy(ctx, clusterId, id, poolId).NodeOperationDeleteRequest(nodeOperationDeleteRequest).Execute()
 
 
 
@@ -3332,10 +3551,11 @@ func main() {
 	clusterId := int32(56) // int32 | 
 	id := "id_example" // string | 
 	poolId := int32(56) // int32 | 
+	nodeOperationDeleteRequest := *openapiclient.NewNodeOperationDeleteRequest() // NodeOperationDeleteRequest |  (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.KubernetesAPI.KubernetesClustersResourcePoolsNodesDestroy(context.Background(), clusterId, id, poolId).Execute()
+	resp, r, err := apiClient.KubernetesAPI.KubernetesClustersResourcePoolsNodesDestroy(context.Background(), clusterId, id, poolId).NodeOperationDeleteRequest(nodeOperationDeleteRequest).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `KubernetesAPI.KubernetesClustersResourcePoolsNodesDestroy``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -3365,6 +3585,7 @@ Name | Type | Description  | Notes
 
 
 
+ **nodeOperationDeleteRequest** | [**NodeOperationDeleteRequest**](NodeOperationDeleteRequest.md) |  | 
 
 ### Return type
 
@@ -3376,7 +3597,7 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
-- **Content-Type**: Not defined
+- **Content-Type**: application/json
 - **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
@@ -5098,7 +5319,7 @@ import (
 
 func main() {
 	id := "id_example" // string | 
-	clusterDetailRequest := *openapiclient.NewClusterDetailRequest("PricePerMonth_example") // ClusterDetailRequest | 
+	clusterDetailRequest := *openapiclient.NewClusterDetailRequest() // ClusterDetailRequest |  (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)

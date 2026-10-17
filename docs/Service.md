@@ -4,6 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**Billing** | [**NullableResourceBilling**](ResourceBilling.md) |  | [readonly] 
 **Id** | **int32** |  | [readonly] 
 **Company** | Pointer to **NullableInt32** |  | [optional] 
 **BillingCycle** | **int32** |  | [readonly] 
@@ -20,7 +21,7 @@ Name | Type | Description | Notes
 
 ### NewService
 
-`func NewService(id int32, billingCycle int32, hostname string, price string, status ServiceStatusEnum, created string, modified string, terminated NullableString, nextInvoice string, primaryService NullableInt32, ) *Service`
+`func NewService(billing NullableResourceBilling, id int32, billingCycle int32, hostname string, price string, status ServiceStatusEnum, created string, modified string, terminated NullableString, nextInvoice string, primaryService NullableInt32, ) *Service`
 
 NewService instantiates a new Service object
 This constructor will assign default values to properties that have it defined,
@@ -35,6 +36,36 @@ NewServiceWithDefaults instantiates a new Service object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
 
+### GetBilling
+
+`func (o *Service) GetBilling() ResourceBilling`
+
+GetBilling returns the Billing field if non-nil, zero value otherwise.
+
+### GetBillingOk
+
+`func (o *Service) GetBillingOk() (*ResourceBilling, bool)`
+
+GetBillingOk returns a tuple with the Billing field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetBilling
+
+`func (o *Service) SetBilling(v ResourceBilling)`
+
+SetBilling sets Billing field to given value.
+
+
+### SetBillingNil
+
+`func (o *Service) SetBillingNil(b bool)`
+
+ SetBillingNil sets the value for Billing to be an explicit nil
+
+### UnsetBilling
+`func (o *Service) UnsetBilling()`
+
+UnsetBilling ensures that no value is present for Billing, not even an explicit nil
 ### GetId
 
 `func (o *Service) GetId() int32`

@@ -22,12 +22,13 @@ var _ MappedNullable = &Bucket{}
 
 // Bucket struct for Bucket
 type Bucket struct {
+	Billing NullableResourceBilling `json:"billing"`
 	Id int32 `json:"id"`
 	Name string `json:"name"`
 	FullName string `json:"full_name"`
 	QuotaGb int32 `json:"quota_gb"`
-	UsedBytes int32 `json:"used_bytes"`
-	ObjectCount int32 `json:"object_count"`
+	UsedBytes int64 `json:"used_bytes"`
+	ObjectCount int64 `json:"object_count"`
 	PublicRead bool `json:"public_read"`
 	Status ResourceStatusEnum `json:"status"`
 	Endpoint string `json:"endpoint"`
@@ -41,8 +42,9 @@ type _Bucket Bucket
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewBucket(id int32, name string, fullName string, quotaGb int32, usedBytes int32, objectCount int32, publicRead bool, status ResourceStatusEnum, endpoint string, region string, created string) *Bucket {
+func NewBucket(billing NullableResourceBilling, id int32, name string, fullName string, quotaGb int32, usedBytes int64, objectCount int64, publicRead bool, status ResourceStatusEnum, endpoint string, region string, created string) *Bucket {
 	this := Bucket{}
+	this.Billing = billing
 	this.Id = id
 	this.Name = name
 	this.FullName = fullName
@@ -63,6 +65,32 @@ func NewBucket(id int32, name string, fullName string, quotaGb int32, usedBytes 
 func NewBucketWithDefaults() *Bucket {
 	this := Bucket{}
 	return &this
+}
+
+// GetBilling returns the Billing field value
+// If the value is explicit nil, the zero value for ResourceBilling will be returned
+func (o *Bucket) GetBilling() ResourceBilling {
+	if o == nil || o.Billing.Get() == nil {
+		var ret ResourceBilling
+		return ret
+	}
+
+	return *o.Billing.Get()
+}
+
+// GetBillingOk returns a tuple with the Billing field value
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *Bucket) GetBillingOk() (*ResourceBilling, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.Billing.Get(), o.Billing.IsSet()
+}
+
+// SetBilling sets field value
+func (o *Bucket) SetBilling(v ResourceBilling) {
+	o.Billing.Set(&v)
 }
 
 // GetId returns the Id field value
@@ -162,9 +190,9 @@ func (o *Bucket) SetQuotaGb(v int32) {
 }
 
 // GetUsedBytes returns the UsedBytes field value
-func (o *Bucket) GetUsedBytes() int32 {
+func (o *Bucket) GetUsedBytes() int64 {
 	if o == nil {
-		var ret int32
+		var ret int64
 		return ret
 	}
 
@@ -173,7 +201,7 @@ func (o *Bucket) GetUsedBytes() int32 {
 
 // GetUsedBytesOk returns a tuple with the UsedBytes field value
 // and a boolean to check if the value has been set.
-func (o *Bucket) GetUsedBytesOk() (*int32, bool) {
+func (o *Bucket) GetUsedBytesOk() (*int64, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -181,14 +209,14 @@ func (o *Bucket) GetUsedBytesOk() (*int32, bool) {
 }
 
 // SetUsedBytes sets field value
-func (o *Bucket) SetUsedBytes(v int32) {
+func (o *Bucket) SetUsedBytes(v int64) {
 	o.UsedBytes = v
 }
 
 // GetObjectCount returns the ObjectCount field value
-func (o *Bucket) GetObjectCount() int32 {
+func (o *Bucket) GetObjectCount() int64 {
 	if o == nil {
-		var ret int32
+		var ret int64
 		return ret
 	}
 
@@ -197,7 +225,7 @@ func (o *Bucket) GetObjectCount() int32 {
 
 // GetObjectCountOk returns a tuple with the ObjectCount field value
 // and a boolean to check if the value has been set.
-func (o *Bucket) GetObjectCountOk() (*int32, bool) {
+func (o *Bucket) GetObjectCountOk() (*int64, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -205,7 +233,7 @@ func (o *Bucket) GetObjectCountOk() (*int32, bool) {
 }
 
 // SetObjectCount sets field value
-func (o *Bucket) SetObjectCount(v int32) {
+func (o *Bucket) SetObjectCount(v int64) {
 	o.ObjectCount = v
 }
 
@@ -339,6 +367,7 @@ func (o Bucket) MarshalJSON() ([]byte, error) {
 
 func (o Bucket) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
+	toSerialize["billing"] = o.Billing.Get()
 	toSerialize["id"] = o.Id
 	toSerialize["name"] = o.Name
 	toSerialize["full_name"] = o.FullName
@@ -358,6 +387,7 @@ func (o *Bucket) UnmarshalJSON(data []byte) (err error) {
 	// by unmarshalling the object into a generic map with string keys and checking
 	// that every required field exists as a key in the generic map.
 	requiredProperties := []string{
+		"billing",
 		"id",
 		"name",
 		"full_name",

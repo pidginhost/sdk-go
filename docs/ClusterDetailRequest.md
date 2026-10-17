@@ -5,7 +5,6 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Name** | Pointer to **string** |  | [optional] 
-**PricePerMonth** | **string** |  | 
 **Features** | Pointer to [**[]FeaturesEnum**](FeaturesEnum.md) |  | [optional] 
 **Protected** | Pointer to **bool** |  | [optional] 
 
@@ -13,7 +12,7 @@ Name | Type | Description | Notes
 
 ### NewClusterDetailRequest
 
-`func NewClusterDetailRequest(pricePerMonth string, ) *ClusterDetailRequest`
+`func NewClusterDetailRequest() *ClusterDetailRequest`
 
 NewClusterDetailRequest instantiates a new ClusterDetailRequest object
 This constructor will assign default values to properties that have it defined,
@@ -52,26 +51,6 @@ SetName sets Name field to given value.
 `func (o *ClusterDetailRequest) HasName() bool`
 
 HasName returns a boolean if a field has been set.
-
-### GetPricePerMonth
-
-`func (o *ClusterDetailRequest) GetPricePerMonth() string`
-
-GetPricePerMonth returns the PricePerMonth field if non-nil, zero value otherwise.
-
-### GetPricePerMonthOk
-
-`func (o *ClusterDetailRequest) GetPricePerMonthOk() (*string, bool)`
-
-GetPricePerMonthOk returns a tuple with the PricePerMonth field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetPricePerMonth
-
-`func (o *ClusterDetailRequest) SetPricePerMonth(v string)`
-
-SetPricePerMonth sets PricePerMonth field to given value.
-
 
 ### GetFeatures
 

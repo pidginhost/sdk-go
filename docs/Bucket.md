@@ -4,12 +4,13 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**Billing** | [**NullableResourceBilling**](ResourceBilling.md) |  | [readonly] 
 **Id** | **int32** |  | [readonly] 
 **Name** | **string** |  | [readonly] 
 **FullName** | **string** |  | [readonly] 
 **QuotaGb** | **int32** |  | [readonly] 
-**UsedBytes** | **int32** |  | [readonly] 
-**ObjectCount** | **int32** |  | [readonly] 
+**UsedBytes** | **int64** |  | [readonly] 
+**ObjectCount** | **int64** |  | [readonly] 
 **PublicRead** | **bool** |  | [readonly] 
 **Status** | [**ResourceStatusEnum**](ResourceStatusEnum.md) |  | [readonly] 
 **Endpoint** | **string** |  | [readonly] 
@@ -20,7 +21,7 @@ Name | Type | Description | Notes
 
 ### NewBucket
 
-`func NewBucket(id int32, name string, fullName string, quotaGb int32, usedBytes int32, objectCount int32, publicRead bool, status ResourceStatusEnum, endpoint string, region string, created string, ) *Bucket`
+`func NewBucket(billing NullableResourceBilling, id int32, name string, fullName string, quotaGb int32, usedBytes int64, objectCount int64, publicRead bool, status ResourceStatusEnum, endpoint string, region string, created string, ) *Bucket`
 
 NewBucket instantiates a new Bucket object
 This constructor will assign default values to properties that have it defined,
@@ -35,6 +36,36 @@ NewBucketWithDefaults instantiates a new Bucket object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
 
+### GetBilling
+
+`func (o *Bucket) GetBilling() ResourceBilling`
+
+GetBilling returns the Billing field if non-nil, zero value otherwise.
+
+### GetBillingOk
+
+`func (o *Bucket) GetBillingOk() (*ResourceBilling, bool)`
+
+GetBillingOk returns a tuple with the Billing field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetBilling
+
+`func (o *Bucket) SetBilling(v ResourceBilling)`
+
+SetBilling sets Billing field to given value.
+
+
+### SetBillingNil
+
+`func (o *Bucket) SetBillingNil(b bool)`
+
+ SetBillingNil sets the value for Billing to be an explicit nil
+
+### UnsetBilling
+`func (o *Bucket) UnsetBilling()`
+
+UnsetBilling ensures that no value is present for Billing, not even an explicit nil
 ### GetId
 
 `func (o *Bucket) GetId() int32`
@@ -117,40 +148,40 @@ SetQuotaGb sets QuotaGb field to given value.
 
 ### GetUsedBytes
 
-`func (o *Bucket) GetUsedBytes() int32`
+`func (o *Bucket) GetUsedBytes() int64`
 
 GetUsedBytes returns the UsedBytes field if non-nil, zero value otherwise.
 
 ### GetUsedBytesOk
 
-`func (o *Bucket) GetUsedBytesOk() (*int32, bool)`
+`func (o *Bucket) GetUsedBytesOk() (*int64, bool)`
 
 GetUsedBytesOk returns a tuple with the UsedBytes field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetUsedBytes
 
-`func (o *Bucket) SetUsedBytes(v int32)`
+`func (o *Bucket) SetUsedBytes(v int64)`
 
 SetUsedBytes sets UsedBytes field to given value.
 
 
 ### GetObjectCount
 
-`func (o *Bucket) GetObjectCount() int32`
+`func (o *Bucket) GetObjectCount() int64`
 
 GetObjectCount returns the ObjectCount field if non-nil, zero value otherwise.
 
 ### GetObjectCountOk
 
-`func (o *Bucket) GetObjectCountOk() (*int32, bool)`
+`func (o *Bucket) GetObjectCountOk() (*int64, bool)`
 
 GetObjectCountOk returns a tuple with the ObjectCount field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetObjectCount
 
-`func (o *Bucket) SetObjectCount(v int32)`
+`func (o *Bucket) SetObjectCount(v int64)`
 
 SetObjectCount sets ObjectCount field to given value.
 

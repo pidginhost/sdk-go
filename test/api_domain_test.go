@@ -48,6 +48,18 @@ func Test_pidginhostsdk_DomainAPIService(t *testing.T) {
 
 	})
 
+	t.Run("Test DomainAPIService DomainDomainCheckAvailabilityRetrieve", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		resp, httpRes, err := apiClient.DomainAPI.DomainDomainCheckAvailabilityRetrieve(context.Background()).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
 	t.Run("Test DomainAPIService DomainDomainContactsCreate", func(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
@@ -282,6 +294,18 @@ func Test_pidginhostsdk_DomainAPIService(t *testing.T) {
 		var id string
 
 		resp, httpRes, err := apiClient.DomainAPI.DomainRegistrantsUpdate(context.Background(), id).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test DomainAPIService DomainTldCatalogRetrieve", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		resp, httpRes, err := apiClient.DomainAPI.DomainTldCatalogRetrieve(context.Background()).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)

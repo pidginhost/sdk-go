@@ -26,19 +26,19 @@ type DNSRecord struct {
 	Name string `json:"name"`
 	Ttl int32 `json:"ttl"`
 	Type string `json:"type"`
-	Address string `json:"address"`
-	Cname string `json:"cname"`
-	Exchange string `json:"exchange"`
-	Preference int32 `json:"preference"`
-	Txtdata string `json:"txtdata"`
-	Unencoded string `json:"unencoded"`
-	Target string `json:"target"`
-	Priority int32 `json:"priority"`
-	Weight int32 `json:"weight"`
-	Port int32 `json:"port"`
-	Flag int32 `json:"flag"`
-	Tag string `json:"tag"`
-	Value string `json:"value"`
+	Address *string `json:"address,omitempty"`
+	Cname *string `json:"cname,omitempty"`
+	Exchange *string `json:"exchange,omitempty"`
+	Preference *int32 `json:"preference,omitempty"`
+	Txtdata *string `json:"txtdata,omitempty"`
+	Unencoded *string `json:"unencoded,omitempty"`
+	Target *string `json:"target,omitempty"`
+	Priority *int32 `json:"priority,omitempty"`
+	Weight *int32 `json:"weight,omitempty"`
+	Port *int32 `json:"port,omitempty"`
+	Flag *int32 `json:"flag,omitempty"`
+	Tag *string `json:"tag,omitempty"`
+	Value *string `json:"value,omitempty"`
 }
 
 type _DNSRecord DNSRecord
@@ -47,25 +47,12 @@ type _DNSRecord DNSRecord
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewDNSRecord(line int32, name string, ttl int32, type_ string, address string, cname string, exchange string, preference int32, txtdata string, unencoded string, target string, priority int32, weight int32, port int32, flag int32, tag string, value string) *DNSRecord {
+func NewDNSRecord(line int32, name string, ttl int32, type_ string) *DNSRecord {
 	this := DNSRecord{}
 	this.Line = line
 	this.Name = name
 	this.Ttl = ttl
 	this.Type = type_
-	this.Address = address
-	this.Cname = cname
-	this.Exchange = exchange
-	this.Preference = preference
-	this.Txtdata = txtdata
-	this.Unencoded = unencoded
-	this.Target = target
-	this.Priority = priority
-	this.Weight = weight
-	this.Port = port
-	this.Flag = flag
-	this.Tag = tag
-	this.Value = value
 	return &this
 }
 
@@ -173,316 +160,420 @@ func (o *DNSRecord) SetType(v string) {
 	o.Type = v
 }
 
-// GetAddress returns the Address field value
+// GetAddress returns the Address field value if set, zero value otherwise.
 func (o *DNSRecord) GetAddress() string {
-	if o == nil {
+	if o == nil || IsNil(o.Address) {
 		var ret string
 		return ret
 	}
-
-	return o.Address
+	return *o.Address
 }
 
-// GetAddressOk returns a tuple with the Address field value
+// GetAddressOk returns a tuple with the Address field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *DNSRecord) GetAddressOk() (*string, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.Address) {
 		return nil, false
 	}
-	return &o.Address, true
+	return o.Address, true
 }
 
-// SetAddress sets field value
+// HasAddress returns a boolean if a field has been set.
+func (o *DNSRecord) HasAddress() bool {
+	if o != nil && !IsNil(o.Address) {
+		return true
+	}
+
+	return false
+}
+
+// SetAddress gets a reference to the given string and assigns it to the Address field.
 func (o *DNSRecord) SetAddress(v string) {
-	o.Address = v
+	o.Address = &v
 }
 
-// GetCname returns the Cname field value
+// GetCname returns the Cname field value if set, zero value otherwise.
 func (o *DNSRecord) GetCname() string {
-	if o == nil {
+	if o == nil || IsNil(o.Cname) {
 		var ret string
 		return ret
 	}
-
-	return o.Cname
+	return *o.Cname
 }
 
-// GetCnameOk returns a tuple with the Cname field value
+// GetCnameOk returns a tuple with the Cname field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *DNSRecord) GetCnameOk() (*string, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.Cname) {
 		return nil, false
 	}
-	return &o.Cname, true
+	return o.Cname, true
 }
 
-// SetCname sets field value
+// HasCname returns a boolean if a field has been set.
+func (o *DNSRecord) HasCname() bool {
+	if o != nil && !IsNil(o.Cname) {
+		return true
+	}
+
+	return false
+}
+
+// SetCname gets a reference to the given string and assigns it to the Cname field.
 func (o *DNSRecord) SetCname(v string) {
-	o.Cname = v
+	o.Cname = &v
 }
 
-// GetExchange returns the Exchange field value
+// GetExchange returns the Exchange field value if set, zero value otherwise.
 func (o *DNSRecord) GetExchange() string {
-	if o == nil {
+	if o == nil || IsNil(o.Exchange) {
 		var ret string
 		return ret
 	}
-
-	return o.Exchange
+	return *o.Exchange
 }
 
-// GetExchangeOk returns a tuple with the Exchange field value
+// GetExchangeOk returns a tuple with the Exchange field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *DNSRecord) GetExchangeOk() (*string, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.Exchange) {
 		return nil, false
 	}
-	return &o.Exchange, true
+	return o.Exchange, true
 }
 
-// SetExchange sets field value
+// HasExchange returns a boolean if a field has been set.
+func (o *DNSRecord) HasExchange() bool {
+	if o != nil && !IsNil(o.Exchange) {
+		return true
+	}
+
+	return false
+}
+
+// SetExchange gets a reference to the given string and assigns it to the Exchange field.
 func (o *DNSRecord) SetExchange(v string) {
-	o.Exchange = v
+	o.Exchange = &v
 }
 
-// GetPreference returns the Preference field value
+// GetPreference returns the Preference field value if set, zero value otherwise.
 func (o *DNSRecord) GetPreference() int32 {
-	if o == nil {
+	if o == nil || IsNil(o.Preference) {
 		var ret int32
 		return ret
 	}
-
-	return o.Preference
+	return *o.Preference
 }
 
-// GetPreferenceOk returns a tuple with the Preference field value
+// GetPreferenceOk returns a tuple with the Preference field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *DNSRecord) GetPreferenceOk() (*int32, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.Preference) {
 		return nil, false
 	}
-	return &o.Preference, true
+	return o.Preference, true
 }
 
-// SetPreference sets field value
+// HasPreference returns a boolean if a field has been set.
+func (o *DNSRecord) HasPreference() bool {
+	if o != nil && !IsNil(o.Preference) {
+		return true
+	}
+
+	return false
+}
+
+// SetPreference gets a reference to the given int32 and assigns it to the Preference field.
 func (o *DNSRecord) SetPreference(v int32) {
-	o.Preference = v
+	o.Preference = &v
 }
 
-// GetTxtdata returns the Txtdata field value
+// GetTxtdata returns the Txtdata field value if set, zero value otherwise.
 func (o *DNSRecord) GetTxtdata() string {
-	if o == nil {
+	if o == nil || IsNil(o.Txtdata) {
 		var ret string
 		return ret
 	}
-
-	return o.Txtdata
+	return *o.Txtdata
 }
 
-// GetTxtdataOk returns a tuple with the Txtdata field value
+// GetTxtdataOk returns a tuple with the Txtdata field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *DNSRecord) GetTxtdataOk() (*string, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.Txtdata) {
 		return nil, false
 	}
-	return &o.Txtdata, true
+	return o.Txtdata, true
 }
 
-// SetTxtdata sets field value
+// HasTxtdata returns a boolean if a field has been set.
+func (o *DNSRecord) HasTxtdata() bool {
+	if o != nil && !IsNil(o.Txtdata) {
+		return true
+	}
+
+	return false
+}
+
+// SetTxtdata gets a reference to the given string and assigns it to the Txtdata field.
 func (o *DNSRecord) SetTxtdata(v string) {
-	o.Txtdata = v
+	o.Txtdata = &v
 }
 
-// GetUnencoded returns the Unencoded field value
+// GetUnencoded returns the Unencoded field value if set, zero value otherwise.
 func (o *DNSRecord) GetUnencoded() string {
-	if o == nil {
+	if o == nil || IsNil(o.Unencoded) {
 		var ret string
 		return ret
 	}
-
-	return o.Unencoded
+	return *o.Unencoded
 }
 
-// GetUnencodedOk returns a tuple with the Unencoded field value
+// GetUnencodedOk returns a tuple with the Unencoded field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *DNSRecord) GetUnencodedOk() (*string, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.Unencoded) {
 		return nil, false
 	}
-	return &o.Unencoded, true
+	return o.Unencoded, true
 }
 
-// SetUnencoded sets field value
+// HasUnencoded returns a boolean if a field has been set.
+func (o *DNSRecord) HasUnencoded() bool {
+	if o != nil && !IsNil(o.Unencoded) {
+		return true
+	}
+
+	return false
+}
+
+// SetUnencoded gets a reference to the given string and assigns it to the Unencoded field.
 func (o *DNSRecord) SetUnencoded(v string) {
-	o.Unencoded = v
+	o.Unencoded = &v
 }
 
-// GetTarget returns the Target field value
+// GetTarget returns the Target field value if set, zero value otherwise.
 func (o *DNSRecord) GetTarget() string {
-	if o == nil {
+	if o == nil || IsNil(o.Target) {
 		var ret string
 		return ret
 	}
-
-	return o.Target
+	return *o.Target
 }
 
-// GetTargetOk returns a tuple with the Target field value
+// GetTargetOk returns a tuple with the Target field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *DNSRecord) GetTargetOk() (*string, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.Target) {
 		return nil, false
 	}
-	return &o.Target, true
+	return o.Target, true
 }
 
-// SetTarget sets field value
+// HasTarget returns a boolean if a field has been set.
+func (o *DNSRecord) HasTarget() bool {
+	if o != nil && !IsNil(o.Target) {
+		return true
+	}
+
+	return false
+}
+
+// SetTarget gets a reference to the given string and assigns it to the Target field.
 func (o *DNSRecord) SetTarget(v string) {
-	o.Target = v
+	o.Target = &v
 }
 
-// GetPriority returns the Priority field value
+// GetPriority returns the Priority field value if set, zero value otherwise.
 func (o *DNSRecord) GetPriority() int32 {
-	if o == nil {
+	if o == nil || IsNil(o.Priority) {
 		var ret int32
 		return ret
 	}
-
-	return o.Priority
+	return *o.Priority
 }
 
-// GetPriorityOk returns a tuple with the Priority field value
+// GetPriorityOk returns a tuple with the Priority field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *DNSRecord) GetPriorityOk() (*int32, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.Priority) {
 		return nil, false
 	}
-	return &o.Priority, true
+	return o.Priority, true
 }
 
-// SetPriority sets field value
+// HasPriority returns a boolean if a field has been set.
+func (o *DNSRecord) HasPriority() bool {
+	if o != nil && !IsNil(o.Priority) {
+		return true
+	}
+
+	return false
+}
+
+// SetPriority gets a reference to the given int32 and assigns it to the Priority field.
 func (o *DNSRecord) SetPriority(v int32) {
-	o.Priority = v
+	o.Priority = &v
 }
 
-// GetWeight returns the Weight field value
+// GetWeight returns the Weight field value if set, zero value otherwise.
 func (o *DNSRecord) GetWeight() int32 {
-	if o == nil {
+	if o == nil || IsNil(o.Weight) {
 		var ret int32
 		return ret
 	}
-
-	return o.Weight
+	return *o.Weight
 }
 
-// GetWeightOk returns a tuple with the Weight field value
+// GetWeightOk returns a tuple with the Weight field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *DNSRecord) GetWeightOk() (*int32, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.Weight) {
 		return nil, false
 	}
-	return &o.Weight, true
+	return o.Weight, true
 }
 
-// SetWeight sets field value
+// HasWeight returns a boolean if a field has been set.
+func (o *DNSRecord) HasWeight() bool {
+	if o != nil && !IsNil(o.Weight) {
+		return true
+	}
+
+	return false
+}
+
+// SetWeight gets a reference to the given int32 and assigns it to the Weight field.
 func (o *DNSRecord) SetWeight(v int32) {
-	o.Weight = v
+	o.Weight = &v
 }
 
-// GetPort returns the Port field value
+// GetPort returns the Port field value if set, zero value otherwise.
 func (o *DNSRecord) GetPort() int32 {
-	if o == nil {
+	if o == nil || IsNil(o.Port) {
 		var ret int32
 		return ret
 	}
-
-	return o.Port
+	return *o.Port
 }
 
-// GetPortOk returns a tuple with the Port field value
+// GetPortOk returns a tuple with the Port field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *DNSRecord) GetPortOk() (*int32, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.Port) {
 		return nil, false
 	}
-	return &o.Port, true
+	return o.Port, true
 }
 
-// SetPort sets field value
+// HasPort returns a boolean if a field has been set.
+func (o *DNSRecord) HasPort() bool {
+	if o != nil && !IsNil(o.Port) {
+		return true
+	}
+
+	return false
+}
+
+// SetPort gets a reference to the given int32 and assigns it to the Port field.
 func (o *DNSRecord) SetPort(v int32) {
-	o.Port = v
+	o.Port = &v
 }
 
-// GetFlag returns the Flag field value
+// GetFlag returns the Flag field value if set, zero value otherwise.
 func (o *DNSRecord) GetFlag() int32 {
-	if o == nil {
+	if o == nil || IsNil(o.Flag) {
 		var ret int32
 		return ret
 	}
-
-	return o.Flag
+	return *o.Flag
 }
 
-// GetFlagOk returns a tuple with the Flag field value
+// GetFlagOk returns a tuple with the Flag field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *DNSRecord) GetFlagOk() (*int32, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.Flag) {
 		return nil, false
 	}
-	return &o.Flag, true
+	return o.Flag, true
 }
 
-// SetFlag sets field value
+// HasFlag returns a boolean if a field has been set.
+func (o *DNSRecord) HasFlag() bool {
+	if o != nil && !IsNil(o.Flag) {
+		return true
+	}
+
+	return false
+}
+
+// SetFlag gets a reference to the given int32 and assigns it to the Flag field.
 func (o *DNSRecord) SetFlag(v int32) {
-	o.Flag = v
+	o.Flag = &v
 }
 
-// GetTag returns the Tag field value
+// GetTag returns the Tag field value if set, zero value otherwise.
 func (o *DNSRecord) GetTag() string {
-	if o == nil {
+	if o == nil || IsNil(o.Tag) {
 		var ret string
 		return ret
 	}
-
-	return o.Tag
+	return *o.Tag
 }
 
-// GetTagOk returns a tuple with the Tag field value
+// GetTagOk returns a tuple with the Tag field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *DNSRecord) GetTagOk() (*string, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.Tag) {
 		return nil, false
 	}
-	return &o.Tag, true
+	return o.Tag, true
 }
 
-// SetTag sets field value
+// HasTag returns a boolean if a field has been set.
+func (o *DNSRecord) HasTag() bool {
+	if o != nil && !IsNil(o.Tag) {
+		return true
+	}
+
+	return false
+}
+
+// SetTag gets a reference to the given string and assigns it to the Tag field.
 func (o *DNSRecord) SetTag(v string) {
-	o.Tag = v
+	o.Tag = &v
 }
 
-// GetValue returns the Value field value
+// GetValue returns the Value field value if set, zero value otherwise.
 func (o *DNSRecord) GetValue() string {
-	if o == nil {
+	if o == nil || IsNil(o.Value) {
 		var ret string
 		return ret
 	}
-
-	return o.Value
+	return *o.Value
 }
 
-// GetValueOk returns a tuple with the Value field value
+// GetValueOk returns a tuple with the Value field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *DNSRecord) GetValueOk() (*string, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.Value) {
 		return nil, false
 	}
-	return &o.Value, true
+	return o.Value, true
 }
 
-// SetValue sets field value
+// HasValue returns a boolean if a field has been set.
+func (o *DNSRecord) HasValue() bool {
+	if o != nil && !IsNil(o.Value) {
+		return true
+	}
+
+	return false
+}
+
+// SetValue gets a reference to the given string and assigns it to the Value field.
 func (o *DNSRecord) SetValue(v string) {
-	o.Value = v
+	o.Value = &v
 }
 
 func (o DNSRecord) MarshalJSON() ([]byte, error) {
@@ -499,19 +590,45 @@ func (o DNSRecord) ToMap() (map[string]interface{}, error) {
 	toSerialize["name"] = o.Name
 	toSerialize["ttl"] = o.Ttl
 	toSerialize["type"] = o.Type
-	toSerialize["address"] = o.Address
-	toSerialize["cname"] = o.Cname
-	toSerialize["exchange"] = o.Exchange
-	toSerialize["preference"] = o.Preference
-	toSerialize["txtdata"] = o.Txtdata
-	toSerialize["unencoded"] = o.Unencoded
-	toSerialize["target"] = o.Target
-	toSerialize["priority"] = o.Priority
-	toSerialize["weight"] = o.Weight
-	toSerialize["port"] = o.Port
-	toSerialize["flag"] = o.Flag
-	toSerialize["tag"] = o.Tag
-	toSerialize["value"] = o.Value
+	if !IsNil(o.Address) {
+		toSerialize["address"] = o.Address
+	}
+	if !IsNil(o.Cname) {
+		toSerialize["cname"] = o.Cname
+	}
+	if !IsNil(o.Exchange) {
+		toSerialize["exchange"] = o.Exchange
+	}
+	if !IsNil(o.Preference) {
+		toSerialize["preference"] = o.Preference
+	}
+	if !IsNil(o.Txtdata) {
+		toSerialize["txtdata"] = o.Txtdata
+	}
+	if !IsNil(o.Unencoded) {
+		toSerialize["unencoded"] = o.Unencoded
+	}
+	if !IsNil(o.Target) {
+		toSerialize["target"] = o.Target
+	}
+	if !IsNil(o.Priority) {
+		toSerialize["priority"] = o.Priority
+	}
+	if !IsNil(o.Weight) {
+		toSerialize["weight"] = o.Weight
+	}
+	if !IsNil(o.Port) {
+		toSerialize["port"] = o.Port
+	}
+	if !IsNil(o.Flag) {
+		toSerialize["flag"] = o.Flag
+	}
+	if !IsNil(o.Tag) {
+		toSerialize["tag"] = o.Tag
+	}
+	if !IsNil(o.Value) {
+		toSerialize["value"] = o.Value
+	}
 	return toSerialize, nil
 }
 
@@ -524,19 +641,6 @@ func (o *DNSRecord) UnmarshalJSON(data []byte) (err error) {
 		"name",
 		"ttl",
 		"type",
-		"address",
-		"cname",
-		"exchange",
-		"preference",
-		"txtdata",
-		"unencoded",
-		"target",
-		"priority",
-		"weight",
-		"port",
-		"flag",
-		"tag",
-		"value",
 	}
 
 	allProperties := make(map[string]interface{})

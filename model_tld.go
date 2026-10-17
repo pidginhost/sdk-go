@@ -35,6 +35,10 @@ type TLD struct {
 	IdnaSupport *bool `json:"idna_support,omitempty"`
 	WgSupport *bool `json:"wg_support,omitempty"`
 	ReactivateMaxDays *int32 `json:"reactivate_max_days,omitempty"`
+	// Smallest registration term the registry accepts (e.g. 2 for .ai).
+	MinYears *int32 `json:"min_years,omitempty"`
+	// Allowed step between registration terms (e.g. 2 for .ai → 2, 4, 6 years).
+	YearStep *int32 `json:"year_step,omitempty"`
 }
 
 type _TLD TLD
@@ -368,6 +372,70 @@ func (o *TLD) SetReactivateMaxDays(v int32) {
 	o.ReactivateMaxDays = &v
 }
 
+// GetMinYears returns the MinYears field value if set, zero value otherwise.
+func (o *TLD) GetMinYears() int32 {
+	if o == nil || IsNil(o.MinYears) {
+		var ret int32
+		return ret
+	}
+	return *o.MinYears
+}
+
+// GetMinYearsOk returns a tuple with the MinYears field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *TLD) GetMinYearsOk() (*int32, bool) {
+	if o == nil || IsNil(o.MinYears) {
+		return nil, false
+	}
+	return o.MinYears, true
+}
+
+// HasMinYears returns a boolean if a field has been set.
+func (o *TLD) HasMinYears() bool {
+	if o != nil && !IsNil(o.MinYears) {
+		return true
+	}
+
+	return false
+}
+
+// SetMinYears gets a reference to the given int32 and assigns it to the MinYears field.
+func (o *TLD) SetMinYears(v int32) {
+	o.MinYears = &v
+}
+
+// GetYearStep returns the YearStep field value if set, zero value otherwise.
+func (o *TLD) GetYearStep() int32 {
+	if o == nil || IsNil(o.YearStep) {
+		var ret int32
+		return ret
+	}
+	return *o.YearStep
+}
+
+// GetYearStepOk returns a tuple with the YearStep field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *TLD) GetYearStepOk() (*int32, bool) {
+	if o == nil || IsNil(o.YearStep) {
+		return nil, false
+	}
+	return o.YearStep, true
+}
+
+// HasYearStep returns a boolean if a field has been set.
+func (o *TLD) HasYearStep() bool {
+	if o != nil && !IsNil(o.YearStep) {
+		return true
+	}
+
+	return false
+}
+
+// SetYearStep gets a reference to the given int32 and assigns it to the YearStep field.
+func (o *TLD) SetYearStep(v int32) {
+	o.YearStep = &v
+}
+
 func (o TLD) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -399,6 +467,12 @@ func (o TLD) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.ReactivateMaxDays) {
 		toSerialize["reactivate_max_days"] = o.ReactivateMaxDays
+	}
+	if !IsNil(o.MinYears) {
+		toSerialize["min_years"] = o.MinYears
+	}
+	if !IsNil(o.YearStep) {
+		toSerialize["year_step"] = o.YearStep
 	}
 	return toSerialize, nil
 }

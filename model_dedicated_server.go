@@ -22,6 +22,7 @@ var _ MappedNullable = &DedicatedServer{}
 
 // DedicatedServer Read-only serializer for dedicated server services.
 type DedicatedServer struct {
+	Billing NullableResourceBilling `json:"billing"`
 	Id int32 `json:"id"`
 	Hostname string `json:"hostname"`
 	Status ServiceStatusEnum `json:"status"`
@@ -33,6 +34,7 @@ type DedicatedServer struct {
 	ServerStatus NullableDedicatedServerStatus `json:"server_status"`
 	Ips []DedicatedServerIP `json:"ips"`
 	OsName NullableString `json:"os_name"`
+	Hardware NullableDedicatedHardware `json:"hardware"`
 }
 
 type _DedicatedServer DedicatedServer
@@ -41,8 +43,9 @@ type _DedicatedServer DedicatedServer
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewDedicatedServer(id int32, hostname string, status ServiceStatusEnum, price string, nextInvoice string, created string, billingCycle string, serverStatus NullableDedicatedServerStatus, ips []DedicatedServerIP, osName NullableString) *DedicatedServer {
+func NewDedicatedServer(billing NullableResourceBilling, id int32, hostname string, status ServiceStatusEnum, price string, nextInvoice string, created string, billingCycle string, serverStatus NullableDedicatedServerStatus, ips []DedicatedServerIP, osName NullableString, hardware NullableDedicatedHardware) *DedicatedServer {
 	this := DedicatedServer{}
+	this.Billing = billing
 	this.Id = id
 	this.Hostname = hostname
 	this.Status = status
@@ -53,6 +56,7 @@ func NewDedicatedServer(id int32, hostname string, status ServiceStatusEnum, pri
 	this.ServerStatus = serverStatus
 	this.Ips = ips
 	this.OsName = osName
+	this.Hardware = hardware
 	return &this
 }
 
@@ -62,6 +66,32 @@ func NewDedicatedServer(id int32, hostname string, status ServiceStatusEnum, pri
 func NewDedicatedServerWithDefaults() *DedicatedServer {
 	this := DedicatedServer{}
 	return &this
+}
+
+// GetBilling returns the Billing field value
+// If the value is explicit nil, the zero value for ResourceBilling will be returned
+func (o *DedicatedServer) GetBilling() ResourceBilling {
+	if o == nil || o.Billing.Get() == nil {
+		var ret ResourceBilling
+		return ret
+	}
+
+	return *o.Billing.Get()
+}
+
+// GetBillingOk returns a tuple with the Billing field value
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *DedicatedServer) GetBillingOk() (*ResourceBilling, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.Billing.Get(), o.Billing.IsSet()
+}
+
+// SetBilling sets field value
+func (o *DedicatedServer) SetBilling(v ResourceBilling) {
+	o.Billing.Set(&v)
 }
 
 // GetId returns the Id field value
@@ -308,6 +338,32 @@ func (o *DedicatedServer) SetOsName(v string) {
 	o.OsName.Set(&v)
 }
 
+// GetHardware returns the Hardware field value
+// If the value is explicit nil, the zero value for DedicatedHardware will be returned
+func (o *DedicatedServer) GetHardware() DedicatedHardware {
+	if o == nil || o.Hardware.Get() == nil {
+		var ret DedicatedHardware
+		return ret
+	}
+
+	return *o.Hardware.Get()
+}
+
+// GetHardwareOk returns a tuple with the Hardware field value
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *DedicatedServer) GetHardwareOk() (*DedicatedHardware, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.Hardware.Get(), o.Hardware.IsSet()
+}
+
+// SetHardware sets field value
+func (o *DedicatedServer) SetHardware(v DedicatedHardware) {
+	o.Hardware.Set(&v)
+}
+
 func (o DedicatedServer) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -318,6 +374,7 @@ func (o DedicatedServer) MarshalJSON() ([]byte, error) {
 
 func (o DedicatedServer) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
+	toSerialize["billing"] = o.Billing.Get()
 	toSerialize["id"] = o.Id
 	toSerialize["hostname"] = o.Hostname
 	toSerialize["status"] = o.Status
@@ -328,6 +385,7 @@ func (o DedicatedServer) ToMap() (map[string]interface{}, error) {
 	toSerialize["server_status"] = o.ServerStatus.Get()
 	toSerialize["ips"] = o.Ips
 	toSerialize["os_name"] = o.OsName.Get()
+	toSerialize["hardware"] = o.Hardware.Get()
 	return toSerialize, nil
 }
 
@@ -336,6 +394,7 @@ func (o *DedicatedServer) UnmarshalJSON(data []byte) (err error) {
 	// by unmarshalling the object into a generic map with string keys and checking
 	// that every required field exists as a key in the generic map.
 	requiredProperties := []string{
+		"billing",
 		"id",
 		"hostname",
 		"status",
@@ -346,6 +405,7 @@ func (o *DedicatedServer) UnmarshalJSON(data []byte) (err error) {
 		"server_status",
 		"ips",
 		"os_name",
+		"hardware",
 	}
 
 	allProperties := make(map[string]interface{})

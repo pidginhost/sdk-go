@@ -4,6 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**Billing** | [**NullableResourceBilling**](ResourceBilling.md) |  | [readonly] 
 **Id** | **int32** |  | [readonly] 
 **Hostname** | Pointer to **string** |  | [optional] 
 **Project** | Pointer to **string** |  | [optional] 
@@ -26,7 +27,7 @@ Name | Type | Description | Notes
 
 ### NewServer
 
-`func NewServer(id int32, image string, package_ string, cpus int32, memory int32, diskSize int32, generation string, destroyProtection bool, haEnabled bool, customOs bool, networks ServerNetworks, rescueMode bool, bootIso NullableString, rescueSupported bool, ) *Server`
+`func NewServer(billing NullableResourceBilling, id int32, image string, package_ string, cpus int32, memory int32, diskSize int32, generation string, destroyProtection bool, haEnabled bool, customOs bool, networks ServerNetworks, rescueMode bool, bootIso NullableString, rescueSupported bool, ) *Server`
 
 NewServer instantiates a new Server object
 This constructor will assign default values to properties that have it defined,
@@ -41,6 +42,36 @@ NewServerWithDefaults instantiates a new Server object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
 
+### GetBilling
+
+`func (o *Server) GetBilling() ResourceBilling`
+
+GetBilling returns the Billing field if non-nil, zero value otherwise.
+
+### GetBillingOk
+
+`func (o *Server) GetBillingOk() (*ResourceBilling, bool)`
+
+GetBillingOk returns a tuple with the Billing field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetBilling
+
+`func (o *Server) SetBilling(v ResourceBilling)`
+
+SetBilling sets Billing field to given value.
+
+
+### SetBillingNil
+
+`func (o *Server) SetBillingNil(b bool)`
+
+ SetBillingNil sets the value for Billing to be an explicit nil
+
+### UnsetBilling
+`func (o *Server) UnsetBilling()`
+
+UnsetBilling ensures that no value is present for Billing, not even an explicit nil
 ### GetId
 
 `func (o *Server) GetId() int32`

@@ -14,6 +14,8 @@ Name | Type | Description | Notes
 **IdnaSupport** | Pointer to **bool** |  | [optional] 
 **WgSupport** | Pointer to **bool** |  | [optional] 
 **ReactivateMaxDays** | Pointer to **int32** |  | [optional] 
+**MinYears** | Pointer to **int32** | Smallest registration term the registry accepts (e.g. 2 for .ai). | [optional] 
+**YearStep** | Pointer to **int32** | Allowed step between registration terms (e.g. 2 for .ai → 2, 4, 6 years). | [optional] 
 
 ## Methods
 
@@ -283,6 +285,56 @@ SetReactivateMaxDays sets ReactivateMaxDays field to given value.
 `func (o *TLD) HasReactivateMaxDays() bool`
 
 HasReactivateMaxDays returns a boolean if a field has been set.
+
+### GetMinYears
+
+`func (o *TLD) GetMinYears() int32`
+
+GetMinYears returns the MinYears field if non-nil, zero value otherwise.
+
+### GetMinYearsOk
+
+`func (o *TLD) GetMinYearsOk() (*int32, bool)`
+
+GetMinYearsOk returns a tuple with the MinYears field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetMinYears
+
+`func (o *TLD) SetMinYears(v int32)`
+
+SetMinYears sets MinYears field to given value.
+
+### HasMinYears
+
+`func (o *TLD) HasMinYears() bool`
+
+HasMinYears returns a boolean if a field has been set.
+
+### GetYearStep
+
+`func (o *TLD) GetYearStep() int32`
+
+GetYearStep returns the YearStep field if non-nil, zero value otherwise.
+
+### GetYearStepOk
+
+`func (o *TLD) GetYearStepOk() (*int32, bool)`
+
+GetYearStepOk returns a tuple with the YearStep field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetYearStep
+
+`func (o *TLD) SetYearStep(v int32)`
+
+SetYearStep sets YearStep field to given value.
+
+### HasYearStep
+
+`func (o *TLD) HasYearStep() bool`
+
+HasYearStep returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

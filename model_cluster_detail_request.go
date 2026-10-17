@@ -13,8 +13,6 @@ package pidginhostsdk
 
 import (
 	"encoding/json"
-	"bytes"
-	"fmt"
 )
 
 // checks if the ClusterDetailRequest type satisfies the MappedNullable interface at compile time
@@ -23,20 +21,16 @@ var _ MappedNullable = &ClusterDetailRequest{}
 // ClusterDetailRequest struct for ClusterDetailRequest
 type ClusterDetailRequest struct {
 	Name *string `json:"name,omitempty"`
-	PricePerMonth string `json:"price_per_month" validate:"regexp=^-?\\d{0\\,16}(?:\\.\\d{0\\,4})?$"`
 	Features []FeaturesEnum `json:"features,omitempty"`
 	Protected *bool `json:"protected,omitempty"`
 }
-
-type _ClusterDetailRequest ClusterDetailRequest
 
 // NewClusterDetailRequest instantiates a new ClusterDetailRequest object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewClusterDetailRequest(pricePerMonth string) *ClusterDetailRequest {
+func NewClusterDetailRequest() *ClusterDetailRequest {
 	this := ClusterDetailRequest{}
-	this.PricePerMonth = pricePerMonth
 	return &this
 }
 
@@ -78,30 +72,6 @@ func (o *ClusterDetailRequest) HasName() bool {
 // SetName gets a reference to the given string and assigns it to the Name field.
 func (o *ClusterDetailRequest) SetName(v string) {
 	o.Name = &v
-}
-
-// GetPricePerMonth returns the PricePerMonth field value
-func (o *ClusterDetailRequest) GetPricePerMonth() string {
-	if o == nil {
-		var ret string
-		return ret
-	}
-
-	return o.PricePerMonth
-}
-
-// GetPricePerMonthOk returns a tuple with the PricePerMonth field value
-// and a boolean to check if the value has been set.
-func (o *ClusterDetailRequest) GetPricePerMonthOk() (*string, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.PricePerMonth, true
-}
-
-// SetPricePerMonth sets field value
-func (o *ClusterDetailRequest) SetPricePerMonth(v string) {
-	o.PricePerMonth = v
 }
 
 // GetFeatures returns the Features field value if set, zero value otherwise.
@@ -181,7 +151,6 @@ func (o ClusterDetailRequest) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Name) {
 		toSerialize["name"] = o.Name
 	}
-	toSerialize["price_per_month"] = o.PricePerMonth
 	if !IsNil(o.Features) {
 		toSerialize["features"] = o.Features
 	}
@@ -189,42 +158,6 @@ func (o ClusterDetailRequest) ToMap() (map[string]interface{}, error) {
 		toSerialize["protected"] = o.Protected
 	}
 	return toSerialize, nil
-}
-
-func (o *ClusterDetailRequest) UnmarshalJSON(data []byte) (err error) {
-	// This validates that all required properties are included in the JSON object
-	// by unmarshalling the object into a generic map with string keys and checking
-	// that every required field exists as a key in the generic map.
-	requiredProperties := []string{
-		"price_per_month",
-	}
-
-	allProperties := make(map[string]interface{})
-
-	err = json.Unmarshal(data, &allProperties)
-
-	if err != nil {
-		return err;
-	}
-
-	for _, requiredProperty := range(requiredProperties) {
-		if _, exists := allProperties[requiredProperty]; !exists {
-			return fmt.Errorf("no value given for required property %v", requiredProperty)
-		}
-	}
-
-	varClusterDetailRequest := _ClusterDetailRequest{}
-
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	err = decoder.Decode(&varClusterDetailRequest)
-
-	if err != nil {
-		return err
-	}
-
-	*o = ClusterDetailRequest(varClusterDetailRequest)
-
-	return err
 }
 
 type NullableClusterDetailRequest struct {

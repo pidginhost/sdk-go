@@ -7,6 +7,8 @@ Method | HTTP request | Description
 [**HostingHostingChangePasswordCreate**](HostingAPI.md#HostingHostingChangePasswordCreate) | **Post** /api/hosting/hosting/{id}/change-password/ | 
 [**HostingHostingList**](HostingAPI.md#HostingHostingList) | **Get** /api/hosting/hosting/ | 
 [**HostingHostingRetrieve**](HostingAPI.md#HostingHostingRetrieve) | **Get** /api/hosting/hosting/{id}/ | 
+[**HostingHostingUpgradeOptionsRetrieve**](HostingAPI.md#HostingHostingUpgradeOptionsRetrieve) | **Get** /api/hosting/hosting/{id}/upgrade-options/ | 
+[**HostingHostingUsageRetrieve**](HostingAPI.md#HostingHostingUsageRetrieve) | **Get** /api/hosting/hosting/{id}/usage/ | 
 
 
 
@@ -203,6 +205,146 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**HostingService**](HostingService.md)
+
+### Authorization
+
+[tokenAuth](../README.md#tokenAuth), [cookieAuth](../README.md#cookieAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## HostingHostingUpgradeOptionsRetrieve
+
+> HostingUpgradeOptions HostingHostingUpgradeOptionsRetrieve(ctx, id).Execute()
+
+
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/pidginhost/sdk-go"
+)
+
+func main() {
+	id := "id_example" // string | 
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.HostingAPI.HostingHostingUpgradeOptionsRetrieve(context.Background(), id).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `HostingAPI.HostingHostingUpgradeOptionsRetrieve``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `HostingHostingUpgradeOptionsRetrieve`: HostingUpgradeOptions
+	fmt.Fprintf(os.Stdout, "Response from `HostingAPI.HostingHostingUpgradeOptionsRetrieve`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**id** | **string** |  | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiHostingHostingUpgradeOptionsRetrieveRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+### Return type
+
+[**HostingUpgradeOptions**](HostingUpgradeOptions.md)
+
+### Authorization
+
+[tokenAuth](../README.md#tokenAuth), [cookieAuth](../README.md#cookieAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## HostingHostingUsageRetrieve
+
+> HostingUsage HostingHostingUsageRetrieve(ctx, id).Execute()
+
+
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/pidginhost/sdk-go"
+)
+
+func main() {
+	id := "id_example" // string | 
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.HostingAPI.HostingHostingUsageRetrieve(context.Background(), id).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `HostingAPI.HostingHostingUsageRetrieve``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `HostingHostingUsageRetrieve`: HostingUsage
+	fmt.Fprintf(os.Stdout, "Response from `HostingAPI.HostingHostingUsageRetrieve`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**id** | **string** |  | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiHostingHostingUsageRetrieveRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+### Return type
+
+[**HostingUsage**](HostingUsage.md)
 
 ### Authorization
 

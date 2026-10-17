@@ -138,6 +138,18 @@ func Test_pidginhostsdk_AccountAPIService(t *testing.T) {
 
 	})
 
+	t.Run("Test AccountAPIService AccountDashboardRetrieve", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		resp, httpRes, err := apiClient.AccountAPI.AccountDashboardRetrieve(context.Background()).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
 	t.Run("Test AccountAPIService AccountEmailsList", func(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
@@ -179,6 +191,18 @@ func Test_pidginhostsdk_AccountAPIService(t *testing.T) {
 		t.Skip("skip test")  // remove to run test
 
 		resp, httpRes, err := apiClient.AccountAPI.AccountProfileUpdate(context.Background()).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test AccountAPIService AccountSessionRetrieve", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		resp, httpRes, err := apiClient.AccountAPI.AccountSessionRetrieve(context.Background()).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)

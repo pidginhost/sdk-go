@@ -22,6 +22,7 @@ var _ MappedNullable = &Service{}
 
 // Service struct for Service
 type Service struct {
+	Billing NullableResourceBilling `json:"billing"`
 	Id int32 `json:"id"`
 	Company NullableInt32 `json:"company,omitempty"`
 	BillingCycle int32 `json:"billing_cycle"`
@@ -42,8 +43,9 @@ type _Service Service
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewService(id int32, billingCycle int32, hostname string, price string, status ServiceStatusEnum, created string, modified string, terminated NullableString, nextInvoice string, primaryService NullableInt32) *Service {
+func NewService(billing NullableResourceBilling, id int32, billingCycle int32, hostname string, price string, status ServiceStatusEnum, created string, modified string, terminated NullableString, nextInvoice string, primaryService NullableInt32) *Service {
 	this := Service{}
+	this.Billing = billing
 	this.Id = id
 	this.BillingCycle = billingCycle
 	this.Hostname = hostname
@@ -63,6 +65,32 @@ func NewService(id int32, billingCycle int32, hostname string, price string, sta
 func NewServiceWithDefaults() *Service {
 	this := Service{}
 	return &this
+}
+
+// GetBilling returns the Billing field value
+// If the value is explicit nil, the zero value for ResourceBilling will be returned
+func (o *Service) GetBilling() ResourceBilling {
+	if o == nil || o.Billing.Get() == nil {
+		var ret ResourceBilling
+		return ret
+	}
+
+	return *o.Billing.Get()
+}
+
+// GetBillingOk returns a tuple with the Billing field value
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *Service) GetBillingOk() (*ResourceBilling, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.Billing.Get(), o.Billing.IsSet()
+}
+
+// SetBilling sets field value
+func (o *Service) SetBilling(v ResourceBilling) {
+	o.Billing.Set(&v)
 }
 
 // GetId returns the Id field value
@@ -361,6 +389,7 @@ func (o Service) MarshalJSON() ([]byte, error) {
 
 func (o Service) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
+	toSerialize["billing"] = o.Billing.Get()
 	toSerialize["id"] = o.Id
 	if o.Company.IsSet() {
 		toSerialize["company"] = o.Company.Get()
@@ -382,6 +411,7 @@ func (o *Service) UnmarshalJSON(data []byte) (err error) {
 	// by unmarshalling the object into a generic map with string keys and checking
 	// that every required field exists as a key in the generic map.
 	requiredProperties := []string{
+		"billing",
 		"id",
 		"billing_cycle",
 		"hostname",

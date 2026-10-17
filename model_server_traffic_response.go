@@ -26,15 +26,15 @@ type ServerTrafficResponse struct {
 	Month int32 `json:"month"`
 	AsOf NullableString `json:"as_of"`
 	Status string `json:"status"`
-	BytesIn int32 `json:"bytes_in"`
-	BytesOut int32 `json:"bytes_out"`
-	BytesTotal int32 `json:"bytes_total"`
+	BytesIn int64 `json:"bytes_in"`
+	BytesOut int64 `json:"bytes_out"`
+	BytesTotal int64 `json:"bytes_total"`
 	IncludedTb NullableInt32 `json:"included_tb"`
 	UsedUnits int32 `json:"used_units"`
 	// Usage rounded up to six decimal places; bytes_total is exact.
 	UsedTb string `json:"used_tb"`
 	// Of bytes_total, the part that may be charged.
-	BillableBytes int32 `json:"billable_bytes"`
+	BillableBytes int64 `json:"billable_bytes"`
 	BillableUnits int32 `json:"billable_units"`
 	// Billable usage rounded up to six decimal places; billable_bytes is exact.
 	BillableTb string `json:"billable_tb"`
@@ -44,8 +44,8 @@ type ServerTrafficResponse struct {
 	ChargedAmount string `json:"charged_amount"`
 	PricePerTb NullableString `json:"price_per_tb"`
 	Currency string `json:"currency"`
-	UnitBytes int32 `json:"unit_bytes"`
-	RemainingBytes NullableInt32 `json:"remaining_bytes"`
+	UnitBytes int64 `json:"unit_bytes"`
+	RemainingBytes NullableInt64 `json:"remaining_bytes"`
 	LastSampleAt NullableString `json:"last_sample_at"`
 	Daily []map[string]interface{} `json:"daily"`
 }
@@ -56,7 +56,7 @@ type _ServerTrafficResponse ServerTrafficResponse
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewServerTrafficResponse(year int32, month int32, asOf NullableString, status string, bytesIn int32, bytesOut int32, bytesTotal int32, includedTb NullableInt32, usedUnits int32, usedTb string, billableBytes int32, billableUnits int32, billableTb string, billableFrom NullableString, chargedTb int32, chargedAmount string, pricePerTb NullableString, currency string, unitBytes int32, remainingBytes NullableInt32, lastSampleAt NullableString, daily []map[string]interface{}) *ServerTrafficResponse {
+func NewServerTrafficResponse(year int32, month int32, asOf NullableString, status string, bytesIn int64, bytesOut int64, bytesTotal int64, includedTb NullableInt32, usedUnits int32, usedTb string, billableBytes int64, billableUnits int32, billableTb string, billableFrom NullableString, chargedTb int32, chargedAmount string, pricePerTb NullableString, currency string, unitBytes int64, remainingBytes NullableInt64, lastSampleAt NullableString, daily []map[string]interface{}) *ServerTrafficResponse {
 	this := ServerTrafficResponse{}
 	this.Year = year
 	this.Month = month
@@ -190,9 +190,9 @@ func (o *ServerTrafficResponse) SetStatus(v string) {
 }
 
 // GetBytesIn returns the BytesIn field value
-func (o *ServerTrafficResponse) GetBytesIn() int32 {
+func (o *ServerTrafficResponse) GetBytesIn() int64 {
 	if o == nil {
-		var ret int32
+		var ret int64
 		return ret
 	}
 
@@ -201,7 +201,7 @@ func (o *ServerTrafficResponse) GetBytesIn() int32 {
 
 // GetBytesInOk returns a tuple with the BytesIn field value
 // and a boolean to check if the value has been set.
-func (o *ServerTrafficResponse) GetBytesInOk() (*int32, bool) {
+func (o *ServerTrafficResponse) GetBytesInOk() (*int64, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -209,14 +209,14 @@ func (o *ServerTrafficResponse) GetBytesInOk() (*int32, bool) {
 }
 
 // SetBytesIn sets field value
-func (o *ServerTrafficResponse) SetBytesIn(v int32) {
+func (o *ServerTrafficResponse) SetBytesIn(v int64) {
 	o.BytesIn = v
 }
 
 // GetBytesOut returns the BytesOut field value
-func (o *ServerTrafficResponse) GetBytesOut() int32 {
+func (o *ServerTrafficResponse) GetBytesOut() int64 {
 	if o == nil {
-		var ret int32
+		var ret int64
 		return ret
 	}
 
@@ -225,7 +225,7 @@ func (o *ServerTrafficResponse) GetBytesOut() int32 {
 
 // GetBytesOutOk returns a tuple with the BytesOut field value
 // and a boolean to check if the value has been set.
-func (o *ServerTrafficResponse) GetBytesOutOk() (*int32, bool) {
+func (o *ServerTrafficResponse) GetBytesOutOk() (*int64, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -233,14 +233,14 @@ func (o *ServerTrafficResponse) GetBytesOutOk() (*int32, bool) {
 }
 
 // SetBytesOut sets field value
-func (o *ServerTrafficResponse) SetBytesOut(v int32) {
+func (o *ServerTrafficResponse) SetBytesOut(v int64) {
 	o.BytesOut = v
 }
 
 // GetBytesTotal returns the BytesTotal field value
-func (o *ServerTrafficResponse) GetBytesTotal() int32 {
+func (o *ServerTrafficResponse) GetBytesTotal() int64 {
 	if o == nil {
-		var ret int32
+		var ret int64
 		return ret
 	}
 
@@ -249,7 +249,7 @@ func (o *ServerTrafficResponse) GetBytesTotal() int32 {
 
 // GetBytesTotalOk returns a tuple with the BytesTotal field value
 // and a boolean to check if the value has been set.
-func (o *ServerTrafficResponse) GetBytesTotalOk() (*int32, bool) {
+func (o *ServerTrafficResponse) GetBytesTotalOk() (*int64, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -257,7 +257,7 @@ func (o *ServerTrafficResponse) GetBytesTotalOk() (*int32, bool) {
 }
 
 // SetBytesTotal sets field value
-func (o *ServerTrafficResponse) SetBytesTotal(v int32) {
+func (o *ServerTrafficResponse) SetBytesTotal(v int64) {
 	o.BytesTotal = v
 }
 
@@ -336,9 +336,9 @@ func (o *ServerTrafficResponse) SetUsedTb(v string) {
 }
 
 // GetBillableBytes returns the BillableBytes field value
-func (o *ServerTrafficResponse) GetBillableBytes() int32 {
+func (o *ServerTrafficResponse) GetBillableBytes() int64 {
 	if o == nil {
-		var ret int32
+		var ret int64
 		return ret
 	}
 
@@ -347,7 +347,7 @@ func (o *ServerTrafficResponse) GetBillableBytes() int32 {
 
 // GetBillableBytesOk returns a tuple with the BillableBytes field value
 // and a boolean to check if the value has been set.
-func (o *ServerTrafficResponse) GetBillableBytesOk() (*int32, bool) {
+func (o *ServerTrafficResponse) GetBillableBytesOk() (*int64, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -355,7 +355,7 @@ func (o *ServerTrafficResponse) GetBillableBytesOk() (*int32, bool) {
 }
 
 // SetBillableBytes sets field value
-func (o *ServerTrafficResponse) SetBillableBytes(v int32) {
+func (o *ServerTrafficResponse) SetBillableBytes(v int64) {
 	o.BillableBytes = v
 }
 
@@ -532,9 +532,9 @@ func (o *ServerTrafficResponse) SetCurrency(v string) {
 }
 
 // GetUnitBytes returns the UnitBytes field value
-func (o *ServerTrafficResponse) GetUnitBytes() int32 {
+func (o *ServerTrafficResponse) GetUnitBytes() int64 {
 	if o == nil {
-		var ret int32
+		var ret int64
 		return ret
 	}
 
@@ -543,7 +543,7 @@ func (o *ServerTrafficResponse) GetUnitBytes() int32 {
 
 // GetUnitBytesOk returns a tuple with the UnitBytes field value
 // and a boolean to check if the value has been set.
-func (o *ServerTrafficResponse) GetUnitBytesOk() (*int32, bool) {
+func (o *ServerTrafficResponse) GetUnitBytesOk() (*int64, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -551,15 +551,15 @@ func (o *ServerTrafficResponse) GetUnitBytesOk() (*int32, bool) {
 }
 
 // SetUnitBytes sets field value
-func (o *ServerTrafficResponse) SetUnitBytes(v int32) {
+func (o *ServerTrafficResponse) SetUnitBytes(v int64) {
 	o.UnitBytes = v
 }
 
 // GetRemainingBytes returns the RemainingBytes field value
-// If the value is explicit nil, the zero value for int32 will be returned
-func (o *ServerTrafficResponse) GetRemainingBytes() int32 {
+// If the value is explicit nil, the zero value for int64 will be returned
+func (o *ServerTrafficResponse) GetRemainingBytes() int64 {
 	if o == nil || o.RemainingBytes.Get() == nil {
-		var ret int32
+		var ret int64
 		return ret
 	}
 
@@ -569,7 +569,7 @@ func (o *ServerTrafficResponse) GetRemainingBytes() int32 {
 // GetRemainingBytesOk returns a tuple with the RemainingBytes field value
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *ServerTrafficResponse) GetRemainingBytesOk() (*int32, bool) {
+func (o *ServerTrafficResponse) GetRemainingBytesOk() (*int64, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -577,7 +577,7 @@ func (o *ServerTrafficResponse) GetRemainingBytesOk() (*int32, bool) {
 }
 
 // SetRemainingBytes sets field value
-func (o *ServerTrafficResponse) SetRemainingBytes(v int32) {
+func (o *ServerTrafficResponse) SetRemainingBytes(v int64) {
 	o.RemainingBytes.Set(&v)
 }
 

@@ -6,6 +6,7 @@ Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**DomainDomainCancelCreate**](DomainAPI.md#DomainDomainCancelCreate) | **Post** /api/domain/domain/{domain}/cancel/ | 
 [**DomainDomainCheckAvailabilityCreate**](DomainAPI.md#DomainDomainCheckAvailabilityCreate) | **Post** /api/domain/domain/check-availability/ | 
+[**DomainDomainCheckAvailabilityRetrieve**](DomainAPI.md#DomainDomainCheckAvailabilityRetrieve) | **Get** /api/domain/domain/check-availability/ | 
 [**DomainDomainContactsCreate**](DomainAPI.md#DomainDomainContactsCreate) | **Post** /api/domain/domain/{domain}/contacts/ | 
 [**DomainDomainCreate**](DomainAPI.md#DomainDomainCreate) | **Post** /api/domain/domain/ | 
 [**DomainDomainDnsCreate**](DomainAPI.md#DomainDomainDnsCreate) | **Post** /api/domain/domain/{domain}/dns/ | 
@@ -24,6 +25,7 @@ Method | HTTP request | Description
 [**DomainRegistrantsPartialUpdate**](DomainAPI.md#DomainRegistrantsPartialUpdate) | **Patch** /api/domain/registrants/{id}/ | 
 [**DomainRegistrantsRetrieve**](DomainAPI.md#DomainRegistrantsRetrieve) | **Get** /api/domain/registrants/{id}/ | 
 [**DomainRegistrantsUpdate**](DomainAPI.md#DomainRegistrantsUpdate) | **Put** /api/domain/registrants/{id}/ | 
+[**DomainTldCatalogRetrieve**](DomainAPI.md#DomainTldCatalogRetrieve) | **Get** /api/domain/tld/catalog/ | 
 [**DomainTldList**](DomainAPI.md#DomainTldList) | **Get** /api/domain/tld/ | 
 [**DomainTldRetrieve**](DomainAPI.md#DomainTldRetrieve) | **Get** /api/domain/tld/{id}/ | 
 
@@ -101,7 +103,7 @@ Name | Type | Description  | Notes
 
 ## DomainDomainCheckAvailabilityCreate
 
-> CheckAvailability DomainDomainCheckAvailabilityCreate(ctx).CheckAvailabilityRequest(checkAvailabilityRequest).Execute()
+> DomainAvailability DomainDomainCheckAvailabilityCreate(ctx).CheckAvailabilityRequest(checkAvailabilityRequest).Execute()
 
 
 
@@ -129,7 +131,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `DomainAPI.DomainDomainCheckAvailabilityCreate``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `DomainDomainCheckAvailabilityCreate`: CheckAvailability
+	// response from `DomainDomainCheckAvailabilityCreate`: DomainAvailability
 	fmt.Fprintf(os.Stdout, "Response from `DomainAPI.DomainDomainCheckAvailabilityCreate`: %v\n", resp)
 }
 ```
@@ -149,7 +151,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**CheckAvailability**](CheckAvailability.md)
+[**DomainAvailability**](DomainAvailability.md)
 
 ### Authorization
 
@@ -158,6 +160,72 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
 - **Content-Type**: application/json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## DomainDomainCheckAvailabilityRetrieve
+
+> DomainAvailability DomainDomainCheckAvailabilityRetrieve(ctx).Domain(domain).Execute()
+
+
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/pidginhost/sdk-go"
+)
+
+func main() {
+	domain := "domain_example" // string | Domain with tld, ex: example.com
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.DomainAPI.DomainDomainCheckAvailabilityRetrieve(context.Background()).Domain(domain).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `DomainAPI.DomainDomainCheckAvailabilityRetrieve``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `DomainDomainCheckAvailabilityRetrieve`: DomainAvailability
+	fmt.Fprintf(os.Stdout, "Response from `DomainAPI.DomainDomainCheckAvailabilityRetrieve`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiDomainDomainCheckAvailabilityRetrieveRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **domain** | **string** | Domain with tld, ex: example.com | 
+
+### Return type
+
+[**DomainAvailability**](DomainAvailability.md)
+
+### Authorization
+
+[tokenAuth](../README.md#tokenAuth), [cookieAuth](../README.md#cookieAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
 - **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
@@ -520,7 +588,7 @@ Name | Type | Description  | Notes
 
 ## DomainDomainList
 
-> PaginatedDomainList DomainDomainList(ctx).Page(page).Execute()
+> PaginatedDomainList DomainDomainList(ctx).Page(page).StatusGroup(statusGroup).Execute()
 
 
 
@@ -540,10 +608,11 @@ import (
 
 func main() {
 	page := int32(56) // int32 | A page number within the paginated result set. (optional)
+	statusGroup := "statusGroup_example" // string | Filter by the account service status before pagination; ordered by expiry, then ID. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.DomainAPI.DomainDomainList(context.Background()).Page(page).Execute()
+	resp, r, err := apiClient.DomainAPI.DomainDomainList(context.Background()).Page(page).StatusGroup(statusGroup).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `DomainAPI.DomainDomainList``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -565,6 +634,7 @@ Other parameters are passed through a pointer to a apiDomainDomainListRequest st
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **page** | **int32** | A page number within the paginated result set. | 
+ **statusGroup** | **string** | Filter by the account service status before pagination; ordered by expiry, then ID. | 
 
 ### Return type
 
@@ -1415,6 +1485,67 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
 - **Content-Type**: application/json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## DomainTldCatalogRetrieve
+
+> TLDCatalog DomainTldCatalogRetrieve(ctx).Execute()
+
+
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/pidginhost/sdk-go"
+)
+
+func main() {
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.DomainAPI.DomainTldCatalogRetrieve(context.Background()).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `DomainAPI.DomainTldCatalogRetrieve``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `DomainTldCatalogRetrieve`: TLDCatalog
+	fmt.Fprintf(os.Stdout, "Response from `DomainAPI.DomainTldCatalogRetrieve`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+This endpoint does not need any parameter.
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiDomainTldCatalogRetrieveRequest struct via the builder pattern
+
+
+### Return type
+
+[**TLDCatalog**](TLDCatalog.md)
+
+### Authorization
+
+[tokenAuth](../README.md#tokenAuth), [cookieAuth](../README.md#cookieAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
 - **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)

@@ -30,6 +30,7 @@ type PrivateNetwork struct {
 	Gateway NullableString `json:"gateway,omitempty"`
 	Provisioned bool `json:"provisioned"`
 	Servers []map[string]string `json:"servers"`
+	Billing NullableResourceBilling `json:"billing"`
 }
 
 type _PrivateNetwork PrivateNetwork
@@ -38,13 +39,14 @@ type _PrivateNetwork PrivateNetwork
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewPrivateNetwork(id int32, slug string, address string, provisioned bool, servers []map[string]string) *PrivateNetwork {
+func NewPrivateNetwork(id int32, slug string, address string, provisioned bool, servers []map[string]string, billing NullableResourceBilling) *PrivateNetwork {
 	this := PrivateNetwork{}
 	this.Id = id
 	this.Slug = slug
 	this.Address = address
 	this.Provisioned = provisioned
 	this.Servers = servers
+	this.Billing = billing
 	return &this
 }
 
@@ -218,6 +220,32 @@ func (o *PrivateNetwork) SetServers(v []map[string]string) {
 	o.Servers = v
 }
 
+// GetBilling returns the Billing field value
+// If the value is explicit nil, the zero value for ResourceBilling will be returned
+func (o *PrivateNetwork) GetBilling() ResourceBilling {
+	if o == nil || o.Billing.Get() == nil {
+		var ret ResourceBilling
+		return ret
+	}
+
+	return *o.Billing.Get()
+}
+
+// GetBillingOk returns a tuple with the Billing field value
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *PrivateNetwork) GetBillingOk() (*ResourceBilling, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.Billing.Get(), o.Billing.IsSet()
+}
+
+// SetBilling sets field value
+func (o *PrivateNetwork) SetBilling(v ResourceBilling) {
+	o.Billing.Set(&v)
+}
+
 func (o PrivateNetwork) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -236,6 +264,7 @@ func (o PrivateNetwork) ToMap() (map[string]interface{}, error) {
 	}
 	toSerialize["provisioned"] = o.Provisioned
 	toSerialize["servers"] = o.Servers
+	toSerialize["billing"] = o.Billing.Get()
 	return toSerialize, nil
 }
 
@@ -249,6 +278,7 @@ func (o *PrivateNetwork) UnmarshalJSON(data []byte) (err error) {
 		"address",
 		"provisioned",
 		"servers",
+		"billing",
 	}
 
 	allProperties := make(map[string]interface{})

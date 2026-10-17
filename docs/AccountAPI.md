@@ -13,10 +13,12 @@ Method | HTTP request | Description
 [**AccountCompaniesPartialUpdate**](AccountAPI.md#AccountCompaniesPartialUpdate) | **Patch** /api/account/companies/{id}/ | 
 [**AccountCompaniesRetrieve**](AccountAPI.md#AccountCompaniesRetrieve) | **Get** /api/account/companies/{id}/ | 
 [**AccountCompaniesUpdate**](AccountAPI.md#AccountCompaniesUpdate) | **Put** /api/account/companies/{id}/ | 
+[**AccountDashboardRetrieve**](AccountAPI.md#AccountDashboardRetrieve) | **Get** /api/account/dashboard/ | 
 [**AccountEmailsList**](AccountAPI.md#AccountEmailsList) | **Get** /api/account/emails/ | 
 [**AccountProfilePartialUpdate**](AccountAPI.md#AccountProfilePartialUpdate) | **Patch** /api/account/profile | 
 [**AccountProfileRetrieve**](AccountAPI.md#AccountProfileRetrieve) | **Get** /api/account/profile | 
 [**AccountProfileUpdate**](AccountAPI.md#AccountProfileUpdate) | **Put** /api/account/profile | 
+[**AccountSessionRetrieve**](AccountAPI.md#AccountSessionRetrieve) | **Get** /api/account/session/ | 
 [**AccountSshKeysCreate**](AccountAPI.md#AccountSshKeysCreate) | **Post** /api/account/ssh-keys/ | 
 [**AccountSshKeysDestroy**](AccountAPI.md#AccountSshKeysDestroy) | **Delete** /api/account/ssh-keys/{id}/ | 
 [**AccountSshKeysList**](AccountAPI.md#AccountSshKeysList) | **Get** /api/account/ssh-keys/ | 
@@ -640,6 +642,67 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
+## AccountDashboardRetrieve
+
+> Dashboard AccountDashboardRetrieve(ctx).Execute()
+
+
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/pidginhost/sdk-go"
+)
+
+func main() {
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.AccountAPI.AccountDashboardRetrieve(context.Background()).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `AccountAPI.AccountDashboardRetrieve``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `AccountDashboardRetrieve`: Dashboard
+	fmt.Fprintf(os.Stdout, "Response from `AccountAPI.AccountDashboardRetrieve`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+This endpoint does not need any parameter.
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiAccountDashboardRetrieveRequest struct via the builder pattern
+
+
+### Return type
+
+[**Dashboard**](Dashboard.md)
+
+### Authorization
+
+[tokenAuth](../README.md#tokenAuth), [cookieAuth](../README.md#cookieAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
 ## AccountEmailsList
 
 > PaginatedEmailHistoryList AccountEmailsList(ctx).Page(page).Execute()
@@ -892,6 +955,67 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
 - **Content-Type**: application/json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## AccountSessionRetrieve
+
+> AccountSessionResponse AccountSessionRetrieve(ctx).Execute()
+
+
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/pidginhost/sdk-go"
+)
+
+func main() {
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.AccountAPI.AccountSessionRetrieve(context.Background()).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `AccountAPI.AccountSessionRetrieve``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `AccountSessionRetrieve`: AccountSessionResponse
+	fmt.Fprintf(os.Stdout, "Response from `AccountAPI.AccountSessionRetrieve`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+This endpoint does not need any parameter.
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiAccountSessionRetrieveRequest struct via the builder pattern
+
+
+### Return type
+
+[**AccountSessionResponse**](AccountSessionResponse.md)
+
+### Authorization
+
+[tokenAuth](../README.md#tokenAuth), [cookieAuth](../README.md#cookieAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
 - **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)

@@ -232,6 +232,30 @@ paths:
       - cookieAuth: []
       tags:
       - account
+  /api/account/dashboard/:
+    get:
+      description: |-
+        Adds :class:`~account.iam_enforcement.IAMActionPermission` as an
+        intersection with the route's existing permission classes (spec §6).
+
+        Detail routes (``self.detail``) defer the role/scope check to
+        ``has_object_permission`` so the account-scoped ``get_object`` answers 404
+        for foreign IDs before any role denial; every other route enforces in
+        ``has_permission``. A detail action that never calls ``get_object`` would
+        skip enforcement — the route probes pin the denial for each route.
+      operationId: account_dashboard_retrieve
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Dashboard"
+          description: ""
+      security:
+      - tokenAuth: []
+      - cookieAuth: []
+      tags:
+      - account
   /api/account/emails/:
     get:
       description: List email history for the authenticated user.
@@ -308,6 +332,23 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/Profile"
+          description: ""
+      security:
+      - tokenAuth: []
+      - cookieAuth: []
+      tags:
+      - account
+  /api/account/session/:
+    get:
+      description: Resolved account and role/scope intersection without owner-only
+        profile access.
+      operationId: account_session_retrieve
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AccountSessionResponse"
           description: ""
       security:
       - tokenAuth: []
@@ -3921,6 +3962,12 @@ paths:
               schema:
                 $ref: "#/components/schemas/Volume"
           description: ""
+        "409":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/VolumeBusy"
+          description: ""
       security:
       - tokenAuth: []
       - cookieAuth: []
@@ -3965,6 +4012,12 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/Volume"
+          description: ""
+        "409":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/VolumeBusy"
           description: ""
       security:
       - tokenAuth: []
@@ -4108,6 +4161,12 @@ paths:
               schema:
                 $ref: "#/components/schemas/Volume"
           description: ""
+        "409":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/VolumeBusy"
+          description: ""
       security:
       - tokenAuth: []
       - cookieAuth: []
@@ -4137,6 +4196,12 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/Volume"
+          description: ""
+        "409":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/VolumeBusy"
           description: ""
       security:
       - tokenAuth: []
@@ -4350,6 +4415,18 @@ paths:
         required: false
         schema:
           type: integer
+        style: form
+      - description: "Filter by the account service status before pagination; ordered\
+          \ by expiry, then ID."
+        explode: true
+        in: query
+        name: status_group
+        required: false
+        schema:
+          enum:
+          - closed
+          - current
+          type: string
         style: form
       responses:
         "200":
@@ -4684,6 +4761,32 @@ paths:
       tags:
       - domain
   /api/domain/domain/check-availability/:
+    get:
+      description: Manage your domains
+      operationId: domain_domain_check_availability_retrieve
+      parameters:
+      - description: "Domain with tld, ex: example.com"
+        explode: true
+        in: query
+        name: domain
+        required: true
+        schema:
+          maxLength: 255
+          minLength: 1
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/DomainAvailability"
+          description: ""
+      security:
+      - tokenAuth: []
+      - cookieAuth: []
+      tags:
+      - domain
     post:
       description: Manage your domains
       operationId: domain_domain_check_availability_create
@@ -4698,7 +4801,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/CheckAvailability"
+                $ref: "#/components/schemas/DomainAvailability"
           description: ""
       security:
       - tokenAuth: []
@@ -4917,6 +5020,23 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/TLD"
+          description: ""
+      security:
+      - tokenAuth: []
+      - cookieAuth: []
+      tags:
+      - domain
+  /api/domain/tld/catalog/:
+    get:
+      description: Registration catalog uses exactly the registrar/prices used by
+        create.
+      operationId: domain_tld_catalog_retrieve
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/TLDCatalog"
           description: ""
       security:
       - tokenAuth: []
@@ -6649,6 +6769,12 @@ paths:
               schema:
                 $ref: "#/components/schemas/DNSRecordMutateResponse"
           description: ""
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/DNSRecordMutateResponse"
+          description: ""
       security:
       - tokenAuth: []
       - cookieAuth: []
@@ -6825,6 +6951,54 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/HostingChangePasswordResponse"
+          description: ""
+      security:
+      - tokenAuth: []
+      - cookieAuth: []
+      tags:
+      - hosting
+  /api/hosting/hosting/{id}/upgrade-options/:
+    get:
+      description: List and manage cPanel/shared hosting services.
+      operationId: hosting_hosting_upgrade_options_retrieve
+      parameters:
+      - explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/HostingUpgradeOptions"
+          description: ""
+      security:
+      - tokenAuth: []
+      - cookieAuth: []
+      tags:
+      - hosting
+  /api/hosting/hosting/{id}/usage/:
+    get:
+      description: List and manage cPanel/shared hosting services.
+      operationId: hosting_hosting_usage_retrieve
+      parameters:
+      - explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/HostingUsage"
           description: ""
       security:
       - tokenAuth: []
@@ -7946,15 +8120,7 @@ paths:
       - kubernetes
   /api/kubernetes/clusters/{cluster_id}/resource-pools/{id}/:
     delete:
-      description: |-
-        Adds :class:`~account.iam_enforcement.IAMActionPermission` as an
-        intersection with the route's existing permission classes (spec §6).
-
-        Detail routes (``self.detail``) defer the role/scope check to
-        ``has_object_permission`` so the account-scoped ``get_object`` answers 404
-        for foreign IDs before any role denial; every other route enforces in
-        ``has_permission``. A detail action that never calls ``get_object`` would
-        skip enforcement — the route probes pin the denial for each route.
+      description: Delete a resource pool and every node in it.
       operationId: kubernetes_clusters_resource_pools_destroy
       parameters:
       - explode: false
@@ -7971,6 +8137,11 @@ paths:
         schema:
           type: string
         style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ResourcePoolDeleteRequest"
       responses:
         "204":
           description: No response body
@@ -8176,6 +8347,11 @@ paths:
         schema:
           type: integer
         style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/NodeOperationDeleteRequest"
       responses:
         "202":
           content:
@@ -8885,7 +9061,6 @@ paths:
           application/json:
             schema:
               $ref: "#/components/schemas/ClusterDetailRequest"
-        required: true
       responses:
         "200":
           content:
@@ -9307,6 +9482,90 @@ paths:
       - cookieAuth: []
       tags:
       - kubernetes
+  /api/kubernetes/clusters/{id}/l3/:
+    get:
+      description: The staff L3 plan for this cluster; read-only.
+      operationId: kubernetes_clusters_l3_retrieve
+      parameters:
+      - explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ClusterDetail"
+          description: ""
+      security:
+      - tokenAuth: []
+      - cookieAuth: []
+      tags:
+      - kubernetes
+  /api/kubernetes/clusters/{id}/l3/cutover/:
+    post:
+      description: |-
+        Start one staff L3 cutover. Only the plan, the confirmation and the
+        attended window are read from the request.
+      operationId: kubernetes_clusters_l3_cutover_create
+      parameters:
+      - explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ClusterDetailRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ClusterDetail"
+          description: ""
+      security:
+      - tokenAuth: []
+      - cookieAuth: []
+      tags:
+      - kubernetes
+  /api/kubernetes/clusters/{id}/l3/revert/:
+    post:
+      description: Request one staff revert of a committed L3 operation.
+      operationId: kubernetes_clusters_l3_revert_create
+      parameters:
+      - explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ClusterDetailRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ClusterDetail"
+          description: ""
+      security:
+      - tokenAuth: []
+      - cookieAuth: []
+      tags:
+      - kubernetes
   /api/kubernetes/clusters/{id}/talos-version-upgrade/:
     post:
       description: Upgrade Talos to the next available version.
@@ -9675,6 +9934,30 @@ paths:
       - cookieAuth: []
       tags:
       - support
+  /o/mobile/dashboard/:
+    get:
+      operationId: o_mobile_dashboard_retrieve
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Dashboard"
+          description: ""
+      tags:
+      - o
+  /o/mobile/session/:
+    get:
+      operationId: o_mobile_session_retrieve
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/MobileOAuthSession"
+          description: ""
+      tags:
+      - o
   /o/register:
     post:
       description: "RFC 7591 dynamic client registration (open, throttled)."
@@ -9807,6 +10090,46 @@ components:
       - name
       - request_count
       - scope
+      type: object
+    AccountSessionResponse:
+      example:
+        actor_email: actor_email
+        account_email: account_email
+        role: role
+        token_id: 0
+        token_scope: token_scope
+        capabilities:
+          key: true
+        currency: currency
+      properties:
+        actor_email:
+          format: email
+          type: string
+        account_email:
+          format: email
+          type: string
+        role:
+          type: string
+        token_id:
+          nullable: true
+          type: integer
+        token_scope:
+          nullable: true
+          type: string
+        capabilities:
+          additionalProperties:
+            type: boolean
+          type: object
+        currency:
+          type: string
+      required:
+      - account_email
+      - actor_email
+      - capabilities
+      - currency
+      - role
+      - token_id
+      - token_scope
       type: object
     ActivateFreeDNSRequest:
       example:
@@ -10189,6 +10512,7 @@ components:
       type: object
     Bucket:
       example:
+        billing: ""
         id: 0
         name: name
         full_name: full_name
@@ -10201,6 +10525,11 @@ components:
         region: region
         created: created
       properties:
+        billing:
+          allOf:
+          - $ref: "#/components/schemas/ResourceBilling"
+          nullable: true
+          readOnly: true
         id:
           readOnly: true
           type: integer
@@ -10215,9 +10544,11 @@ components:
           title: Quota (GB)
           type: integer
         used_bytes:
+          format: int64
           readOnly: true
           type: integer
         object_count:
+          format: int64
           readOnly: true
           type: integer
         public_read:
@@ -10237,6 +10568,7 @@ components:
           readOnly: true
           type: string
       required:
+      - billing
       - created
       - endpoint
       - full_name
@@ -10476,17 +10808,6 @@ components:
       required:
       - password
       type: object
-    CheckAvailability:
-      example:
-        domain: domain
-      properties:
-        domain:
-          description: "Domain with tld, ex: example.com"
-          maxLength: 255
-          type: string
-      required:
-      - domain
-      type: object
     CheckAvailabilityRequest:
       example:
         domain: domain
@@ -10607,6 +10928,7 @@ components:
         price_per_month:
           format: decimal
           pattern: "^-?\\d{0,16}(?:\\.\\d{0,4})?$"
+          readOnly: true
           type: string
         price_per_hour:
           format: double
@@ -10683,7 +11005,6 @@ components:
     ClusterDetailRequest:
       example:
         name: name
-        price_per_month: price_per_month
         features:
         - cert-manager
         - cert-manager
@@ -10692,18 +11013,12 @@ components:
         name:
           maxLength: 200
           type: string
-        price_per_month:
-          format: decimal
-          pattern: "^-?\\d{0,16}(?:\\.\\d{0,4})?$"
-          type: string
         features:
           items:
             $ref: "#/components/schemas/FeaturesEnum"
           type: array
         protected:
           type: boolean
-      required:
-      - price_per_month
       type: object
     ClusterEncryption:
       description: |-
@@ -11851,6 +12166,11 @@ components:
           minLength: 1
           type: string
       type: object
+    CurrencyEnum:
+      description: '* `RON` - RON'
+      enum:
+      - RON
+      type: string
     DNSGlue:
       description: |-
         A glue / "personal DNS" record: registers a child nameserver host at
@@ -11938,62 +12258,36 @@ components:
           readOnly: true
           type: string
         address:
-          readOnly: true
           type: string
         cname:
-          readOnly: true
           type: string
         exchange:
-          readOnly: true
           type: string
         preference:
-          readOnly: true
           type: integer
         txtdata:
-          readOnly: true
           type: string
         unencoded:
-          readOnly: true
           type: string
         target:
-          readOnly: true
           type: string
         priority:
-          readOnly: true
           type: integer
         weight:
-          readOnly: true
           type: integer
         port:
-          readOnly: true
           type: integer
         flag:
-          readOnly: true
           type: integer
         tag:
-          readOnly: true
           type: string
         value:
-          readOnly: true
           type: string
       required:
       - Line
-      - address
-      - cname
-      - exchange
-      - flag
       - name
-      - port
-      - preference
-      - priority
-      - tag
-      - target
       - ttl
-      - txtdata
       - type
-      - unencoded
-      - value
-      - weight
       type: object
     DNSRecordCreateRequest:
       description: Validate input for creating or editing a DNS record.
@@ -12138,6 +12432,94 @@ components:
       required:
       - message
       type: object
+    Dashboard:
+      example:
+        currency: currency
+        billing: ""
+        resources: ""
+      properties:
+        currency:
+          type: string
+        billing:
+          allOf:
+          - $ref: "#/components/schemas/DashboardBilling"
+          nullable: true
+        resources:
+          allOf:
+          - $ref: "#/components/schemas/DashboardResources"
+          nullable: true
+      required:
+      - billing
+      - currency
+      - resources
+      type: object
+    DashboardBilling:
+      properties:
+        balance:
+          type: string
+        unpaid_count:
+          type: integer
+        unpaid_total:
+          type: string
+        invoices:
+          items:
+            $ref: "#/components/schemas/InvoiceList"
+          type: array
+      required:
+      - balance
+      - invoices
+      - unpaid_count
+      - unpaid_total
+      type: object
+    DashboardResources:
+      properties:
+        server_count:
+          type: integer
+        hosting_count:
+          type: integer
+        servers:
+          items:
+            $ref: "#/components/schemas/DashboardServer"
+          type: array
+        hosting:
+          items:
+            $ref: "#/components/schemas/HostingService"
+          type: array
+        expiring_domains:
+          items:
+            $ref: "#/components/schemas/ExpiringDomain"
+          type: array
+      required:
+      - expiring_domains
+      - hosting
+      - hosting_count
+      - server_count
+      - servers
+      type: object
+    DashboardServer:
+      properties:
+        id:
+          type: integer
+        hostname:
+          type: string
+        status:
+          type: string
+        project:
+          type: string
+        cpus:
+          nullable: true
+          type: integer
+        memory:
+          nullable: true
+          type: integer
+      required:
+      - cpus
+      - hostname
+      - id
+      - memory
+      - project
+      - status
+      type: object
     DeactivateFreeDNSRequest:
       example:
         domain: domain
@@ -12162,6 +12544,45 @@ components:
       required:
       - message
       type: object
+    DedicatedHardware:
+      properties:
+        title:
+          type: string
+        processor:
+          type: string
+        processor_count:
+          type: integer
+        memory_gb:
+          type: integer
+        disks:
+          type: string
+        raid:
+          type: string
+        network:
+          type: string
+        traffic:
+          type: string
+        gpu:
+          type: string
+        extra_hardware:
+          items:
+            type: string
+          type: array
+        software:
+          type: string
+      required:
+      - disks
+      - extra_hardware
+      - gpu
+      - memory_gb
+      - network
+      - processor
+      - processor_count
+      - raid
+      - software
+      - title
+      - traffic
+      type: object
     DedicatedRDNSRequest:
       example:
         ip_id: 0
@@ -12180,6 +12601,7 @@ components:
     DedicatedServer:
       description: Read-only serializer for dedicated server services.
       example:
+        billing: ""
         id: 0
         hostname: hostname
         status: ""
@@ -12196,7 +12618,13 @@ components:
           ip: ip
           reverse_dns: reverse_dns
         os_name: os_name
+        hardware: ""
       properties:
+        billing:
+          allOf:
+          - $ref: "#/components/schemas/ResourceBilling"
+          nullable: true
+          readOnly: true
         id:
           readOnly: true
           type: integer
@@ -12237,9 +12665,16 @@ components:
           nullable: true
           readOnly: true
           type: string
+        hardware:
+          allOf:
+          - $ref: "#/components/schemas/DedicatedHardware"
+          nullable: true
+          readOnly: true
       required:
+      - billing
       - billing_cycle
       - created
+      - hardware
       - hostname
       - id
       - ips
@@ -12572,6 +13007,19 @@ components:
       required:
       - dns_source
       - name
+      type: object
+    DomainAvailability:
+      example:
+        available: true
+        supported: true
+      properties:
+        available:
+          type: boolean
+        supported:
+          type: boolean
+      required:
+      - available
+      - supported
       type: object
     DomainCancelResponse:
       example:
@@ -13136,6 +13584,17 @@ components:
       - encryption_task_aborted
       - dispatch_pending
       type: string
+    ExpiringDomain:
+      properties:
+        name:
+          type: string
+        expiration_date:
+          format: date
+          type: string
+      required:
+      - expiration_date
+      - name
+      type: object
     FeatureUpgradeRequest:
       example:
         feature_name: feature_name
@@ -13907,9 +14366,25 @@ components:
       required:
       - message
       type: object
+    HostingLVEPeriod:
+      example:
+        from: from
+        to: to
+      properties:
+        from:
+          nullable: true
+          type: string
+        to:
+          nullable: true
+          type: string
+      required:
+      - from
+      - to
+      type: object
     HostingService:
       description: Read-only serializer for shared/cPanel hosting services.
       example:
+        billing: ""
         id: 0
         hostname: hostname
         status: ""
@@ -13921,6 +14396,11 @@ components:
         node_url: node_url
         username: username
       properties:
+        billing:
+          allOf:
+          - $ref: "#/components/schemas/ResourceBilling"
+          nullable: true
+          readOnly: true
         id:
           readOnly: true
           type: integer
@@ -13960,6 +14440,7 @@ components:
           readOnly: true
           type: string
       required:
+      - billing
       - billing_cycle
       - created
       - hostname
@@ -13970,6 +14451,189 @@ components:
       - price
       - status
       - username
+      type: object
+    HostingUpgradeOption:
+      example:
+        id: 0
+        name: name
+        base_price: 20549123.661408067
+        currency: currency
+        tax_included: true
+        limits:
+          key: ""
+        review_url: https://openapi-generator.tech
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        base_price:
+          exclusiveMaximum: true
+          exclusiveMinimum: true
+          format: double
+          maximum: 100000000
+          minimum: -100000000
+          type: number
+        currency:
+          type: string
+        tax_included:
+          type: boolean
+        limits:
+          additionalProperties: {}
+          description: Package display limits; disk_quota and traffic are in GB.
+          type: object
+        review_url:
+          format: uri
+          type: string
+      required:
+      - base_price
+      - currency
+      - id
+      - limits
+      - name
+      - review_url
+      - tax_included
+      type: object
+    HostingUpgradeOptions:
+      example:
+        results:
+        - id: 0
+          name: name
+          base_price: 20549123.661408067
+          currency: currency
+          tax_included: true
+          limits:
+            key: ""
+          review_url: https://openapi-generator.tech
+        - id: 0
+          name: name
+          base_price: 20549123.661408067
+          currency: currency
+          tax_included: true
+          limits:
+            key: ""
+          review_url: https://openapi-generator.tech
+      properties:
+        results:
+          items:
+            $ref: "#/components/schemas/HostingUpgradeOption"
+          type: array
+      required:
+      - results
+      type: object
+    HostingUsage:
+      example:
+        fetched_at: fetched_at
+        package: package
+        metrics:
+        - key: key
+          label: label
+          used: 0.8008281904610115
+          limit: 6.027456183070403
+          unit: unit
+          percentage: 1.4658129805029452
+          faults: 5.962133916683182
+          source: source
+          near_limit: true
+        - key: key
+          label: label
+          used: 0.8008281904610115
+          limit: 6.027456183070403
+          unit: unit
+          percentage: 1.4658129805029452
+          faults: 5.962133916683182
+          source: source
+          near_limit: true
+        live_available: true
+        lve_available: true
+        lve_period:
+        - from: from
+          to: to
+        - from: from
+          to: to
+        package_limits:
+          key: 5
+        pressure_detected: true
+      properties:
+        fetched_at:
+          type: string
+        package:
+          type: string
+        metrics:
+          items:
+            $ref: "#/components/schemas/HostingUsageMetric"
+          type: array
+        live_available:
+          type: boolean
+        lve_available:
+          type: boolean
+        lve_period:
+          items:
+            $ref: "#/components/schemas/HostingLVEPeriod"
+          type: array
+        package_limits:
+          additionalProperties:
+            type: integer
+          type: object
+        pressure_detected:
+          type: boolean
+      required:
+      - fetched_at
+      - live_available
+      - lve_available
+      - lve_period
+      - metrics
+      - package
+      - package_limits
+      - pressure_detected
+      type: object
+    HostingUsageMetric:
+      example:
+        key: key
+        label: label
+        used: 0.8008281904610115
+        limit: 6.027456183070403
+        unit: unit
+        percentage: 1.4658129805029452
+        faults: 5.962133916683182
+        source: source
+        near_limit: true
+      properties:
+        key:
+          type: string
+        label:
+          type: string
+        used:
+          format: double
+          nullable: true
+          type: number
+        limit:
+          format: double
+          nullable: true
+          type: number
+        unit:
+          type: string
+        percentage:
+          format: double
+          nullable: true
+          type: number
+        faults:
+          format: double
+          nullable: true
+          type: number
+        source:
+          type: string
+        near_limit:
+          type: boolean
+      required:
+      - key
+      - label
+      - limit
+      - near_limit
+      - percentage
+      - source
+      - unit
+      - used
       type: object
     InboundRoute:
       example:
@@ -14087,10 +14751,13 @@ components:
         number_proforma: number_proforma
         number_fiscal: number_fiscal
         status: ""
+        invoice_type: ""
+        can_pay_with_funds: true
         subtotal: subtotal
         vat_value: vat_value
         vat_percentage: 6
         total: total
+        local_amounts: ""
         invoice_date: 2000-01-23
         due_date: 2000-01-23
         payment_date: payment_date
@@ -14122,6 +14789,13 @@ components:
           allOf:
           - $ref: "#/components/schemas/InvoiceStatusEnum"
           readOnly: true
+        invoice_type:
+          allOf:
+          - $ref: "#/components/schemas/InvoiceTypeEnum"
+          readOnly: true
+        can_pay_with_funds:
+          readOnly: true
+          type: boolean
         subtotal:
           format: decimal
           pattern: "^-?\\d{0,8}(?:\\.\\d{0,2})?$"
@@ -14140,6 +14814,11 @@ components:
           pattern: "^-?\\d{0,8}(?:\\.\\d{0,2})?$"
           readOnly: true
           type: string
+        local_amounts:
+          allOf:
+          - $ref: "#/components/schemas/InvoiceLocalAmounts"
+          nullable: true
+          readOnly: true
         invoice_date:
           format: date
           readOnly: true
@@ -14170,11 +14849,14 @@ components:
           readOnly: true
           type: array
       required:
+      - can_pay_with_funds
       - client_info
       - due_date
       - id
       - invoice_date
       - invoice_info
+      - invoice_type
+      - local_amounts
       - number_fiscal
       - number_proforma
       - payment_date
@@ -14194,10 +14876,13 @@ components:
         number_proforma: number_proforma
         number_fiscal: number_fiscal
         status: ""
+        invoice_type: ""
+        can_pay_with_funds: true
         subtotal: subtotal
         vat_value: vat_value
         vat_percentage: 6
         total: total
+        local_amounts: ""
         invoice_date: 2000-01-23
         due_date: 2000-01-23
         payment_date: payment_date
@@ -14217,6 +14902,13 @@ components:
           allOf:
           - $ref: "#/components/schemas/InvoiceStatusEnum"
           readOnly: true
+        invoice_type:
+          allOf:
+          - $ref: "#/components/schemas/InvoiceTypeEnum"
+          readOnly: true
+        can_pay_with_funds:
+          readOnly: true
+          type: boolean
         subtotal:
           format: decimal
           pattern: "^-?\\d{0,8}(?:\\.\\d{0,2})?$"
@@ -14235,6 +14927,11 @@ components:
           pattern: "^-?\\d{0,8}(?:\\.\\d{0,2})?$"
           readOnly: true
           type: string
+        local_amounts:
+          allOf:
+          - $ref: "#/components/schemas/InvoiceLocalAmounts"
+          nullable: true
+          readOnly: true
         invoice_date:
           format: date
           readOnly: true
@@ -14249,9 +14946,12 @@ components:
           readOnly: true
           type: string
       required:
+      - can_pay_with_funds
       - due_date
       - id
       - invoice_date
+      - invoice_type
+      - local_amounts
       - number_fiscal
       - number_proforma
       - payment_date
@@ -14259,6 +14959,33 @@ components:
       - subtotal
       - total
       - vat_percentage
+      - vat_value
+      type: object
+    InvoiceLocalAmounts:
+      properties:
+        currency:
+          $ref: "#/components/schemas/CurrencyEnum"
+        subtotal:
+          format: decimal
+          pattern: "^-?\\d{0,18}(?:\\.\\d{0,2})?$"
+          type: string
+        vat_value:
+          format: decimal
+          pattern: "^-?\\d{0,18}(?:\\.\\d{0,2})?$"
+          type: string
+        total:
+          format: decimal
+          pattern: "^-?\\d{0,18}(?:\\.\\d{0,2})?$"
+          type: string
+        primary:
+          description: True for a Romanian beneficiary (the rule that picks the PDF
+            language); show RON first.
+          type: boolean
+      required:
+      - currency
+      - primary
+      - subtotal
+      - total
       - vat_value
       type: object
     InvoiceService:
@@ -14295,6 +15022,14 @@ components:
       - processing
       - cancelled
       - refunded
+      type: string
+    InvoiceTypeEnum:
+      description: |-
+        * `standard` - Standard
+        * `usage` - Usage
+      enum:
+      - standard
+      - usage
       type: string
     IsoBootRequest:
       example:
@@ -14591,6 +15326,45 @@ components:
       required:
       - threshold_type
       type: object
+    MobileOAuthSession:
+      example:
+        actor_email: actor_email
+        account_email: account_email
+        role: role
+        token_id: 0
+        token_scope: token_scope
+        currency: currency
+        capabilities:
+          key: true
+      properties:
+        actor_email:
+          format: email
+          type: string
+        account_email:
+          format: email
+          type: string
+        role:
+          type: string
+        token_id:
+          nullable: true
+          type: integer
+        token_scope:
+          type: string
+        currency:
+          type: string
+        capabilities:
+          additionalProperties:
+            type: boolean
+          type: object
+      required:
+      - account_email
+      - actor_email
+      - capabilities
+      - currency
+      - role
+      - token_id
+      - token_scope
+      type: object
     ModeEnum:
       description: |-
         * `webhook` - HTTP webhook
@@ -14785,6 +15559,28 @@ components:
       - target_hostname
       - unmanaged_pods_confirmed_at
       - updated_at
+      type: object
+    NodeOperationDeleteRequest:
+      description: |-
+        A delete additionally requires the hostname typed back.
+
+        Checked here rather than in the service on purpose: it is a confirmation
+        that a human typed the right name, which a `source="system"` caller cannot
+        satisfy and must not be asked to. The panel form asks the same question in
+        the same words.
+      example:
+        local_data_loss_accepted: false
+        confirm_hostname: ""
+      properties:
+        local_data_loss_accepted:
+          default: false
+          description: Acknowledge that data kept on the node itself is destroyed.
+            The drain always deletes emptyDir.
+          type: boolean
+        confirm_hostname:
+          default: ""
+          description: "The node's hostname, typed back exactly."
+          type: string
       type: object
     NodeOperationKindEnum:
       description: |-
@@ -15287,7 +16083,8 @@ components:
         next: http://api.example.org/accounts/?page=4
         previous: http://api.example.org/accounts/?page=2
         results:
-        - id: 0
+        - billing: ""
+          id: 0
           hostname: hostname
           status: ""
           price: price
@@ -15303,7 +16100,9 @@ components:
             ip: ip
             reverse_dns: reverse_dns
           os_name: os_name
-        - id: 0
+          hardware: ""
+        - billing: ""
+          id: 0
           hostname: hostname
           status: ""
           price: price
@@ -15319,6 +16118,7 @@ components:
             ip: ip
             reverse_dns: reverse_dns
           os_name: os_name
+          hardware: ""
       properties:
         count:
           example: 123
@@ -15809,7 +16609,8 @@ components:
         next: http://api.example.org/accounts/?page=4
         previous: http://api.example.org/accounts/?page=2
         results:
-        - id: 0
+        - billing: ""
+          id: 0
           hostname: hostname
           status: ""
           price: price
@@ -15819,7 +16620,8 @@ components:
           package_name: package_name
           node_url: node_url
           username: username
-        - id: 0
+        - billing: ""
+          id: 0
           hostname: hostname
           status: ""
           price: price
@@ -15905,10 +16707,13 @@ components:
           number_proforma: number_proforma
           number_fiscal: number_fiscal
           status: ""
+          invoice_type: ""
+          can_pay_with_funds: true
           subtotal: subtotal
           vat_value: vat_value
           vat_percentage: 6
           total: total
+          local_amounts: ""
           invoice_date: 2000-01-23
           due_date: 2000-01-23
           payment_date: payment_date
@@ -15916,10 +16721,13 @@ components:
           number_proforma: number_proforma
           number_fiscal: number_fiscal
           status: ""
+          invoice_type: ""
+          can_pay_with_funds: true
           subtotal: subtotal
           vat_value: vat_value
           vat_percentage: 6
           total: total
+          local_amounts: ""
           invoice_date: 2000-01-23
           due_date: 2000-01-23
           payment_date: payment_date
@@ -16253,6 +17061,7 @@ components:
           servers:
           - key: servers
           - key: servers
+          billing: ""
         - id: 0
           slug: slug
           address: address
@@ -16261,6 +17070,7 @@ components:
           servers:
           - key: servers
           - key: servers
+          billing: ""
       properties:
         count:
           example: 123
@@ -16585,7 +17395,8 @@ components:
         next: http://api.example.org/accounts/?page=4
         previous: http://api.example.org/accounts/?page=2
         results:
-        - id: 0
+        - billing: ""
+          id: 0
           hostname: hostname
           project: project
           image: image
@@ -16602,7 +17413,8 @@ components:
           rescue_mode: true
           boot_iso: boot_iso
           rescue_supported: true
-        - id: 0
+        - billing: ""
+          id: 0
           hostname: hostname
           project: project
           image: image
@@ -16967,6 +17779,8 @@ components:
           idna_support: true
           wg_support: true
           reactivate_max_days: 19750
+          min_years: 4803
+          year_step: 19536
         - id: 0
           tld: tld
           price: price
@@ -16977,6 +17791,8 @@ components:
           idna_support: true
           wg_support: true
           reactivate_max_days: 19750
+          min_years: 4803
+          year_step: 19536
       properties:
         count:
           example: 123
@@ -17094,7 +17910,6 @@ components:
     PatchedClusterDetailRequest:
       example:
         name: name
-        price_per_month: price_per_month
         features:
         - cert-manager
         - cert-manager
@@ -17102,10 +17917,6 @@ components:
       properties:
         name:
           maxLength: 200
-          type: string
-        price_per_month:
-          format: decimal
-          pattern: "^-?\\d{0,16}(?:\\.\\d{0,4})?$"
           type: string
         features:
           items:
@@ -17895,6 +18706,7 @@ components:
         servers:
         - key: servers
         - key: servers
+        billing: ""
       properties:
         id:
           readOnly: true
@@ -17920,8 +18732,14 @@ components:
             type: object
           readOnly: true
           type: array
+        billing:
+          allOf:
+          - $ref: "#/components/schemas/ResourceBilling"
+          nullable: true
+          readOnly: true
       required:
       - address
+      - billing
       - id
       - provisioned
       - servers
@@ -18283,6 +19101,68 @@ components:
       required:
       - queued
       type: object
+    ResourceBilling:
+      properties:
+        amount:
+          format: decimal
+          pattern: "^-?\\d{0,18}(?:\\.\\d{0,2})?$"
+          type: string
+        currency:
+          type: string
+        tax_included:
+          type: boolean
+        cycle_months:
+          type: integer
+        cycle_label:
+          type: string
+        next_invoice:
+          format: date
+          nullable: true
+          type: string
+        profile:
+          allOf:
+          - $ref: "#/components/schemas/ResourceBillingProfile"
+          nullable: true
+        metered:
+          type: boolean
+        included:
+          type: boolean
+        hourly_amount:
+          format: decimal
+          pattern: "^-?\\d{0,16}(?:\\.\\d{0,4})?$"
+          type: string
+        monthly_total:
+          format: decimal
+          pattern: "^-?\\d{0,18}(?:\\.\\d{0,2})?$"
+          type: string
+        components:
+          additionalProperties:
+            format: decimal
+            pattern: "^-?\\d{0,18}(?:\\.\\d{0,2})?$"
+            type: string
+          type: object
+      required:
+      - amount
+      - currency
+      - cycle_label
+      - cycle_months
+      - included
+      - metered
+      - next_invoice
+      - profile
+      - tax_included
+      type: object
+    ResourceBillingProfile:
+      properties:
+        id:
+          nullable: true
+          type: integer
+        name:
+          type: string
+      required:
+      - id
+      - name
+      type: object
     ResourcePool:
       example:
         id: 0
@@ -18349,6 +19229,16 @@ components:
           type: integer
       required:
       - id
+      type: object
+    ResourcePoolDeleteRequest:
+      example:
+        local_data_loss_accepted: false
+      properties:
+        local_data_loss_accepted:
+          default: false
+          description: Acknowledge that data kept on the pool's nodes is destroyed.
+            Not needed for an empty pool.
+          type: boolean
       type: object
     ResourcePoolNode:
       example:
@@ -18705,6 +19595,7 @@ components:
       type: string
     Server:
       example:
+        billing: ""
         id: 0
         hostname: hostname
         project: project
@@ -18723,6 +19614,11 @@ components:
         boot_iso: boot_iso
         rescue_supported: true
       properties:
+        billing:
+          allOf:
+          - $ref: "#/components/schemas/ResourceBilling"
+          nullable: true
+          readOnly: true
         id:
           readOnly: true
           type: integer
@@ -18782,6 +19678,7 @@ components:
           readOnly: true
           type: boolean
       required:
+      - billing
       - boot_iso
       - cpus
       - custom_os
@@ -18935,6 +19832,7 @@ components:
       type: object
     ServerDetail:
       example:
+        billing: ""
         id: 0
         hostname: hostname
         project: project
@@ -18954,6 +19852,8 @@ components:
           product: product
           attached: true
           server: ""
+          status: ""
+          billing: ""
         - id: 5
           project: project
           alias: alias
@@ -18961,6 +19861,8 @@ components:
           product: product
           attached: true
           server: ""
+          status: ""
+          billing: ""
         networks: ""
         floating_ips:
         - id: 7
@@ -18983,6 +19885,11 @@ components:
         boot_iso: boot_iso
         rescue_supported: true
       properties:
+        billing:
+          allOf:
+          - $ref: "#/components/schemas/ResourceBilling"
+          nullable: true
+          readOnly: true
         id:
           readOnly: true
           type: integer
@@ -19069,6 +19976,7 @@ components:
           readOnly: true
           type: boolean
       required:
+      - billing
       - boot_iso
       - cpus
       - custom_os
@@ -19266,10 +20174,13 @@ components:
         status:
           type: string
         bytes_in:
+          format: int64
           type: integer
         bytes_out:
+          format: int64
           type: integer
         bytes_total:
+          format: int64
           type: integer
         included_tb:
           nullable: true
@@ -19281,6 +20192,7 @@ components:
           type: string
         billable_bytes:
           description: "Of bytes_total, the part that may be charged."
+          format: int64
           type: integer
         billable_units:
           type: integer
@@ -19306,8 +20218,10 @@ components:
         currency:
           type: string
         unit_bytes:
+          format: int64
           type: integer
         remaining_bytes:
+          format: int64
           nullable: true
           type: integer
         last_sample_at:
@@ -19383,6 +20297,11 @@ components:
       type: object
     Service:
       properties:
+        billing:
+          allOf:
+          - $ref: "#/components/schemas/ResourceBilling"
+          nullable: true
+          readOnly: true
         id:
           readOnly: true
           type: integer
@@ -19425,6 +20344,7 @@ components:
           readOnly: true
           type: integer
       required:
+      - billing
       - billing_cycle
       - created
       - hostname
@@ -20039,6 +20959,8 @@ components:
         idna_support: true
         wg_support: true
         reactivate_max_days: 19750
+        min_years: 4803
+        year_step: 19536
       properties:
         id:
           readOnly: true
@@ -20079,11 +21001,68 @@ components:
           maximum: 32767
           minimum: 0
           type: integer
+        min_years:
+          description: Smallest registration term the registry accepts (e.g. 2 for
+            .ai).
+          maximum: 32767
+          minimum: 0
+          title: Minimum registration years
+          type: integer
+        year_step:
+          description: "Allowed step between registration terms (e.g. 2 for .ai →\
+            \ 2, 4, 6 years)."
+          maximum: 32767
+          minimum: 0
+          title: Registration year step
+          type: integer
       required:
       - id
       - price
       - registrar
       - tld
+      type: object
+    TLDCatalog:
+      example:
+        tlds:
+        - id: 0
+          tld: tld
+          price: price
+          renew_price: renew_price
+          transfer_price: transfer_price
+          registrar: registrar
+          api_renewable: true
+          idna_support: true
+          wg_support: true
+          reactivate_max_days: 19750
+          min_years: 4803
+          year_step: 19536
+        - id: 0
+          tld: tld
+          price: price
+          renew_price: renew_price
+          transfer_price: transfer_price
+          registrar: registrar
+          api_renewable: true
+          idna_support: true
+          wg_support: true
+          reactivate_max_days: 19750
+          min_years: 4803
+          year_step: 19536
+        default_nameservers: default_nameservers
+        currency: currency
+      properties:
+        tlds:
+          items:
+            $ref: "#/components/schemas/TLD"
+          type: array
+        default_nameservers:
+          type: string
+        currency:
+          type: string
+      required:
+      - currency
+      - default_nameservers
+      - tlds
       type: object
     TalosUpgradeResponse:
       example:
@@ -20568,6 +21547,8 @@ components:
         product: product
         attached: true
         server: ""
+        status: ""
+        billing: ""
       properties:
         id:
           readOnly: true
@@ -20593,12 +21574,40 @@ components:
           default: ""
           readOnly: true
           type: string
+        status:
+          allOf:
+          - $ref: "#/components/schemas/ResourceStatusEnum"
+          readOnly: true
+        billing:
+          allOf:
+          - $ref: "#/components/schemas/ResourceBilling"
+          nullable: true
+          readOnly: true
       required:
       - attached
+      - billing
       - id
       - product
       - server
       - size
+      - status
+      type: object
+    VolumeBusy:
+      example:
+        message: message
+        extra:
+          key: ""
+      properties:
+        message:
+          readOnly: true
+          type: string
+        extra:
+          additionalProperties: {}
+          readOnly: true
+          type: object
+      required:
+      - extra
+      - message
       type: object
     VolumeRequest:
       example:
@@ -20655,6 +21664,9 @@ components:
       bearerFormat: phme_<key>
       scheme: bearer
       type: http
+    oauth2:
+      flows: {}
+      type: oauth2
     tokenAuth:
       description: Token-based authentication with required prefix "Token"
       in: header

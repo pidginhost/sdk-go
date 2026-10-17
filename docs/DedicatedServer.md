@@ -4,6 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**Billing** | [**NullableResourceBilling**](ResourceBilling.md) |  | [readonly] 
 **Id** | **int32** |  | [readonly] 
 **Hostname** | **string** |  | [readonly] 
 **Status** | [**ServiceStatusEnum**](ServiceStatusEnum.md) |  | [readonly] 
@@ -14,12 +15,13 @@ Name | Type | Description | Notes
 **ServerStatus** | [**NullableDedicatedServerStatus**](DedicatedServerStatus.md) |  | [readonly] 
 **Ips** | [**[]DedicatedServerIP**](DedicatedServerIP.md) |  | [readonly] 
 **OsName** | **NullableString** |  | [readonly] 
+**Hardware** | [**NullableDedicatedHardware**](DedicatedHardware.md) |  | [readonly] 
 
 ## Methods
 
 ### NewDedicatedServer
 
-`func NewDedicatedServer(id int32, hostname string, status ServiceStatusEnum, price string, nextInvoice string, created string, billingCycle string, serverStatus NullableDedicatedServerStatus, ips []DedicatedServerIP, osName NullableString, ) *DedicatedServer`
+`func NewDedicatedServer(billing NullableResourceBilling, id int32, hostname string, status ServiceStatusEnum, price string, nextInvoice string, created string, billingCycle string, serverStatus NullableDedicatedServerStatus, ips []DedicatedServerIP, osName NullableString, hardware NullableDedicatedHardware, ) *DedicatedServer`
 
 NewDedicatedServer instantiates a new DedicatedServer object
 This constructor will assign default values to properties that have it defined,
@@ -34,6 +36,36 @@ NewDedicatedServerWithDefaults instantiates a new DedicatedServer object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
 
+### GetBilling
+
+`func (o *DedicatedServer) GetBilling() ResourceBilling`
+
+GetBilling returns the Billing field if non-nil, zero value otherwise.
+
+### GetBillingOk
+
+`func (o *DedicatedServer) GetBillingOk() (*ResourceBilling, bool)`
+
+GetBillingOk returns a tuple with the Billing field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetBilling
+
+`func (o *DedicatedServer) SetBilling(v ResourceBilling)`
+
+SetBilling sets Billing field to given value.
+
+
+### SetBillingNil
+
+`func (o *DedicatedServer) SetBillingNil(b bool)`
+
+ SetBillingNil sets the value for Billing to be an explicit nil
+
+### UnsetBilling
+`func (o *DedicatedServer) UnsetBilling()`
+
+UnsetBilling ensures that no value is present for Billing, not even an explicit nil
 ### GetId
 
 `func (o *DedicatedServer) GetId() int32`
@@ -254,6 +286,36 @@ SetOsName sets OsName field to given value.
 `func (o *DedicatedServer) UnsetOsName()`
 
 UnsetOsName ensures that no value is present for OsName, not even an explicit nil
+### GetHardware
+
+`func (o *DedicatedServer) GetHardware() DedicatedHardware`
+
+GetHardware returns the Hardware field if non-nil, zero value otherwise.
+
+### GetHardwareOk
+
+`func (o *DedicatedServer) GetHardwareOk() (*DedicatedHardware, bool)`
+
+GetHardwareOk returns a tuple with the Hardware field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetHardware
+
+`func (o *DedicatedServer) SetHardware(v DedicatedHardware)`
+
+SetHardware sets Hardware field to given value.
+
+
+### SetHardwareNil
+
+`func (o *DedicatedServer) SetHardwareNil(b bool)`
+
+ SetHardwareNil sets the value for Hardware to be an explicit nil
+
+### UnsetHardware
+`func (o *DedicatedServer) UnsetHardware()`
+
+UnsetHardware ensures that no value is present for Hardware, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

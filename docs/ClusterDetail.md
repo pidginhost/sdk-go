@@ -10,7 +10,7 @@ Name | Type | Description | Notes
 **Generation** | **string** |  | [readonly] 
 **ClusterType** | **NullableString** |  | [readonly] 
 **KubeVersion** | **NullableString** |  | [readonly] 
-**PricePerMonth** | **string** |  | 
+**PricePerMonth** | **string** |  | [readonly] 
 **PricePerHour** | **float64** |  | [readonly] 
 **Features** | Pointer to [**[]FeaturesEnum**](FeaturesEnum.md) |  | [optional] 
 **FeaturesReady** | **bool** |  | [readonly] 

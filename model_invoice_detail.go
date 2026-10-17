@@ -26,10 +26,13 @@ type InvoiceDetail struct {
 	NumberProforma string `json:"number_proforma"`
 	NumberFiscal string `json:"number_fiscal"`
 	Status InvoiceStatusEnum `json:"status"`
+	InvoiceType InvoiceTypeEnum `json:"invoice_type"`
+	CanPayWithFunds bool `json:"can_pay_with_funds"`
 	Subtotal string `json:"subtotal" validate:"regexp=^-?\\d{0\\,8}(?:\\.\\d{0\\,2})?$"`
 	VatValue string `json:"vat_value" validate:"regexp=^-?\\d{0\\,8}(?:\\.\\d{0\\,2})?$"`
 	VatPercentage int32 `json:"vat_percentage"`
 	Total string `json:"total" validate:"regexp=^-?\\d{0\\,8}(?:\\.\\d{0\\,2})?$"`
+	LocalAmounts NullableInvoiceLocalAmounts `json:"local_amounts"`
 	InvoiceDate string `json:"invoice_date"`
 	DueDate NullableString `json:"due_date"`
 	PaymentDate NullableString `json:"payment_date"`
@@ -47,16 +50,19 @@ type _InvoiceDetail InvoiceDetail
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewInvoiceDetail(id int32, numberProforma string, numberFiscal string, status InvoiceStatusEnum, subtotal string, vatValue string, vatPercentage int32, total string, invoiceDate string, dueDate NullableString, paymentDate NullableString, productInfo interface{}, usageDetail interface{}, clientInfo interface{}, invoiceInfo interface{}, paymentMethod string, services []InvoiceService) *InvoiceDetail {
+func NewInvoiceDetail(id int32, numberProforma string, numberFiscal string, status InvoiceStatusEnum, invoiceType InvoiceTypeEnum, canPayWithFunds bool, subtotal string, vatValue string, vatPercentage int32, total string, localAmounts NullableInvoiceLocalAmounts, invoiceDate string, dueDate NullableString, paymentDate NullableString, productInfo interface{}, usageDetail interface{}, clientInfo interface{}, invoiceInfo interface{}, paymentMethod string, services []InvoiceService) *InvoiceDetail {
 	this := InvoiceDetail{}
 	this.Id = id
 	this.NumberProforma = numberProforma
 	this.NumberFiscal = numberFiscal
 	this.Status = status
+	this.InvoiceType = invoiceType
+	this.CanPayWithFunds = canPayWithFunds
 	this.Subtotal = subtotal
 	this.VatValue = vatValue
 	this.VatPercentage = vatPercentage
 	this.Total = total
+	this.LocalAmounts = localAmounts
 	this.InvoiceDate = invoiceDate
 	this.DueDate = dueDate
 	this.PaymentDate = paymentDate
@@ -173,6 +179,54 @@ func (o *InvoiceDetail) SetStatus(v InvoiceStatusEnum) {
 	o.Status = v
 }
 
+// GetInvoiceType returns the InvoiceType field value
+func (o *InvoiceDetail) GetInvoiceType() InvoiceTypeEnum {
+	if o == nil {
+		var ret InvoiceTypeEnum
+		return ret
+	}
+
+	return o.InvoiceType
+}
+
+// GetInvoiceTypeOk returns a tuple with the InvoiceType field value
+// and a boolean to check if the value has been set.
+func (o *InvoiceDetail) GetInvoiceTypeOk() (*InvoiceTypeEnum, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.InvoiceType, true
+}
+
+// SetInvoiceType sets field value
+func (o *InvoiceDetail) SetInvoiceType(v InvoiceTypeEnum) {
+	o.InvoiceType = v
+}
+
+// GetCanPayWithFunds returns the CanPayWithFunds field value
+func (o *InvoiceDetail) GetCanPayWithFunds() bool {
+	if o == nil {
+		var ret bool
+		return ret
+	}
+
+	return o.CanPayWithFunds
+}
+
+// GetCanPayWithFundsOk returns a tuple with the CanPayWithFunds field value
+// and a boolean to check if the value has been set.
+func (o *InvoiceDetail) GetCanPayWithFundsOk() (*bool, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.CanPayWithFunds, true
+}
+
+// SetCanPayWithFunds sets field value
+func (o *InvoiceDetail) SetCanPayWithFunds(v bool) {
+	o.CanPayWithFunds = v
+}
+
 // GetSubtotal returns the Subtotal field value
 func (o *InvoiceDetail) GetSubtotal() string {
 	if o == nil {
@@ -267,6 +321,32 @@ func (o *InvoiceDetail) GetTotalOk() (*string, bool) {
 // SetTotal sets field value
 func (o *InvoiceDetail) SetTotal(v string) {
 	o.Total = v
+}
+
+// GetLocalAmounts returns the LocalAmounts field value
+// If the value is explicit nil, the zero value for InvoiceLocalAmounts will be returned
+func (o *InvoiceDetail) GetLocalAmounts() InvoiceLocalAmounts {
+	if o == nil || o.LocalAmounts.Get() == nil {
+		var ret InvoiceLocalAmounts
+		return ret
+	}
+
+	return *o.LocalAmounts.Get()
+}
+
+// GetLocalAmountsOk returns a tuple with the LocalAmounts field value
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *InvoiceDetail) GetLocalAmountsOk() (*InvoiceLocalAmounts, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.LocalAmounts.Get(), o.LocalAmounts.IsSet()
+}
+
+// SetLocalAmounts sets field value
+func (o *InvoiceDetail) SetLocalAmounts(v InvoiceLocalAmounts) {
+	o.LocalAmounts.Set(&v)
 }
 
 // GetInvoiceDate returns the InvoiceDate field value
@@ -511,10 +591,13 @@ func (o InvoiceDetail) ToMap() (map[string]interface{}, error) {
 	toSerialize["number_proforma"] = o.NumberProforma
 	toSerialize["number_fiscal"] = o.NumberFiscal
 	toSerialize["status"] = o.Status
+	toSerialize["invoice_type"] = o.InvoiceType
+	toSerialize["can_pay_with_funds"] = o.CanPayWithFunds
 	toSerialize["subtotal"] = o.Subtotal
 	toSerialize["vat_value"] = o.VatValue
 	toSerialize["vat_percentage"] = o.VatPercentage
 	toSerialize["total"] = o.Total
+	toSerialize["local_amounts"] = o.LocalAmounts.Get()
 	toSerialize["invoice_date"] = o.InvoiceDate
 	toSerialize["due_date"] = o.DueDate.Get()
 	toSerialize["payment_date"] = o.PaymentDate.Get()
@@ -544,10 +627,13 @@ func (o *InvoiceDetail) UnmarshalJSON(data []byte) (err error) {
 		"number_proforma",
 		"number_fiscal",
 		"status",
+		"invoice_type",
+		"can_pay_with_funds",
 		"subtotal",
 		"vat_value",
 		"vat_percentage",
 		"total",
+		"local_amounts",
 		"invoice_date",
 		"due_date",
 		"payment_date",

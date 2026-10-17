@@ -4,6 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**Billing** | [**NullableResourceBilling**](ResourceBilling.md) |  | [readonly] 
 **Id** | **int32** |  | [readonly] 
 **Hostname** | **string** |  | [readonly] 
 **Project** | Pointer to **string** |  | [optional] 
@@ -31,7 +32,7 @@ Name | Type | Description | Notes
 
 ### NewServerDetail
 
-`func NewServerDetail(id int32, hostname string, image string, package_ string, cpus int32, memory int32, diskSize int32, generation string, machine map[string]interface{}, volumes []Volume, networks ServerNetworks, floatingIps []FloatingIPSummary, status ResourceStatusEnum, username string, destroyProtection bool, haEnabled bool, customOs bool, rescueMode bool, bootIso NullableString, rescueSupported bool, ) *ServerDetail`
+`func NewServerDetail(billing NullableResourceBilling, id int32, hostname string, image string, package_ string, cpus int32, memory int32, diskSize int32, generation string, machine map[string]interface{}, volumes []Volume, networks ServerNetworks, floatingIps []FloatingIPSummary, status ResourceStatusEnum, username string, destroyProtection bool, haEnabled bool, customOs bool, rescueMode bool, bootIso NullableString, rescueSupported bool, ) *ServerDetail`
 
 NewServerDetail instantiates a new ServerDetail object
 This constructor will assign default values to properties that have it defined,
@@ -46,6 +47,36 @@ NewServerDetailWithDefaults instantiates a new ServerDetail object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
 
+### GetBilling
+
+`func (o *ServerDetail) GetBilling() ResourceBilling`
+
+GetBilling returns the Billing field if non-nil, zero value otherwise.
+
+### GetBillingOk
+
+`func (o *ServerDetail) GetBillingOk() (*ResourceBilling, bool)`
+
+GetBillingOk returns a tuple with the Billing field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetBilling
+
+`func (o *ServerDetail) SetBilling(v ResourceBilling)`
+
+SetBilling sets Billing field to given value.
+
+
+### SetBillingNil
+
+`func (o *ServerDetail) SetBillingNil(b bool)`
+
+ SetBillingNil sets the value for Billing to be an explicit nil
+
+### UnsetBilling
+`func (o *ServerDetail) UnsetBilling()`
+
+UnsetBilling ensures that no value is present for Billing, not even an explicit nil
 ### GetId
 
 `func (o *ServerDetail) GetId() int32`

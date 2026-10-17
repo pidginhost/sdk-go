@@ -21,7 +21,6 @@ var _ MappedNullable = &PatchedClusterDetailRequest{}
 // PatchedClusterDetailRequest struct for PatchedClusterDetailRequest
 type PatchedClusterDetailRequest struct {
 	Name *string `json:"name,omitempty"`
-	PricePerMonth *string `json:"price_per_month,omitempty" validate:"regexp=^-?\\d{0\\,16}(?:\\.\\d{0\\,4})?$"`
 	Features []FeaturesEnum `json:"features,omitempty"`
 	Protected *bool `json:"protected,omitempty"`
 }
@@ -73,38 +72,6 @@ func (o *PatchedClusterDetailRequest) HasName() bool {
 // SetName gets a reference to the given string and assigns it to the Name field.
 func (o *PatchedClusterDetailRequest) SetName(v string) {
 	o.Name = &v
-}
-
-// GetPricePerMonth returns the PricePerMonth field value if set, zero value otherwise.
-func (o *PatchedClusterDetailRequest) GetPricePerMonth() string {
-	if o == nil || IsNil(o.PricePerMonth) {
-		var ret string
-		return ret
-	}
-	return *o.PricePerMonth
-}
-
-// GetPricePerMonthOk returns a tuple with the PricePerMonth field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *PatchedClusterDetailRequest) GetPricePerMonthOk() (*string, bool) {
-	if o == nil || IsNil(o.PricePerMonth) {
-		return nil, false
-	}
-	return o.PricePerMonth, true
-}
-
-// HasPricePerMonth returns a boolean if a field has been set.
-func (o *PatchedClusterDetailRequest) HasPricePerMonth() bool {
-	if o != nil && !IsNil(o.PricePerMonth) {
-		return true
-	}
-
-	return false
-}
-
-// SetPricePerMonth gets a reference to the given string and assigns it to the PricePerMonth field.
-func (o *PatchedClusterDetailRequest) SetPricePerMonth(v string) {
-	o.PricePerMonth = &v
 }
 
 // GetFeatures returns the Features field value if set, zero value otherwise.
@@ -183,9 +150,6 @@ func (o PatchedClusterDetailRequest) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	if !IsNil(o.Name) {
 		toSerialize["name"] = o.Name
-	}
-	if !IsNil(o.PricePerMonth) {
-		toSerialize["price_per_month"] = o.PricePerMonth
 	}
 	if !IsNil(o.Features) {
 		toSerialize["features"] = o.Features

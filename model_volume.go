@@ -31,6 +31,8 @@ type Volume struct {
 	Product string `json:"product"`
 	Attached bool `json:"attached"`
 	Server string `json:"server"`
+	Status ResourceStatusEnum `json:"status"`
+	Billing NullableResourceBilling `json:"billing"`
 }
 
 type _Volume Volume
@@ -39,13 +41,15 @@ type _Volume Volume
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewVolume(id int32, size int32, product string, attached bool, server string) *Volume {
+func NewVolume(id int32, size int32, product string, attached bool, server string, status ResourceStatusEnum, billing NullableResourceBilling) *Volume {
 	this := Volume{}
 	this.Id = id
 	this.Size = size
 	this.Product = product
 	this.Attached = attached
 	this.Server = server
+	this.Status = status
+	this.Billing = billing
 	return &this
 }
 
@@ -241,6 +245,56 @@ func (o *Volume) SetServer(v string) {
 	o.Server = v
 }
 
+// GetStatus returns the Status field value
+func (o *Volume) GetStatus() ResourceStatusEnum {
+	if o == nil {
+		var ret ResourceStatusEnum
+		return ret
+	}
+
+	return o.Status
+}
+
+// GetStatusOk returns a tuple with the Status field value
+// and a boolean to check if the value has been set.
+func (o *Volume) GetStatusOk() (*ResourceStatusEnum, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.Status, true
+}
+
+// SetStatus sets field value
+func (o *Volume) SetStatus(v ResourceStatusEnum) {
+	o.Status = v
+}
+
+// GetBilling returns the Billing field value
+// If the value is explicit nil, the zero value for ResourceBilling will be returned
+func (o *Volume) GetBilling() ResourceBilling {
+	if o == nil || o.Billing.Get() == nil {
+		var ret ResourceBilling
+		return ret
+	}
+
+	return *o.Billing.Get()
+}
+
+// GetBillingOk returns a tuple with the Billing field value
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *Volume) GetBillingOk() (*ResourceBilling, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.Billing.Get(), o.Billing.IsSet()
+}
+
+// SetBilling sets field value
+func (o *Volume) SetBilling(v ResourceBilling) {
+	o.Billing.Set(&v)
+}
+
 func (o Volume) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -262,6 +316,8 @@ func (o Volume) ToMap() (map[string]interface{}, error) {
 	toSerialize["product"] = o.Product
 	toSerialize["attached"] = o.Attached
 	toSerialize["server"] = o.Server
+	toSerialize["status"] = o.Status
+	toSerialize["billing"] = o.Billing.Get()
 	return toSerialize, nil
 }
 
@@ -275,6 +331,8 @@ func (o *Volume) UnmarshalJSON(data []byte) (err error) {
 		"product",
 		"attached",
 		"server",
+		"status",
+		"billing",
 	}
 
 	allProperties := make(map[string]interface{})

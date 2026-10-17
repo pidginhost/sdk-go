@@ -11,12 +11,14 @@ Name | Type | Description | Notes
 **Product** | **string** | ID or slug | 
 **Attached** | **bool** |  | [readonly] 
 **Server** | **string** |  | [readonly] [default to ""]
+**Status** | [**ResourceStatusEnum**](ResourceStatusEnum.md) |  | [readonly] 
+**Billing** | [**NullableResourceBilling**](ResourceBilling.md) |  | [readonly] 
 
 ## Methods
 
 ### NewVolume
 
-`func NewVolume(id int32, size int32, product string, attached bool, server string, ) *Volume`
+`func NewVolume(id int32, size int32, product string, attached bool, server string, status ResourceStatusEnum, billing NullableResourceBilling, ) *Volume`
 
 NewVolume instantiates a new Volume object
 This constructor will assign default values to properties that have it defined,
@@ -181,6 +183,56 @@ and a boolean to check if the value has been set.
 SetServer sets Server field to given value.
 
 
+### GetStatus
+
+`func (o *Volume) GetStatus() ResourceStatusEnum`
+
+GetStatus returns the Status field if non-nil, zero value otherwise.
+
+### GetStatusOk
+
+`func (o *Volume) GetStatusOk() (*ResourceStatusEnum, bool)`
+
+GetStatusOk returns a tuple with the Status field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetStatus
+
+`func (o *Volume) SetStatus(v ResourceStatusEnum)`
+
+SetStatus sets Status field to given value.
+
+
+### GetBilling
+
+`func (o *Volume) GetBilling() ResourceBilling`
+
+GetBilling returns the Billing field if non-nil, zero value otherwise.
+
+### GetBillingOk
+
+`func (o *Volume) GetBillingOk() (*ResourceBilling, bool)`
+
+GetBillingOk returns a tuple with the Billing field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetBilling
+
+`func (o *Volume) SetBilling(v ResourceBilling)`
+
+SetBilling sets Billing field to given value.
+
+
+### SetBillingNil
+
+`func (o *Volume) SetBillingNil(b bool)`
+
+ SetBillingNil sets the value for Billing to be an explicit nil
+
+### UnsetBilling
+`func (o *Volume) UnsetBilling()`
+
+UnsetBilling ensures that no value is present for Billing, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

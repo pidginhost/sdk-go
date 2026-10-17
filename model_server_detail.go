@@ -22,6 +22,7 @@ var _ MappedNullable = &ServerDetail{}
 
 // ServerDetail struct for ServerDetail
 type ServerDetail struct {
+	Billing NullableResourceBilling `json:"billing"`
 	Id int32 `json:"id"`
 	Hostname string `json:"hostname"`
 	Project *string `json:"project,omitempty"`
@@ -56,8 +57,9 @@ type _ServerDetail ServerDetail
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewServerDetail(id int32, hostname string, image string, package_ string, cpus int32, memory int32, diskSize int32, generation string, machine map[string]interface{}, volumes []Volume, networks ServerNetworks, floatingIps []FloatingIPSummary, status ResourceStatusEnum, username string, destroyProtection bool, haEnabled bool, customOs bool, rescueMode bool, bootIso NullableString, rescueSupported bool) *ServerDetail {
+func NewServerDetail(billing NullableResourceBilling, id int32, hostname string, image string, package_ string, cpus int32, memory int32, diskSize int32, generation string, machine map[string]interface{}, volumes []Volume, networks ServerNetworks, floatingIps []FloatingIPSummary, status ResourceStatusEnum, username string, destroyProtection bool, haEnabled bool, customOs bool, rescueMode bool, bootIso NullableString, rescueSupported bool) *ServerDetail {
 	this := ServerDetail{}
+	this.Billing = billing
 	this.Id = id
 	this.Hostname = hostname
 	this.Image = image
@@ -87,6 +89,32 @@ func NewServerDetail(id int32, hostname string, image string, package_ string, c
 func NewServerDetailWithDefaults() *ServerDetail {
 	this := ServerDetail{}
 	return &this
+}
+
+// GetBilling returns the Billing field value
+// If the value is explicit nil, the zero value for ResourceBilling will be returned
+func (o *ServerDetail) GetBilling() ResourceBilling {
+	if o == nil || o.Billing.Get() == nil {
+		var ret ResourceBilling
+		return ret
+	}
+
+	return *o.Billing.Get()
+}
+
+// GetBillingOk returns a tuple with the Billing field value
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *ServerDetail) GetBillingOk() (*ResourceBilling, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.Billing.Get(), o.Billing.IsSet()
+}
+
+// SetBilling sets field value
+func (o *ServerDetail) SetBilling(v ResourceBilling) {
+	o.Billing.Set(&v)
 }
 
 // GetId returns the Id field value
@@ -645,6 +673,7 @@ func (o ServerDetail) MarshalJSON() ([]byte, error) {
 
 func (o ServerDetail) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
+	toSerialize["billing"] = o.Billing.Get()
 	toSerialize["id"] = o.Id
 	toSerialize["hostname"] = o.Hostname
 	if !IsNil(o.Project) {
@@ -679,6 +708,7 @@ func (o *ServerDetail) UnmarshalJSON(data []byte) (err error) {
 	// by unmarshalling the object into a generic map with string keys and checking
 	// that every required field exists as a key in the generic map.
 	requiredProperties := []string{
+		"billing",
 		"id",
 		"hostname",
 		"image",

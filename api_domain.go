@@ -152,7 +152,7 @@ func (r ApiDomainDomainCheckAvailabilityCreateRequest) CheckAvailabilityRequest(
 	return r
 }
 
-func (r ApiDomainDomainCheckAvailabilityCreateRequest) Execute() (*CheckAvailability, *http.Response, error) {
+func (r ApiDomainDomainCheckAvailabilityCreateRequest) Execute() (*DomainAvailability, *http.Response, error) {
 	return r.ApiService.DomainDomainCheckAvailabilityCreateExecute(r)
 }
 
@@ -172,13 +172,13 @@ func (a *DomainAPIService) DomainDomainCheckAvailabilityCreate(ctx context.Conte
 }
 
 // Execute executes the request
-//  @return CheckAvailability
-func (a *DomainAPIService) DomainDomainCheckAvailabilityCreateExecute(r ApiDomainDomainCheckAvailabilityCreateRequest) (*CheckAvailability, *http.Response, error) {
+//  @return DomainAvailability
+func (a *DomainAPIService) DomainDomainCheckAvailabilityCreateExecute(r ApiDomainDomainCheckAvailabilityCreateRequest) (*DomainAvailability, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *CheckAvailability
+		localVarReturnValue  *DomainAvailability
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "DomainAPIService.DomainDomainCheckAvailabilityCreate")
@@ -214,6 +214,136 @@ func (a *DomainAPIService) DomainDomainCheckAvailabilityCreateExecute(r ApiDomai
 	}
 	// body params
 	localVarPostBody = r.checkAvailabilityRequest
+	if r.ctx != nil {
+		// API Key Authentication
+		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
+			if apiKey, ok := auth["tokenAuth"]; ok {
+				var key string
+				if apiKey.Prefix != "" {
+					key = apiKey.Prefix + " " + apiKey.Key
+				} else {
+					key = apiKey.Key
+				}
+				localVarHeaderParams["Authorization"] = key
+			}
+		}
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiDomainDomainCheckAvailabilityRetrieveRequest struct {
+	ctx context.Context
+	ApiService *DomainAPIService
+	domain *string
+}
+
+// Domain with tld, ex: example.com
+func (r ApiDomainDomainCheckAvailabilityRetrieveRequest) Domain(domain string) ApiDomainDomainCheckAvailabilityRetrieveRequest {
+	r.domain = &domain
+	return r
+}
+
+func (r ApiDomainDomainCheckAvailabilityRetrieveRequest) Execute() (*DomainAvailability, *http.Response, error) {
+	return r.ApiService.DomainDomainCheckAvailabilityRetrieveExecute(r)
+}
+
+/*
+DomainDomainCheckAvailabilityRetrieve Method for DomainDomainCheckAvailabilityRetrieve
+
+Manage your domains
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiDomainDomainCheckAvailabilityRetrieveRequest
+*/
+func (a *DomainAPIService) DomainDomainCheckAvailabilityRetrieve(ctx context.Context) ApiDomainDomainCheckAvailabilityRetrieveRequest {
+	return ApiDomainDomainCheckAvailabilityRetrieveRequest{
+		ApiService: a,
+		ctx: ctx,
+	}
+}
+
+// Execute executes the request
+//  @return DomainAvailability
+func (a *DomainAPIService) DomainDomainCheckAvailabilityRetrieveExecute(r ApiDomainDomainCheckAvailabilityRetrieveRequest) (*DomainAvailability, *http.Response, error) {
+	var (
+		localVarHTTPMethod   = http.MethodGet
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *DomainAvailability
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "DomainAPIService.DomainDomainCheckAvailabilityRetrieve")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/api/domain/domain/check-availability/"
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+	if r.domain == nil {
+		return localVarReturnValue, nil, reportError("domain is required and must be specified")
+	}
+	if strlen(*r.domain) < 1 {
+		return localVarReturnValue, nil, reportError("domain must have at least 1 elements")
+	}
+	if strlen(*r.domain) > 255 {
+		return localVarReturnValue, nil, reportError("domain must have less than 255 elements")
+	}
+
+	parameterAddToHeaderOrQuery(localVarQueryParams, "domain", r.domain, "form", "")
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
@@ -889,11 +1019,18 @@ type ApiDomainDomainListRequest struct {
 	ctx context.Context
 	ApiService *DomainAPIService
 	page *int32
+	statusGroup *string
 }
 
 // A page number within the paginated result set.
 func (r ApiDomainDomainListRequest) Page(page int32) ApiDomainDomainListRequest {
 	r.page = &page
+	return r
+}
+
+// Filter by the account service status before pagination; ordered by expiry, then ID.
+func (r ApiDomainDomainListRequest) StatusGroup(statusGroup string) ApiDomainDomainListRequest {
+	r.statusGroup = &statusGroup
 	return r
 }
 
@@ -939,6 +1076,9 @@ func (a *DomainAPIService) DomainDomainListExecute(r ApiDomainDomainListRequest)
 
 	if r.page != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "page", r.page, "form", "")
+	}
+	if r.statusGroup != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "status_group", r.statusGroup, "form", "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -2427,6 +2567,119 @@ func (a *DomainAPIService) DomainRegistrantsUpdateExecute(r ApiDomainRegistrants
 	}
 	// body params
 	localVarPostBody = r.domainRegistrantRequest
+	if r.ctx != nil {
+		// API Key Authentication
+		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
+			if apiKey, ok := auth["tokenAuth"]; ok {
+				var key string
+				if apiKey.Prefix != "" {
+					key = apiKey.Prefix + " " + apiKey.Key
+				} else {
+					key = apiKey.Key
+				}
+				localVarHeaderParams["Authorization"] = key
+			}
+		}
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiDomainTldCatalogRetrieveRequest struct {
+	ctx context.Context
+	ApiService *DomainAPIService
+}
+
+func (r ApiDomainTldCatalogRetrieveRequest) Execute() (*TLDCatalog, *http.Response, error) {
+	return r.ApiService.DomainTldCatalogRetrieveExecute(r)
+}
+
+/*
+DomainTldCatalogRetrieve Method for DomainTldCatalogRetrieve
+
+Registration catalog uses exactly the registrar/prices used by create.
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiDomainTldCatalogRetrieveRequest
+*/
+func (a *DomainAPIService) DomainTldCatalogRetrieve(ctx context.Context) ApiDomainTldCatalogRetrieveRequest {
+	return ApiDomainTldCatalogRetrieveRequest{
+		ApiService: a,
+		ctx: ctx,
+	}
+}
+
+// Execute executes the request
+//  @return TLDCatalog
+func (a *DomainAPIService) DomainTldCatalogRetrieveExecute(r ApiDomainTldCatalogRetrieveRequest) (*TLDCatalog, *http.Response, error) {
+	var (
+		localVarHTTPMethod   = http.MethodGet
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *TLDCatalog
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "DomainAPIService.DomainTldCatalogRetrieve")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/api/domain/tld/catalog/"
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {

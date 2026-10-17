@@ -8,25 +8,25 @@ Name | Type | Description | Notes
 **Name** | **string** |  | [readonly] 
 **Ttl** | **int32** |  | [readonly] 
 **Type** | **string** |  | [readonly] 
-**Address** | **string** |  | [readonly] 
-**Cname** | **string** |  | [readonly] 
-**Exchange** | **string** |  | [readonly] 
-**Preference** | **int32** |  | [readonly] 
-**Txtdata** | **string** |  | [readonly] 
-**Unencoded** | **string** |  | [readonly] 
-**Target** | **string** |  | [readonly] 
-**Priority** | **int32** |  | [readonly] 
-**Weight** | **int32** |  | [readonly] 
-**Port** | **int32** |  | [readonly] 
-**Flag** | **int32** |  | [readonly] 
-**Tag** | **string** |  | [readonly] 
-**Value** | **string** |  | [readonly] 
+**Address** | Pointer to **string** |  | [optional] 
+**Cname** | Pointer to **string** |  | [optional] 
+**Exchange** | Pointer to **string** |  | [optional] 
+**Preference** | Pointer to **int32** |  | [optional] 
+**Txtdata** | Pointer to **string** |  | [optional] 
+**Unencoded** | Pointer to **string** |  | [optional] 
+**Target** | Pointer to **string** |  | [optional] 
+**Priority** | Pointer to **int32** |  | [optional] 
+**Weight** | Pointer to **int32** |  | [optional] 
+**Port** | Pointer to **int32** |  | [optional] 
+**Flag** | Pointer to **int32** |  | [optional] 
+**Tag** | Pointer to **string** |  | [optional] 
+**Value** | Pointer to **string** |  | [optional] 
 
 ## Methods
 
 ### NewDNSRecord
 
-`func NewDNSRecord(line int32, name string, ttl int32, type_ string, address string, cname string, exchange string, preference int32, txtdata string, unencoded string, target string, priority int32, weight int32, port int32, flag int32, tag string, value string, ) *DNSRecord`
+`func NewDNSRecord(line int32, name string, ttl int32, type_ string, ) *DNSRecord`
 
 NewDNSRecord instantiates a new DNSRecord object
 This constructor will assign default values to properties that have it defined,
@@ -140,6 +140,11 @@ and a boolean to check if the value has been set.
 
 SetAddress sets Address field to given value.
 
+### HasAddress
+
+`func (o *DNSRecord) HasAddress() bool`
+
+HasAddress returns a boolean if a field has been set.
 
 ### GetCname
 
@@ -160,6 +165,11 @@ and a boolean to check if the value has been set.
 
 SetCname sets Cname field to given value.
 
+### HasCname
+
+`func (o *DNSRecord) HasCname() bool`
+
+HasCname returns a boolean if a field has been set.
 
 ### GetExchange
 
@@ -180,6 +190,11 @@ and a boolean to check if the value has been set.
 
 SetExchange sets Exchange field to given value.
 
+### HasExchange
+
+`func (o *DNSRecord) HasExchange() bool`
+
+HasExchange returns a boolean if a field has been set.
 
 ### GetPreference
 
@@ -200,6 +215,11 @@ and a boolean to check if the value has been set.
 
 SetPreference sets Preference field to given value.
 
+### HasPreference
+
+`func (o *DNSRecord) HasPreference() bool`
+
+HasPreference returns a boolean if a field has been set.
 
 ### GetTxtdata
 
@@ -220,6 +240,11 @@ and a boolean to check if the value has been set.
 
 SetTxtdata sets Txtdata field to given value.
 
+### HasTxtdata
+
+`func (o *DNSRecord) HasTxtdata() bool`
+
+HasTxtdata returns a boolean if a field has been set.
 
 ### GetUnencoded
 
@@ -240,6 +265,11 @@ and a boolean to check if the value has been set.
 
 SetUnencoded sets Unencoded field to given value.
 
+### HasUnencoded
+
+`func (o *DNSRecord) HasUnencoded() bool`
+
+HasUnencoded returns a boolean if a field has been set.
 
 ### GetTarget
 
@@ -260,6 +290,11 @@ and a boolean to check if the value has been set.
 
 SetTarget sets Target field to given value.
 
+### HasTarget
+
+`func (o *DNSRecord) HasTarget() bool`
+
+HasTarget returns a boolean if a field has been set.
 
 ### GetPriority
 
@@ -280,6 +315,11 @@ and a boolean to check if the value has been set.
 
 SetPriority sets Priority field to given value.
 
+### HasPriority
+
+`func (o *DNSRecord) HasPriority() bool`
+
+HasPriority returns a boolean if a field has been set.
 
 ### GetWeight
 
@@ -300,6 +340,11 @@ and a boolean to check if the value has been set.
 
 SetWeight sets Weight field to given value.
 
+### HasWeight
+
+`func (o *DNSRecord) HasWeight() bool`
+
+HasWeight returns a boolean if a field has been set.
 
 ### GetPort
 
@@ -320,6 +365,11 @@ and a boolean to check if the value has been set.
 
 SetPort sets Port field to given value.
 
+### HasPort
+
+`func (o *DNSRecord) HasPort() bool`
+
+HasPort returns a boolean if a field has been set.
 
 ### GetFlag
 
@@ -340,6 +390,11 @@ and a boolean to check if the value has been set.
 
 SetFlag sets Flag field to given value.
 
+### HasFlag
+
+`func (o *DNSRecord) HasFlag() bool`
+
+HasFlag returns a boolean if a field has been set.
 
 ### GetTag
 
@@ -360,6 +415,11 @@ and a boolean to check if the value has been set.
 
 SetTag sets Tag field to given value.
 
+### HasTag
+
+`func (o *DNSRecord) HasTag() bool`
+
+HasTag returns a boolean if a field has been set.
 
 ### GetValue
 
@@ -380,6 +440,11 @@ and a boolean to check if the value has been set.
 
 SetValue sets Value field to given value.
 
+### HasValue
+
+`func (o *DNSRecord) HasValue() bool`
+
+HasValue returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

@@ -5,7 +5,6 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Name** | Pointer to **string** |  | [optional] 
-**PricePerMonth** | Pointer to **string** |  | [optional] 
 **Features** | Pointer to [**[]FeaturesEnum**](FeaturesEnum.md) |  | [optional] 
 **Protected** | Pointer to **bool** |  | [optional] 
 
@@ -52,31 +51,6 @@ SetName sets Name field to given value.
 `func (o *PatchedClusterDetailRequest) HasName() bool`
 
 HasName returns a boolean if a field has been set.
-
-### GetPricePerMonth
-
-`func (o *PatchedClusterDetailRequest) GetPricePerMonth() string`
-
-GetPricePerMonth returns the PricePerMonth field if non-nil, zero value otherwise.
-
-### GetPricePerMonthOk
-
-`func (o *PatchedClusterDetailRequest) GetPricePerMonthOk() (*string, bool)`
-
-GetPricePerMonthOk returns a tuple with the PricePerMonth field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetPricePerMonth
-
-`func (o *PatchedClusterDetailRequest) SetPricePerMonth(v string)`
-
-SetPricePerMonth sets PricePerMonth field to given value.
-
-### HasPricePerMonth
-
-`func (o *PatchedClusterDetailRequest) HasPricePerMonth() bool`
-
-HasPricePerMonth returns a boolean if a field has been set.
 
 ### GetFeatures
 

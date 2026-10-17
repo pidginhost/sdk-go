@@ -8,13 +8,13 @@ Name | Type | Description | Notes
 **Month** | **int32** |  | 
 **AsOf** | **NullableString** |  | 
 **Status** | **string** |  | 
-**BytesIn** | **int32** |  | 
-**BytesOut** | **int32** |  | 
-**BytesTotal** | **int32** |  | 
+**BytesIn** | **int64** |  | 
+**BytesOut** | **int64** |  | 
+**BytesTotal** | **int64** |  | 
 **IncludedTb** | **NullableInt32** |  | 
 **UsedUnits** | **int32** |  | 
 **UsedTb** | **string** | Usage rounded up to six decimal places; bytes_total is exact. | 
-**BillableBytes** | **int32** | Of bytes_total, the part that may be charged. | 
+**BillableBytes** | **int64** | Of bytes_total, the part that may be charged. | 
 **BillableUnits** | **int32** |  | 
 **BillableTb** | **string** | Billable usage rounded up to six decimal places; billable_bytes is exact. | 
 **BillableFrom** | **NullableString** | First fully billable day, when one date describes the usage. May fall after the reported month. Null when all usage is billable or streams have different boundaries; use billable_bytes for the billable total. | 
@@ -22,8 +22,8 @@ Name | Type | Description | Notes
 **ChargedAmount** | **string** |  | 
 **PricePerTb** | **NullableString** |  | 
 **Currency** | **string** |  | 
-**UnitBytes** | **int32** |  | 
-**RemainingBytes** | **NullableInt32** |  | 
+**UnitBytes** | **int64** |  | 
+**RemainingBytes** | **NullableInt64** |  | 
 **LastSampleAt** | **NullableString** |  | 
 **Daily** | **[]map[string]interface{}** |  | 
 
@@ -31,7 +31,7 @@ Name | Type | Description | Notes
 
 ### NewServerTrafficResponse
 
-`func NewServerTrafficResponse(year int32, month int32, asOf NullableString, status string, bytesIn int32, bytesOut int32, bytesTotal int32, includedTb NullableInt32, usedUnits int32, usedTb string, billableBytes int32, billableUnits int32, billableTb string, billableFrom NullableString, chargedTb int32, chargedAmount string, pricePerTb NullableString, currency string, unitBytes int32, remainingBytes NullableInt32, lastSampleAt NullableString, daily []map[string]interface{}, ) *ServerTrafficResponse`
+`func NewServerTrafficResponse(year int32, month int32, asOf NullableString, status string, bytesIn int64, bytesOut int64, bytesTotal int64, includedTb NullableInt32, usedUnits int32, usedTb string, billableBytes int64, billableUnits int32, billableTb string, billableFrom NullableString, chargedTb int32, chargedAmount string, pricePerTb NullableString, currency string, unitBytes int64, remainingBytes NullableInt64, lastSampleAt NullableString, daily []map[string]interface{}, ) *ServerTrafficResponse`
 
 NewServerTrafficResponse instantiates a new ServerTrafficResponse object
 This constructor will assign default values to properties that have it defined,
@@ -138,60 +138,60 @@ SetStatus sets Status field to given value.
 
 ### GetBytesIn
 
-`func (o *ServerTrafficResponse) GetBytesIn() int32`
+`func (o *ServerTrafficResponse) GetBytesIn() int64`
 
 GetBytesIn returns the BytesIn field if non-nil, zero value otherwise.
 
 ### GetBytesInOk
 
-`func (o *ServerTrafficResponse) GetBytesInOk() (*int32, bool)`
+`func (o *ServerTrafficResponse) GetBytesInOk() (*int64, bool)`
 
 GetBytesInOk returns a tuple with the BytesIn field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetBytesIn
 
-`func (o *ServerTrafficResponse) SetBytesIn(v int32)`
+`func (o *ServerTrafficResponse) SetBytesIn(v int64)`
 
 SetBytesIn sets BytesIn field to given value.
 
 
 ### GetBytesOut
 
-`func (o *ServerTrafficResponse) GetBytesOut() int32`
+`func (o *ServerTrafficResponse) GetBytesOut() int64`
 
 GetBytesOut returns the BytesOut field if non-nil, zero value otherwise.
 
 ### GetBytesOutOk
 
-`func (o *ServerTrafficResponse) GetBytesOutOk() (*int32, bool)`
+`func (o *ServerTrafficResponse) GetBytesOutOk() (*int64, bool)`
 
 GetBytesOutOk returns a tuple with the BytesOut field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetBytesOut
 
-`func (o *ServerTrafficResponse) SetBytesOut(v int32)`
+`func (o *ServerTrafficResponse) SetBytesOut(v int64)`
 
 SetBytesOut sets BytesOut field to given value.
 
 
 ### GetBytesTotal
 
-`func (o *ServerTrafficResponse) GetBytesTotal() int32`
+`func (o *ServerTrafficResponse) GetBytesTotal() int64`
 
 GetBytesTotal returns the BytesTotal field if non-nil, zero value otherwise.
 
 ### GetBytesTotalOk
 
-`func (o *ServerTrafficResponse) GetBytesTotalOk() (*int32, bool)`
+`func (o *ServerTrafficResponse) GetBytesTotalOk() (*int64, bool)`
 
 GetBytesTotalOk returns a tuple with the BytesTotal field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetBytesTotal
 
-`func (o *ServerTrafficResponse) SetBytesTotal(v int32)`
+`func (o *ServerTrafficResponse) SetBytesTotal(v int64)`
 
 SetBytesTotal sets BytesTotal field to given value.
 
@@ -268,20 +268,20 @@ SetUsedTb sets UsedTb field to given value.
 
 ### GetBillableBytes
 
-`func (o *ServerTrafficResponse) GetBillableBytes() int32`
+`func (o *ServerTrafficResponse) GetBillableBytes() int64`
 
 GetBillableBytes returns the BillableBytes field if non-nil, zero value otherwise.
 
 ### GetBillableBytesOk
 
-`func (o *ServerTrafficResponse) GetBillableBytesOk() (*int32, bool)`
+`func (o *ServerTrafficResponse) GetBillableBytesOk() (*int64, bool)`
 
 GetBillableBytesOk returns a tuple with the BillableBytes field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetBillableBytes
 
-`func (o *ServerTrafficResponse) SetBillableBytes(v int32)`
+`func (o *ServerTrafficResponse) SetBillableBytes(v int64)`
 
 SetBillableBytes sets BillableBytes field to given value.
 
@@ -448,40 +448,40 @@ SetCurrency sets Currency field to given value.
 
 ### GetUnitBytes
 
-`func (o *ServerTrafficResponse) GetUnitBytes() int32`
+`func (o *ServerTrafficResponse) GetUnitBytes() int64`
 
 GetUnitBytes returns the UnitBytes field if non-nil, zero value otherwise.
 
 ### GetUnitBytesOk
 
-`func (o *ServerTrafficResponse) GetUnitBytesOk() (*int32, bool)`
+`func (o *ServerTrafficResponse) GetUnitBytesOk() (*int64, bool)`
 
 GetUnitBytesOk returns a tuple with the UnitBytes field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetUnitBytes
 
-`func (o *ServerTrafficResponse) SetUnitBytes(v int32)`
+`func (o *ServerTrafficResponse) SetUnitBytes(v int64)`
 
 SetUnitBytes sets UnitBytes field to given value.
 
 
 ### GetRemainingBytes
 
-`func (o *ServerTrafficResponse) GetRemainingBytes() int32`
+`func (o *ServerTrafficResponse) GetRemainingBytes() int64`
 
 GetRemainingBytes returns the RemainingBytes field if non-nil, zero value otherwise.
 
 ### GetRemainingBytesOk
 
-`func (o *ServerTrafficResponse) GetRemainingBytesOk() (*int32, bool)`
+`func (o *ServerTrafficResponse) GetRemainingBytesOk() (*int64, bool)`
 
 GetRemainingBytesOk returns a tuple with the RemainingBytes field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetRemainingBytes
 
-`func (o *ServerTrafficResponse) SetRemainingBytes(v int32)`
+`func (o *ServerTrafficResponse) SetRemainingBytes(v int64)`
 
 SetRemainingBytes sets RemainingBytes field to given value.
 

@@ -8,10 +8,13 @@ Name | Type | Description | Notes
 **NumberProforma** | **string** |  | [readonly] 
 **NumberFiscal** | **string** |  | [readonly] 
 **Status** | [**InvoiceStatusEnum**](InvoiceStatusEnum.md) |  | [readonly] 
+**InvoiceType** | [**InvoiceTypeEnum**](InvoiceTypeEnum.md) |  | [readonly] 
+**CanPayWithFunds** | **bool** |  | [readonly] 
 **Subtotal** | **string** |  | [readonly] 
 **VatValue** | **string** |  | [readonly] 
 **VatPercentage** | **int32** |  | [readonly] 
 **Total** | **string** |  | [readonly] 
+**LocalAmounts** | [**NullableInvoiceLocalAmounts**](InvoiceLocalAmounts.md) |  | [readonly] 
 **InvoiceDate** | **string** |  | [readonly] 
 **DueDate** | **NullableString** |  | [readonly] 
 **PaymentDate** | **NullableString** |  | [readonly] 
@@ -20,7 +23,7 @@ Name | Type | Description | Notes
 
 ### NewInvoiceList
 
-`func NewInvoiceList(id int32, numberProforma string, numberFiscal string, status InvoiceStatusEnum, subtotal string, vatValue string, vatPercentage int32, total string, invoiceDate string, dueDate NullableString, paymentDate NullableString, ) *InvoiceList`
+`func NewInvoiceList(id int32, numberProforma string, numberFiscal string, status InvoiceStatusEnum, invoiceType InvoiceTypeEnum, canPayWithFunds bool, subtotal string, vatValue string, vatPercentage int32, total string, localAmounts NullableInvoiceLocalAmounts, invoiceDate string, dueDate NullableString, paymentDate NullableString, ) *InvoiceList`
 
 NewInvoiceList instantiates a new InvoiceList object
 This constructor will assign default values to properties that have it defined,
@@ -115,6 +118,46 @@ and a boolean to check if the value has been set.
 SetStatus sets Status field to given value.
 
 
+### GetInvoiceType
+
+`func (o *InvoiceList) GetInvoiceType() InvoiceTypeEnum`
+
+GetInvoiceType returns the InvoiceType field if non-nil, zero value otherwise.
+
+### GetInvoiceTypeOk
+
+`func (o *InvoiceList) GetInvoiceTypeOk() (*InvoiceTypeEnum, bool)`
+
+GetInvoiceTypeOk returns a tuple with the InvoiceType field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetInvoiceType
+
+`func (o *InvoiceList) SetInvoiceType(v InvoiceTypeEnum)`
+
+SetInvoiceType sets InvoiceType field to given value.
+
+
+### GetCanPayWithFunds
+
+`func (o *InvoiceList) GetCanPayWithFunds() bool`
+
+GetCanPayWithFunds returns the CanPayWithFunds field if non-nil, zero value otherwise.
+
+### GetCanPayWithFundsOk
+
+`func (o *InvoiceList) GetCanPayWithFundsOk() (*bool, bool)`
+
+GetCanPayWithFundsOk returns a tuple with the CanPayWithFunds field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetCanPayWithFunds
+
+`func (o *InvoiceList) SetCanPayWithFunds(v bool)`
+
+SetCanPayWithFunds sets CanPayWithFunds field to given value.
+
+
 ### GetSubtotal
 
 `func (o *InvoiceList) GetSubtotal() string`
@@ -195,6 +238,36 @@ and a boolean to check if the value has been set.
 SetTotal sets Total field to given value.
 
 
+### GetLocalAmounts
+
+`func (o *InvoiceList) GetLocalAmounts() InvoiceLocalAmounts`
+
+GetLocalAmounts returns the LocalAmounts field if non-nil, zero value otherwise.
+
+### GetLocalAmountsOk
+
+`func (o *InvoiceList) GetLocalAmountsOk() (*InvoiceLocalAmounts, bool)`
+
+GetLocalAmountsOk returns a tuple with the LocalAmounts field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetLocalAmounts
+
+`func (o *InvoiceList) SetLocalAmounts(v InvoiceLocalAmounts)`
+
+SetLocalAmounts sets LocalAmounts field to given value.
+
+
+### SetLocalAmountsNil
+
+`func (o *InvoiceList) SetLocalAmountsNil(b bool)`
+
+ SetLocalAmountsNil sets the value for LocalAmounts to be an explicit nil
+
+### UnsetLocalAmounts
+`func (o *InvoiceList) UnsetLocalAmounts()`
+
+UnsetLocalAmounts ensures that no value is present for LocalAmounts, not even an explicit nil
 ### GetInvoiceDate
 
 `func (o *InvoiceList) GetInvoiceDate() string`

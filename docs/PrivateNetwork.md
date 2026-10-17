@@ -10,12 +10,13 @@ Name | Type | Description | Notes
 **Gateway** | Pointer to **NullableString** |  | [optional] 
 **Provisioned** | **bool** |  | [readonly] 
 **Servers** | **[]map[string]string** |  | [readonly] 
+**Billing** | [**NullableResourceBilling**](ResourceBilling.md) |  | [readonly] 
 
 ## Methods
 
 ### NewPrivateNetwork
 
-`func NewPrivateNetwork(id int32, slug string, address string, provisioned bool, servers []map[string]string, ) *PrivateNetwork`
+`func NewPrivateNetwork(id int32, slug string, address string, provisioned bool, servers []map[string]string, billing NullableResourceBilling, ) *PrivateNetwork`
 
 NewPrivateNetwork instantiates a new PrivateNetwork object
 This constructor will assign default values to properties that have it defined,
@@ -165,6 +166,36 @@ and a boolean to check if the value has been set.
 SetServers sets Servers field to given value.
 
 
+### GetBilling
+
+`func (o *PrivateNetwork) GetBilling() ResourceBilling`
+
+GetBilling returns the Billing field if non-nil, zero value otherwise.
+
+### GetBillingOk
+
+`func (o *PrivateNetwork) GetBillingOk() (*ResourceBilling, bool)`
+
+GetBillingOk returns a tuple with the Billing field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetBilling
+
+`func (o *PrivateNetwork) SetBilling(v ResourceBilling)`
+
+SetBilling sets Billing field to given value.
+
+
+### SetBillingNil
+
+`func (o *PrivateNetwork) SetBillingNil(b bool)`
+
+ SetBillingNil sets the value for Billing to be an explicit nil
+
+### UnsetBilling
+`func (o *PrivateNetwork) UnsetBilling()`
+
+UnsetBilling ensures that no value is present for Billing, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 
