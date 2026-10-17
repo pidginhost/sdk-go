@@ -5976,37 +5976,6 @@ paths:
       - cookieAuth: []
       tags:
       - email
-  /api/email/services/{id}/restore/:
-    post:
-      description: |-
-        Intersect the beta gate and IAM with the configured API permissions.
-
-        Keeping the gate additive preserves authentication, custom-token scope,
-        and OAuth scope checks when the customer-facing feature flag is open.
-        Per-action permission overrides (the staff-only restore action) remain in
-        the same intersection.
-      operationId: email_services_restore_create
-      parameters:
-      - description: A unique integer value identifying this email service.
-        explode: false
-        in: path
-        name: id
-        required: true
-        schema:
-          type: integer
-        style: simple
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/EmailService"
-          description: ""
-      security:
-      - tokenAuth: []
-      - cookieAuth: []
-      tags:
-      - email
   /api/email/services/{service_pk}/api_credentials/:
     get:
       description: |-
@@ -7639,37 +7608,6 @@ paths:
       - cookieAuth: []
       tags:
       - kubernetes
-  /api/kubernetes/clusters/{cluster_id}/node-operations/{id}/resume/:
-    post:
-      description: Staff-only resume of an operation waiting for support.
-      operationId: kubernetes_clusters_node_operations_resume_create
-      parameters:
-      - explode: false
-        in: path
-        name: cluster_id
-        required: true
-        schema:
-          type: integer
-        style: simple
-      - explode: false
-        in: path
-        name: id
-        required: true
-        schema:
-          type: string
-        style: simple
-      responses:
-        "202":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/NodeOperation"
-          description: ""
-      security:
-      - tokenAuth: []
-      - cookieAuth: []
-      tags:
-      - kubernetes
   /api/kubernetes/clusters/{cluster_id}/node-operations/{id}/retry/:
     post:
       description: Retry a blocked operation with the overrides that answer its blocker.
@@ -7771,37 +7709,6 @@ paths:
         style: simple
       responses:
         "200":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/PoolRemovalJournal"
-          description: ""
-      security:
-      - tokenAuth: []
-      - cookieAuth: []
-      tags:
-      - kubernetes
-  /api/kubernetes/clusters/{cluster_id}/pool-removal-journals/{id}/resume/:
-    post:
-      description: Staff-only resume of a pool removal waiting for support.
-      operationId: kubernetes_clusters_pool_removal_journals_resume_create
-      parameters:
-      - explode: false
-        in: path
-        name: cluster_id
-        required: true
-        schema:
-          type: integer
-        style: simple
-      - explode: false
-        in: path
-        name: id
-        required: true
-        schema:
-          type: string
-        style: simple
-      responses:
-        "202":
           content:
             application/json:
               schema:
@@ -9347,70 +9254,6 @@ paths:
       - cookieAuth: []
       tags:
       - kubernetes
-  /api/kubernetes/clusters/{id}/encryption/reconcile/:
-    post:
-      description: "Staff only: resolve a cluster whose encryption state is unknown."
-      operationId: kubernetes_clusters_encryption_reconcile_create
-      parameters:
-      - explode: false
-        in: path
-        name: id
-        required: true
-        schema:
-          type: string
-        style: simple
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/ClusterEncryptionReconcileRequest"
-        required: true
-      responses:
-        "202":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/ClusterEncryptionOperation"
-          description: ""
-          headers:
-            Location:
-              description: "The cluster's encryption status resource, to poll for\
-                \ the outcome."
-              explode: false
-              required: true
-              schema:
-                format: uri
-                type: string
-              style: simple
-        "400":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/ClusterEncryptionError"
-          description: ""
-        "403":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/ClusterEncryptionError"
-          description: ""
-        "404":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/ClusterEncryptionError"
-          description: ""
-        "409":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/ClusterEncryptionError"
-          description: ""
-      security:
-      - tokenAuth: []
-      - cookieAuth: []
-      tags:
-      - kubernetes
   /api/kubernetes/clusters/{id}/kube-version-upgrade/:
     post:
       description: Upgrade kubernetes to the next available version.
@@ -9476,90 +9319,6 @@ paths:
             text/plain:
               schema:
                 type: string
-          description: ""
-      security:
-      - tokenAuth: []
-      - cookieAuth: []
-      tags:
-      - kubernetes
-  /api/kubernetes/clusters/{id}/l3/:
-    get:
-      description: The staff L3 plan for this cluster; read-only.
-      operationId: kubernetes_clusters_l3_retrieve
-      parameters:
-      - explode: false
-        in: path
-        name: id
-        required: true
-        schema:
-          type: string
-        style: simple
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/ClusterDetail"
-          description: ""
-      security:
-      - tokenAuth: []
-      - cookieAuth: []
-      tags:
-      - kubernetes
-  /api/kubernetes/clusters/{id}/l3/cutover/:
-    post:
-      description: |-
-        Start one staff L3 cutover. Only the plan, the confirmation and the
-        attended window are read from the request.
-      operationId: kubernetes_clusters_l3_cutover_create
-      parameters:
-      - explode: false
-        in: path
-        name: id
-        required: true
-        schema:
-          type: string
-        style: simple
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/ClusterDetailRequest"
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/ClusterDetail"
-          description: ""
-      security:
-      - tokenAuth: []
-      - cookieAuth: []
-      tags:
-      - kubernetes
-  /api/kubernetes/clusters/{id}/l3/revert/:
-    post:
-      description: Request one staff revert of a committed L3 operation.
-      operationId: kubernetes_clusters_l3_revert_create
-      parameters:
-      - explode: false
-        in: path
-        name: id
-        required: true
-        schema:
-          type: string
-        style: simple
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/ClusterDetailRequest"
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/ClusterDetail"
           description: ""
       security:
       - tokenAuth: []
@@ -9934,41 +9693,6 @@ paths:
       - cookieAuth: []
       tags:
       - support
-  /o/mobile/dashboard/:
-    get:
-      operationId: o_mobile_dashboard_retrieve
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Dashboard"
-          description: ""
-      tags:
-      - o
-  /o/mobile/session/:
-    get:
-      operationId: o_mobile_session_retrieve
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/MobileOAuthSession"
-          description: ""
-      tags:
-      - o
-  /o/register:
-    post:
-      description: "RFC 7591 dynamic client registration (open, throttled)."
-      operationId: o_register_create
-      responses:
-        "200":
-          description: No response body
-      security:
-      - {}
-      tags:
-      - o
 components:
   schemas:
     APITokenCreate:
@@ -11275,42 +10999,6 @@ components:
       - request_id
       - requested_mode
       - status
-      type: object
-    ClusterEncryptionReconcileRequest:
-      description: |-
-        The staff reconcile body, which alone may carry the override.
-
-        A SEPARATE component rather than an optional field on the shared one. The
-        toggle route ignores the flag entirely, so declaring it in one body would
-        hand a generated client an argument that silently does nothing on half the
-        routes carrying it -- the same class of published untruth the rest of this
-        feature's schema work exists to prevent.
-      example:
-        mode: ""
-        acknowledge_workload_restart: false
-        override_unverifiable: false
-      properties:
-        mode:
-          allOf:
-          - $ref: "#/components/schemas/EncryptionModeEnum"
-          description: |-
-            Target encryption mode: no encryption, or WireGuard.
-
-            * `none` - none
-            * `wireguard` - wireguard
-        acknowledge_workload_restart:
-          default: false
-          description: Confirms the caller accepts that workloads must be restarted
-            after the change.
-          type: boolean
-        override_unverifiable:
-          default: false
-          description: "Record this mode even if verification refuses, together with\
-            \ what was observed. Only the unencrypted mode can be asserted this way:\
-            \ an encrypted state always requires positive per-node evidence."
-          type: boolean
-      required:
-      - mode
       type: object
     ClusterEncryptionRefusal:
       example:
@@ -15325,45 +15013,6 @@ components:
           type: integer
       required:
       - threshold_type
-      type: object
-    MobileOAuthSession:
-      example:
-        actor_email: actor_email
-        account_email: account_email
-        role: role
-        token_id: 0
-        token_scope: token_scope
-        currency: currency
-        capabilities:
-          key: true
-      properties:
-        actor_email:
-          format: email
-          type: string
-        account_email:
-          format: email
-          type: string
-        role:
-          type: string
-        token_id:
-          nullable: true
-          type: integer
-        token_scope:
-          type: string
-        currency:
-          type: string
-        capabilities:
-          additionalProperties:
-            type: boolean
-          type: object
-      required:
-      - account_email
-      - actor_email
-      - capabilities
-      - currency
-      - role
-      - token_id
-      - token_scope
       type: object
     ModeEnum:
       description: |-
@@ -21664,9 +21313,6 @@ components:
       bearerFormat: phme_<key>
       scheme: bearer
       type: http
-    oauth2:
-      flows: {}
-      type: oauth2
     tokenAuth:
       description: Token-based authentication with required prefix "Token"
       in: header

@@ -39,7 +39,6 @@ Method | HTTP request | Description
 [**EmailServicesList**](EmailAPI.md#EmailServicesList) | **Get** /api/email/services/ | 
 [**EmailServicesMessagesRetrieve**](EmailAPI.md#EmailServicesMessagesRetrieve) | **Get** /api/email/services/{service_pk}/messages/ | 
 [**EmailServicesPartialUpdate**](EmailAPI.md#EmailServicesPartialUpdate) | **Patch** /api/email/services/{id}/ | 
-[**EmailServicesRestoreCreate**](EmailAPI.md#EmailServicesRestoreCreate) | **Post** /api/email/services/{id}/restore/ | 
 [**EmailServicesRetrieve**](EmailAPI.md#EmailServicesRetrieve) | **Get** /api/email/services/{id}/ | 
 [**EmailServicesSandboxAddressesCreate**](EmailAPI.md#EmailServicesSandboxAddressesCreate) | **Post** /api/email/services/{service_pk}/sandbox_addresses/ | 
 [**EmailServicesSandboxAddressesList**](EmailAPI.md#EmailServicesSandboxAddressesList) | **Get** /api/email/services/{service_pk}/sandbox_addresses/ | 
@@ -2455,76 +2454,6 @@ Name | Type | Description  | Notes
 ### Other Parameters
 
 Other parameters are passed through a pointer to a apiEmailServicesPartialUpdateRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
-
-### Return type
-
-[**EmailService**](EmailService.md)
-
-### Authorization
-
-[tokenAuth](../README.md#tokenAuth), [cookieAuth](../README.md#cookieAuth)
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
-- **Accept**: application/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../README.md#documentation-for-models)
-[[Back to README]](../README.md)
-
-
-## EmailServicesRestoreCreate
-
-> EmailService EmailServicesRestoreCreate(ctx, id).Execute()
-
-
-
-
-
-### Example
-
-```go
-package main
-
-import (
-	"context"
-	"fmt"
-	"os"
-	openapiclient "github.com/pidginhost/sdk-go"
-)
-
-func main() {
-	id := int32(56) // int32 | A unique integer value identifying this email service.
-
-	configuration := openapiclient.NewConfiguration()
-	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.EmailAPI.EmailServicesRestoreCreate(context.Background(), id).Execute()
-	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error when calling `EmailAPI.EmailServicesRestoreCreate``: %v\n", err)
-		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-	}
-	// response from `EmailServicesRestoreCreate`: EmailService
-	fmt.Fprintf(os.Stdout, "Response from `EmailAPI.EmailServicesRestoreCreate`: %v\n", resp)
-}
-```
-
-### Path Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**id** | **int32** | A unique integer value identifying this email service. | 
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiEmailServicesRestoreCreateRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes

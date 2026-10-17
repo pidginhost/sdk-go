@@ -70,8 +70,6 @@ type APIClient struct {
 
 	KubernetesAPI *KubernetesAPIService
 
-	OAPI *OAPIService
-
 	SchemaAPI *SchemaAPIService
 
 	SupportAPI *SupportAPIService
@@ -103,7 +101,6 @@ func NewAPIClient(cfg *Configuration) *APIClient {
 	c.FreednsAPI = (*FreednsAPIService)(&c.common)
 	c.HostingAPI = (*HostingAPIService)(&c.common)
 	c.KubernetesAPI = (*KubernetesAPIService)(&c.common)
-	c.OAPI = (*OAPIService)(&c.common)
 	c.SchemaAPI = (*SchemaAPIService)(&c.common)
 	c.SupportAPI = (*SupportAPIService)(&c.common)
 
