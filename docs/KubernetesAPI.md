@@ -29,6 +29,8 @@ Method | HTTP request | Description
 [**KubernetesClustersLbFirewallPartialUpdate**](KubernetesAPI.md#KubernetesClustersLbFirewallPartialUpdate) | **Patch** /api/kubernetes/clusters/{cluster_id}/lb-firewall/{id}/ | 
 [**KubernetesClustersLbFirewallRetrieve**](KubernetesAPI.md#KubernetesClustersLbFirewallRetrieve) | **Get** /api/kubernetes/clusters/{cluster_id}/lb-firewall/{id}/ | 
 [**KubernetesClustersLbFirewallUpdate**](KubernetesAPI.md#KubernetesClustersLbFirewallUpdate) | **Put** /api/kubernetes/clusters/{cluster_id}/lb-firewall/{id}/ | 
+[**KubernetesClustersLbReimageCreate**](KubernetesAPI.md#KubernetesClustersLbReimageCreate) | **Post** /api/kubernetes/clusters/{id}/lb-reimage/ | 
+[**KubernetesClustersLbReimageRetrieve**](KubernetesAPI.md#KubernetesClustersLbReimageRetrieve) | **Get** /api/kubernetes/clusters/{id}/lb-reimage/ | 
 [**KubernetesClustersList**](KubernetesAPI.md#KubernetesClustersList) | **Get** /api/kubernetes/clusters/ | 
 [**KubernetesClustersNodeOperationsCancelCreate**](KubernetesAPI.md#KubernetesClustersNodeOperationsCancelCreate) | **Post** /api/kubernetes/clusters/{cluster_id}/node-operations/{id}/cancel/ | 
 [**KubernetesClustersNodeOperationsList**](KubernetesAPI.md#KubernetesClustersNodeOperationsList) | **Get** /api/kubernetes/clusters/{cluster_id}/node-operations/ | 
@@ -1851,6 +1853,148 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
 - **Content-Type**: application/json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## KubernetesClustersLbReimageCreate
+
+> LBReimageStarted KubernetesClustersLbReimageCreate(ctx, id).LBReimageRequest(lBReimageRequest).Execute()
+
+
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/pidginhost/sdk-go"
+)
+
+func main() {
+	id := "id_example" // string | 
+	lBReimageRequest := *openapiclient.NewLBReimageRequest("PlanId_example", "Confirmation_example") // LBReimageRequest | 
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.KubernetesAPI.KubernetesClustersLbReimageCreate(context.Background(), id).LBReimageRequest(lBReimageRequest).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `KubernetesAPI.KubernetesClustersLbReimageCreate``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `KubernetesClustersLbReimageCreate`: LBReimageStarted
+	fmt.Fprintf(os.Stdout, "Response from `KubernetesAPI.KubernetesClustersLbReimageCreate`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**id** | **string** |  | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiKubernetesClustersLbReimageCreateRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+ **lBReimageRequest** | [**LBReimageRequest**](LBReimageRequest.md) |  | 
+
+### Return type
+
+[**LBReimageStarted**](LBReimageStarted.md)
+
+### Authorization
+
+[tokenAuth](../README.md#tokenAuth), [cookieAuth](../README.md#cookieAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## KubernetesClustersLbReimageRetrieve
+
+> LBReimageStatus KubernetesClustersLbReimageRetrieve(ctx, id).Execute()
+
+
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/pidginhost/sdk-go"
+)
+
+func main() {
+	id := "id_example" // string | 
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.KubernetesAPI.KubernetesClustersLbReimageRetrieve(context.Background(), id).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `KubernetesAPI.KubernetesClustersLbReimageRetrieve``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `KubernetesClustersLbReimageRetrieve`: LBReimageStatus
+	fmt.Fprintf(os.Stdout, "Response from `KubernetesAPI.KubernetesClustersLbReimageRetrieve`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**id** | **string** |  | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiKubernetesClustersLbReimageRetrieveRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+### Return type
+
+[**LBReimageStatus**](LBReimageStatus.md)
+
+### Authorization
+
+[tokenAuth](../README.md#tokenAuth), [cookieAuth](../README.md#cookieAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
 - **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)

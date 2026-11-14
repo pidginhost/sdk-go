@@ -6,13 +6,13 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Domain** | **string** | Domain name or primary key of the domain to activate. | 
 **Source** | [**SourceEnum**](SourceEnum.md) | &#39;internal&#39; for domains purchased on PidginHost, &#39;external&#39; for user-added domains.  * &#x60;internal&#x60; - Internal * &#x60;external&#x60; - External | 
-**Ip** | **string** | IPv4 address to use as the default A record for the zone. | 
+**Ip** | Pointer to **NullableString** | IPv4 address for the zone&#39;s default records. Leave it out to start with an empty zone. | [optional] 
 
 ## Methods
 
 ### NewActivateFreeDNSRequest
 
-`func NewActivateFreeDNSRequest(domain string, source SourceEnum, ip string, ) *ActivateFreeDNSRequest`
+`func NewActivateFreeDNSRequest(domain string, source SourceEnum, ) *ActivateFreeDNSRequest`
 
 NewActivateFreeDNSRequest instantiates a new ActivateFreeDNSRequest object
 This constructor will assign default values to properties that have it defined,
@@ -86,7 +86,22 @@ and a boolean to check if the value has been set.
 
 SetIp sets Ip field to given value.
 
+### HasIp
 
+`func (o *ActivateFreeDNSRequest) HasIp() bool`
+
+HasIp returns a boolean if a field has been set.
+
+### SetIpNil
+
+`func (o *ActivateFreeDNSRequest) SetIpNil(b bool)`
+
+ SetIpNil sets the value for Ip to be an explicit nil
+
+### UnsetIp
+`func (o *ActivateFreeDNSRequest) UnsetIp()`
+
+UnsetIp ensures that no value is present for Ip, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

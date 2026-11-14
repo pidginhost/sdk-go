@@ -16,23 +16,19 @@ import (
 	"fmt"
 )
 
-// KubeVersionEnum * `1.33.13` - 1.33.13 * `1.34.10` - 1.34.10 * `1.35.7` - 1.35.7 * `1.36.3` - 1.36.3
+// KubeVersionEnum * `1.35.10` - 1.35.10 * `1.36.6` - 1.36.6
 type KubeVersionEnum string
 
 // List of KubeVersionEnum
 const (
-	KUBEVERSIONENUM__1_33_13 KubeVersionEnum = "1.33.13"
-	KUBEVERSIONENUM__1_34_10 KubeVersionEnum = "1.34.10"
-	KUBEVERSIONENUM__1_35_7 KubeVersionEnum = "1.35.7"
-	KUBEVERSIONENUM__1_36_3 KubeVersionEnum = "1.36.3"
+	KUBEVERSIONENUM__1_35_10 KubeVersionEnum = "1.35.10"
+	KUBEVERSIONENUM__1_36_6 KubeVersionEnum = "1.36.6"
 )
 
 // All allowed values of KubeVersionEnum enum
 var AllowedKubeVersionEnumEnumValues = []KubeVersionEnum{
-	"1.33.13",
-	"1.34.10",
-	"1.35.7",
-	"1.36.3",
+	"1.35.10",
+	"1.36.6",
 }
 
 func (v *KubeVersionEnum) UnmarshalJSON(src []byte) error {

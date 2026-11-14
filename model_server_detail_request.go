@@ -20,6 +20,8 @@ var _ MappedNullable = &ServerDetailRequest{}
 
 // ServerDetailRequest struct for ServerDetailRequest
 type ServerDetailRequest struct {
+	// Renaming also moves reverse DNS still on the old name. The server takes the new name at its next reboot from the panel or API, which also creates new SSH host keys and resets the login password and SSH keys to the ones saved here.
+	Hostname *string `json:"hostname,omitempty"`
 	Project *string `json:"project,omitempty"`
 	Password *string `json:"password,omitempty"`
 	// Public key to apply for SSH login. Applying a non-empty key regenerates cloud-init and reboots a running server. Clearing removes the key from future cloud-init data, but does not revoke keys already in the guest.
@@ -41,6 +43,38 @@ func NewServerDetailRequest() *ServerDetailRequest {
 func NewServerDetailRequestWithDefaults() *ServerDetailRequest {
 	this := ServerDetailRequest{}
 	return &this
+}
+
+// GetHostname returns the Hostname field value if set, zero value otherwise.
+func (o *ServerDetailRequest) GetHostname() string {
+	if o == nil || IsNil(o.Hostname) {
+		var ret string
+		return ret
+	}
+	return *o.Hostname
+}
+
+// GetHostnameOk returns a tuple with the Hostname field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ServerDetailRequest) GetHostnameOk() (*string, bool) {
+	if o == nil || IsNil(o.Hostname) {
+		return nil, false
+	}
+	return o.Hostname, true
+}
+
+// HasHostname returns a boolean if a field has been set.
+func (o *ServerDetailRequest) HasHostname() bool {
+	if o != nil && !IsNil(o.Hostname) {
+		return true
+	}
+
+	return false
+}
+
+// SetHostname gets a reference to the given string and assigns it to the Hostname field.
+func (o *ServerDetailRequest) SetHostname(v string) {
+	o.Hostname = &v
 }
 
 // GetProject returns the Project field value if set, zero value otherwise.
@@ -149,6 +183,9 @@ func (o ServerDetailRequest) MarshalJSON() ([]byte, error) {
 
 func (o ServerDetailRequest) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
+	if !IsNil(o.Hostname) {
+		toSerialize["hostname"] = o.Hostname
+	}
 	if !IsNil(o.Project) {
 		toSerialize["project"] = o.Project
 	}

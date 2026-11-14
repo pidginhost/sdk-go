@@ -18,6 +18,7 @@ import (
 	"net/http"
 	"net/url"
 	"strings"
+	"reflect"
 )
 
 
@@ -4737,6 +4738,6077 @@ func (a *CloudAPIService) CloudFloatingIpv6UnauthorizeCreateExecute(r ApiCloudFl
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
+type ApiCloudGatewaysCreateRequest struct {
+	ctx context.Context
+	ApiService *CloudAPIService
+	gatewayCreateRequest *GatewayCreateRequest
+}
+
+func (r ApiCloudGatewaysCreateRequest) GatewayCreateRequest(gatewayCreateRequest GatewayCreateRequest) ApiCloudGatewaysCreateRequest {
+	r.gatewayCreateRequest = &gatewayCreateRequest
+	return r
+}
+
+func (r ApiCloudGatewaysCreateRequest) Execute() (*Gateway, *http.Response, error) {
+	return r.ApiService.CloudGatewaysCreateExecute(r)
+}
+
+/*
+CloudGatewaysCreate Method for CloudGatewaysCreate
+
+Reserve a gateway and queue its provisioning (spec 11.1); its state shows the progress.
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiCloudGatewaysCreateRequest
+*/
+func (a *CloudAPIService) CloudGatewaysCreate(ctx context.Context) ApiCloudGatewaysCreateRequest {
+	return ApiCloudGatewaysCreateRequest{
+		ApiService: a,
+		ctx: ctx,
+	}
+}
+
+// Execute executes the request
+//  @return Gateway
+func (a *CloudAPIService) CloudGatewaysCreateExecute(r ApiCloudGatewaysCreateRequest) (*Gateway, *http.Response, error) {
+	var (
+		localVarHTTPMethod   = http.MethodPost
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *Gateway
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CloudAPIService.CloudGatewaysCreate")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/api/cloud/gateways/"
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+	if r.gatewayCreateRequest == nil {
+		return localVarReturnValue, nil, reportError("gatewayCreateRequest is required and must be specified")
+	}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{"application/json"}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	// body params
+	localVarPostBody = r.gatewayCreateRequest
+	if r.ctx != nil {
+		// API Key Authentication
+		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
+			if apiKey, ok := auth["tokenAuth"]; ok {
+				var key string
+				if apiKey.Prefix != "" {
+					key = apiKey.Prefix + " " + apiKey.Key
+				} else {
+					key = apiKey.Key
+				}
+				localVarHeaderParams["Authorization"] = key
+			}
+		}
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiCloudGatewaysDestroyRequest struct {
+	ctx context.Context
+	ApiService *CloudAPIService
+	id string
+	networks *[]int32
+	revision *int32
+	servers *[]int32
+}
+
+// The preview&#39;s network ids.
+func (r ApiCloudGatewaysDestroyRequest) Networks(networks []int32) ApiCloudGatewaysDestroyRequest {
+	r.networks = &networks
+	return r
+}
+
+// The gateway&#39;s desired revision from the preview; without it, a preview.
+func (r ApiCloudGatewaysDestroyRequest) Revision(revision int32) ApiCloudGatewaysDestroyRequest {
+	r.revision = &revision
+	return r
+}
+
+// The preview&#39;s server ids.
+func (r ApiCloudGatewaysDestroyRequest) Servers(servers []int32) ApiCloudGatewaysDestroyRequest {
+	r.servers = &servers
+	return r
+}
+
+func (r ApiCloudGatewaysDestroyRequest) Execute() (*GatewayOperation, *http.Response, error) {
+	return r.ApiService.CloudGatewaysDestroyExecute(r)
+}
+
+/*
+CloudGatewaysDestroy Method for CloudGatewaysDestroy
+
+Delete the gateway (spec 11.5): its VM is destroyed, then its networks and IPv4 are released.
+Without the preview's revision, networks and servers, 409 with a fresh preview.
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param id
+ @return ApiCloudGatewaysDestroyRequest
+*/
+func (a *CloudAPIService) CloudGatewaysDestroy(ctx context.Context, id string) ApiCloudGatewaysDestroyRequest {
+	return ApiCloudGatewaysDestroyRequest{
+		ApiService: a,
+		ctx: ctx,
+		id: id,
+	}
+}
+
+// Execute executes the request
+//  @return GatewayOperation
+func (a *CloudAPIService) CloudGatewaysDestroyExecute(r ApiCloudGatewaysDestroyRequest) (*GatewayOperation, *http.Response, error) {
+	var (
+		localVarHTTPMethod   = http.MethodDelete
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *GatewayOperation
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CloudAPIService.CloudGatewaysDestroy")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/api/cloud/gateways/{id}/"
+	localVarPath = strings.Replace(localVarPath, "{"+"id"+"}", url.PathEscape(parameterValueToString(r.id, "id")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	if r.networks != nil {
+		t := *r.networks
+		if reflect.TypeOf(t).Kind() == reflect.Slice {
+			s := reflect.ValueOf(t)
+			for i := 0; i < s.Len(); i++ {
+				parameterAddToHeaderOrQuery(localVarQueryParams, "networks", s.Index(i).Interface(), "form", "multi")
+			}
+		} else {
+			parameterAddToHeaderOrQuery(localVarQueryParams, "networks", t, "form", "multi")
+		}
+	}
+	if r.revision != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "revision", r.revision, "form", "")
+	}
+	if r.servers != nil {
+		t := *r.servers
+		if reflect.TypeOf(t).Kind() == reflect.Slice {
+			s := reflect.ValueOf(t)
+			for i := 0; i < s.Len(); i++ {
+				parameterAddToHeaderOrQuery(localVarQueryParams, "servers", s.Index(i).Interface(), "form", "multi")
+			}
+		} else {
+			parameterAddToHeaderOrQuery(localVarQueryParams, "servers", t, "form", "multi")
+		}
+	}
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	if r.ctx != nil {
+		// API Key Authentication
+		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
+			if apiKey, ok := auth["tokenAuth"]; ok {
+				var key string
+				if apiKey.Prefix != "" {
+					key = apiKey.Prefix + " " + apiKey.Key
+				} else {
+					key = apiKey.Key
+				}
+				localVarHeaderParams["Authorization"] = key
+			}
+		}
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 409 {
+			var v GatewayDeleteConflict
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiCloudGatewaysFirewallRulesCreateRequest struct {
+	ctx context.Context
+	ApiService *CloudAPIService
+	gatewayId int32
+	gatewayFirewallRuleWriteRequest *GatewayFirewallRuleWriteRequest
+}
+
+func (r ApiCloudGatewaysFirewallRulesCreateRequest) GatewayFirewallRuleWriteRequest(gatewayFirewallRuleWriteRequest GatewayFirewallRuleWriteRequest) ApiCloudGatewaysFirewallRulesCreateRequest {
+	r.gatewayFirewallRuleWriteRequest = &gatewayFirewallRuleWriteRequest
+	return r
+}
+
+func (r ApiCloudGatewaysFirewallRulesCreateRequest) Execute() (*GatewayFirewallRule, *http.Response, error) {
+	return r.ApiService.CloudGatewaysFirewallRulesCreateExecute(r)
+}
+
+/*
+CloudGatewaysFirewallRulesCreate Method for CloudGatewaysFirewallRulesCreate
+
+Add a rule after the last one (spec 5.7); it is pending until the agent applies its revision.
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param gatewayId
+ @return ApiCloudGatewaysFirewallRulesCreateRequest
+*/
+func (a *CloudAPIService) CloudGatewaysFirewallRulesCreate(ctx context.Context, gatewayId int32) ApiCloudGatewaysFirewallRulesCreateRequest {
+	return ApiCloudGatewaysFirewallRulesCreateRequest{
+		ApiService: a,
+		ctx: ctx,
+		gatewayId: gatewayId,
+	}
+}
+
+// Execute executes the request
+//  @return GatewayFirewallRule
+func (a *CloudAPIService) CloudGatewaysFirewallRulesCreateExecute(r ApiCloudGatewaysFirewallRulesCreateRequest) (*GatewayFirewallRule, *http.Response, error) {
+	var (
+		localVarHTTPMethod   = http.MethodPost
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *GatewayFirewallRule
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CloudAPIService.CloudGatewaysFirewallRulesCreate")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/api/cloud/gateways/{gateway_id}/firewall-rules/"
+	localVarPath = strings.Replace(localVarPath, "{"+"gateway_id"+"}", url.PathEscape(parameterValueToString(r.gatewayId, "gatewayId")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+	if r.gatewayFirewallRuleWriteRequest == nil {
+		return localVarReturnValue, nil, reportError("gatewayFirewallRuleWriteRequest is required and must be specified")
+	}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{"application/json"}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	// body params
+	localVarPostBody = r.gatewayFirewallRuleWriteRequest
+	if r.ctx != nil {
+		// API Key Authentication
+		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
+			if apiKey, ok := auth["tokenAuth"]; ok {
+				var key string
+				if apiKey.Prefix != "" {
+					key = apiKey.Prefix + " " + apiKey.Key
+				} else {
+					key = apiKey.Key
+				}
+				localVarHeaderParams["Authorization"] = key
+			}
+		}
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 409 {
+			var v GatewayConflict
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiCloudGatewaysFirewallRulesDestroyRequest struct {
+	ctx context.Context
+	ApiService *CloudAPIService
+	gatewayId int32
+	id int32
+	revision *int32
+}
+
+// The gateway&#39;s desired revision from the preview; without it, a preview.
+func (r ApiCloudGatewaysFirewallRulesDestroyRequest) Revision(revision int32) ApiCloudGatewaysFirewallRulesDestroyRequest {
+	r.revision = &revision
+	return r
+}
+
+func (r ApiCloudGatewaysFirewallRulesDestroyRequest) Execute() (*GatewayOperation, *http.Response, error) {
+	return r.ApiService.CloudGatewaysFirewallRulesDestroyExecute(r)
+}
+
+/*
+CloudGatewaysFirewallRulesDestroy Method for CloudGatewaysFirewallRulesDestroy
+
+Delete a rule (spec 5.11): 202 with the record the agent's acknowledgement completes. Without
+the preview's revision, 409 with a fresh one.
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param gatewayId
+ @param id
+ @return ApiCloudGatewaysFirewallRulesDestroyRequest
+*/
+func (a *CloudAPIService) CloudGatewaysFirewallRulesDestroy(ctx context.Context, gatewayId int32, id int32) ApiCloudGatewaysFirewallRulesDestroyRequest {
+	return ApiCloudGatewaysFirewallRulesDestroyRequest{
+		ApiService: a,
+		ctx: ctx,
+		gatewayId: gatewayId,
+		id: id,
+	}
+}
+
+// Execute executes the request
+//  @return GatewayOperation
+func (a *CloudAPIService) CloudGatewaysFirewallRulesDestroyExecute(r ApiCloudGatewaysFirewallRulesDestroyRequest) (*GatewayOperation, *http.Response, error) {
+	var (
+		localVarHTTPMethod   = http.MethodDelete
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *GatewayOperation
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CloudAPIService.CloudGatewaysFirewallRulesDestroy")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/api/cloud/gateways/{gateway_id}/firewall-rules/{id}/"
+	localVarPath = strings.Replace(localVarPath, "{"+"gateway_id"+"}", url.PathEscape(parameterValueToString(r.gatewayId, "gatewayId")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"id"+"}", url.PathEscape(parameterValueToString(r.id, "id")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	if r.revision != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "revision", r.revision, "form", "")
+	}
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	if r.ctx != nil {
+		// API Key Authentication
+		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
+			if apiKey, ok := auth["tokenAuth"]; ok {
+				var key string
+				if apiKey.Prefix != "" {
+					key = apiKey.Prefix + " " + apiKey.Key
+				} else {
+					key = apiKey.Key
+				}
+				localVarHeaderParams["Authorization"] = key
+			}
+		}
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 409 {
+			var v GatewayConflict
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiCloudGatewaysFirewallRulesListRequest struct {
+	ctx context.Context
+	ApiService *CloudAPIService
+	gatewayId int32
+	page *int32
+}
+
+// A page number within the paginated result set.
+func (r ApiCloudGatewaysFirewallRulesListRequest) Page(page int32) ApiCloudGatewaysFirewallRulesListRequest {
+	r.page = &page
+	return r
+}
+
+func (r ApiCloudGatewaysFirewallRulesListRequest) Execute() (*PaginatedGatewayFirewallRuleList, *http.Response, error) {
+	return r.ApiService.CloudGatewaysFirewallRulesListExecute(r)
+}
+
+/*
+CloudGatewaysFirewallRulesList Method for CloudGatewaysFirewallRulesList
+
+A gateway's firewall rules, in evaluation order
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param gatewayId
+ @return ApiCloudGatewaysFirewallRulesListRequest
+*/
+func (a *CloudAPIService) CloudGatewaysFirewallRulesList(ctx context.Context, gatewayId int32) ApiCloudGatewaysFirewallRulesListRequest {
+	return ApiCloudGatewaysFirewallRulesListRequest{
+		ApiService: a,
+		ctx: ctx,
+		gatewayId: gatewayId,
+	}
+}
+
+// Execute executes the request
+//  @return PaginatedGatewayFirewallRuleList
+func (a *CloudAPIService) CloudGatewaysFirewallRulesListExecute(r ApiCloudGatewaysFirewallRulesListRequest) (*PaginatedGatewayFirewallRuleList, *http.Response, error) {
+	var (
+		localVarHTTPMethod   = http.MethodGet
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *PaginatedGatewayFirewallRuleList
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CloudAPIService.CloudGatewaysFirewallRulesList")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/api/cloud/gateways/{gateway_id}/firewall-rules/"
+	localVarPath = strings.Replace(localVarPath, "{"+"gateway_id"+"}", url.PathEscape(parameterValueToString(r.gatewayId, "gatewayId")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	if r.page != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "page", r.page, "form", "")
+	}
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	if r.ctx != nil {
+		// API Key Authentication
+		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
+			if apiKey, ok := auth["tokenAuth"]; ok {
+				var key string
+				if apiKey.Prefix != "" {
+					key = apiKey.Prefix + " " + apiKey.Key
+				} else {
+					key = apiKey.Key
+				}
+				localVarHeaderParams["Authorization"] = key
+			}
+		}
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiCloudGatewaysFirewallRulesMoveCreateRequest struct {
+	ctx context.Context
+	ApiService *CloudAPIService
+	gatewayId int32
+	id int32
+	gatewayFirewallMoveRequest *GatewayFirewallMoveRequest
+	revision *int32
+}
+
+func (r ApiCloudGatewaysFirewallRulesMoveCreateRequest) GatewayFirewallMoveRequest(gatewayFirewallMoveRequest GatewayFirewallMoveRequest) ApiCloudGatewaysFirewallRulesMoveCreateRequest {
+	r.gatewayFirewallMoveRequest = &gatewayFirewallMoveRequest
+	return r
+}
+
+// The gateway&#39;s desired revision from the preview; without it, a preview.
+func (r ApiCloudGatewaysFirewallRulesMoveCreateRequest) Revision(revision int32) ApiCloudGatewaysFirewallRulesMoveCreateRequest {
+	r.revision = &revision
+	return r
+}
+
+func (r ApiCloudGatewaysFirewallRulesMoveCreateRequest) Execute() (*GatewayFirewallRule, *http.Response, error) {
+	return r.ApiService.CloudGatewaysFirewallRulesMoveCreateExecute(r)
+}
+
+/*
+CloudGatewaysFirewallRulesMoveCreate Method for CloudGatewaysFirewallRulesMoveCreate
+
+Move a rule to a position, the others keeping their order. Without the preview's revision,
+409 with a fresh one.
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param gatewayId
+ @param id
+ @return ApiCloudGatewaysFirewallRulesMoveCreateRequest
+*/
+func (a *CloudAPIService) CloudGatewaysFirewallRulesMoveCreate(ctx context.Context, gatewayId int32, id int32) ApiCloudGatewaysFirewallRulesMoveCreateRequest {
+	return ApiCloudGatewaysFirewallRulesMoveCreateRequest{
+		ApiService: a,
+		ctx: ctx,
+		gatewayId: gatewayId,
+		id: id,
+	}
+}
+
+// Execute executes the request
+//  @return GatewayFirewallRule
+func (a *CloudAPIService) CloudGatewaysFirewallRulesMoveCreateExecute(r ApiCloudGatewaysFirewallRulesMoveCreateRequest) (*GatewayFirewallRule, *http.Response, error) {
+	var (
+		localVarHTTPMethod   = http.MethodPost
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *GatewayFirewallRule
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CloudAPIService.CloudGatewaysFirewallRulesMoveCreate")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/api/cloud/gateways/{gateway_id}/firewall-rules/{id}/move/"
+	localVarPath = strings.Replace(localVarPath, "{"+"gateway_id"+"}", url.PathEscape(parameterValueToString(r.gatewayId, "gatewayId")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"id"+"}", url.PathEscape(parameterValueToString(r.id, "id")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+	if r.gatewayFirewallMoveRequest == nil {
+		return localVarReturnValue, nil, reportError("gatewayFirewallMoveRequest is required and must be specified")
+	}
+
+	if r.revision != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "revision", r.revision, "form", "")
+	}
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{"application/json"}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	// body params
+	localVarPostBody = r.gatewayFirewallMoveRequest
+	if r.ctx != nil {
+		// API Key Authentication
+		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
+			if apiKey, ok := auth["tokenAuth"]; ok {
+				var key string
+				if apiKey.Prefix != "" {
+					key = apiKey.Prefix + " " + apiKey.Key
+				} else {
+					key = apiKey.Key
+				}
+				localVarHeaderParams["Authorization"] = key
+			}
+		}
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 409 {
+			var v GatewayConflict
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiCloudGatewaysFirewallRulesPartialUpdateRequest struct {
+	ctx context.Context
+	ApiService *CloudAPIService
+	gatewayId int32
+	id int32
+	patchedGatewayFirewallRuleWriteRequest *PatchedGatewayFirewallRuleWriteRequest
+}
+
+func (r ApiCloudGatewaysFirewallRulesPartialUpdateRequest) PatchedGatewayFirewallRuleWriteRequest(patchedGatewayFirewallRuleWriteRequest PatchedGatewayFirewallRuleWriteRequest) ApiCloudGatewaysFirewallRulesPartialUpdateRequest {
+	r.patchedGatewayFirewallRuleWriteRequest = &patchedGatewayFirewallRuleWriteRequest
+	return r
+}
+
+func (r ApiCloudGatewaysFirewallRulesPartialUpdateRequest) Execute() (*GatewayFirewallRule, *http.Response, error) {
+	return r.ApiService.CloudGatewaysFirewallRulesPartialUpdateExecute(r)
+}
+
+/*
+CloudGatewaysFirewallRulesPartialUpdate Method for CloudGatewaysFirewallRulesPartialUpdate
+
+Change a rule's fields; a source or destination is replaced whole. Its position stays.
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param gatewayId
+ @param id
+ @return ApiCloudGatewaysFirewallRulesPartialUpdateRequest
+*/
+func (a *CloudAPIService) CloudGatewaysFirewallRulesPartialUpdate(ctx context.Context, gatewayId int32, id int32) ApiCloudGatewaysFirewallRulesPartialUpdateRequest {
+	return ApiCloudGatewaysFirewallRulesPartialUpdateRequest{
+		ApiService: a,
+		ctx: ctx,
+		gatewayId: gatewayId,
+		id: id,
+	}
+}
+
+// Execute executes the request
+//  @return GatewayFirewallRule
+func (a *CloudAPIService) CloudGatewaysFirewallRulesPartialUpdateExecute(r ApiCloudGatewaysFirewallRulesPartialUpdateRequest) (*GatewayFirewallRule, *http.Response, error) {
+	var (
+		localVarHTTPMethod   = http.MethodPatch
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *GatewayFirewallRule
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CloudAPIService.CloudGatewaysFirewallRulesPartialUpdate")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/api/cloud/gateways/{gateway_id}/firewall-rules/{id}/"
+	localVarPath = strings.Replace(localVarPath, "{"+"gateway_id"+"}", url.PathEscape(parameterValueToString(r.gatewayId, "gatewayId")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"id"+"}", url.PathEscape(parameterValueToString(r.id, "id")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{"application/json"}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	// body params
+	localVarPostBody = r.patchedGatewayFirewallRuleWriteRequest
+	if r.ctx != nil {
+		// API Key Authentication
+		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
+			if apiKey, ok := auth["tokenAuth"]; ok {
+				var key string
+				if apiKey.Prefix != "" {
+					key = apiKey.Prefix + " " + apiKey.Key
+				} else {
+					key = apiKey.Key
+				}
+				localVarHeaderParams["Authorization"] = key
+			}
+		}
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 409 {
+			var v GatewayConflict
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiCloudGatewaysFirewallRulesRetrieveRequest struct {
+	ctx context.Context
+	ApiService *CloudAPIService
+	gatewayId int32
+	id int32
+}
+
+func (r ApiCloudGatewaysFirewallRulesRetrieveRequest) Execute() (*GatewayFirewallRule, *http.Response, error) {
+	return r.ApiService.CloudGatewaysFirewallRulesRetrieveExecute(r)
+}
+
+/*
+CloudGatewaysFirewallRulesRetrieve Method for CloudGatewaysFirewallRulesRetrieve
+
+A gateway's firewall rules, in evaluation order
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param gatewayId
+ @param id
+ @return ApiCloudGatewaysFirewallRulesRetrieveRequest
+*/
+func (a *CloudAPIService) CloudGatewaysFirewallRulesRetrieve(ctx context.Context, gatewayId int32, id int32) ApiCloudGatewaysFirewallRulesRetrieveRequest {
+	return ApiCloudGatewaysFirewallRulesRetrieveRequest{
+		ApiService: a,
+		ctx: ctx,
+		gatewayId: gatewayId,
+		id: id,
+	}
+}
+
+// Execute executes the request
+//  @return GatewayFirewallRule
+func (a *CloudAPIService) CloudGatewaysFirewallRulesRetrieveExecute(r ApiCloudGatewaysFirewallRulesRetrieveRequest) (*GatewayFirewallRule, *http.Response, error) {
+	var (
+		localVarHTTPMethod   = http.MethodGet
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *GatewayFirewallRule
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CloudAPIService.CloudGatewaysFirewallRulesRetrieve")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/api/cloud/gateways/{gateway_id}/firewall-rules/{id}/"
+	localVarPath = strings.Replace(localVarPath, "{"+"gateway_id"+"}", url.PathEscape(parameterValueToString(r.gatewayId, "gatewayId")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"id"+"}", url.PathEscape(parameterValueToString(r.id, "id")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	if r.ctx != nil {
+		// API Key Authentication
+		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
+			if apiKey, ok := auth["tokenAuth"]; ok {
+				var key string
+				if apiKey.Prefix != "" {
+					key = apiKey.Prefix + " " + apiKey.Key
+				} else {
+					key = apiKey.Key
+				}
+				localVarHeaderParams["Authorization"] = key
+			}
+		}
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiCloudGatewaysListRequest struct {
+	ctx context.Context
+	ApiService *CloudAPIService
+	page *int32
+}
+
+// A page number within the paginated result set.
+func (r ApiCloudGatewaysListRequest) Page(page int32) ApiCloudGatewaysListRequest {
+	r.page = &page
+	return r
+}
+
+func (r ApiCloudGatewaysListRequest) Execute() (*PaginatedGatewayList, *http.Response, error) {
+	return r.ApiService.CloudGatewaysListExecute(r)
+}
+
+/*
+CloudGatewaysList Method for CloudGatewaysList
+
+Manage gateways
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiCloudGatewaysListRequest
+*/
+func (a *CloudAPIService) CloudGatewaysList(ctx context.Context) ApiCloudGatewaysListRequest {
+	return ApiCloudGatewaysListRequest{
+		ApiService: a,
+		ctx: ctx,
+	}
+}
+
+// Execute executes the request
+//  @return PaginatedGatewayList
+func (a *CloudAPIService) CloudGatewaysListExecute(r ApiCloudGatewaysListRequest) (*PaginatedGatewayList, *http.Response, error) {
+	var (
+		localVarHTTPMethod   = http.MethodGet
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *PaginatedGatewayList
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CloudAPIService.CloudGatewaysList")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/api/cloud/gateways/"
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	if r.page != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "page", r.page, "form", "")
+	}
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	if r.ctx != nil {
+		// API Key Authentication
+		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
+			if apiKey, ok := auth["tokenAuth"]; ok {
+				var key string
+				if apiKey.Prefix != "" {
+					key = apiKey.Prefix + " " + apiKey.Key
+				} else {
+					key = apiKey.Key
+				}
+				localVarHeaderParams["Authorization"] = key
+			}
+		}
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiCloudGatewaysListenersCreateRequest struct {
+	ctx context.Context
+	ApiService *CloudAPIService
+	gatewayId int32
+	gatewayLBListenerWriteRequest *GatewayLBListenerWriteRequest
+}
+
+func (r ApiCloudGatewaysListenersCreateRequest) GatewayLBListenerWriteRequest(gatewayLBListenerWriteRequest GatewayLBListenerWriteRequest) ApiCloudGatewaysListenersCreateRequest {
+	r.gatewayLBListenerWriteRequest = &gatewayLBListenerWriteRequest
+	return r
+}
+
+func (r ApiCloudGatewaysListenersCreateRequest) Execute() (*GatewayLBListener, *http.Response, error) {
+	return r.ApiService.CloudGatewaysListenersCreateExecute(r)
+}
+
+/*
+CloudGatewaysListenersCreate Method for CloudGatewaysListenersCreate
+
+Add a listener (spec 6.8): tcp and udp name a pool, http takes routes. Pending until applied.
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param gatewayId
+ @return ApiCloudGatewaysListenersCreateRequest
+*/
+func (a *CloudAPIService) CloudGatewaysListenersCreate(ctx context.Context, gatewayId int32) ApiCloudGatewaysListenersCreateRequest {
+	return ApiCloudGatewaysListenersCreateRequest{
+		ApiService: a,
+		ctx: ctx,
+		gatewayId: gatewayId,
+	}
+}
+
+// Execute executes the request
+//  @return GatewayLBListener
+func (a *CloudAPIService) CloudGatewaysListenersCreateExecute(r ApiCloudGatewaysListenersCreateRequest) (*GatewayLBListener, *http.Response, error) {
+	var (
+		localVarHTTPMethod   = http.MethodPost
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *GatewayLBListener
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CloudAPIService.CloudGatewaysListenersCreate")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/api/cloud/gateways/{gateway_id}/listeners/"
+	localVarPath = strings.Replace(localVarPath, "{"+"gateway_id"+"}", url.PathEscape(parameterValueToString(r.gatewayId, "gatewayId")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{"application/json"}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	// body params
+	localVarPostBody = r.gatewayLBListenerWriteRequest
+	if r.ctx != nil {
+		// API Key Authentication
+		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
+			if apiKey, ok := auth["tokenAuth"]; ok {
+				var key string
+				if apiKey.Prefix != "" {
+					key = apiKey.Prefix + " " + apiKey.Key
+				} else {
+					key = apiKey.Key
+				}
+				localVarHeaderParams["Authorization"] = key
+			}
+		}
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 409 {
+			var v GatewayConflict
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiCloudGatewaysListenersDestroyRequest struct {
+	ctx context.Context
+	ApiService *CloudAPIService
+	gatewayId int32
+	id int32
+	revision *int32
+}
+
+// The gateway&#39;s desired revision from the preview; without it, a preview.
+func (r ApiCloudGatewaysListenersDestroyRequest) Revision(revision int32) ApiCloudGatewaysListenersDestroyRequest {
+	r.revision = &revision
+	return r
+}
+
+func (r ApiCloudGatewaysListenersDestroyRequest) Execute() (*GatewayOperation, *http.Response, error) {
+	return r.ApiService.CloudGatewaysListenersDestroyExecute(r)
+}
+
+/*
+CloudGatewaysListenersDestroy Method for CloudGatewaysListenersDestroy
+
+Delete a listener and its routes (spec 5.11): 202 with the record the agent's acknowledgement
+completes. Without the preview's revision, 409 with a fresh one.
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param gatewayId
+ @param id
+ @return ApiCloudGatewaysListenersDestroyRequest
+*/
+func (a *CloudAPIService) CloudGatewaysListenersDestroy(ctx context.Context, gatewayId int32, id int32) ApiCloudGatewaysListenersDestroyRequest {
+	return ApiCloudGatewaysListenersDestroyRequest{
+		ApiService: a,
+		ctx: ctx,
+		gatewayId: gatewayId,
+		id: id,
+	}
+}
+
+// Execute executes the request
+//  @return GatewayOperation
+func (a *CloudAPIService) CloudGatewaysListenersDestroyExecute(r ApiCloudGatewaysListenersDestroyRequest) (*GatewayOperation, *http.Response, error) {
+	var (
+		localVarHTTPMethod   = http.MethodDelete
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *GatewayOperation
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CloudAPIService.CloudGatewaysListenersDestroy")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/api/cloud/gateways/{gateway_id}/listeners/{id}/"
+	localVarPath = strings.Replace(localVarPath, "{"+"gateway_id"+"}", url.PathEscape(parameterValueToString(r.gatewayId, "gatewayId")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"id"+"}", url.PathEscape(parameterValueToString(r.id, "id")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	if r.revision != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "revision", r.revision, "form", "")
+	}
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	if r.ctx != nil {
+		// API Key Authentication
+		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
+			if apiKey, ok := auth["tokenAuth"]; ok {
+				var key string
+				if apiKey.Prefix != "" {
+					key = apiKey.Prefix + " " + apiKey.Key
+				} else {
+					key = apiKey.Key
+				}
+				localVarHeaderParams["Authorization"] = key
+			}
+		}
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 409 {
+			var v GatewayConflict
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiCloudGatewaysListenersListRequest struct {
+	ctx context.Context
+	ApiService *CloudAPIService
+	gatewayId int32
+	page *int32
+}
+
+// A page number within the paginated result set.
+func (r ApiCloudGatewaysListenersListRequest) Page(page int32) ApiCloudGatewaysListenersListRequest {
+	r.page = &page
+	return r
+}
+
+func (r ApiCloudGatewaysListenersListRequest) Execute() (*PaginatedGatewayLBListenerList, *http.Response, error) {
+	return r.ApiService.CloudGatewaysListenersListExecute(r)
+}
+
+/*
+CloudGatewaysListenersList Method for CloudGatewaysListenersList
+
+A gateway's load balancer listeners
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param gatewayId
+ @return ApiCloudGatewaysListenersListRequest
+*/
+func (a *CloudAPIService) CloudGatewaysListenersList(ctx context.Context, gatewayId int32) ApiCloudGatewaysListenersListRequest {
+	return ApiCloudGatewaysListenersListRequest{
+		ApiService: a,
+		ctx: ctx,
+		gatewayId: gatewayId,
+	}
+}
+
+// Execute executes the request
+//  @return PaginatedGatewayLBListenerList
+func (a *CloudAPIService) CloudGatewaysListenersListExecute(r ApiCloudGatewaysListenersListRequest) (*PaginatedGatewayLBListenerList, *http.Response, error) {
+	var (
+		localVarHTTPMethod   = http.MethodGet
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *PaginatedGatewayLBListenerList
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CloudAPIService.CloudGatewaysListenersList")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/api/cloud/gateways/{gateway_id}/listeners/"
+	localVarPath = strings.Replace(localVarPath, "{"+"gateway_id"+"}", url.PathEscape(parameterValueToString(r.gatewayId, "gatewayId")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	if r.page != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "page", r.page, "form", "")
+	}
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	if r.ctx != nil {
+		// API Key Authentication
+		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
+			if apiKey, ok := auth["tokenAuth"]; ok {
+				var key string
+				if apiKey.Prefix != "" {
+					key = apiKey.Prefix + " " + apiKey.Key
+				} else {
+					key = apiKey.Key
+				}
+				localVarHeaderParams["Authorization"] = key
+			}
+		}
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiCloudGatewaysListenersPartialUpdateRequest struct {
+	ctx context.Context
+	ApiService *CloudAPIService
+	gatewayId int32
+	id int32
+	patchedGatewayLBListenerWriteRequest *PatchedGatewayLBListenerWriteRequest
+}
+
+func (r ApiCloudGatewaysListenersPartialUpdateRequest) PatchedGatewayLBListenerWriteRequest(patchedGatewayLBListenerWriteRequest PatchedGatewayLBListenerWriteRequest) ApiCloudGatewaysListenersPartialUpdateRequest {
+	r.patchedGatewayLBListenerWriteRequest = &patchedGatewayLBListenerWriteRequest
+	return r
+}
+
+func (r ApiCloudGatewaysListenersPartialUpdateRequest) Execute() (*GatewayLBListener, *http.Response, error) {
+	return r.ApiService.CloudGatewaysListenersPartialUpdateExecute(r)
+}
+
+/*
+CloudGatewaysListenersPartialUpdate Method for CloudGatewaysListenersPartialUpdate
+
+Change a listener's pool, sources, comment or enabled flag; protocol, port and mode are fixed.
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param gatewayId
+ @param id
+ @return ApiCloudGatewaysListenersPartialUpdateRequest
+*/
+func (a *CloudAPIService) CloudGatewaysListenersPartialUpdate(ctx context.Context, gatewayId int32, id int32) ApiCloudGatewaysListenersPartialUpdateRequest {
+	return ApiCloudGatewaysListenersPartialUpdateRequest{
+		ApiService: a,
+		ctx: ctx,
+		gatewayId: gatewayId,
+		id: id,
+	}
+}
+
+// Execute executes the request
+//  @return GatewayLBListener
+func (a *CloudAPIService) CloudGatewaysListenersPartialUpdateExecute(r ApiCloudGatewaysListenersPartialUpdateRequest) (*GatewayLBListener, *http.Response, error) {
+	var (
+		localVarHTTPMethod   = http.MethodPatch
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *GatewayLBListener
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CloudAPIService.CloudGatewaysListenersPartialUpdate")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/api/cloud/gateways/{gateway_id}/listeners/{id}/"
+	localVarPath = strings.Replace(localVarPath, "{"+"gateway_id"+"}", url.PathEscape(parameterValueToString(r.gatewayId, "gatewayId")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"id"+"}", url.PathEscape(parameterValueToString(r.id, "id")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{"application/json"}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	// body params
+	localVarPostBody = r.patchedGatewayLBListenerWriteRequest
+	if r.ctx != nil {
+		// API Key Authentication
+		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
+			if apiKey, ok := auth["tokenAuth"]; ok {
+				var key string
+				if apiKey.Prefix != "" {
+					key = apiKey.Prefix + " " + apiKey.Key
+				} else {
+					key = apiKey.Key
+				}
+				localVarHeaderParams["Authorization"] = key
+			}
+		}
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 409 {
+			var v GatewayConflict
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiCloudGatewaysListenersRetrieveRequest struct {
+	ctx context.Context
+	ApiService *CloudAPIService
+	gatewayId int32
+	id int32
+}
+
+func (r ApiCloudGatewaysListenersRetrieveRequest) Execute() (*GatewayLBListener, *http.Response, error) {
+	return r.ApiService.CloudGatewaysListenersRetrieveExecute(r)
+}
+
+/*
+CloudGatewaysListenersRetrieve Method for CloudGatewaysListenersRetrieve
+
+A gateway's load balancer listeners
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param gatewayId
+ @param id
+ @return ApiCloudGatewaysListenersRetrieveRequest
+*/
+func (a *CloudAPIService) CloudGatewaysListenersRetrieve(ctx context.Context, gatewayId int32, id int32) ApiCloudGatewaysListenersRetrieveRequest {
+	return ApiCloudGatewaysListenersRetrieveRequest{
+		ApiService: a,
+		ctx: ctx,
+		gatewayId: gatewayId,
+		id: id,
+	}
+}
+
+// Execute executes the request
+//  @return GatewayLBListener
+func (a *CloudAPIService) CloudGatewaysListenersRetrieveExecute(r ApiCloudGatewaysListenersRetrieveRequest) (*GatewayLBListener, *http.Response, error) {
+	var (
+		localVarHTTPMethod   = http.MethodGet
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *GatewayLBListener
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CloudAPIService.CloudGatewaysListenersRetrieve")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/api/cloud/gateways/{gateway_id}/listeners/{id}/"
+	localVarPath = strings.Replace(localVarPath, "{"+"gateway_id"+"}", url.PathEscape(parameterValueToString(r.gatewayId, "gatewayId")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"id"+"}", url.PathEscape(parameterValueToString(r.id, "id")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	if r.ctx != nil {
+		// API Key Authentication
+		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
+			if apiKey, ok := auth["tokenAuth"]; ok {
+				var key string
+				if apiKey.Prefix != "" {
+					key = apiKey.Prefix + " " + apiKey.Key
+				} else {
+					key = apiKey.Key
+				}
+				localVarHeaderParams["Authorization"] = key
+			}
+		}
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiCloudGatewaysListenersRoutesCreateRequest struct {
+	ctx context.Context
+	ApiService *CloudAPIService
+	gatewayId int32
+	listenerId int32
+	gatewayRouteWriteRequest *GatewayRouteWriteRequest
+}
+
+func (r ApiCloudGatewaysListenersRoutesCreateRequest) GatewayRouteWriteRequest(gatewayRouteWriteRequest GatewayRouteWriteRequest) ApiCloudGatewaysListenersRoutesCreateRequest {
+	r.gatewayRouteWriteRequest = &gatewayRouteWriteRequest
+	return r
+}
+
+func (r ApiCloudGatewaysListenersRoutesCreateRequest) Execute() (*GatewayRoute, *http.Response, error) {
+	return r.ApiService.CloudGatewaysListenersRoutesCreateExecute(r)
+}
+
+/*
+CloudGatewaysListenersRoutesCreate Method for CloudGatewaysListenersRoutesCreate
+
+Add a route (spec 5.6): hostnames and a path prefix to a pool. Pending until applied.
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param gatewayId
+ @param listenerId
+ @return ApiCloudGatewaysListenersRoutesCreateRequest
+*/
+func (a *CloudAPIService) CloudGatewaysListenersRoutesCreate(ctx context.Context, gatewayId int32, listenerId int32) ApiCloudGatewaysListenersRoutesCreateRequest {
+	return ApiCloudGatewaysListenersRoutesCreateRequest{
+		ApiService: a,
+		ctx: ctx,
+		gatewayId: gatewayId,
+		listenerId: listenerId,
+	}
+}
+
+// Execute executes the request
+//  @return GatewayRoute
+func (a *CloudAPIService) CloudGatewaysListenersRoutesCreateExecute(r ApiCloudGatewaysListenersRoutesCreateRequest) (*GatewayRoute, *http.Response, error) {
+	var (
+		localVarHTTPMethod   = http.MethodPost
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *GatewayRoute
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CloudAPIService.CloudGatewaysListenersRoutesCreate")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/api/cloud/gateways/{gateway_id}/listeners/{listener_id}/routes/"
+	localVarPath = strings.Replace(localVarPath, "{"+"gateway_id"+"}", url.PathEscape(parameterValueToString(r.gatewayId, "gatewayId")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"listener_id"+"}", url.PathEscape(parameterValueToString(r.listenerId, "listenerId")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{"application/json"}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	// body params
+	localVarPostBody = r.gatewayRouteWriteRequest
+	if r.ctx != nil {
+		// API Key Authentication
+		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
+			if apiKey, ok := auth["tokenAuth"]; ok {
+				var key string
+				if apiKey.Prefix != "" {
+					key = apiKey.Prefix + " " + apiKey.Key
+				} else {
+					key = apiKey.Key
+				}
+				localVarHeaderParams["Authorization"] = key
+			}
+		}
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 409 {
+			var v GatewayConflict
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiCloudGatewaysListenersRoutesDestroyRequest struct {
+	ctx context.Context
+	ApiService *CloudAPIService
+	gatewayId int32
+	id int32
+	listenerId int32
+	revision *int32
+}
+
+// The gateway&#39;s desired revision from the preview; without it, a preview.
+func (r ApiCloudGatewaysListenersRoutesDestroyRequest) Revision(revision int32) ApiCloudGatewaysListenersRoutesDestroyRequest {
+	r.revision = &revision
+	return r
+}
+
+func (r ApiCloudGatewaysListenersRoutesDestroyRequest) Execute() (*GatewayOperation, *http.Response, error) {
+	return r.ApiService.CloudGatewaysListenersRoutesDestroyExecute(r)
+}
+
+/*
+CloudGatewaysListenersRoutesDestroy Method for CloudGatewaysListenersRoutesDestroy
+
+Delete a route (spec 5.11): 202 with the record the agent's acknowledgement completes. Without
+the preview's revision, 409 with a fresh one.
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param gatewayId
+ @param id
+ @param listenerId
+ @return ApiCloudGatewaysListenersRoutesDestroyRequest
+*/
+func (a *CloudAPIService) CloudGatewaysListenersRoutesDestroy(ctx context.Context, gatewayId int32, id int32, listenerId int32) ApiCloudGatewaysListenersRoutesDestroyRequest {
+	return ApiCloudGatewaysListenersRoutesDestroyRequest{
+		ApiService: a,
+		ctx: ctx,
+		gatewayId: gatewayId,
+		id: id,
+		listenerId: listenerId,
+	}
+}
+
+// Execute executes the request
+//  @return GatewayOperation
+func (a *CloudAPIService) CloudGatewaysListenersRoutesDestroyExecute(r ApiCloudGatewaysListenersRoutesDestroyRequest) (*GatewayOperation, *http.Response, error) {
+	var (
+		localVarHTTPMethod   = http.MethodDelete
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *GatewayOperation
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CloudAPIService.CloudGatewaysListenersRoutesDestroy")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/api/cloud/gateways/{gateway_id}/listeners/{listener_id}/routes/{id}/"
+	localVarPath = strings.Replace(localVarPath, "{"+"gateway_id"+"}", url.PathEscape(parameterValueToString(r.gatewayId, "gatewayId")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"id"+"}", url.PathEscape(parameterValueToString(r.id, "id")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"listener_id"+"}", url.PathEscape(parameterValueToString(r.listenerId, "listenerId")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	if r.revision != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "revision", r.revision, "form", "")
+	}
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	if r.ctx != nil {
+		// API Key Authentication
+		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
+			if apiKey, ok := auth["tokenAuth"]; ok {
+				var key string
+				if apiKey.Prefix != "" {
+					key = apiKey.Prefix + " " + apiKey.Key
+				} else {
+					key = apiKey.Key
+				}
+				localVarHeaderParams["Authorization"] = key
+			}
+		}
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 409 {
+			var v GatewayConflict
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiCloudGatewaysListenersRoutesListRequest struct {
+	ctx context.Context
+	ApiService *CloudAPIService
+	gatewayId int32
+	listenerId int32
+	page *int32
+}
+
+// A page number within the paginated result set.
+func (r ApiCloudGatewaysListenersRoutesListRequest) Page(page int32) ApiCloudGatewaysListenersRoutesListRequest {
+	r.page = &page
+	return r
+}
+
+func (r ApiCloudGatewaysListenersRoutesListRequest) Execute() (*PaginatedGatewayRouteList, *http.Response, error) {
+	return r.ApiService.CloudGatewaysListenersRoutesListExecute(r)
+}
+
+/*
+CloudGatewaysListenersRoutesList Method for CloudGatewaysListenersRoutesList
+
+An http listener's routes
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param gatewayId
+ @param listenerId
+ @return ApiCloudGatewaysListenersRoutesListRequest
+*/
+func (a *CloudAPIService) CloudGatewaysListenersRoutesList(ctx context.Context, gatewayId int32, listenerId int32) ApiCloudGatewaysListenersRoutesListRequest {
+	return ApiCloudGatewaysListenersRoutesListRequest{
+		ApiService: a,
+		ctx: ctx,
+		gatewayId: gatewayId,
+		listenerId: listenerId,
+	}
+}
+
+// Execute executes the request
+//  @return PaginatedGatewayRouteList
+func (a *CloudAPIService) CloudGatewaysListenersRoutesListExecute(r ApiCloudGatewaysListenersRoutesListRequest) (*PaginatedGatewayRouteList, *http.Response, error) {
+	var (
+		localVarHTTPMethod   = http.MethodGet
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *PaginatedGatewayRouteList
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CloudAPIService.CloudGatewaysListenersRoutesList")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/api/cloud/gateways/{gateway_id}/listeners/{listener_id}/routes/"
+	localVarPath = strings.Replace(localVarPath, "{"+"gateway_id"+"}", url.PathEscape(parameterValueToString(r.gatewayId, "gatewayId")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"listener_id"+"}", url.PathEscape(parameterValueToString(r.listenerId, "listenerId")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	if r.page != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "page", r.page, "form", "")
+	}
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	if r.ctx != nil {
+		// API Key Authentication
+		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
+			if apiKey, ok := auth["tokenAuth"]; ok {
+				var key string
+				if apiKey.Prefix != "" {
+					key = apiKey.Prefix + " " + apiKey.Key
+				} else {
+					key = apiKey.Key
+				}
+				localVarHeaderParams["Authorization"] = key
+			}
+		}
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiCloudGatewaysListenersRoutesPartialUpdateRequest struct {
+	ctx context.Context
+	ApiService *CloudAPIService
+	gatewayId int32
+	id int32
+	listenerId int32
+	patchedGatewayRouteWriteRequest *PatchedGatewayRouteWriteRequest
+}
+
+func (r ApiCloudGatewaysListenersRoutesPartialUpdateRequest) PatchedGatewayRouteWriteRequest(patchedGatewayRouteWriteRequest PatchedGatewayRouteWriteRequest) ApiCloudGatewaysListenersRoutesPartialUpdateRequest {
+	r.patchedGatewayRouteWriteRequest = &patchedGatewayRouteWriteRequest
+	return r
+}
+
+func (r ApiCloudGatewaysListenersRoutesPartialUpdateRequest) Execute() (*GatewayRoute, *http.Response, error) {
+	return r.ApiService.CloudGatewaysListenersRoutesPartialUpdateExecute(r)
+}
+
+/*
+CloudGatewaysListenersRoutesPartialUpdate Method for CloudGatewaysListenersRoutesPartialUpdate
+
+Change a route; hostnames are replaced whole.
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param gatewayId
+ @param id
+ @param listenerId
+ @return ApiCloudGatewaysListenersRoutesPartialUpdateRequest
+*/
+func (a *CloudAPIService) CloudGatewaysListenersRoutesPartialUpdate(ctx context.Context, gatewayId int32, id int32, listenerId int32) ApiCloudGatewaysListenersRoutesPartialUpdateRequest {
+	return ApiCloudGatewaysListenersRoutesPartialUpdateRequest{
+		ApiService: a,
+		ctx: ctx,
+		gatewayId: gatewayId,
+		id: id,
+		listenerId: listenerId,
+	}
+}
+
+// Execute executes the request
+//  @return GatewayRoute
+func (a *CloudAPIService) CloudGatewaysListenersRoutesPartialUpdateExecute(r ApiCloudGatewaysListenersRoutesPartialUpdateRequest) (*GatewayRoute, *http.Response, error) {
+	var (
+		localVarHTTPMethod   = http.MethodPatch
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *GatewayRoute
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CloudAPIService.CloudGatewaysListenersRoutesPartialUpdate")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/api/cloud/gateways/{gateway_id}/listeners/{listener_id}/routes/{id}/"
+	localVarPath = strings.Replace(localVarPath, "{"+"gateway_id"+"}", url.PathEscape(parameterValueToString(r.gatewayId, "gatewayId")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"id"+"}", url.PathEscape(parameterValueToString(r.id, "id")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"listener_id"+"}", url.PathEscape(parameterValueToString(r.listenerId, "listenerId")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{"application/json"}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	// body params
+	localVarPostBody = r.patchedGatewayRouteWriteRequest
+	if r.ctx != nil {
+		// API Key Authentication
+		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
+			if apiKey, ok := auth["tokenAuth"]; ok {
+				var key string
+				if apiKey.Prefix != "" {
+					key = apiKey.Prefix + " " + apiKey.Key
+				} else {
+					key = apiKey.Key
+				}
+				localVarHeaderParams["Authorization"] = key
+			}
+		}
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 409 {
+			var v GatewayConflict
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiCloudGatewaysListenersRoutesRetrieveRequest struct {
+	ctx context.Context
+	ApiService *CloudAPIService
+	gatewayId int32
+	id int32
+	listenerId int32
+}
+
+func (r ApiCloudGatewaysListenersRoutesRetrieveRequest) Execute() (*GatewayRoute, *http.Response, error) {
+	return r.ApiService.CloudGatewaysListenersRoutesRetrieveExecute(r)
+}
+
+/*
+CloudGatewaysListenersRoutesRetrieve Method for CloudGatewaysListenersRoutesRetrieve
+
+An http listener's routes
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param gatewayId
+ @param id
+ @param listenerId
+ @return ApiCloudGatewaysListenersRoutesRetrieveRequest
+*/
+func (a *CloudAPIService) CloudGatewaysListenersRoutesRetrieve(ctx context.Context, gatewayId int32, id int32, listenerId int32) ApiCloudGatewaysListenersRoutesRetrieveRequest {
+	return ApiCloudGatewaysListenersRoutesRetrieveRequest{
+		ApiService: a,
+		ctx: ctx,
+		gatewayId: gatewayId,
+		id: id,
+		listenerId: listenerId,
+	}
+}
+
+// Execute executes the request
+//  @return GatewayRoute
+func (a *CloudAPIService) CloudGatewaysListenersRoutesRetrieveExecute(r ApiCloudGatewaysListenersRoutesRetrieveRequest) (*GatewayRoute, *http.Response, error) {
+	var (
+		localVarHTTPMethod   = http.MethodGet
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *GatewayRoute
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CloudAPIService.CloudGatewaysListenersRoutesRetrieve")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/api/cloud/gateways/{gateway_id}/listeners/{listener_id}/routes/{id}/"
+	localVarPath = strings.Replace(localVarPath, "{"+"gateway_id"+"}", url.PathEscape(parameterValueToString(r.gatewayId, "gatewayId")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"id"+"}", url.PathEscape(parameterValueToString(r.id, "id")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"listener_id"+"}", url.PathEscape(parameterValueToString(r.listenerId, "listenerId")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	if r.ctx != nil {
+		// API Key Authentication
+		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
+			if apiKey, ok := auth["tokenAuth"]; ok {
+				var key string
+				if apiKey.Prefix != "" {
+					key = apiKey.Prefix + " " + apiKey.Key
+				} else {
+					key = apiKey.Key
+				}
+				localVarHeaderParams["Authorization"] = key
+			}
+		}
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiCloudGatewaysNetworksCreateRequest struct {
+	ctx context.Context
+	ApiService *CloudAPIService
+	gatewayId int32
+	gatewayNetworkCreateRequest *GatewayNetworkCreateRequest
+}
+
+func (r ApiCloudGatewaysNetworksCreateRequest) GatewayNetworkCreateRequest(gatewayNetworkCreateRequest GatewayNetworkCreateRequest) ApiCloudGatewaysNetworksCreateRequest {
+	r.gatewayNetworkCreateRequest = &gatewayNetworkCreateRequest
+	return r
+}
+
+func (r ApiCloudGatewaysNetworksCreateRequest) Execute() (*GatewayOperation, *http.Response, error) {
+	return r.ApiService.CloudGatewaysNetworksCreateExecute(r)
+}
+
+/*
+CloudGatewaysNetworksCreate Method for CloudGatewaysNetworksCreate
+
+Attach a network (spec 11.3): the operation reserves it and hotplugs the gateway's NIC.
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param gatewayId
+ @return ApiCloudGatewaysNetworksCreateRequest
+*/
+func (a *CloudAPIService) CloudGatewaysNetworksCreate(ctx context.Context, gatewayId int32) ApiCloudGatewaysNetworksCreateRequest {
+	return ApiCloudGatewaysNetworksCreateRequest{
+		ApiService: a,
+		ctx: ctx,
+		gatewayId: gatewayId,
+	}
+}
+
+// Execute executes the request
+//  @return GatewayOperation
+func (a *CloudAPIService) CloudGatewaysNetworksCreateExecute(r ApiCloudGatewaysNetworksCreateRequest) (*GatewayOperation, *http.Response, error) {
+	var (
+		localVarHTTPMethod   = http.MethodPost
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *GatewayOperation
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CloudAPIService.CloudGatewaysNetworksCreate")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/api/cloud/gateways/{gateway_id}/networks/"
+	localVarPath = strings.Replace(localVarPath, "{"+"gateway_id"+"}", url.PathEscape(parameterValueToString(r.gatewayId, "gatewayId")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+	if r.gatewayNetworkCreateRequest == nil {
+		return localVarReturnValue, nil, reportError("gatewayNetworkCreateRequest is required and must be specified")
+	}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{"application/json"}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	// body params
+	localVarPostBody = r.gatewayNetworkCreateRequest
+	if r.ctx != nil {
+		// API Key Authentication
+		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
+			if apiKey, ok := auth["tokenAuth"]; ok {
+				var key string
+				if apiKey.Prefix != "" {
+					key = apiKey.Prefix + " " + apiKey.Key
+				} else {
+					key = apiKey.Key
+				}
+				localVarHeaderParams["Authorization"] = key
+			}
+		}
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 409 {
+			var v GatewayConflict
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiCloudGatewaysNetworksDestroyRequest struct {
+	ctx context.Context
+	ApiService *CloudAPIService
+	gatewayId int32
+	networkId int32
+	revision *int32
+	servers *[]int32
+}
+
+// The gateway&#39;s desired revision from the preview; without it, a preview.
+func (r ApiCloudGatewaysNetworksDestroyRequest) Revision(revision int32) ApiCloudGatewaysNetworksDestroyRequest {
+	r.revision = &revision
+	return r
+}
+
+// The preview&#39;s server ids.
+func (r ApiCloudGatewaysNetworksDestroyRequest) Servers(servers []int32) ApiCloudGatewaysNetworksDestroyRequest {
+	r.servers = &servers
+	return r
+}
+
+func (r ApiCloudGatewaysNetworksDestroyRequest) Execute() (*GatewayOperation, *http.Response, error) {
+	return r.ApiService.CloudGatewaysNetworksDestroyExecute(r)
+}
+
+/*
+CloudGatewaysNetworksDestroy Method for CloudGatewaysNetworksDestroy
+
+Detach a network (spec 11.3). Without the preview's revision and servers, 409 with a fresh preview.
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param gatewayId
+ @param networkId
+ @return ApiCloudGatewaysNetworksDestroyRequest
+*/
+func (a *CloudAPIService) CloudGatewaysNetworksDestroy(ctx context.Context, gatewayId int32, networkId int32) ApiCloudGatewaysNetworksDestroyRequest {
+	return ApiCloudGatewaysNetworksDestroyRequest{
+		ApiService: a,
+		ctx: ctx,
+		gatewayId: gatewayId,
+		networkId: networkId,
+	}
+}
+
+// Execute executes the request
+//  @return GatewayOperation
+func (a *CloudAPIService) CloudGatewaysNetworksDestroyExecute(r ApiCloudGatewaysNetworksDestroyRequest) (*GatewayOperation, *http.Response, error) {
+	var (
+		localVarHTTPMethod   = http.MethodDelete
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *GatewayOperation
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CloudAPIService.CloudGatewaysNetworksDestroy")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/api/cloud/gateways/{gateway_id}/networks/{network_id}/"
+	localVarPath = strings.Replace(localVarPath, "{"+"gateway_id"+"}", url.PathEscape(parameterValueToString(r.gatewayId, "gatewayId")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"network_id"+"}", url.PathEscape(parameterValueToString(r.networkId, "networkId")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	if r.revision != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "revision", r.revision, "form", "")
+	}
+	if r.servers != nil {
+		t := *r.servers
+		if reflect.TypeOf(t).Kind() == reflect.Slice {
+			s := reflect.ValueOf(t)
+			for i := 0; i < s.Len(); i++ {
+				parameterAddToHeaderOrQuery(localVarQueryParams, "servers", s.Index(i).Interface(), "form", "multi")
+			}
+		} else {
+			parameterAddToHeaderOrQuery(localVarQueryParams, "servers", t, "form", "multi")
+		}
+	}
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	if r.ctx != nil {
+		// API Key Authentication
+		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
+			if apiKey, ok := auth["tokenAuth"]; ok {
+				var key string
+				if apiKey.Prefix != "" {
+					key = apiKey.Prefix + " " + apiKey.Key
+				} else {
+					key = apiKey.Key
+				}
+				localVarHeaderParams["Authorization"] = key
+			}
+		}
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 409 {
+			var v GatewayConflict
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiCloudGatewaysNetworksListRequest struct {
+	ctx context.Context
+	ApiService *CloudAPIService
+	gatewayId int32
+	page *int32
+}
+
+// A page number within the paginated result set.
+func (r ApiCloudGatewaysNetworksListRequest) Page(page int32) ApiCloudGatewaysNetworksListRequest {
+	r.page = &page
+	return r
+}
+
+func (r ApiCloudGatewaysNetworksListRequest) Execute() (*PaginatedGatewayNetworkList, *http.Response, error) {
+	return r.ApiService.CloudGatewaysNetworksListExecute(r)
+}
+
+/*
+CloudGatewaysNetworksList Method for CloudGatewaysNetworksList
+
+A gateway's private networks, by network id
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param gatewayId
+ @return ApiCloudGatewaysNetworksListRequest
+*/
+func (a *CloudAPIService) CloudGatewaysNetworksList(ctx context.Context, gatewayId int32) ApiCloudGatewaysNetworksListRequest {
+	return ApiCloudGatewaysNetworksListRequest{
+		ApiService: a,
+		ctx: ctx,
+		gatewayId: gatewayId,
+	}
+}
+
+// Execute executes the request
+//  @return PaginatedGatewayNetworkList
+func (a *CloudAPIService) CloudGatewaysNetworksListExecute(r ApiCloudGatewaysNetworksListRequest) (*PaginatedGatewayNetworkList, *http.Response, error) {
+	var (
+		localVarHTTPMethod   = http.MethodGet
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *PaginatedGatewayNetworkList
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CloudAPIService.CloudGatewaysNetworksList")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/api/cloud/gateways/{gateway_id}/networks/"
+	localVarPath = strings.Replace(localVarPath, "{"+"gateway_id"+"}", url.PathEscape(parameterValueToString(r.gatewayId, "gatewayId")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	if r.page != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "page", r.page, "form", "")
+	}
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	if r.ctx != nil {
+		// API Key Authentication
+		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
+			if apiKey, ok := auth["tokenAuth"]; ok {
+				var key string
+				if apiKey.Prefix != "" {
+					key = apiKey.Prefix + " " + apiKey.Key
+				} else {
+					key = apiKey.Key
+				}
+				localVarHeaderParams["Authorization"] = key
+			}
+		}
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiCloudGatewaysNetworksPartialUpdateRequest struct {
+	ctx context.Context
+	ApiService *CloudAPIService
+	gatewayId int32
+	networkId int32
+	revision *int32
+	servers *[]int32
+	patchedGatewayNetworkUpdateRequest *PatchedGatewayNetworkUpdateRequest
+}
+
+// The gateway&#39;s desired revision from the preview; without it, a preview.
+func (r ApiCloudGatewaysNetworksPartialUpdateRequest) Revision(revision int32) ApiCloudGatewaysNetworksPartialUpdateRequest {
+	r.revision = &revision
+	return r
+}
+
+// The preview&#39;s server ids.
+func (r ApiCloudGatewaysNetworksPartialUpdateRequest) Servers(servers []int32) ApiCloudGatewaysNetworksPartialUpdateRequest {
+	r.servers = &servers
+	return r
+}
+
+func (r ApiCloudGatewaysNetworksPartialUpdateRequest) PatchedGatewayNetworkUpdateRequest(patchedGatewayNetworkUpdateRequest PatchedGatewayNetworkUpdateRequest) ApiCloudGatewaysNetworksPartialUpdateRequest {
+	r.patchedGatewayNetworkUpdateRequest = &patchedGatewayNetworkUpdateRequest
+	return r
+}
+
+func (r ApiCloudGatewaysNetworksPartialUpdateRequest) Execute() (*GatewayNetwork, *http.Response, error) {
+	return r.ApiService.CloudGatewaysNetworksPartialUpdateExecute(r)
+}
+
+/*
+CloudGatewaysNetworksPartialUpdate Method for CloudGatewaysNetworksPartialUpdate
+
+Switch a router network's SNAT (spec 6.4). Turning it off without the preview's revision and
+servers answers 409 with a fresh preview; the change is pending until the agent applies it.
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param gatewayId
+ @param networkId
+ @return ApiCloudGatewaysNetworksPartialUpdateRequest
+*/
+func (a *CloudAPIService) CloudGatewaysNetworksPartialUpdate(ctx context.Context, gatewayId int32, networkId int32) ApiCloudGatewaysNetworksPartialUpdateRequest {
+	return ApiCloudGatewaysNetworksPartialUpdateRequest{
+		ApiService: a,
+		ctx: ctx,
+		gatewayId: gatewayId,
+		networkId: networkId,
+	}
+}
+
+// Execute executes the request
+//  @return GatewayNetwork
+func (a *CloudAPIService) CloudGatewaysNetworksPartialUpdateExecute(r ApiCloudGatewaysNetworksPartialUpdateRequest) (*GatewayNetwork, *http.Response, error) {
+	var (
+		localVarHTTPMethod   = http.MethodPatch
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *GatewayNetwork
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CloudAPIService.CloudGatewaysNetworksPartialUpdate")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/api/cloud/gateways/{gateway_id}/networks/{network_id}/"
+	localVarPath = strings.Replace(localVarPath, "{"+"gateway_id"+"}", url.PathEscape(parameterValueToString(r.gatewayId, "gatewayId")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"network_id"+"}", url.PathEscape(parameterValueToString(r.networkId, "networkId")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	if r.revision != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "revision", r.revision, "form", "")
+	}
+	if r.servers != nil {
+		t := *r.servers
+		if reflect.TypeOf(t).Kind() == reflect.Slice {
+			s := reflect.ValueOf(t)
+			for i := 0; i < s.Len(); i++ {
+				parameterAddToHeaderOrQuery(localVarQueryParams, "servers", s.Index(i).Interface(), "form", "multi")
+			}
+		} else {
+			parameterAddToHeaderOrQuery(localVarQueryParams, "servers", t, "form", "multi")
+		}
+	}
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{"application/json"}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	// body params
+	localVarPostBody = r.patchedGatewayNetworkUpdateRequest
+	if r.ctx != nil {
+		// API Key Authentication
+		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
+			if apiKey, ok := auth["tokenAuth"]; ok {
+				var key string
+				if apiKey.Prefix != "" {
+					key = apiKey.Prefix + " " + apiKey.Key
+				} else {
+					key = apiKey.Key
+				}
+				localVarHeaderParams["Authorization"] = key
+			}
+		}
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 409 {
+			var v GatewayConflict
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiCloudGatewaysNetworksRetrieveRequest struct {
+	ctx context.Context
+	ApiService *CloudAPIService
+	gatewayId int32
+	networkId int32
+}
+
+func (r ApiCloudGatewaysNetworksRetrieveRequest) Execute() (*GatewayNetwork, *http.Response, error) {
+	return r.ApiService.CloudGatewaysNetworksRetrieveExecute(r)
+}
+
+/*
+CloudGatewaysNetworksRetrieve Method for CloudGatewaysNetworksRetrieve
+
+A gateway's private networks, by network id
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param gatewayId
+ @param networkId
+ @return ApiCloudGatewaysNetworksRetrieveRequest
+*/
+func (a *CloudAPIService) CloudGatewaysNetworksRetrieve(ctx context.Context, gatewayId int32, networkId int32) ApiCloudGatewaysNetworksRetrieveRequest {
+	return ApiCloudGatewaysNetworksRetrieveRequest{
+		ApiService: a,
+		ctx: ctx,
+		gatewayId: gatewayId,
+		networkId: networkId,
+	}
+}
+
+// Execute executes the request
+//  @return GatewayNetwork
+func (a *CloudAPIService) CloudGatewaysNetworksRetrieveExecute(r ApiCloudGatewaysNetworksRetrieveRequest) (*GatewayNetwork, *http.Response, error) {
+	var (
+		localVarHTTPMethod   = http.MethodGet
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *GatewayNetwork
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CloudAPIService.CloudGatewaysNetworksRetrieve")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/api/cloud/gateways/{gateway_id}/networks/{network_id}/"
+	localVarPath = strings.Replace(localVarPath, "{"+"gateway_id"+"}", url.PathEscape(parameterValueToString(r.gatewayId, "gatewayId")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"network_id"+"}", url.PathEscape(parameterValueToString(r.networkId, "networkId")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	if r.ctx != nil {
+		// API Key Authentication
+		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
+			if apiKey, ok := auth["tokenAuth"]; ok {
+				var key string
+				if apiKey.Prefix != "" {
+					key = apiKey.Prefix + " " + apiKey.Key
+				} else {
+					key = apiKey.Key
+				}
+				localVarHeaderParams["Authorization"] = key
+			}
+		}
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiCloudGatewaysOperationsListRequest struct {
+	ctx context.Context
+	ApiService *CloudAPIService
+	gatewayId int32
+	page *int32
+}
+
+// A page number within the paginated result set.
+func (r ApiCloudGatewaysOperationsListRequest) Page(page int32) ApiCloudGatewaysOperationsListRequest {
+	r.page = &page
+	return r
+}
+
+func (r ApiCloudGatewaysOperationsListRequest) Execute() (*PaginatedGatewayOperationList, *http.Response, error) {
+	return r.ApiService.CloudGatewaysOperationsListExecute(r)
+}
+
+/*
+CloudGatewaysOperationsList Method for CloudGatewaysOperationsList
+
+A gateway's operations, newest first
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param gatewayId
+ @return ApiCloudGatewaysOperationsListRequest
+*/
+func (a *CloudAPIService) CloudGatewaysOperationsList(ctx context.Context, gatewayId int32) ApiCloudGatewaysOperationsListRequest {
+	return ApiCloudGatewaysOperationsListRequest{
+		ApiService: a,
+		ctx: ctx,
+		gatewayId: gatewayId,
+	}
+}
+
+// Execute executes the request
+//  @return PaginatedGatewayOperationList
+func (a *CloudAPIService) CloudGatewaysOperationsListExecute(r ApiCloudGatewaysOperationsListRequest) (*PaginatedGatewayOperationList, *http.Response, error) {
+	var (
+		localVarHTTPMethod   = http.MethodGet
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *PaginatedGatewayOperationList
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CloudAPIService.CloudGatewaysOperationsList")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/api/cloud/gateways/{gateway_id}/operations/"
+	localVarPath = strings.Replace(localVarPath, "{"+"gateway_id"+"}", url.PathEscape(parameterValueToString(r.gatewayId, "gatewayId")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	if r.page != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "page", r.page, "form", "")
+	}
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	if r.ctx != nil {
+		// API Key Authentication
+		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
+			if apiKey, ok := auth["tokenAuth"]; ok {
+				var key string
+				if apiKey.Prefix != "" {
+					key = apiKey.Prefix + " " + apiKey.Key
+				} else {
+					key = apiKey.Key
+				}
+				localVarHeaderParams["Authorization"] = key
+			}
+		}
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiCloudGatewaysOperationsRetrieveRequest struct {
+	ctx context.Context
+	ApiService *CloudAPIService
+	gatewayId int32
+	id string
+}
+
+func (r ApiCloudGatewaysOperationsRetrieveRequest) Execute() (*GatewayOperation, *http.Response, error) {
+	return r.ApiService.CloudGatewaysOperationsRetrieveExecute(r)
+}
+
+/*
+CloudGatewaysOperationsRetrieve Method for CloudGatewaysOperationsRetrieve
+
+A gateway's operations, newest first
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param gatewayId
+ @param id
+ @return ApiCloudGatewaysOperationsRetrieveRequest
+*/
+func (a *CloudAPIService) CloudGatewaysOperationsRetrieve(ctx context.Context, gatewayId int32, id string) ApiCloudGatewaysOperationsRetrieveRequest {
+	return ApiCloudGatewaysOperationsRetrieveRequest{
+		ApiService: a,
+		ctx: ctx,
+		gatewayId: gatewayId,
+		id: id,
+	}
+}
+
+// Execute executes the request
+//  @return GatewayOperation
+func (a *CloudAPIService) CloudGatewaysOperationsRetrieveExecute(r ApiCloudGatewaysOperationsRetrieveRequest) (*GatewayOperation, *http.Response, error) {
+	var (
+		localVarHTTPMethod   = http.MethodGet
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *GatewayOperation
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CloudAPIService.CloudGatewaysOperationsRetrieve")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/api/cloud/gateways/{gateway_id}/operations/{id}/"
+	localVarPath = strings.Replace(localVarPath, "{"+"gateway_id"+"}", url.PathEscape(parameterValueToString(r.gatewayId, "gatewayId")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"id"+"}", url.PathEscape(parameterValueToString(r.id, "id")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	if r.ctx != nil {
+		// API Key Authentication
+		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
+			if apiKey, ok := auth["tokenAuth"]; ok {
+				var key string
+				if apiKey.Prefix != "" {
+					key = apiKey.Prefix + " " + apiKey.Key
+				} else {
+					key = apiKey.Key
+				}
+				localVarHeaderParams["Authorization"] = key
+			}
+		}
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiCloudGatewaysPartialUpdateRequest struct {
+	ctx context.Context
+	ApiService *CloudAPIService
+	id string
+	patchedGatewayUpdateRequest *PatchedGatewayUpdateRequest
+}
+
+func (r ApiCloudGatewaysPartialUpdateRequest) PatchedGatewayUpdateRequest(patchedGatewayUpdateRequest PatchedGatewayUpdateRequest) ApiCloudGatewaysPartialUpdateRequest {
+	r.patchedGatewayUpdateRequest = &patchedGatewayUpdateRequest
+	return r
+}
+
+func (r ApiCloudGatewaysPartialUpdateRequest) Execute() (*Gateway, *http.Response, error) {
+	return r.ApiService.CloudGatewaysPartialUpdateExecute(r)
+}
+
+/*
+CloudGatewaysPartialUpdate Method for CloudGatewaysPartialUpdate
+
+Rename the gateway or change its maintenance window. The name is not compiled, so no revision
+follows; a new window reaches the agent in a new revision (spec 11.4).
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param id
+ @return ApiCloudGatewaysPartialUpdateRequest
+*/
+func (a *CloudAPIService) CloudGatewaysPartialUpdate(ctx context.Context, id string) ApiCloudGatewaysPartialUpdateRequest {
+	return ApiCloudGatewaysPartialUpdateRequest{
+		ApiService: a,
+		ctx: ctx,
+		id: id,
+	}
+}
+
+// Execute executes the request
+//  @return Gateway
+func (a *CloudAPIService) CloudGatewaysPartialUpdateExecute(r ApiCloudGatewaysPartialUpdateRequest) (*Gateway, *http.Response, error) {
+	var (
+		localVarHTTPMethod   = http.MethodPatch
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *Gateway
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CloudAPIService.CloudGatewaysPartialUpdate")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/api/cloud/gateways/{id}/"
+	localVarPath = strings.Replace(localVarPath, "{"+"id"+"}", url.PathEscape(parameterValueToString(r.id, "id")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{"application/json"}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	// body params
+	localVarPostBody = r.patchedGatewayUpdateRequest
+	if r.ctx != nil {
+		// API Key Authentication
+		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
+			if apiKey, ok := auth["tokenAuth"]; ok {
+				var key string
+				if apiKey.Prefix != "" {
+					key = apiKey.Prefix + " " + apiKey.Key
+				} else {
+					key = apiKey.Key
+				}
+				localVarHeaderParams["Authorization"] = key
+			}
+		}
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 409 {
+			var v GatewayConflict
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiCloudGatewaysPoolsBackendsCreateRequest struct {
+	ctx context.Context
+	ApiService *CloudAPIService
+	gatewayId int32
+	poolId int32
+	gatewayBackendWriteRequest *GatewayBackendWriteRequest
+}
+
+func (r ApiCloudGatewaysPoolsBackendsCreateRequest) GatewayBackendWriteRequest(gatewayBackendWriteRequest GatewayBackendWriteRequest) ApiCloudGatewaysPoolsBackendsCreateRequest {
+	r.gatewayBackendWriteRequest = &gatewayBackendWriteRequest
+	return r
+}
+
+func (r ApiCloudGatewaysPoolsBackendsCreateRequest) Execute() (*GatewayBackend, *http.Response, error) {
+	return r.ApiService.CloudGatewaysPoolsBackendsCreateExecute(r)
+}
+
+/*
+CloudGatewaysPoolsBackendsCreate Method for CloudGatewaysPoolsBackendsCreate
+
+Add a server to the pool (spec 5.5); it is pending until the agent applies its revision.
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param gatewayId
+ @param poolId
+ @return ApiCloudGatewaysPoolsBackendsCreateRequest
+*/
+func (a *CloudAPIService) CloudGatewaysPoolsBackendsCreate(ctx context.Context, gatewayId int32, poolId int32) ApiCloudGatewaysPoolsBackendsCreateRequest {
+	return ApiCloudGatewaysPoolsBackendsCreateRequest{
+		ApiService: a,
+		ctx: ctx,
+		gatewayId: gatewayId,
+		poolId: poolId,
+	}
+}
+
+// Execute executes the request
+//  @return GatewayBackend
+func (a *CloudAPIService) CloudGatewaysPoolsBackendsCreateExecute(r ApiCloudGatewaysPoolsBackendsCreateRequest) (*GatewayBackend, *http.Response, error) {
+	var (
+		localVarHTTPMethod   = http.MethodPost
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *GatewayBackend
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CloudAPIService.CloudGatewaysPoolsBackendsCreate")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/api/cloud/gateways/{gateway_id}/pools/{pool_id}/backends/"
+	localVarPath = strings.Replace(localVarPath, "{"+"gateway_id"+"}", url.PathEscape(parameterValueToString(r.gatewayId, "gatewayId")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"pool_id"+"}", url.PathEscape(parameterValueToString(r.poolId, "poolId")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{"application/json"}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	// body params
+	localVarPostBody = r.gatewayBackendWriteRequest
+	if r.ctx != nil {
+		// API Key Authentication
+		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
+			if apiKey, ok := auth["tokenAuth"]; ok {
+				var key string
+				if apiKey.Prefix != "" {
+					key = apiKey.Prefix + " " + apiKey.Key
+				} else {
+					key = apiKey.Key
+				}
+				localVarHeaderParams["Authorization"] = key
+			}
+		}
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 409 {
+			var v GatewayConflict
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiCloudGatewaysPoolsBackendsDestroyRequest struct {
+	ctx context.Context
+	ApiService *CloudAPIService
+	gatewayId int32
+	id int32
+	poolId int32
+	revision *int32
+}
+
+// The gateway&#39;s desired revision from the preview; without it, a preview.
+func (r ApiCloudGatewaysPoolsBackendsDestroyRequest) Revision(revision int32) ApiCloudGatewaysPoolsBackendsDestroyRequest {
+	r.revision = &revision
+	return r
+}
+
+func (r ApiCloudGatewaysPoolsBackendsDestroyRequest) Execute() (*GatewayOperation, *http.Response, error) {
+	return r.ApiService.CloudGatewaysPoolsBackendsDestroyExecute(r)
+}
+
+/*
+CloudGatewaysPoolsBackendsDestroy Method for CloudGatewaysPoolsBackendsDestroy
+
+Remove a server (spec 5.11): 202 with the record the agent's acknowledgement completes. Without
+the preview's revision, 409 with a fresh one.
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param gatewayId
+ @param id
+ @param poolId
+ @return ApiCloudGatewaysPoolsBackendsDestroyRequest
+*/
+func (a *CloudAPIService) CloudGatewaysPoolsBackendsDestroy(ctx context.Context, gatewayId int32, id int32, poolId int32) ApiCloudGatewaysPoolsBackendsDestroyRequest {
+	return ApiCloudGatewaysPoolsBackendsDestroyRequest{
+		ApiService: a,
+		ctx: ctx,
+		gatewayId: gatewayId,
+		id: id,
+		poolId: poolId,
+	}
+}
+
+// Execute executes the request
+//  @return GatewayOperation
+func (a *CloudAPIService) CloudGatewaysPoolsBackendsDestroyExecute(r ApiCloudGatewaysPoolsBackendsDestroyRequest) (*GatewayOperation, *http.Response, error) {
+	var (
+		localVarHTTPMethod   = http.MethodDelete
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *GatewayOperation
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CloudAPIService.CloudGatewaysPoolsBackendsDestroy")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/api/cloud/gateways/{gateway_id}/pools/{pool_id}/backends/{id}/"
+	localVarPath = strings.Replace(localVarPath, "{"+"gateway_id"+"}", url.PathEscape(parameterValueToString(r.gatewayId, "gatewayId")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"id"+"}", url.PathEscape(parameterValueToString(r.id, "id")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"pool_id"+"}", url.PathEscape(parameterValueToString(r.poolId, "poolId")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	if r.revision != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "revision", r.revision, "form", "")
+	}
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	if r.ctx != nil {
+		// API Key Authentication
+		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
+			if apiKey, ok := auth["tokenAuth"]; ok {
+				var key string
+				if apiKey.Prefix != "" {
+					key = apiKey.Prefix + " " + apiKey.Key
+				} else {
+					key = apiKey.Key
+				}
+				localVarHeaderParams["Authorization"] = key
+			}
+		}
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 409 {
+			var v GatewayConflict
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiCloudGatewaysPoolsBackendsListRequest struct {
+	ctx context.Context
+	ApiService *CloudAPIService
+	gatewayId int32
+	poolId int32
+	page *int32
+}
+
+// A page number within the paginated result set.
+func (r ApiCloudGatewaysPoolsBackendsListRequest) Page(page int32) ApiCloudGatewaysPoolsBackendsListRequest {
+	r.page = &page
+	return r
+}
+
+func (r ApiCloudGatewaysPoolsBackendsListRequest) Execute() (*PaginatedGatewayBackendList, *http.Response, error) {
+	return r.ApiService.CloudGatewaysPoolsBackendsListExecute(r)
+}
+
+/*
+CloudGatewaysPoolsBackendsList Method for CloudGatewaysPoolsBackendsList
+
+A backend pool's servers
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param gatewayId
+ @param poolId
+ @return ApiCloudGatewaysPoolsBackendsListRequest
+*/
+func (a *CloudAPIService) CloudGatewaysPoolsBackendsList(ctx context.Context, gatewayId int32, poolId int32) ApiCloudGatewaysPoolsBackendsListRequest {
+	return ApiCloudGatewaysPoolsBackendsListRequest{
+		ApiService: a,
+		ctx: ctx,
+		gatewayId: gatewayId,
+		poolId: poolId,
+	}
+}
+
+// Execute executes the request
+//  @return PaginatedGatewayBackendList
+func (a *CloudAPIService) CloudGatewaysPoolsBackendsListExecute(r ApiCloudGatewaysPoolsBackendsListRequest) (*PaginatedGatewayBackendList, *http.Response, error) {
+	var (
+		localVarHTTPMethod   = http.MethodGet
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *PaginatedGatewayBackendList
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CloudAPIService.CloudGatewaysPoolsBackendsList")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/api/cloud/gateways/{gateway_id}/pools/{pool_id}/backends/"
+	localVarPath = strings.Replace(localVarPath, "{"+"gateway_id"+"}", url.PathEscape(parameterValueToString(r.gatewayId, "gatewayId")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"pool_id"+"}", url.PathEscape(parameterValueToString(r.poolId, "poolId")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	if r.page != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "page", r.page, "form", "")
+	}
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	if r.ctx != nil {
+		// API Key Authentication
+		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
+			if apiKey, ok := auth["tokenAuth"]; ok {
+				var key string
+				if apiKey.Prefix != "" {
+					key = apiKey.Prefix + " " + apiKey.Key
+				} else {
+					key = apiKey.Key
+				}
+				localVarHeaderParams["Authorization"] = key
+			}
+		}
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiCloudGatewaysPoolsBackendsPartialUpdateRequest struct {
+	ctx context.Context
+	ApiService *CloudAPIService
+	gatewayId int32
+	id int32
+	poolId int32
+	patchedGatewayBackendWriteRequest *PatchedGatewayBackendWriteRequest
+}
+
+func (r ApiCloudGatewaysPoolsBackendsPartialUpdateRequest) PatchedGatewayBackendWriteRequest(patchedGatewayBackendWriteRequest PatchedGatewayBackendWriteRequest) ApiCloudGatewaysPoolsBackendsPartialUpdateRequest {
+	r.patchedGatewayBackendWriteRequest = &patchedGatewayBackendWriteRequest
+	return r
+}
+
+func (r ApiCloudGatewaysPoolsBackendsPartialUpdateRequest) Execute() (*GatewayBackend, *http.Response, error) {
+	return r.ApiService.CloudGatewaysPoolsBackendsPartialUpdateExecute(r)
+}
+
+/*
+CloudGatewaysPoolsBackendsPartialUpdate Method for CloudGatewaysPoolsBackendsPartialUpdate
+
+Change a server. The last enabled server of a pool in use cannot be disabled.
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param gatewayId
+ @param id
+ @param poolId
+ @return ApiCloudGatewaysPoolsBackendsPartialUpdateRequest
+*/
+func (a *CloudAPIService) CloudGatewaysPoolsBackendsPartialUpdate(ctx context.Context, gatewayId int32, id int32, poolId int32) ApiCloudGatewaysPoolsBackendsPartialUpdateRequest {
+	return ApiCloudGatewaysPoolsBackendsPartialUpdateRequest{
+		ApiService: a,
+		ctx: ctx,
+		gatewayId: gatewayId,
+		id: id,
+		poolId: poolId,
+	}
+}
+
+// Execute executes the request
+//  @return GatewayBackend
+func (a *CloudAPIService) CloudGatewaysPoolsBackendsPartialUpdateExecute(r ApiCloudGatewaysPoolsBackendsPartialUpdateRequest) (*GatewayBackend, *http.Response, error) {
+	var (
+		localVarHTTPMethod   = http.MethodPatch
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *GatewayBackend
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CloudAPIService.CloudGatewaysPoolsBackendsPartialUpdate")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/api/cloud/gateways/{gateway_id}/pools/{pool_id}/backends/{id}/"
+	localVarPath = strings.Replace(localVarPath, "{"+"gateway_id"+"}", url.PathEscape(parameterValueToString(r.gatewayId, "gatewayId")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"id"+"}", url.PathEscape(parameterValueToString(r.id, "id")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"pool_id"+"}", url.PathEscape(parameterValueToString(r.poolId, "poolId")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{"application/json"}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	// body params
+	localVarPostBody = r.patchedGatewayBackendWriteRequest
+	if r.ctx != nil {
+		// API Key Authentication
+		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
+			if apiKey, ok := auth["tokenAuth"]; ok {
+				var key string
+				if apiKey.Prefix != "" {
+					key = apiKey.Prefix + " " + apiKey.Key
+				} else {
+					key = apiKey.Key
+				}
+				localVarHeaderParams["Authorization"] = key
+			}
+		}
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 409 {
+			var v GatewayConflict
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiCloudGatewaysPoolsBackendsRetrieveRequest struct {
+	ctx context.Context
+	ApiService *CloudAPIService
+	gatewayId int32
+	id int32
+	poolId int32
+}
+
+func (r ApiCloudGatewaysPoolsBackendsRetrieveRequest) Execute() (*GatewayBackend, *http.Response, error) {
+	return r.ApiService.CloudGatewaysPoolsBackendsRetrieveExecute(r)
+}
+
+/*
+CloudGatewaysPoolsBackendsRetrieve Method for CloudGatewaysPoolsBackendsRetrieve
+
+A backend pool's servers
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param gatewayId
+ @param id
+ @param poolId
+ @return ApiCloudGatewaysPoolsBackendsRetrieveRequest
+*/
+func (a *CloudAPIService) CloudGatewaysPoolsBackendsRetrieve(ctx context.Context, gatewayId int32, id int32, poolId int32) ApiCloudGatewaysPoolsBackendsRetrieveRequest {
+	return ApiCloudGatewaysPoolsBackendsRetrieveRequest{
+		ApiService: a,
+		ctx: ctx,
+		gatewayId: gatewayId,
+		id: id,
+		poolId: poolId,
+	}
+}
+
+// Execute executes the request
+//  @return GatewayBackend
+func (a *CloudAPIService) CloudGatewaysPoolsBackendsRetrieveExecute(r ApiCloudGatewaysPoolsBackendsRetrieveRequest) (*GatewayBackend, *http.Response, error) {
+	var (
+		localVarHTTPMethod   = http.MethodGet
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *GatewayBackend
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CloudAPIService.CloudGatewaysPoolsBackendsRetrieve")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/api/cloud/gateways/{gateway_id}/pools/{pool_id}/backends/{id}/"
+	localVarPath = strings.Replace(localVarPath, "{"+"gateway_id"+"}", url.PathEscape(parameterValueToString(r.gatewayId, "gatewayId")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"id"+"}", url.PathEscape(parameterValueToString(r.id, "id")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"pool_id"+"}", url.PathEscape(parameterValueToString(r.poolId, "poolId")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	if r.ctx != nil {
+		// API Key Authentication
+		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
+			if apiKey, ok := auth["tokenAuth"]; ok {
+				var key string
+				if apiKey.Prefix != "" {
+					key = apiKey.Prefix + " " + apiKey.Key
+				} else {
+					key = apiKey.Key
+				}
+				localVarHeaderParams["Authorization"] = key
+			}
+		}
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiCloudGatewaysPoolsCreateRequest struct {
+	ctx context.Context
+	ApiService *CloudAPIService
+	gatewayId int32
+	gatewayBackendPoolWriteRequest *GatewayBackendPoolWriteRequest
+}
+
+func (r ApiCloudGatewaysPoolsCreateRequest) GatewayBackendPoolWriteRequest(gatewayBackendPoolWriteRequest GatewayBackendPoolWriteRequest) ApiCloudGatewaysPoolsCreateRequest {
+	r.gatewayBackendPoolWriteRequest = &gatewayBackendPoolWriteRequest
+	return r
+}
+
+func (r ApiCloudGatewaysPoolsCreateRequest) Execute() (*GatewayBackendPool, *http.Response, error) {
+	return r.ApiService.CloudGatewaysPoolsCreateExecute(r)
+}
+
+/*
+CloudGatewaysPoolsCreate Method for CloudGatewaysPoolsCreate
+
+Add a backend pool (spec 5.5); it is pending until the agent applies its revision.
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param gatewayId
+ @return ApiCloudGatewaysPoolsCreateRequest
+*/
+func (a *CloudAPIService) CloudGatewaysPoolsCreate(ctx context.Context, gatewayId int32) ApiCloudGatewaysPoolsCreateRequest {
+	return ApiCloudGatewaysPoolsCreateRequest{
+		ApiService: a,
+		ctx: ctx,
+		gatewayId: gatewayId,
+	}
+}
+
+// Execute executes the request
+//  @return GatewayBackendPool
+func (a *CloudAPIService) CloudGatewaysPoolsCreateExecute(r ApiCloudGatewaysPoolsCreateRequest) (*GatewayBackendPool, *http.Response, error) {
+	var (
+		localVarHTTPMethod   = http.MethodPost
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *GatewayBackendPool
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CloudAPIService.CloudGatewaysPoolsCreate")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/api/cloud/gateways/{gateway_id}/pools/"
+	localVarPath = strings.Replace(localVarPath, "{"+"gateway_id"+"}", url.PathEscape(parameterValueToString(r.gatewayId, "gatewayId")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{"application/json"}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	// body params
+	localVarPostBody = r.gatewayBackendPoolWriteRequest
+	if r.ctx != nil {
+		// API Key Authentication
+		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
+			if apiKey, ok := auth["tokenAuth"]; ok {
+				var key string
+				if apiKey.Prefix != "" {
+					key = apiKey.Prefix + " " + apiKey.Key
+				} else {
+					key = apiKey.Key
+				}
+				localVarHeaderParams["Authorization"] = key
+			}
+		}
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 409 {
+			var v GatewayConflict
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiCloudGatewaysPoolsDestroyRequest struct {
+	ctx context.Context
+	ApiService *CloudAPIService
+	gatewayId int32
+	id int32
+	revision *int32
+}
+
+// The gateway&#39;s desired revision from the preview; without it, a preview.
+func (r ApiCloudGatewaysPoolsDestroyRequest) Revision(revision int32) ApiCloudGatewaysPoolsDestroyRequest {
+	r.revision = &revision
+	return r
+}
+
+func (r ApiCloudGatewaysPoolsDestroyRequest) Execute() (*GatewayOperation, *http.Response, error) {
+	return r.ApiService.CloudGatewaysPoolsDestroyExecute(r)
+}
+
+/*
+CloudGatewaysPoolsDestroy Method for CloudGatewaysPoolsDestroy
+
+Delete an unused pool and its servers (spec 5.11): 202 with the record the agent's acknowledgement
+completes. Without the preview's revision, 409 with a fresh one.
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param gatewayId
+ @param id
+ @return ApiCloudGatewaysPoolsDestroyRequest
+*/
+func (a *CloudAPIService) CloudGatewaysPoolsDestroy(ctx context.Context, gatewayId int32, id int32) ApiCloudGatewaysPoolsDestroyRequest {
+	return ApiCloudGatewaysPoolsDestroyRequest{
+		ApiService: a,
+		ctx: ctx,
+		gatewayId: gatewayId,
+		id: id,
+	}
+}
+
+// Execute executes the request
+//  @return GatewayOperation
+func (a *CloudAPIService) CloudGatewaysPoolsDestroyExecute(r ApiCloudGatewaysPoolsDestroyRequest) (*GatewayOperation, *http.Response, error) {
+	var (
+		localVarHTTPMethod   = http.MethodDelete
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *GatewayOperation
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CloudAPIService.CloudGatewaysPoolsDestroy")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/api/cloud/gateways/{gateway_id}/pools/{id}/"
+	localVarPath = strings.Replace(localVarPath, "{"+"gateway_id"+"}", url.PathEscape(parameterValueToString(r.gatewayId, "gatewayId")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"id"+"}", url.PathEscape(parameterValueToString(r.id, "id")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	if r.revision != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "revision", r.revision, "form", "")
+	}
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	if r.ctx != nil {
+		// API Key Authentication
+		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
+			if apiKey, ok := auth["tokenAuth"]; ok {
+				var key string
+				if apiKey.Prefix != "" {
+					key = apiKey.Prefix + " " + apiKey.Key
+				} else {
+					key = apiKey.Key
+				}
+				localVarHeaderParams["Authorization"] = key
+			}
+		}
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 409 {
+			var v GatewayConflict
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiCloudGatewaysPoolsListRequest struct {
+	ctx context.Context
+	ApiService *CloudAPIService
+	gatewayId int32
+	page *int32
+}
+
+// A page number within the paginated result set.
+func (r ApiCloudGatewaysPoolsListRequest) Page(page int32) ApiCloudGatewaysPoolsListRequest {
+	r.page = &page
+	return r
+}
+
+func (r ApiCloudGatewaysPoolsListRequest) Execute() (*PaginatedGatewayBackendPoolList, *http.Response, error) {
+	return r.ApiService.CloudGatewaysPoolsListExecute(r)
+}
+
+/*
+CloudGatewaysPoolsList Method for CloudGatewaysPoolsList
+
+A gateway's backend pools
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param gatewayId
+ @return ApiCloudGatewaysPoolsListRequest
+*/
+func (a *CloudAPIService) CloudGatewaysPoolsList(ctx context.Context, gatewayId int32) ApiCloudGatewaysPoolsListRequest {
+	return ApiCloudGatewaysPoolsListRequest{
+		ApiService: a,
+		ctx: ctx,
+		gatewayId: gatewayId,
+	}
+}
+
+// Execute executes the request
+//  @return PaginatedGatewayBackendPoolList
+func (a *CloudAPIService) CloudGatewaysPoolsListExecute(r ApiCloudGatewaysPoolsListRequest) (*PaginatedGatewayBackendPoolList, *http.Response, error) {
+	var (
+		localVarHTTPMethod   = http.MethodGet
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *PaginatedGatewayBackendPoolList
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CloudAPIService.CloudGatewaysPoolsList")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/api/cloud/gateways/{gateway_id}/pools/"
+	localVarPath = strings.Replace(localVarPath, "{"+"gateway_id"+"}", url.PathEscape(parameterValueToString(r.gatewayId, "gatewayId")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	if r.page != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "page", r.page, "form", "")
+	}
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	if r.ctx != nil {
+		// API Key Authentication
+		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
+			if apiKey, ok := auth["tokenAuth"]; ok {
+				var key string
+				if apiKey.Prefix != "" {
+					key = apiKey.Prefix + " " + apiKey.Key
+				} else {
+					key = apiKey.Key
+				}
+				localVarHeaderParams["Authorization"] = key
+			}
+		}
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiCloudGatewaysPoolsPartialUpdateRequest struct {
+	ctx context.Context
+	ApiService *CloudAPIService
+	gatewayId int32
+	id int32
+	patchedGatewayBackendPoolWriteRequest *PatchedGatewayBackendPoolWriteRequest
+}
+
+func (r ApiCloudGatewaysPoolsPartialUpdateRequest) PatchedGatewayBackendPoolWriteRequest(patchedGatewayBackendPoolWriteRequest PatchedGatewayBackendPoolWriteRequest) ApiCloudGatewaysPoolsPartialUpdateRequest {
+	r.patchedGatewayBackendPoolWriteRequest = &patchedGatewayBackendPoolWriteRequest
+	return r
+}
+
+func (r ApiCloudGatewaysPoolsPartialUpdateRequest) Execute() (*GatewayBackendPool, *http.Response, error) {
+	return r.ApiService.CloudGatewaysPoolsPartialUpdateExecute(r)
+}
+
+/*
+CloudGatewaysPoolsPartialUpdate Method for CloudGatewaysPoolsPartialUpdate
+
+Change a pool; health_check takes the fields to change. Every listener and route on it must still fit.
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param gatewayId
+ @param id
+ @return ApiCloudGatewaysPoolsPartialUpdateRequest
+*/
+func (a *CloudAPIService) CloudGatewaysPoolsPartialUpdate(ctx context.Context, gatewayId int32, id int32) ApiCloudGatewaysPoolsPartialUpdateRequest {
+	return ApiCloudGatewaysPoolsPartialUpdateRequest{
+		ApiService: a,
+		ctx: ctx,
+		gatewayId: gatewayId,
+		id: id,
+	}
+}
+
+// Execute executes the request
+//  @return GatewayBackendPool
+func (a *CloudAPIService) CloudGatewaysPoolsPartialUpdateExecute(r ApiCloudGatewaysPoolsPartialUpdateRequest) (*GatewayBackendPool, *http.Response, error) {
+	var (
+		localVarHTTPMethod   = http.MethodPatch
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *GatewayBackendPool
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CloudAPIService.CloudGatewaysPoolsPartialUpdate")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/api/cloud/gateways/{gateway_id}/pools/{id}/"
+	localVarPath = strings.Replace(localVarPath, "{"+"gateway_id"+"}", url.PathEscape(parameterValueToString(r.gatewayId, "gatewayId")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"id"+"}", url.PathEscape(parameterValueToString(r.id, "id")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{"application/json"}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	// body params
+	localVarPostBody = r.patchedGatewayBackendPoolWriteRequest
+	if r.ctx != nil {
+		// API Key Authentication
+		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
+			if apiKey, ok := auth["tokenAuth"]; ok {
+				var key string
+				if apiKey.Prefix != "" {
+					key = apiKey.Prefix + " " + apiKey.Key
+				} else {
+					key = apiKey.Key
+				}
+				localVarHeaderParams["Authorization"] = key
+			}
+		}
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 409 {
+			var v GatewayConflict
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiCloudGatewaysPoolsRetrieveRequest struct {
+	ctx context.Context
+	ApiService *CloudAPIService
+	gatewayId int32
+	id int32
+}
+
+func (r ApiCloudGatewaysPoolsRetrieveRequest) Execute() (*GatewayBackendPool, *http.Response, error) {
+	return r.ApiService.CloudGatewaysPoolsRetrieveExecute(r)
+}
+
+/*
+CloudGatewaysPoolsRetrieve Method for CloudGatewaysPoolsRetrieve
+
+A gateway's backend pools
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param gatewayId
+ @param id
+ @return ApiCloudGatewaysPoolsRetrieveRequest
+*/
+func (a *CloudAPIService) CloudGatewaysPoolsRetrieve(ctx context.Context, gatewayId int32, id int32) ApiCloudGatewaysPoolsRetrieveRequest {
+	return ApiCloudGatewaysPoolsRetrieveRequest{
+		ApiService: a,
+		ctx: ctx,
+		gatewayId: gatewayId,
+		id: id,
+	}
+}
+
+// Execute executes the request
+//  @return GatewayBackendPool
+func (a *CloudAPIService) CloudGatewaysPoolsRetrieveExecute(r ApiCloudGatewaysPoolsRetrieveRequest) (*GatewayBackendPool, *http.Response, error) {
+	var (
+		localVarHTTPMethod   = http.MethodGet
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *GatewayBackendPool
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CloudAPIService.CloudGatewaysPoolsRetrieve")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/api/cloud/gateways/{gateway_id}/pools/{id}/"
+	localVarPath = strings.Replace(localVarPath, "{"+"gateway_id"+"}", url.PathEscape(parameterValueToString(r.gatewayId, "gatewayId")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"id"+"}", url.PathEscape(parameterValueToString(r.id, "id")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	if r.ctx != nil {
+		// API Key Authentication
+		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
+			if apiKey, ok := auth["tokenAuth"]; ok {
+				var key string
+				if apiKey.Prefix != "" {
+					key = apiKey.Prefix + " " + apiKey.Key
+				} else {
+					key = apiKey.Key
+				}
+				localVarHeaderParams["Authorization"] = key
+			}
+		}
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiCloudGatewaysPortForwardsCreateRequest struct {
+	ctx context.Context
+	ApiService *CloudAPIService
+	gatewayId int32
+	gatewayForwardWriteRequest *GatewayForwardWriteRequest
+}
+
+func (r ApiCloudGatewaysPortForwardsCreateRequest) GatewayForwardWriteRequest(gatewayForwardWriteRequest GatewayForwardWriteRequest) ApiCloudGatewaysPortForwardsCreateRequest {
+	r.gatewayForwardWriteRequest = &gatewayForwardWriteRequest
+	return r
+}
+
+func (r ApiCloudGatewaysPortForwardsCreateRequest) Execute() (*GatewayForward, *http.Response, error) {
+	return r.ApiService.CloudGatewaysPortForwardsCreateExecute(r)
+}
+
+/*
+CloudGatewaysPortForwardsCreate Method for CloudGatewaysPortForwardsCreate
+
+Add a port forward (spec 6.7); it is pending until the agent applies its revision.
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param gatewayId
+ @return ApiCloudGatewaysPortForwardsCreateRequest
+*/
+func (a *CloudAPIService) CloudGatewaysPortForwardsCreate(ctx context.Context, gatewayId int32) ApiCloudGatewaysPortForwardsCreateRequest {
+	return ApiCloudGatewaysPortForwardsCreateRequest{
+		ApiService: a,
+		ctx: ctx,
+		gatewayId: gatewayId,
+	}
+}
+
+// Execute executes the request
+//  @return GatewayForward
+func (a *CloudAPIService) CloudGatewaysPortForwardsCreateExecute(r ApiCloudGatewaysPortForwardsCreateRequest) (*GatewayForward, *http.Response, error) {
+	var (
+		localVarHTTPMethod   = http.MethodPost
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *GatewayForward
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CloudAPIService.CloudGatewaysPortForwardsCreate")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/api/cloud/gateways/{gateway_id}/port-forwards/"
+	localVarPath = strings.Replace(localVarPath, "{"+"gateway_id"+"}", url.PathEscape(parameterValueToString(r.gatewayId, "gatewayId")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+	if r.gatewayForwardWriteRequest == nil {
+		return localVarReturnValue, nil, reportError("gatewayForwardWriteRequest is required and must be specified")
+	}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{"application/json"}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	// body params
+	localVarPostBody = r.gatewayForwardWriteRequest
+	if r.ctx != nil {
+		// API Key Authentication
+		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
+			if apiKey, ok := auth["tokenAuth"]; ok {
+				var key string
+				if apiKey.Prefix != "" {
+					key = apiKey.Prefix + " " + apiKey.Key
+				} else {
+					key = apiKey.Key
+				}
+				localVarHeaderParams["Authorization"] = key
+			}
+		}
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 409 {
+			var v GatewayConflict
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiCloudGatewaysPortForwardsDestroyRequest struct {
+	ctx context.Context
+	ApiService *CloudAPIService
+	gatewayId int32
+	id int32
+	revision *int32
+}
+
+// The gateway&#39;s desired revision from the preview; without it, a preview.
+func (r ApiCloudGatewaysPortForwardsDestroyRequest) Revision(revision int32) ApiCloudGatewaysPortForwardsDestroyRequest {
+	r.revision = &revision
+	return r
+}
+
+func (r ApiCloudGatewaysPortForwardsDestroyRequest) Execute() (*GatewayOperation, *http.Response, error) {
+	return r.ApiService.CloudGatewaysPortForwardsDestroyExecute(r)
+}
+
+/*
+CloudGatewaysPortForwardsDestroy Method for CloudGatewaysPortForwardsDestroy
+
+Delete a forward (spec 5.11): 202 with the record the agent's acknowledgement completes. Without
+the preview's revision, 409 with a fresh one.
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param gatewayId
+ @param id
+ @return ApiCloudGatewaysPortForwardsDestroyRequest
+*/
+func (a *CloudAPIService) CloudGatewaysPortForwardsDestroy(ctx context.Context, gatewayId int32, id int32) ApiCloudGatewaysPortForwardsDestroyRequest {
+	return ApiCloudGatewaysPortForwardsDestroyRequest{
+		ApiService: a,
+		ctx: ctx,
+		gatewayId: gatewayId,
+		id: id,
+	}
+}
+
+// Execute executes the request
+//  @return GatewayOperation
+func (a *CloudAPIService) CloudGatewaysPortForwardsDestroyExecute(r ApiCloudGatewaysPortForwardsDestroyRequest) (*GatewayOperation, *http.Response, error) {
+	var (
+		localVarHTTPMethod   = http.MethodDelete
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *GatewayOperation
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CloudAPIService.CloudGatewaysPortForwardsDestroy")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/api/cloud/gateways/{gateway_id}/port-forwards/{id}/"
+	localVarPath = strings.Replace(localVarPath, "{"+"gateway_id"+"}", url.PathEscape(parameterValueToString(r.gatewayId, "gatewayId")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"id"+"}", url.PathEscape(parameterValueToString(r.id, "id")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	if r.revision != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "revision", r.revision, "form", "")
+	}
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	if r.ctx != nil {
+		// API Key Authentication
+		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
+			if apiKey, ok := auth["tokenAuth"]; ok {
+				var key string
+				if apiKey.Prefix != "" {
+					key = apiKey.Prefix + " " + apiKey.Key
+				} else {
+					key = apiKey.Key
+				}
+				localVarHeaderParams["Authorization"] = key
+			}
+		}
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 409 {
+			var v GatewayConflict
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiCloudGatewaysPortForwardsListRequest struct {
+	ctx context.Context
+	ApiService *CloudAPIService
+	gatewayId int32
+	page *int32
+}
+
+// A page number within the paginated result set.
+func (r ApiCloudGatewaysPortForwardsListRequest) Page(page int32) ApiCloudGatewaysPortForwardsListRequest {
+	r.page = &page
+	return r
+}
+
+func (r ApiCloudGatewaysPortForwardsListRequest) Execute() (*PaginatedGatewayForwardList, *http.Response, error) {
+	return r.ApiService.CloudGatewaysPortForwardsListExecute(r)
+}
+
+/*
+CloudGatewaysPortForwardsList Method for CloudGatewaysPortForwardsList
+
+A gateway's port forwards
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param gatewayId
+ @return ApiCloudGatewaysPortForwardsListRequest
+*/
+func (a *CloudAPIService) CloudGatewaysPortForwardsList(ctx context.Context, gatewayId int32) ApiCloudGatewaysPortForwardsListRequest {
+	return ApiCloudGatewaysPortForwardsListRequest{
+		ApiService: a,
+		ctx: ctx,
+		gatewayId: gatewayId,
+	}
+}
+
+// Execute executes the request
+//  @return PaginatedGatewayForwardList
+func (a *CloudAPIService) CloudGatewaysPortForwardsListExecute(r ApiCloudGatewaysPortForwardsListRequest) (*PaginatedGatewayForwardList, *http.Response, error) {
+	var (
+		localVarHTTPMethod   = http.MethodGet
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *PaginatedGatewayForwardList
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CloudAPIService.CloudGatewaysPortForwardsList")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/api/cloud/gateways/{gateway_id}/port-forwards/"
+	localVarPath = strings.Replace(localVarPath, "{"+"gateway_id"+"}", url.PathEscape(parameterValueToString(r.gatewayId, "gatewayId")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	if r.page != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "page", r.page, "form", "")
+	}
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	if r.ctx != nil {
+		// API Key Authentication
+		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
+			if apiKey, ok := auth["tokenAuth"]; ok {
+				var key string
+				if apiKey.Prefix != "" {
+					key = apiKey.Prefix + " " + apiKey.Key
+				} else {
+					key = apiKey.Key
+				}
+				localVarHeaderParams["Authorization"] = key
+			}
+		}
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiCloudGatewaysPortForwardsPartialUpdateRequest struct {
+	ctx context.Context
+	ApiService *CloudAPIService
+	gatewayId int32
+	id int32
+	patchedGatewayForwardWriteRequest *PatchedGatewayForwardWriteRequest
+}
+
+func (r ApiCloudGatewaysPortForwardsPartialUpdateRequest) PatchedGatewayForwardWriteRequest(patchedGatewayForwardWriteRequest PatchedGatewayForwardWriteRequest) ApiCloudGatewaysPortForwardsPartialUpdateRequest {
+	r.patchedGatewayForwardWriteRequest = &patchedGatewayForwardWriteRequest
+	return r
+}
+
+func (r ApiCloudGatewaysPortForwardsPartialUpdateRequest) Execute() (*GatewayForward, *http.Response, error) {
+	return r.ApiService.CloudGatewaysPortForwardsPartialUpdateExecute(r)
+}
+
+/*
+CloudGatewaysPortForwardsPartialUpdate Method for CloudGatewaysPortForwardsPartialUpdate
+
+Change a forward's fields; public_ports and target are each replaced whole.
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param gatewayId
+ @param id
+ @return ApiCloudGatewaysPortForwardsPartialUpdateRequest
+*/
+func (a *CloudAPIService) CloudGatewaysPortForwardsPartialUpdate(ctx context.Context, gatewayId int32, id int32) ApiCloudGatewaysPortForwardsPartialUpdateRequest {
+	return ApiCloudGatewaysPortForwardsPartialUpdateRequest{
+		ApiService: a,
+		ctx: ctx,
+		gatewayId: gatewayId,
+		id: id,
+	}
+}
+
+// Execute executes the request
+//  @return GatewayForward
+func (a *CloudAPIService) CloudGatewaysPortForwardsPartialUpdateExecute(r ApiCloudGatewaysPortForwardsPartialUpdateRequest) (*GatewayForward, *http.Response, error) {
+	var (
+		localVarHTTPMethod   = http.MethodPatch
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *GatewayForward
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CloudAPIService.CloudGatewaysPortForwardsPartialUpdate")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/api/cloud/gateways/{gateway_id}/port-forwards/{id}/"
+	localVarPath = strings.Replace(localVarPath, "{"+"gateway_id"+"}", url.PathEscape(parameterValueToString(r.gatewayId, "gatewayId")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"id"+"}", url.PathEscape(parameterValueToString(r.id, "id")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{"application/json"}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	// body params
+	localVarPostBody = r.patchedGatewayForwardWriteRequest
+	if r.ctx != nil {
+		// API Key Authentication
+		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
+			if apiKey, ok := auth["tokenAuth"]; ok {
+				var key string
+				if apiKey.Prefix != "" {
+					key = apiKey.Prefix + " " + apiKey.Key
+				} else {
+					key = apiKey.Key
+				}
+				localVarHeaderParams["Authorization"] = key
+			}
+		}
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 409 {
+			var v GatewayConflict
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiCloudGatewaysPortForwardsRetrieveRequest struct {
+	ctx context.Context
+	ApiService *CloudAPIService
+	gatewayId int32
+	id int32
+}
+
+func (r ApiCloudGatewaysPortForwardsRetrieveRequest) Execute() (*GatewayForward, *http.Response, error) {
+	return r.ApiService.CloudGatewaysPortForwardsRetrieveExecute(r)
+}
+
+/*
+CloudGatewaysPortForwardsRetrieve Method for CloudGatewaysPortForwardsRetrieve
+
+A gateway's port forwards
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param gatewayId
+ @param id
+ @return ApiCloudGatewaysPortForwardsRetrieveRequest
+*/
+func (a *CloudAPIService) CloudGatewaysPortForwardsRetrieve(ctx context.Context, gatewayId int32, id int32) ApiCloudGatewaysPortForwardsRetrieveRequest {
+	return ApiCloudGatewaysPortForwardsRetrieveRequest{
+		ApiService: a,
+		ctx: ctx,
+		gatewayId: gatewayId,
+		id: id,
+	}
+}
+
+// Execute executes the request
+//  @return GatewayForward
+func (a *CloudAPIService) CloudGatewaysPortForwardsRetrieveExecute(r ApiCloudGatewaysPortForwardsRetrieveRequest) (*GatewayForward, *http.Response, error) {
+	var (
+		localVarHTTPMethod   = http.MethodGet
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *GatewayForward
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CloudAPIService.CloudGatewaysPortForwardsRetrieve")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/api/cloud/gateways/{gateway_id}/port-forwards/{id}/"
+	localVarPath = strings.Replace(localVarPath, "{"+"gateway_id"+"}", url.PathEscape(parameterValueToString(r.gatewayId, "gatewayId")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"id"+"}", url.PathEscape(parameterValueToString(r.id, "id")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	if r.ctx != nil {
+		// API Key Authentication
+		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
+			if apiKey, ok := auth["tokenAuth"]; ok {
+				var key string
+				if apiKey.Prefix != "" {
+					key = apiKey.Prefix + " " + apiKey.Key
+				} else {
+					key = apiKey.Key
+				}
+				localVarHeaderParams["Authorization"] = key
+			}
+		}
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiCloudGatewaysReenrollCreateRequest struct {
+	ctx context.Context
+	ApiService *CloudAPIService
+	id string
+	gatewayReenrollRequest *GatewayReenrollRequest
+}
+
+func (r ApiCloudGatewaysReenrollCreateRequest) GatewayReenrollRequest(gatewayReenrollRequest GatewayReenrollRequest) ApiCloudGatewaysReenrollCreateRequest {
+	r.gatewayReenrollRequest = &gatewayReenrollRequest
+	return r
+}
+
+func (r ApiCloudGatewaysReenrollCreateRequest) Execute() (*GatewayOperation, *http.Response, error) {
+	return r.ApiService.CloudGatewaysReenrollCreateExecute(r)
+}
+
+/*
+CloudGatewaysReenrollCreate Method for CloudGatewaysReenrollCreate
+
+Re-enroll the gateway (spec 8.1 step 6): its agent token is revoked and it restarts to enroll again.
+Without the preview's revision, networks and servers, 409 with a fresh preview.
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param id
+ @return ApiCloudGatewaysReenrollCreateRequest
+*/
+func (a *CloudAPIService) CloudGatewaysReenrollCreate(ctx context.Context, id string) ApiCloudGatewaysReenrollCreateRequest {
+	return ApiCloudGatewaysReenrollCreateRequest{
+		ApiService: a,
+		ctx: ctx,
+		id: id,
+	}
+}
+
+// Execute executes the request
+//  @return GatewayOperation
+func (a *CloudAPIService) CloudGatewaysReenrollCreateExecute(r ApiCloudGatewaysReenrollCreateRequest) (*GatewayOperation, *http.Response, error) {
+	var (
+		localVarHTTPMethod   = http.MethodPost
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *GatewayOperation
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CloudAPIService.CloudGatewaysReenrollCreate")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/api/cloud/gateways/{id}/reenroll/"
+	localVarPath = strings.Replace(localVarPath, "{"+"id"+"}", url.PathEscape(parameterValueToString(r.id, "id")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{"application/json"}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	// body params
+	localVarPostBody = r.gatewayReenrollRequest
+	if r.ctx != nil {
+		// API Key Authentication
+		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
+			if apiKey, ok := auth["tokenAuth"]; ok {
+				var key string
+				if apiKey.Prefix != "" {
+					key = apiKey.Prefix + " " + apiKey.Key
+				} else {
+					key = apiKey.Key
+				}
+				localVarHeaderParams["Authorization"] = key
+			}
+		}
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 409 {
+			var v GatewayReenrollConflict
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiCloudGatewaysRetrieveRequest struct {
+	ctx context.Context
+	ApiService *CloudAPIService
+	id string
+}
+
+func (r ApiCloudGatewaysRetrieveRequest) Execute() (*Gateway, *http.Response, error) {
+	return r.ApiService.CloudGatewaysRetrieveExecute(r)
+}
+
+/*
+CloudGatewaysRetrieve Method for CloudGatewaysRetrieve
+
+Manage gateways
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param id
+ @return ApiCloudGatewaysRetrieveRequest
+*/
+func (a *CloudAPIService) CloudGatewaysRetrieve(ctx context.Context, id string) ApiCloudGatewaysRetrieveRequest {
+	return ApiCloudGatewaysRetrieveRequest{
+		ApiService: a,
+		ctx: ctx,
+		id: id,
+	}
+}
+
+// Execute executes the request
+//  @return Gateway
+func (a *CloudAPIService) CloudGatewaysRetrieveExecute(r ApiCloudGatewaysRetrieveRequest) (*Gateway, *http.Response, error) {
+	var (
+		localVarHTTPMethod   = http.MethodGet
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *Gateway
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CloudAPIService.CloudGatewaysRetrieve")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/api/cloud/gateways/{id}/"
+	localVarPath = strings.Replace(localVarPath, "{"+"id"+"}", url.PathEscape(parameterValueToString(r.id, "id")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	if r.ctx != nil {
+		// API Key Authentication
+		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
+			if apiKey, ok := auth["tokenAuth"]; ok {
+				var key string
+				if apiKey.Prefix != "" {
+					key = apiKey.Prefix + " " + apiKey.Key
+				} else {
+					key = apiKey.Key
+				}
+				localVarHeaderParams["Authorization"] = key
+			}
+		}
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiCloudGatewaysStatusRetrieveRequest struct {
+	ctx context.Context
+	ApiService *CloudAPIService
+	id string
+}
+
+func (r ApiCloudGatewaysStatusRetrieveRequest) Execute() (*GatewayStatus, *http.Response, error) {
+	return r.ApiService.CloudGatewaysStatusRetrieveExecute(r)
+}
+
+/*
+CloudGatewaysStatusRetrieve Method for CloudGatewaysStatusRetrieve
+
+The gateway's state and the customer part of its agent's last report (spec 9.5).
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param id
+ @return ApiCloudGatewaysStatusRetrieveRequest
+*/
+func (a *CloudAPIService) CloudGatewaysStatusRetrieve(ctx context.Context, id string) ApiCloudGatewaysStatusRetrieveRequest {
+	return ApiCloudGatewaysStatusRetrieveRequest{
+		ApiService: a,
+		ctx: ctx,
+		id: id,
+	}
+}
+
+// Execute executes the request
+//  @return GatewayStatus
+func (a *CloudAPIService) CloudGatewaysStatusRetrieveExecute(r ApiCloudGatewaysStatusRetrieveRequest) (*GatewayStatus, *http.Response, error) {
+	var (
+		localVarHTTPMethod   = http.MethodGet
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *GatewayStatus
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CloudAPIService.CloudGatewaysStatusRetrieve")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/api/cloud/gateways/{id}/status/"
+	localVarPath = strings.Replace(localVarPath, "{"+"id"+"}", url.PathEscape(parameterValueToString(r.id, "id")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	if r.ctx != nil {
+		// API Key Authentication
+		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
+			if apiKey, ok := auth["tokenAuth"]; ok {
+				var key string
+				if apiKey.Prefix != "" {
+					key = apiKey.Prefix + " " + apiKey.Key
+				} else {
+					key = apiKey.Key
+				}
+				localVarHeaderParams["Authorization"] = key
+			}
+		}
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
 type ApiCloudGenerationsListRequest struct {
 	ctx context.Context
 	ApiService *CloudAPIService
@@ -7061,6 +13133,144 @@ func (a *CloudAPIService) CloudPrivateNetworksAddServerCreateExecute(r ApiCloudP
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
+type ApiCloudPrivateNetworksApplyRouteCreateRequest struct {
+	ctx context.Context
+	ApiService *CloudAPIService
+	id int32
+	applyRouteRequest *ApplyRouteRequest
+}
+
+func (r ApiCloudPrivateNetworksApplyRouteCreateRequest) ApplyRouteRequest(applyRouteRequest ApplyRouteRequest) ApiCloudPrivateNetworksApplyRouteCreateRequest {
+	r.applyRouteRequest = &applyRouteRequest
+	return r
+}
+
+func (r ApiCloudPrivateNetworksApplyRouteCreateRequest) Execute() (*GatewayOperation, *http.Response, error) {
+	return r.ApiService.CloudPrivateNetworksApplyRouteCreateExecute(r)
+}
+
+/*
+CloudPrivateNetworksApplyRouteCreate Method for CloudPrivateNetworksApplyRouteCreate
+
+Re-render the named servers' routes and reboot them (spec 6.3); naming a server acknowledges its reboot.
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param id
+ @return ApiCloudPrivateNetworksApplyRouteCreateRequest
+*/
+func (a *CloudAPIService) CloudPrivateNetworksApplyRouteCreate(ctx context.Context, id int32) ApiCloudPrivateNetworksApplyRouteCreateRequest {
+	return ApiCloudPrivateNetworksApplyRouteCreateRequest{
+		ApiService: a,
+		ctx: ctx,
+		id: id,
+	}
+}
+
+// Execute executes the request
+//  @return GatewayOperation
+func (a *CloudAPIService) CloudPrivateNetworksApplyRouteCreateExecute(r ApiCloudPrivateNetworksApplyRouteCreateRequest) (*GatewayOperation, *http.Response, error) {
+	var (
+		localVarHTTPMethod   = http.MethodPost
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *GatewayOperation
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CloudAPIService.CloudPrivateNetworksApplyRouteCreate")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/api/cloud/private-networks/{id}/apply-route/"
+	localVarPath = strings.Replace(localVarPath, "{"+"id"+"}", url.PathEscape(parameterValueToString(r.id, "id")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+	if r.applyRouteRequest == nil {
+		return localVarReturnValue, nil, reportError("applyRouteRequest is required and must be specified")
+	}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{"application/json"}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	// body params
+	localVarPostBody = r.applyRouteRequest
+	if r.ctx != nil {
+		// API Key Authentication
+		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
+			if apiKey, ok := auth["tokenAuth"]; ok {
+				var key string
+				if apiKey.Prefix != "" {
+					key = apiKey.Prefix + " " + apiKey.Key
+				} else {
+					key = apiKey.Key
+				}
+				localVarHeaderParams["Authorization"] = key
+			}
+		}
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 409 {
+			var v GatewayConflict
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
 type ApiCloudPrivateNetworksCreateRequest struct {
 	ctx context.Context
 	ApiService *CloudAPIService
@@ -7710,6 +13920,123 @@ func (a *CloudAPIService) CloudPrivateNetworksRetrieveExecute(r ApiCloudPrivateN
 	}
 
 	localVarPath := localBasePath + "/api/cloud/private-networks/{id}/"
+	localVarPath = strings.Replace(localVarPath, "{"+"id"+"}", url.PathEscape(parameterValueToString(r.id, "id")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	if r.ctx != nil {
+		// API Key Authentication
+		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
+			if apiKey, ok := auth["tokenAuth"]; ok {
+				var key string
+				if apiKey.Prefix != "" {
+					key = apiKey.Prefix + " " + apiKey.Key
+				} else {
+					key = apiKey.Key
+				}
+				localVarHeaderParams["Authorization"] = key
+			}
+		}
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiCloudPrivateNetworksRouteStatusRetrieveRequest struct {
+	ctx context.Context
+	ApiService *CloudAPIService
+	id int32
+}
+
+func (r ApiCloudPrivateNetworksRouteStatusRetrieveRequest) Execute() (*RouteStatus, *http.Response, error) {
+	return r.ApiService.CloudPrivateNetworksRouteStatusRetrieveExecute(r)
+}
+
+/*
+CloudPrivateNetworksRouteStatusRetrieve Method for CloudPrivateNetworksRouteStatusRetrieve
+
+Each server's default route against the spec 6.2 rule, read from Proxmox, and the network's route applies.
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param id
+ @return ApiCloudPrivateNetworksRouteStatusRetrieveRequest
+*/
+func (a *CloudAPIService) CloudPrivateNetworksRouteStatusRetrieve(ctx context.Context, id int32) ApiCloudPrivateNetworksRouteStatusRetrieveRequest {
+	return ApiCloudPrivateNetworksRouteStatusRetrieveRequest{
+		ApiService: a,
+		ctx: ctx,
+		id: id,
+	}
+}
+
+// Execute executes the request
+//  @return RouteStatus
+func (a *CloudAPIService) CloudPrivateNetworksRouteStatusRetrieveExecute(r ApiCloudPrivateNetworksRouteStatusRetrieveRequest) (*RouteStatus, *http.Response, error) {
+	var (
+		localVarHTTPMethod   = http.MethodGet
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *RouteStatus
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CloudAPIService.CloudPrivateNetworksRouteStatusRetrieve")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/api/cloud/private-networks/{id}/route-status/"
 	localVarPath = strings.Replace(localVarPath, "{"+"id"+"}", url.PathEscape(parameterValueToString(r.id, "id")), -1)
 
 	localVarHeaderParams := make(map[string]string)

@@ -2165,6 +2165,1861 @@ paths:
       - cookieAuth: []
       tags:
       - cloud
+  /api/cloud/gateways/:
+    get:
+      description: Manage gateways
+      operationId: cloud_gateways_list
+      parameters:
+      - description: A page number within the paginated result set.
+        explode: true
+        in: query
+        name: page
+        required: false
+        schema:
+          type: integer
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PaginatedGatewayList"
+          description: ""
+      security:
+      - tokenAuth: []
+      - cookieAuth: []
+      tags:
+      - cloud
+    post:
+      description: Reserve a gateway and queue its provisioning (spec 11.1); its state
+        shows the progress.
+      operationId: cloud_gateways_create
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/GatewayCreateRequest"
+        required: true
+      responses:
+        "202":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Gateway"
+          description: ""
+          headers:
+            Location:
+              description: "The new gateway, to poll for its state."
+              explode: false
+              required: true
+              schema:
+                format: uri
+                type: string
+              style: simple
+      security:
+      - tokenAuth: []
+      - cookieAuth: []
+      tags:
+      - cloud
+  /api/cloud/gateways/{gateway_id}/firewall-rules/:
+    get:
+      description: "A gateway's firewall rules, in evaluation order"
+      operationId: cloud_gateways_firewall_rules_list
+      parameters:
+      - explode: false
+        in: path
+        name: gateway_id
+        required: true
+        schema:
+          type: integer
+        style: simple
+      - description: A page number within the paginated result set.
+        explode: true
+        in: query
+        name: page
+        required: false
+        schema:
+          type: integer
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PaginatedGatewayFirewallRuleList"
+          description: ""
+      security:
+      - tokenAuth: []
+      - cookieAuth: []
+      tags:
+      - cloud
+    post:
+      description: Add a rule after the last one (spec 5.7); it is pending until the
+        agent applies its revision.
+      operationId: cloud_gateways_firewall_rules_create
+      parameters:
+      - explode: false
+        in: path
+        name: gateway_id
+        required: true
+        schema:
+          type: integer
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/GatewayFirewallRuleWriteRequest"
+        required: true
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GatewayFirewallRule"
+          description: ""
+        "409":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GatewayConflict"
+          description: ""
+      security:
+      - tokenAuth: []
+      - cookieAuth: []
+      tags:
+      - cloud
+  /api/cloud/gateways/{gateway_id}/firewall-rules/{id}/:
+    delete:
+      description: |-
+        Delete a rule (spec 5.11): 202 with the record the agent's acknowledgement completes. Without
+        the preview's revision, 409 with a fresh one.
+      operationId: cloud_gateways_firewall_rules_destroy
+      parameters:
+      - explode: false
+        in: path
+        name: gateway_id
+        required: true
+        schema:
+          type: integer
+        style: simple
+      - explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          type: integer
+        style: simple
+      - description: "The gateway's desired revision from the preview; without it,\
+          \ a preview."
+        explode: true
+        in: query
+        name: revision
+        required: false
+        schema:
+          type: integer
+        style: form
+      responses:
+        "202":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GatewayOperation"
+          description: ""
+          headers:
+            Location:
+              description: "The operation, to poll for its status."
+              explode: false
+              required: true
+              schema:
+                format: uri
+                type: string
+              style: simple
+        "409":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GatewayConflict"
+          description: ""
+      security:
+      - tokenAuth: []
+      - cookieAuth: []
+      tags:
+      - cloud
+    get:
+      description: "A gateway's firewall rules, in evaluation order"
+      operationId: cloud_gateways_firewall_rules_retrieve
+      parameters:
+      - explode: false
+        in: path
+        name: gateway_id
+        required: true
+        schema:
+          type: integer
+        style: simple
+      - explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          type: integer
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GatewayFirewallRule"
+          description: ""
+      security:
+      - tokenAuth: []
+      - cookieAuth: []
+      tags:
+      - cloud
+    patch:
+      description: Change a rule's fields; a source or destination is replaced whole.
+        Its position stays.
+      operationId: cloud_gateways_firewall_rules_partial_update
+      parameters:
+      - explode: false
+        in: path
+        name: gateway_id
+        required: true
+        schema:
+          type: integer
+        style: simple
+      - explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          type: integer
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/PatchedGatewayFirewallRuleWriteRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GatewayFirewallRule"
+          description: ""
+        "409":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GatewayConflict"
+          description: ""
+      security:
+      - tokenAuth: []
+      - cookieAuth: []
+      tags:
+      - cloud
+  /api/cloud/gateways/{gateway_id}/firewall-rules/{id}/move/:
+    post:
+      description: |-
+        Move a rule to a position, the others keeping their order. Without the preview's revision,
+        409 with a fresh one.
+      operationId: cloud_gateways_firewall_rules_move_create
+      parameters:
+      - explode: false
+        in: path
+        name: gateway_id
+        required: true
+        schema:
+          type: integer
+        style: simple
+      - explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          type: integer
+        style: simple
+      - description: "The gateway's desired revision from the preview; without it,\
+          \ a preview."
+        explode: true
+        in: query
+        name: revision
+        required: false
+        schema:
+          type: integer
+        style: form
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/GatewayFirewallMoveRequest"
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GatewayFirewallRule"
+          description: ""
+        "409":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GatewayConflict"
+          description: ""
+      security:
+      - tokenAuth: []
+      - cookieAuth: []
+      tags:
+      - cloud
+  /api/cloud/gateways/{gateway_id}/listeners/:
+    get:
+      description: A gateway's load balancer listeners
+      operationId: cloud_gateways_listeners_list
+      parameters:
+      - explode: false
+        in: path
+        name: gateway_id
+        required: true
+        schema:
+          type: integer
+        style: simple
+      - description: A page number within the paginated result set.
+        explode: true
+        in: query
+        name: page
+        required: false
+        schema:
+          type: integer
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PaginatedGatewayLBListenerList"
+          description: ""
+      security:
+      - tokenAuth: []
+      - cookieAuth: []
+      tags:
+      - cloud
+    post:
+      description: "Add a listener (spec 6.8): tcp and udp name a pool, http takes\
+        \ routes. Pending until applied."
+      operationId: cloud_gateways_listeners_create
+      parameters:
+      - explode: false
+        in: path
+        name: gateway_id
+        required: true
+        schema:
+          type: integer
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/GatewayLBListenerWriteRequest"
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GatewayLBListener"
+          description: ""
+        "409":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GatewayConflict"
+          description: ""
+      security:
+      - tokenAuth: []
+      - cookieAuth: []
+      tags:
+      - cloud
+  /api/cloud/gateways/{gateway_id}/listeners/{listener_id}/routes/:
+    get:
+      description: An http listener's routes
+      operationId: cloud_gateways_listeners_routes_list
+      parameters:
+      - explode: false
+        in: path
+        name: gateway_id
+        required: true
+        schema:
+          type: integer
+        style: simple
+      - explode: false
+        in: path
+        name: listener_id
+        required: true
+        schema:
+          type: integer
+        style: simple
+      - description: A page number within the paginated result set.
+        explode: true
+        in: query
+        name: page
+        required: false
+        schema:
+          type: integer
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PaginatedGatewayRouteList"
+          description: ""
+      security:
+      - tokenAuth: []
+      - cookieAuth: []
+      tags:
+      - cloud
+    post:
+      description: "Add a route (spec 5.6): hostnames and a path prefix to a pool.\
+        \ Pending until applied."
+      operationId: cloud_gateways_listeners_routes_create
+      parameters:
+      - explode: false
+        in: path
+        name: gateway_id
+        required: true
+        schema:
+          type: integer
+        style: simple
+      - explode: false
+        in: path
+        name: listener_id
+        required: true
+        schema:
+          type: integer
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/GatewayRouteWriteRequest"
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GatewayRoute"
+          description: ""
+        "409":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GatewayConflict"
+          description: ""
+      security:
+      - tokenAuth: []
+      - cookieAuth: []
+      tags:
+      - cloud
+  /api/cloud/gateways/{gateway_id}/listeners/{listener_id}/routes/{id}/:
+    delete:
+      description: |-
+        Delete a route (spec 5.11): 202 with the record the agent's acknowledgement completes. Without
+        the preview's revision, 409 with a fresh one.
+      operationId: cloud_gateways_listeners_routes_destroy
+      parameters:
+      - explode: false
+        in: path
+        name: gateway_id
+        required: true
+        schema:
+          type: integer
+        style: simple
+      - explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          type: integer
+        style: simple
+      - explode: false
+        in: path
+        name: listener_id
+        required: true
+        schema:
+          type: integer
+        style: simple
+      - description: "The gateway's desired revision from the preview; without it,\
+          \ a preview."
+        explode: true
+        in: query
+        name: revision
+        required: false
+        schema:
+          type: integer
+        style: form
+      responses:
+        "202":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GatewayOperation"
+          description: ""
+          headers:
+            Location:
+              description: "The operation, to poll for its status."
+              explode: false
+              required: true
+              schema:
+                format: uri
+                type: string
+              style: simple
+        "409":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GatewayConflict"
+          description: ""
+      security:
+      - tokenAuth: []
+      - cookieAuth: []
+      tags:
+      - cloud
+    get:
+      description: An http listener's routes
+      operationId: cloud_gateways_listeners_routes_retrieve
+      parameters:
+      - explode: false
+        in: path
+        name: gateway_id
+        required: true
+        schema:
+          type: integer
+        style: simple
+      - explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          type: integer
+        style: simple
+      - explode: false
+        in: path
+        name: listener_id
+        required: true
+        schema:
+          type: integer
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GatewayRoute"
+          description: ""
+      security:
+      - tokenAuth: []
+      - cookieAuth: []
+      tags:
+      - cloud
+    patch:
+      description: Change a route; hostnames are replaced whole.
+      operationId: cloud_gateways_listeners_routes_partial_update
+      parameters:
+      - explode: false
+        in: path
+        name: gateway_id
+        required: true
+        schema:
+          type: integer
+        style: simple
+      - explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          type: integer
+        style: simple
+      - explode: false
+        in: path
+        name: listener_id
+        required: true
+        schema:
+          type: integer
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/PatchedGatewayRouteWriteRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GatewayRoute"
+          description: ""
+        "409":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GatewayConflict"
+          description: ""
+      security:
+      - tokenAuth: []
+      - cookieAuth: []
+      tags:
+      - cloud
+  /api/cloud/gateways/{gateway_id}/listeners/{id}/:
+    delete:
+      description: |-
+        Delete a listener and its routes (spec 5.11): 202 with the record the agent's acknowledgement
+        completes. Without the preview's revision, 409 with a fresh one.
+      operationId: cloud_gateways_listeners_destroy
+      parameters:
+      - explode: false
+        in: path
+        name: gateway_id
+        required: true
+        schema:
+          type: integer
+        style: simple
+      - explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          type: integer
+        style: simple
+      - description: "The gateway's desired revision from the preview; without it,\
+          \ a preview."
+        explode: true
+        in: query
+        name: revision
+        required: false
+        schema:
+          type: integer
+        style: form
+      responses:
+        "202":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GatewayOperation"
+          description: ""
+          headers:
+            Location:
+              description: "The operation, to poll for its status."
+              explode: false
+              required: true
+              schema:
+                format: uri
+                type: string
+              style: simple
+        "409":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GatewayConflict"
+          description: ""
+      security:
+      - tokenAuth: []
+      - cookieAuth: []
+      tags:
+      - cloud
+    get:
+      description: A gateway's load balancer listeners
+      operationId: cloud_gateways_listeners_retrieve
+      parameters:
+      - explode: false
+        in: path
+        name: gateway_id
+        required: true
+        schema:
+          type: integer
+        style: simple
+      - explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          type: integer
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GatewayLBListener"
+          description: ""
+      security:
+      - tokenAuth: []
+      - cookieAuth: []
+      tags:
+      - cloud
+    patch:
+      description: "Change a listener's pool, sources, comment or enabled flag; protocol,\
+        \ port and mode are fixed."
+      operationId: cloud_gateways_listeners_partial_update
+      parameters:
+      - explode: false
+        in: path
+        name: gateway_id
+        required: true
+        schema:
+          type: integer
+        style: simple
+      - explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          type: integer
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/PatchedGatewayLBListenerWriteRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GatewayLBListener"
+          description: ""
+        "409":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GatewayConflict"
+          description: ""
+      security:
+      - tokenAuth: []
+      - cookieAuth: []
+      tags:
+      - cloud
+  /api/cloud/gateways/{gateway_id}/networks/:
+    get:
+      description: "A gateway's private networks, by network id"
+      operationId: cloud_gateways_networks_list
+      parameters:
+      - explode: false
+        in: path
+        name: gateway_id
+        required: true
+        schema:
+          type: integer
+        style: simple
+      - description: A page number within the paginated result set.
+        explode: true
+        in: query
+        name: page
+        required: false
+        schema:
+          type: integer
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PaginatedGatewayNetworkList"
+          description: ""
+      security:
+      - tokenAuth: []
+      - cookieAuth: []
+      tags:
+      - cloud
+    post:
+      description: "Attach a network (spec 11.3): the operation reserves it and hotplugs\
+        \ the gateway's NIC."
+      operationId: cloud_gateways_networks_create
+      parameters:
+      - explode: false
+        in: path
+        name: gateway_id
+        required: true
+        schema:
+          type: integer
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/GatewayNetworkCreateRequest"
+        required: true
+      responses:
+        "202":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GatewayOperation"
+          description: ""
+          headers:
+            Location:
+              description: "The operation, to poll for its status."
+              explode: false
+              required: true
+              schema:
+                format: uri
+                type: string
+              style: simple
+        "409":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GatewayConflict"
+          description: ""
+      security:
+      - tokenAuth: []
+      - cookieAuth: []
+      tags:
+      - cloud
+  /api/cloud/gateways/{gateway_id}/networks/{network_id}/:
+    delete:
+      description: "Detach a network (spec 11.3). Without the preview's revision and\
+        \ servers, 409 with a fresh preview."
+      operationId: cloud_gateways_networks_destroy
+      parameters:
+      - explode: false
+        in: path
+        name: gateway_id
+        required: true
+        schema:
+          type: integer
+        style: simple
+      - explode: false
+        in: path
+        name: network_id
+        required: true
+        schema:
+          type: integer
+        style: simple
+      - description: "The gateway's desired revision from the preview; without it,\
+          \ a preview."
+        explode: true
+        in: query
+        name: revision
+        required: false
+        schema:
+          type: integer
+        style: form
+      - description: The preview's server ids.
+        explode: true
+        in: query
+        name: servers
+        required: false
+        schema:
+          items:
+            type: integer
+          type: array
+        style: form
+      responses:
+        "202":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GatewayOperation"
+          description: ""
+          headers:
+            Location:
+              description: "The operation, to poll for its status."
+              explode: false
+              required: true
+              schema:
+                format: uri
+                type: string
+              style: simple
+        "409":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GatewayConflict"
+          description: ""
+      security:
+      - tokenAuth: []
+      - cookieAuth: []
+      tags:
+      - cloud
+    get:
+      description: "A gateway's private networks, by network id"
+      operationId: cloud_gateways_networks_retrieve
+      parameters:
+      - explode: false
+        in: path
+        name: gateway_id
+        required: true
+        schema:
+          type: integer
+        style: simple
+      - explode: false
+        in: path
+        name: network_id
+        required: true
+        schema:
+          type: integer
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GatewayNetwork"
+          description: ""
+      security:
+      - tokenAuth: []
+      - cookieAuth: []
+      tags:
+      - cloud
+    patch:
+      description: |-
+        Switch a router network's SNAT (spec 6.4). Turning it off without the preview's revision and
+        servers answers 409 with a fresh preview; the change is pending until the agent applies it.
+      operationId: cloud_gateways_networks_partial_update
+      parameters:
+      - explode: false
+        in: path
+        name: gateway_id
+        required: true
+        schema:
+          type: integer
+        style: simple
+      - explode: false
+        in: path
+        name: network_id
+        required: true
+        schema:
+          type: integer
+        style: simple
+      - description: "The gateway's desired revision from the preview; without it,\
+          \ a preview."
+        explode: true
+        in: query
+        name: revision
+        required: false
+        schema:
+          type: integer
+        style: form
+      - description: The preview's server ids.
+        explode: true
+        in: query
+        name: servers
+        required: false
+        schema:
+          items:
+            type: integer
+          type: array
+        style: form
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/PatchedGatewayNetworkUpdateRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GatewayNetwork"
+          description: ""
+        "409":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GatewayConflict"
+          description: ""
+      security:
+      - tokenAuth: []
+      - cookieAuth: []
+      tags:
+      - cloud
+  /api/cloud/gateways/{gateway_id}/operations/:
+    get:
+      description: "A gateway's operations, newest first"
+      operationId: cloud_gateways_operations_list
+      parameters:
+      - explode: false
+        in: path
+        name: gateway_id
+        required: true
+        schema:
+          type: integer
+        style: simple
+      - description: A page number within the paginated result set.
+        explode: true
+        in: query
+        name: page
+        required: false
+        schema:
+          type: integer
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PaginatedGatewayOperationList"
+          description: ""
+      security:
+      - tokenAuth: []
+      - cookieAuth: []
+      tags:
+      - cloud
+  /api/cloud/gateways/{gateway_id}/operations/{id}/:
+    get:
+      description: "A gateway's operations, newest first"
+      operationId: cloud_gateways_operations_retrieve
+      parameters:
+      - explode: false
+        in: path
+        name: gateway_id
+        required: true
+        schema:
+          type: integer
+        style: simple
+      - explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GatewayOperation"
+          description: ""
+      security:
+      - tokenAuth: []
+      - cookieAuth: []
+      tags:
+      - cloud
+  /api/cloud/gateways/{gateway_id}/pools/:
+    get:
+      description: A gateway's backend pools
+      operationId: cloud_gateways_pools_list
+      parameters:
+      - explode: false
+        in: path
+        name: gateway_id
+        required: true
+        schema:
+          type: integer
+        style: simple
+      - description: A page number within the paginated result set.
+        explode: true
+        in: query
+        name: page
+        required: false
+        schema:
+          type: integer
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PaginatedGatewayBackendPoolList"
+          description: ""
+      security:
+      - tokenAuth: []
+      - cookieAuth: []
+      tags:
+      - cloud
+    post:
+      description: Add a backend pool (spec 5.5); it is pending until the agent applies
+        its revision.
+      operationId: cloud_gateways_pools_create
+      parameters:
+      - explode: false
+        in: path
+        name: gateway_id
+        required: true
+        schema:
+          type: integer
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/GatewayBackendPoolWriteRequest"
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GatewayBackendPool"
+          description: ""
+        "409":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GatewayConflict"
+          description: ""
+      security:
+      - tokenAuth: []
+      - cookieAuth: []
+      tags:
+      - cloud
+  /api/cloud/gateways/{gateway_id}/pools/{id}/:
+    delete:
+      description: |-
+        Delete an unused pool and its servers (spec 5.11): 202 with the record the agent's acknowledgement
+        completes. Without the preview's revision, 409 with a fresh one.
+      operationId: cloud_gateways_pools_destroy
+      parameters:
+      - explode: false
+        in: path
+        name: gateway_id
+        required: true
+        schema:
+          type: integer
+        style: simple
+      - explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          type: integer
+        style: simple
+      - description: "The gateway's desired revision from the preview; without it,\
+          \ a preview."
+        explode: true
+        in: query
+        name: revision
+        required: false
+        schema:
+          type: integer
+        style: form
+      responses:
+        "202":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GatewayOperation"
+          description: ""
+          headers:
+            Location:
+              description: "The operation, to poll for its status."
+              explode: false
+              required: true
+              schema:
+                format: uri
+                type: string
+              style: simple
+        "409":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GatewayConflict"
+          description: ""
+      security:
+      - tokenAuth: []
+      - cookieAuth: []
+      tags:
+      - cloud
+    get:
+      description: A gateway's backend pools
+      operationId: cloud_gateways_pools_retrieve
+      parameters:
+      - explode: false
+        in: path
+        name: gateway_id
+        required: true
+        schema:
+          type: integer
+        style: simple
+      - explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          type: integer
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GatewayBackendPool"
+          description: ""
+      security:
+      - tokenAuth: []
+      - cookieAuth: []
+      tags:
+      - cloud
+    patch:
+      description: Change a pool; health_check takes the fields to change. Every listener
+        and route on it must still fit.
+      operationId: cloud_gateways_pools_partial_update
+      parameters:
+      - explode: false
+        in: path
+        name: gateway_id
+        required: true
+        schema:
+          type: integer
+        style: simple
+      - explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          type: integer
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/PatchedGatewayBackendPoolWriteRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GatewayBackendPool"
+          description: ""
+        "409":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GatewayConflict"
+          description: ""
+      security:
+      - tokenAuth: []
+      - cookieAuth: []
+      tags:
+      - cloud
+  /api/cloud/gateways/{gateway_id}/pools/{pool_id}/backends/:
+    get:
+      description: A backend pool's servers
+      operationId: cloud_gateways_pools_backends_list
+      parameters:
+      - explode: false
+        in: path
+        name: gateway_id
+        required: true
+        schema:
+          type: integer
+        style: simple
+      - description: A page number within the paginated result set.
+        explode: true
+        in: query
+        name: page
+        required: false
+        schema:
+          type: integer
+        style: form
+      - explode: false
+        in: path
+        name: pool_id
+        required: true
+        schema:
+          type: integer
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PaginatedGatewayBackendList"
+          description: ""
+      security:
+      - tokenAuth: []
+      - cookieAuth: []
+      tags:
+      - cloud
+    post:
+      description: Add a server to the pool (spec 5.5); it is pending until the agent
+        applies its revision.
+      operationId: cloud_gateways_pools_backends_create
+      parameters:
+      - explode: false
+        in: path
+        name: gateway_id
+        required: true
+        schema:
+          type: integer
+        style: simple
+      - explode: false
+        in: path
+        name: pool_id
+        required: true
+        schema:
+          type: integer
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/GatewayBackendWriteRequest"
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GatewayBackend"
+          description: ""
+        "409":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GatewayConflict"
+          description: ""
+      security:
+      - tokenAuth: []
+      - cookieAuth: []
+      tags:
+      - cloud
+  /api/cloud/gateways/{gateway_id}/pools/{pool_id}/backends/{id}/:
+    delete:
+      description: |-
+        Remove a server (spec 5.11): 202 with the record the agent's acknowledgement completes. Without
+        the preview's revision, 409 with a fresh one.
+      operationId: cloud_gateways_pools_backends_destroy
+      parameters:
+      - explode: false
+        in: path
+        name: gateway_id
+        required: true
+        schema:
+          type: integer
+        style: simple
+      - explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          type: integer
+        style: simple
+      - explode: false
+        in: path
+        name: pool_id
+        required: true
+        schema:
+          type: integer
+        style: simple
+      - description: "The gateway's desired revision from the preview; without it,\
+          \ a preview."
+        explode: true
+        in: query
+        name: revision
+        required: false
+        schema:
+          type: integer
+        style: form
+      responses:
+        "202":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GatewayOperation"
+          description: ""
+          headers:
+            Location:
+              description: "The operation, to poll for its status."
+              explode: false
+              required: true
+              schema:
+                format: uri
+                type: string
+              style: simple
+        "409":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GatewayConflict"
+          description: ""
+      security:
+      - tokenAuth: []
+      - cookieAuth: []
+      tags:
+      - cloud
+    get:
+      description: A backend pool's servers
+      operationId: cloud_gateways_pools_backends_retrieve
+      parameters:
+      - explode: false
+        in: path
+        name: gateway_id
+        required: true
+        schema:
+          type: integer
+        style: simple
+      - explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          type: integer
+        style: simple
+      - explode: false
+        in: path
+        name: pool_id
+        required: true
+        schema:
+          type: integer
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GatewayBackend"
+          description: ""
+      security:
+      - tokenAuth: []
+      - cookieAuth: []
+      tags:
+      - cloud
+    patch:
+      description: Change a server. The last enabled server of a pool in use cannot
+        be disabled.
+      operationId: cloud_gateways_pools_backends_partial_update
+      parameters:
+      - explode: false
+        in: path
+        name: gateway_id
+        required: true
+        schema:
+          type: integer
+        style: simple
+      - explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          type: integer
+        style: simple
+      - explode: false
+        in: path
+        name: pool_id
+        required: true
+        schema:
+          type: integer
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/PatchedGatewayBackendWriteRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GatewayBackend"
+          description: ""
+        "409":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GatewayConflict"
+          description: ""
+      security:
+      - tokenAuth: []
+      - cookieAuth: []
+      tags:
+      - cloud
+  /api/cloud/gateways/{gateway_id}/port-forwards/:
+    get:
+      description: A gateway's port forwards
+      operationId: cloud_gateways_port_forwards_list
+      parameters:
+      - explode: false
+        in: path
+        name: gateway_id
+        required: true
+        schema:
+          type: integer
+        style: simple
+      - description: A page number within the paginated result set.
+        explode: true
+        in: query
+        name: page
+        required: false
+        schema:
+          type: integer
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PaginatedGatewayForwardList"
+          description: ""
+      security:
+      - tokenAuth: []
+      - cookieAuth: []
+      tags:
+      - cloud
+    post:
+      description: Add a port forward (spec 6.7); it is pending until the agent applies
+        its revision.
+      operationId: cloud_gateways_port_forwards_create
+      parameters:
+      - explode: false
+        in: path
+        name: gateway_id
+        required: true
+        schema:
+          type: integer
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/GatewayForwardWriteRequest"
+        required: true
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GatewayForward"
+          description: ""
+        "409":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GatewayConflict"
+          description: ""
+      security:
+      - tokenAuth: []
+      - cookieAuth: []
+      tags:
+      - cloud
+  /api/cloud/gateways/{gateway_id}/port-forwards/{id}/:
+    delete:
+      description: |-
+        Delete a forward (spec 5.11): 202 with the record the agent's acknowledgement completes. Without
+        the preview's revision, 409 with a fresh one.
+      operationId: cloud_gateways_port_forwards_destroy
+      parameters:
+      - explode: false
+        in: path
+        name: gateway_id
+        required: true
+        schema:
+          type: integer
+        style: simple
+      - explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          type: integer
+        style: simple
+      - description: "The gateway's desired revision from the preview; without it,\
+          \ a preview."
+        explode: true
+        in: query
+        name: revision
+        required: false
+        schema:
+          type: integer
+        style: form
+      responses:
+        "202":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GatewayOperation"
+          description: ""
+          headers:
+            Location:
+              description: "The operation, to poll for its status."
+              explode: false
+              required: true
+              schema:
+                format: uri
+                type: string
+              style: simple
+        "409":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GatewayConflict"
+          description: ""
+      security:
+      - tokenAuth: []
+      - cookieAuth: []
+      tags:
+      - cloud
+    get:
+      description: A gateway's port forwards
+      operationId: cloud_gateways_port_forwards_retrieve
+      parameters:
+      - explode: false
+        in: path
+        name: gateway_id
+        required: true
+        schema:
+          type: integer
+        style: simple
+      - explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          type: integer
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GatewayForward"
+          description: ""
+      security:
+      - tokenAuth: []
+      - cookieAuth: []
+      tags:
+      - cloud
+    patch:
+      description: Change a forward's fields; public_ports and target are each replaced
+        whole.
+      operationId: cloud_gateways_port_forwards_partial_update
+      parameters:
+      - explode: false
+        in: path
+        name: gateway_id
+        required: true
+        schema:
+          type: integer
+        style: simple
+      - explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          type: integer
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/PatchedGatewayForwardWriteRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GatewayForward"
+          description: ""
+        "409":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GatewayConflict"
+          description: ""
+      security:
+      - tokenAuth: []
+      - cookieAuth: []
+      tags:
+      - cloud
+  /api/cloud/gateways/{id}/:
+    delete:
+      description: |-
+        Delete the gateway (spec 11.5): its VM is destroyed, then its networks and IPv4 are released.
+        Without the preview's revision, networks and servers, 409 with a fresh preview.
+      operationId: cloud_gateways_destroy
+      parameters:
+      - explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: The preview's network ids.
+        explode: true
+        in: query
+        name: networks
+        required: false
+        schema:
+          items:
+            type: integer
+          type: array
+        style: form
+      - description: "The gateway's desired revision from the preview; without it,\
+          \ a preview."
+        explode: true
+        in: query
+        name: revision
+        required: false
+        schema:
+          type: integer
+        style: form
+      - description: The preview's server ids.
+        explode: true
+        in: query
+        name: servers
+        required: false
+        schema:
+          items:
+            type: integer
+          type: array
+        style: form
+      responses:
+        "202":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GatewayOperation"
+          description: ""
+          headers:
+            Location:
+              description: "The operation, to poll for its status."
+              explode: false
+              required: true
+              schema:
+                format: uri
+                type: string
+              style: simple
+        "409":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GatewayDeleteConflict"
+          description: ""
+      security:
+      - tokenAuth: []
+      - cookieAuth: []
+      tags:
+      - cloud
+    get:
+      description: Manage gateways
+      operationId: cloud_gateways_retrieve
+      parameters:
+      - explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Gateway"
+          description: ""
+      security:
+      - tokenAuth: []
+      - cookieAuth: []
+      tags:
+      - cloud
+    patch:
+      description: |-
+        Rename the gateway or change its maintenance window. The name is not compiled, so no revision
+        follows; a new window reaches the agent in a new revision (spec 11.4).
+      operationId: cloud_gateways_partial_update
+      parameters:
+      - explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/PatchedGatewayUpdateRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Gateway"
+          description: ""
+        "409":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GatewayConflict"
+          description: ""
+      security:
+      - tokenAuth: []
+      - cookieAuth: []
+      tags:
+      - cloud
+  /api/cloud/gateways/{id}/reenroll/:
+    post:
+      description: |-
+        Re-enroll the gateway (spec 8.1 step 6): its agent token is revoked and it restarts to enroll again.
+        Without the preview's revision, networks and servers, 409 with a fresh preview.
+      operationId: cloud_gateways_reenroll_create
+      parameters:
+      - explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/GatewayReenrollRequest"
+      responses:
+        "202":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GatewayOperation"
+          description: ""
+          headers:
+            Location:
+              description: "The operation, to poll for its status."
+              explode: false
+              required: true
+              schema:
+                format: uri
+                type: string
+              style: simple
+        "409":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GatewayReenrollConflict"
+          description: ""
+      security:
+      - tokenAuth: []
+      - cookieAuth: []
+      tags:
+      - cloud
+  /api/cloud/gateways/{id}/status/:
+    get:
+      description: The gateway's state and the customer part of its agent's last report
+        (spec 9.5).
+      operationId: cloud_gateways_status_retrieve
+      parameters:
+      - explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GatewayStatus"
+          description: ""
+      security:
+      - tokenAuth: []
+      - cookieAuth: []
+      tags:
+      - cloud
   /api/cloud/generations/:
     get:
       description: |-
@@ -2864,6 +4719,52 @@ paths:
       - cookieAuth: []
       tags:
       - cloud
+  /api/cloud/private-networks/{id}/apply-route/:
+    post:
+      description: Re-render the named servers' routes and reboot them (spec 6.3);
+        naming a server acknowledges its reboot.
+      operationId: cloud_private_networks_apply_route_create
+      parameters:
+      - explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          type: integer
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ApplyRouteRequest"
+        required: true
+      responses:
+        "202":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GatewayOperation"
+          description: ""
+          headers:
+            Location:
+              description: "The network's route status, which lists the operation."
+              explode: false
+              required: true
+              schema:
+                format: uri
+                type: string
+              style: simple
+        "409":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GatewayConflict"
+          description: ""
+      security:
+      - tokenAuth: []
+      - cookieAuth: []
+      tags:
+      - cloud
   /api/cloud/private-networks/{id}/remove-server/:
     post:
       description: Manage private networks
@@ -2889,6 +4790,31 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/RemoveServerResponse"
+          description: ""
+      security:
+      - tokenAuth: []
+      - cookieAuth: []
+      tags:
+      - cloud
+  /api/cloud/private-networks/{id}/route-status/:
+    get:
+      description: "Each server's default route against the spec 6.2 rule, read from\
+        \ Proxmox, and the network's route applies."
+      operationId: cloud_private_networks_route_status_retrieve
+      parameters:
+      - explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          type: integer
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/RouteStatus"
           description: ""
       security:
       - tokenAuth: []
@@ -9325,6 +11251,68 @@ paths:
       - cookieAuth: []
       tags:
       - kubernetes
+  /api/kubernetes/clusters/{id}/lb-reimage/:
+    get:
+      description: Show the latest load-balancer replacement on this cluster and whether
+        one can start now.
+      operationId: kubernetes_clusters_lb_reimage_retrieve
+      parameters:
+      - explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/LBReimageStatus"
+          description: ""
+      security:
+      - tokenAuth: []
+      - cookieAuth: []
+      tags:
+      - kubernetes
+    post:
+      description: Start a load-balancer replacement now. Traffic through the load
+        balancer stops while it is switched over. Support can roll back for 24 hours
+        after it completes. OAuth access tokens cannot start one.
+      operationId: kubernetes_clusters_lb_reimage_create
+      parameters:
+      - explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/LBReimageRequest"
+        required: true
+      responses:
+        "202":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/LBReimageStarted"
+          description: ""
+        "409":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/LBReimageRefused"
+          description: ""
+      security:
+      - tokenAuth: []
+      - cookieAuth: []
+      tags:
+      - kubernetes
   /api/kubernetes/clusters/{id}/talos-version-upgrade/:
     post:
       description: Upgrade Talos to the next available version.
@@ -9874,13 +11862,14 @@ components:
             * `internal` - Internal
             * `external` - External
         ip:
-          description: IPv4 address to use as the default A record for the zone.
+          description: IPv4 address for the zone's default records. Leave it out to
+            start with an empty zone.
           format: ipv4
           minLength: 1
+          nullable: true
           type: string
       required:
       - domain
-      - ip
       - source
       type: object
     ActivateFreeDNSResponse:
@@ -10079,6 +12068,20 @@ components:
       - credential
       - key
       type: object
+    ApplyRouteRequest:
+      example:
+        servers:
+        - 0
+        - 0
+      properties:
+        servers:
+          description: The servers to re-render and reboot; each one listed reboots.
+          items:
+            type: integer
+          type: array
+      required:
+      - servers
+      type: object
     AttachIPv4Request:
       example:
         ipv4: ipv4
@@ -10239,7 +12242,7 @@ components:
         billing: ""
         id: 0
         name: name
-        full_name: full_name
+        full_name: ""
         quota_gb: 6
         used_bytes: 1
         object_count: 5
@@ -10261,6 +12264,7 @@ components:
           readOnly: true
           type: string
         full_name:
+          default: ""
           readOnly: true
           type: string
         quota_gb:
@@ -10281,6 +12285,7 @@ components:
         status:
           allOf:
           - $ref: "#/components/schemas/ResourceStatusEnum"
+          default: pending
           readOnly: true
         endpoint:
           readOnly: true
@@ -10573,7 +12578,7 @@ components:
         kube_version:
           allOf:
           - $ref: "#/components/schemas/KubeVersionEnum"
-          default: 1.36.3
+          default: 1.36.6
         features:
           items:
             $ref: "#/components/schemas/FeaturesEnum"
@@ -12793,7 +14798,7 @@ components:
           maxLength: 100
           type: string
         company:
-          maxLength: 40
+          maxLength: 128
           nullable: true
           type: string
         address:
@@ -12861,7 +14866,7 @@ components:
           minLength: 1
           type: string
         company:
-          maxLength: 40
+          maxLength: 128
           nullable: true
           type: string
         address:
@@ -13850,6 +15855,1612 @@ components:
       - DROP
       - REJECT
       type: string
+    Gateway:
+      example:
+        id: 0
+        name: name
+        state: ""
+        state_reason: state_reason
+        status: ""
+        desired_revision: 6
+        applied_revision: 1
+        ipv4: ipv4
+        ipv6: ipv6
+        maintenance_weekday: 5
+        maintenance_hour: 5
+        ha_enabled: true
+        current_operation: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        created: created
+      properties:
+        id:
+          readOnly: true
+          type: integer
+        name:
+          readOnly: true
+          type: string
+        state:
+          allOf:
+          - $ref: "#/components/schemas/GatewayStateEnum"
+          readOnly: true
+        state_reason:
+          readOnly: true
+          type: string
+        status:
+          allOf:
+          - $ref: "#/components/schemas/ResourceStatusEnum"
+          readOnly: true
+        desired_revision:
+          readOnly: true
+          type: integer
+        applied_revision:
+          nullable: true
+          readOnly: true
+          type: integer
+        ipv4:
+          format: ipv4
+          nullable: true
+          readOnly: true
+          type: string
+        ipv6:
+          format: ipv6
+          nullable: true
+          readOnly: true
+          type: string
+        maintenance_weekday:
+          readOnly: true
+          type: integer
+        maintenance_hour:
+          readOnly: true
+          type: integer
+        ha_enabled:
+          readOnly: true
+          type: boolean
+        current_operation:
+          format: uuid
+          nullable: true
+          readOnly: true
+          type: string
+        created:
+          readOnly: true
+          type: string
+      required:
+      - applied_revision
+      - created
+      - current_operation
+      - desired_revision
+      - ha_enabled
+      - id
+      - ipv4
+      - ipv6
+      - maintenance_hour
+      - maintenance_weekday
+      - name
+      - state
+      - state_reason
+      - status
+      type: object
+    GatewayApplyError:
+      properties:
+        kind:
+          description: "The kind of the object the agent refused, or null."
+          nullable: true
+          type: string
+        id:
+          nullable: true
+          type: integer
+        message:
+          type: string
+        rollback:
+          description: "not_needed, pending, succeeded or failed."
+          type: string
+      required:
+      - id
+      - kind
+      - message
+      - rollback
+      type: object
+    GatewayBackend:
+      description: |-
+        A pool's server (spec 5.5) with its health as the gateway last reported it (spec 6.8).
+
+        The view passes the health map in the context, read once per request.
+      example:
+        id: 0
+        network: 6
+        address: address
+        port: 1
+        weight: 5
+        enabled: true
+        health: ""
+        health_changed: health_changed
+        changed_revision: 5
+        pending: true
+      properties:
+        id:
+          readOnly: true
+          type: integer
+        network:
+          description: An attached private network's id.
+          type: integer
+        address:
+          format: ipv4
+          readOnly: true
+          type: string
+        port:
+          readOnly: true
+          type: integer
+        weight:
+          readOnly: true
+          type: integer
+        enabled:
+          readOnly: true
+          type: boolean
+        health:
+          allOf:
+          - $ref: "#/components/schemas/GatewayBackendHealthEnum"
+          readOnly: true
+        health_changed:
+          nullable: true
+          readOnly: true
+          type: string
+        changed_revision:
+          readOnly: true
+          type: integer
+        pending:
+          readOnly: true
+          type: boolean
+      required:
+      - address
+      - changed_revision
+      - enabled
+      - health
+      - health_changed
+      - id
+      - network
+      - pending
+      - port
+      - weight
+      type: object
+    GatewayBackendHealthEnum:
+      description: |-
+        * `healthy` - healthy
+        * `unhealthy` - unhealthy
+        * `unknown` - unknown
+      enum:
+      - healthy
+      - unhealthy
+      - unknown
+      type: string
+    GatewayBackendPool:
+      description: "A backend pool (spec 5.5): the servers a listener or route sends\
+        \ to; pending until applied."
+      example:
+        id: 0
+        name: name
+        policy: ""
+        proxy_protocol: true
+        health_check: ""
+        changed_revision: 6
+        pending: true
+      properties:
+        id:
+          readOnly: true
+          type: integer
+        name:
+          readOnly: true
+          type: string
+        policy:
+          allOf:
+          - $ref: "#/components/schemas/GatewayBackendPoolPolicyEnum"
+          readOnly: true
+        proxy_protocol:
+          readOnly: true
+          type: boolean
+        health_check:
+          allOf:
+          - $ref: "#/components/schemas/GatewayHealthCheck"
+          readOnly: true
+        changed_revision:
+          readOnly: true
+          type: integer
+        pending:
+          readOnly: true
+          type: boolean
+      required:
+      - changed_revision
+      - health_check
+      - id
+      - name
+      - pending
+      - policy
+      - proxy_protocol
+      type: object
+    GatewayBackendPoolPolicyEnum:
+      description: |-
+        * `round_robin` - round_robin
+        * `least_request` - least_request
+      enum:
+      - round_robin
+      - least_request
+      type: string
+    GatewayBackendPoolWriteRequest:
+      description: The fields a customer writes; gateway.backend_pools.clean_pool
+        decides what they may hold.
+      example:
+        name: name
+        policy: round_robin
+        proxy_protocol: true
+        health_check:
+          type: none
+          path: path
+          status_min: 139
+          status_max: 400
+          interval_s: 10
+          timeout_s: 18
+          healthy_threshold: 6
+          unhealthy_threshold: 3
+          port: 46277
+      properties:
+        name:
+          maxLength: 64
+          minLength: 1
+          type: string
+        policy:
+          $ref: "#/components/schemas/GatewayBackendPoolPolicyEnum"
+        proxy_protocol:
+          description: PROXY protocol v2 to the servers; tcp only.
+          type: boolean
+        health_check:
+          $ref: "#/components/schemas/GatewayHealthCheckWriteRequest"
+      type: object
+    GatewayBackendWriteRequest:
+      description: The fields a customer writes; gateway.backend_pools.clean_backend
+        decides what they may hold.
+      example:
+        network: 0
+        address: address
+        port: 39501
+        weight: 15
+        enabled: true
+      properties:
+        network:
+          description: An attached private network's id.
+          type: integer
+        address:
+          description: "A host of that network, other than the gateway."
+          minLength: 1
+          type: string
+        port:
+          maximum: 65535
+          minimum: 1
+          type: integer
+        weight:
+          maximum: 100
+          minimum: 1
+          type: integer
+        enabled:
+          type: boolean
+      type: object
+    GatewayConflict:
+      description: "A 409 answer: the conflict, and for a destructive action a fresh\
+        \ preview to confirm."
+      example:
+        message: message
+        extra:
+          fields:
+            key:
+            - fields
+            - fields
+          preview: ""
+      properties:
+        message:
+          type: string
+        extra:
+          $ref: "#/components/schemas/GatewayConflictExtra"
+      required:
+      - extra
+      - message
+      type: object
+    GatewayConflictExtra:
+      example:
+        fields:
+          key:
+          - fields
+          - fields
+        preview: ""
+      properties:
+        fields:
+          additionalProperties:
+            items:
+              type: string
+            type: array
+          type: object
+        preview:
+          allOf:
+          - $ref: "#/components/schemas/GatewayPreview"
+          description: Present when the confirmation is stale.
+      required:
+      - fields
+      type: object
+    GatewayConntrack:
+      properties:
+        count:
+          nullable: true
+          type: integer
+        max:
+          nullable: true
+          type: integer
+        insert_failures:
+          description: An unsigned 64-bit decimal string.
+          nullable: true
+          type: string
+      required:
+      - count
+      - insert_failures
+      - max
+      type: object
+    GatewayCreateRequest:
+      example:
+        name: name
+        ipv4: ipv4
+        ipv6: false
+      properties:
+        name:
+          maxLength: 64
+          minLength: 1
+          type: string
+        ipv4:
+          format: ipv4
+          minLength: 1
+          nullable: true
+          type: string
+        ipv6:
+          default: false
+          type: boolean
+      required:
+      - name
+      type: object
+    GatewayDeleteConflict:
+      description: "A delete's 409 answer: the conflict, and a fresh preview of what\
+        \ the delete takes away."
+      example:
+        message: message
+        extra:
+          fields:
+            key:
+            - fields
+            - fields
+          preview: ""
+      properties:
+        message:
+          type: string
+        extra:
+          $ref: "#/components/schemas/GatewayDeleteConflictExtra"
+      required:
+      - extra
+      - message
+      type: object
+    GatewayDeleteConflictExtra:
+      example:
+        fields:
+          key:
+          - fields
+          - fields
+        preview: ""
+      properties:
+        fields:
+          additionalProperties:
+            items:
+              type: string
+            type: array
+          type: object
+        preview:
+          allOf:
+          - $ref: "#/components/schemas/GatewayDeletePreview"
+          description: Present when the confirmation is stale.
+      required:
+      - fields
+      type: object
+    GatewayDeletePreview:
+      properties:
+        revision:
+          type: integer
+        servers:
+          items:
+            $ref: "#/components/schemas/GatewayPreviewServer"
+          type: array
+        networks:
+          items:
+            $ref: "#/components/schemas/GatewayPreviewNetwork"
+          type: array
+      required:
+      - networks
+      - revision
+      - servers
+      type: object
+    GatewayEgressProbe:
+      properties:
+        ok:
+          nullable: true
+          type: boolean
+        latency_ms:
+          nullable: true
+          type: integer
+        at:
+          nullable: true
+          type: string
+      required:
+      - at
+      - latency_ms
+      - ok
+      type: object
+    GatewayFirewallDestination:
+      description: "Exactly one of network, cidr and internet."
+      properties:
+        network:
+          description: A private network the gateway is attached to.
+          type: integer
+        cidr:
+          description: "An IPv4 network, such as 10.0.0.0/24."
+          type: string
+        internet:
+          description: "True: egress by the gateway's WAN."
+          type: boolean
+      type: object
+    GatewayFirewallDestinationRequest:
+      description: "Exactly one of network, cidr and internet."
+      example:
+        network: 6
+        cidr: cidr
+        internet: true
+      properties:
+        network:
+          description: A private network the gateway is attached to.
+          type: integer
+        cidr:
+          description: "An IPv4 network, such as 10.0.0.0/24."
+          minLength: 1
+          type: string
+        internet:
+          description: "True: egress by the gateway's WAN."
+          type: boolean
+      type: object
+    GatewayFirewallMoveRequest:
+      example:
+        position: 0
+      properties:
+        position:
+          description: "The position to move the rule to, from 0."
+          type: integer
+      required:
+      - position
+      type: object
+    GatewayFirewallProtocolEnum:
+      description: |-
+        * `tcp` - tcp
+        * `udp` - udp
+        * `icmp` - icmp
+        * `any` - any
+      enum:
+      - tcp
+      - udp
+      - icmp
+      - any
+      type: string
+    GatewayFirewallRule:
+      description: "A firewall rule (spec 5.7): first match wins in position order;\
+        \ a change is pending until applied."
+      example:
+        id: 0
+        position: 6
+        action: ""
+        source: ""
+        destination: ""
+        protocol: ""
+        ports:
+        - start: 9607
+          end: 39073
+        - start: 9607
+          end: 39073
+        enabled: true
+        comment: comment
+        changed_revision: 5
+        pending: true
+      properties:
+        id:
+          readOnly: true
+          type: integer
+        position:
+          readOnly: true
+          type: integer
+        action:
+          allOf:
+          - $ref: "#/components/schemas/FwPolicyOutEnum"
+          readOnly: true
+        source:
+          allOf:
+          - $ref: "#/components/schemas/GatewayFirewallSource"
+          readOnly: true
+        destination:
+          allOf:
+          - $ref: "#/components/schemas/GatewayFirewallDestination"
+          readOnly: true
+        protocol:
+          allOf:
+          - $ref: "#/components/schemas/GatewayFirewallProtocolEnum"
+          readOnly: true
+        ports:
+          items:
+            $ref: "#/components/schemas/GatewayPortRange"
+          readOnly: true
+          type: array
+        enabled:
+          readOnly: true
+          type: boolean
+        comment:
+          readOnly: true
+          type: string
+        changed_revision:
+          readOnly: true
+          type: integer
+        pending:
+          readOnly: true
+          type: boolean
+      required:
+      - action
+      - changed_revision
+      - comment
+      - destination
+      - enabled
+      - id
+      - pending
+      - ports
+      - position
+      - protocol
+      - source
+      type: object
+    GatewayFirewallRuleWriteRequest:
+      description: The fields a customer writes; gateway.firewall.clean_rule decides
+        what they may hold.
+      example:
+        action: ACCEPT
+        source:
+          network: 0
+          cidr: cidr
+        destination:
+          network: 6
+          cidr: cidr
+          internet: true
+        protocol: tcp
+        ports:
+        - start: 9607
+          end: 39073
+        - start: 9607
+          end: 39073
+        enabled: true
+        comment: comment
+      properties:
+        action:
+          $ref: "#/components/schemas/FwPolicyOutEnum"
+        source:
+          $ref: "#/components/schemas/GatewayFirewallSourceRequest"
+        destination:
+          $ref: "#/components/schemas/GatewayFirewallDestinationRequest"
+        protocol:
+          $ref: "#/components/schemas/GatewayFirewallProtocolEnum"
+        ports:
+          items:
+            $ref: "#/components/schemas/GatewayPortRangeRequest"
+          type: array
+        enabled:
+          type: boolean
+        comment:
+          maxLength: 256
+          type: string
+      required:
+      - action
+      - destination
+      - protocol
+      - source
+      type: object
+    GatewayFirewallSource:
+      description: Exactly one of network and cidr.
+      properties:
+        network:
+          description: A private network the gateway is attached to.
+          type: integer
+        cidr:
+          description: "An IPv4 network, such as 10.0.0.0/24."
+          type: string
+      type: object
+    GatewayFirewallSourceRequest:
+      description: Exactly one of network and cidr.
+      example:
+        network: 0
+        cidr: cidr
+      properties:
+        network:
+          description: A private network the gateway is attached to.
+          type: integer
+        cidr:
+          description: "An IPv4 network, such as 10.0.0.0/24."
+          minLength: 1
+          type: string
+      type: object
+    GatewayForward:
+      description: "A port forward (spec 6.7): public ports to one host of an attached\
+        \ network; pending until applied."
+      example:
+        id: 0
+        protocol: ""
+        public_ports: ""
+        allowed_sources: ""
+        target: ""
+        preserve_client_ip: true
+        enabled: true
+        comment: comment
+        changed_revision: 6
+        pending: true
+      properties:
+        id:
+          readOnly: true
+          type: integer
+        protocol:
+          allOf:
+          - $ref: "#/components/schemas/GatewayForwardProtocolEnum"
+          readOnly: true
+        public_ports:
+          allOf:
+          - $ref: "#/components/schemas/GatewayPortRange"
+          readOnly: true
+        allowed_sources:
+          readOnly: true
+        target:
+          allOf:
+          - $ref: "#/components/schemas/GatewayForwardTarget"
+          readOnly: true
+        preserve_client_ip:
+          description: "Always false: the target sees the gateway's address."
+          readOnly: true
+          type: boolean
+        enabled:
+          readOnly: true
+          type: boolean
+        comment:
+          readOnly: true
+          type: string
+        changed_revision:
+          readOnly: true
+          type: integer
+        pending:
+          readOnly: true
+          type: boolean
+      required:
+      - allowed_sources
+      - changed_revision
+      - comment
+      - enabled
+      - id
+      - pending
+      - preserve_client_ip
+      - protocol
+      - public_ports
+      - target
+      type: object
+    GatewayForwardProtocolEnum:
+      description: |-
+        * `tcp` - tcp
+        * `udp` - udp
+      enum:
+      - tcp
+      - udp
+      type: string
+    GatewayForwardTarget:
+      properties:
+        network:
+          description: An attached private network's id.
+          type: integer
+        address:
+          description: "A host of that network, other than the gateway."
+          type: string
+        port_start:
+          description: "The first public port goes here, the next ones follow in order."
+          maximum: 65535
+          minimum: 1
+          type: integer
+      required:
+      - address
+      - network
+      - port_start
+      type: object
+    GatewayForwardTargetRequest:
+      example:
+        network: 0
+        address: address
+        port_start: 39501
+      properties:
+        network:
+          description: An attached private network's id.
+          type: integer
+        address:
+          description: "A host of that network, other than the gateway."
+          minLength: 1
+          type: string
+        port_start:
+          description: "The first public port goes here, the next ones follow in order."
+          maximum: 65535
+          minimum: 1
+          type: integer
+      required:
+      - address
+      - network
+      - port_start
+      type: object
+    GatewayForwardWriteRequest:
+      description: The fields a customer writes; gateway.forwards.clean_forward decides
+        what they may hold.
+      example:
+        protocol: tcp
+        public_ports:
+          start: 9607
+          end: 39073
+        target:
+          network: 0
+          address: address
+          port_start: 39501
+        allowed_sources:
+        - allowed_sources
+        - allowed_sources
+        preserve_client_ip: true
+        enabled: true
+        comment: comment
+      properties:
+        protocol:
+          $ref: "#/components/schemas/GatewayForwardProtocolEnum"
+        public_ports:
+          $ref: "#/components/schemas/GatewayPortRangeRequest"
+        target:
+          $ref: "#/components/schemas/GatewayForwardTargetRequest"
+        allowed_sources:
+          description: IPv4 networks; empty means any source.
+          items:
+            minLength: 1
+            type: string
+          type: array
+        preserve_client_ip:
+          description: Only false is accepted for now.
+          type: boolean
+        enabled:
+          type: boolean
+        comment:
+          maxLength: 256
+          type: string
+      required:
+      - protocol
+      - public_ports
+      - target
+      type: object
+    GatewayHealthCheck:
+      description: A pool's health check (spec 5.5); the fields its type does not
+        have are null.
+      properties:
+        type:
+          $ref: "#/components/schemas/GatewayHealthCheckTypeEnum"
+        path:
+          nullable: true
+          type: string
+        status_min:
+          nullable: true
+          type: integer
+        status_max:
+          nullable: true
+          type: integer
+        interval_s:
+          nullable: true
+          type: integer
+        timeout_s:
+          nullable: true
+          type: integer
+        healthy_threshold:
+          nullable: true
+          type: integer
+        unhealthy_threshold:
+          nullable: true
+          type: integer
+        port:
+          description: Null checks each server's own port.
+          nullable: true
+          type: integer
+      required:
+      - healthy_threshold
+      - interval_s
+      - path
+      - port
+      - status_max
+      - status_min
+      - timeout_s
+      - type
+      - unhealthy_threshold
+      type: object
+    GatewayHealthCheckTypeEnum:
+      description: |-
+        * `none` - none
+        * `tcp` - tcp
+        * `http` - http
+      enum:
+      - none
+      - tcp
+      - http
+      type: string
+    GatewayHealthCheckWriteRequest:
+      description: "The check fields a customer writes; a missing one keeps its value,\
+        \ and a type takes only its own fields."
+      example:
+        type: none
+        path: path
+        status_min: 139
+        status_max: 400
+        interval_s: 10
+        timeout_s: 18
+        healthy_threshold: 6
+        unhealthy_threshold: 3
+        port: 46277
+      properties:
+        type:
+          $ref: "#/components/schemas/GatewayHealthCheckTypeEnum"
+        path:
+          description: http only.
+          maxLength: 256
+          minLength: 1
+          type: string
+        status_min:
+          description: http only.
+          maximum: 599
+          minimum: 100
+          type: integer
+        status_max:
+          description: http only.
+          maximum: 599
+          minimum: 100
+          type: integer
+        interval_s:
+          maximum: 60
+          minimum: 2
+          type: integer
+        timeout_s:
+          description: Below interval_s.
+          maximum: 30
+          minimum: 1
+          type: integer
+        healthy_threshold:
+          maximum: 10
+          minimum: 1
+          type: integer
+        unhealthy_threshold:
+          maximum: 10
+          minimum: 1
+          type: integer
+        port:
+          description: Null checks each server's own port.
+          maximum: 65535
+          minimum: 1
+          nullable: true
+          type: integer
+      type: object
+    GatewayInterface:
+      example:
+        slot: 5
+        name: name
+        state: state
+        addresses:
+        - addresses
+        - addresses
+      properties:
+        slot:
+          type: integer
+        name:
+          type: string
+        state:
+          description: "up, down or unknown."
+          type: string
+        addresses:
+          items:
+            type: string
+          type: array
+      required:
+      - addresses
+      - name
+      - slot
+      - state
+      type: object
+    GatewayLBListener:
+      description: "A load balancer listener (spec 6.8): one public port with a mode;\
+        \ pending until applied."
+      example:
+        id: 0
+        protocol: ""
+        port: 6
+        mode: tcp
+        pool: 1
+        allowed_sources:
+        - allowed_sources
+        - allowed_sources
+        enabled: true
+        comment: comment
+        changed_revision: 5
+        pending: true
+      properties:
+        id:
+          readOnly: true
+          type: integer
+        protocol:
+          allOf:
+          - $ref: "#/components/schemas/GatewayForwardProtocolEnum"
+          readOnly: true
+        port:
+          type: integer
+        mode:
+          $ref: "#/components/schemas/GatewayLBListenerModeEnum"
+        pool:
+          description: The backend pool of a tcp or udp listener; null for http.
+          nullable: true
+          type: integer
+        allowed_sources:
+          description: Empty means any source.
+          items:
+            type: string
+          type: array
+        enabled:
+          readOnly: true
+          type: boolean
+        comment:
+          readOnly: true
+          type: string
+        changed_revision:
+          readOnly: true
+          type: integer
+        pending:
+          readOnly: true
+          type: boolean
+      required:
+      - allowed_sources
+      - changed_revision
+      - comment
+      - enabled
+      - id
+      - mode
+      - pending
+      - pool
+      - port
+      - protocol
+      type: object
+    GatewayLBListenerModeEnum:
+      description: |-
+        * `tcp` - tcp
+        * `udp` - udp
+        * `http` - http
+        * `https` - https
+      enum:
+      - tcp
+      - udp
+      - http
+      - https
+      type: string
+    GatewayLBListenerWriteRequest:
+      description: |-
+        The fields a customer writes; gateway.lb_listeners.clean_listener decides what they may hold.
+
+        protocol, port and mode are set at creation and cannot change.
+      example:
+        protocol: tcp
+        port: 5249
+        mode: ""
+        pool: 6
+        allowed_sources:
+        - allowed_sources
+        - allowed_sources
+        enabled: true
+        comment: comment
+      properties:
+        protocol:
+          $ref: "#/components/schemas/GatewayForwardProtocolEnum"
+        port:
+          maximum: 65535
+          minimum: 1
+          type: integer
+        mode:
+          allOf:
+          - $ref: "#/components/schemas/GatewayLBListenerModeEnum"
+          description: |-
+            tcp, udp or http; https is not available yet.
+
+            * `tcp` - tcp
+            * `udp` - udp
+            * `http` - http
+            * `https` - https
+        pool:
+          description: A backend pool's id; tcp and udp only.
+          nullable: true
+          type: integer
+        allowed_sources:
+          description: IPv4 and IPv6 networks; empty means any source.
+          items:
+            minLength: 1
+            type: string
+          type: array
+        enabled:
+          type: boolean
+        comment:
+          maxLength: 256
+          type: string
+      type: object
+    GatewayNetwork:
+      description: |-
+        One network the gateway is attached to (spec 5.3). A change is pending until the agent applies
+        its revision (spec 11.2); a failure shows a reason, never its text. The NIC's MAC stays internal.
+      example:
+        network: 0
+        role: ""
+        snat: true
+        state: ""
+        slot: 6
+        address: address
+        changed_revision: 1
+        pending: true
+        reason: reason
+      properties:
+        network:
+          readOnly: true
+          type: integer
+        role:
+          allOf:
+          - $ref: "#/components/schemas/GatewayNetworkRoleEnum"
+          readOnly: true
+        snat:
+          readOnly: true
+          type: boolean
+        state:
+          allOf:
+          - $ref: "#/components/schemas/GatewayNetworkStateEnum"
+          readOnly: true
+        slot:
+          readOnly: true
+          type: integer
+        address:
+          format: ipv4
+          readOnly: true
+          type: string
+        changed_revision:
+          readOnly: true
+          type: integer
+        pending:
+          readOnly: true
+          type: boolean
+        reason:
+          description: "Why the last network change failed, or empty."
+          readOnly: true
+          type: string
+      required:
+      - address
+      - changed_revision
+      - network
+      - pending
+      - reason
+      - role
+      - slot
+      - snat
+      - state
+      type: object
+    GatewayNetworkCreateRequest:
+      example:
+        network: 0
+        role: router
+      properties:
+        network:
+          description: A private network of the service.
+          type: integer
+        role:
+          $ref: "#/components/schemas/GatewayNetworkRoleEnum"
+      required:
+      - network
+      - role
+      type: object
+    GatewayNetworkRoleEnum:
+      description: |-
+        * `router` - router
+        * `member` - member
+      enum:
+      - router
+      - member
+      type: string
+    GatewayNetworkStateEnum:
+      description: |-
+        * `attaching` - attaching
+        * `attached` - attached
+        * `detaching` - detaching
+        * `error` - error
+      enum:
+      - attaching
+      - attached
+      - detaching
+      - error
+      type: string
+    GatewayOperation:
+      description: |-
+        An operation's progress (spec 5.11). A route apply's per-server evidence (node, QEMU
+        process, guest boot, config) stays internal: each server shows its status. Error text is
+        never published, as it can be a Proxmox exception's text, which names nodes: a failure
+        shows a reason from the fixed vocabulary in gateway.reasons.
+      example:
+        id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        kind: ""
+        status: ""
+        network: 0
+        revision: 6
+        started_at: started_at
+        deadline_at: deadline_at
+        completed_at: completed_at
+        servers:
+        - 1
+        - 1
+        outcomes:
+          key:
+            status: status
+            completed_at: completed_at
+            reason: reason
+        reason: reason
+      properties:
+        id:
+          format: uuid
+          readOnly: true
+          type: string
+        kind:
+          allOf:
+          - $ref: "#/components/schemas/GatewayOperationKindEnum"
+          readOnly: true
+        status:
+          allOf:
+          - $ref: "#/components/schemas/GatewayOperationStatusEnum"
+          readOnly: true
+        network:
+          nullable: true
+          readOnly: true
+          type: integer
+        revision:
+          nullable: true
+          readOnly: true
+          type: integer
+        started_at:
+          readOnly: true
+          type: string
+        deadline_at:
+          nullable: true
+          readOnly: true
+          type: string
+        completed_at:
+          nullable: true
+          readOnly: true
+          type: string
+        servers:
+          items:
+            type: integer
+          readOnly: true
+          type: array
+        outcomes:
+          additionalProperties:
+            $ref: "#/components/schemas/GatewayRouteOutcome"
+          readOnly: true
+          type: object
+        reason:
+          description: Why the operation failed; empty unless it did.
+          readOnly: true
+          type: string
+      required:
+      - completed_at
+      - deadline_at
+      - id
+      - kind
+      - network
+      - outcomes
+      - reason
+      - revision
+      - servers
+      - started_at
+      - status
+      type: object
+    GatewayOperationKindEnum:
+      description: |-
+        * `provision` - Provision
+        * `attach` - Attach
+        * `detach` - Detach
+        * `reenroll` - Reenroll
+        * `cancel` - Cancel
+        * `route_apply` - Route Apply
+        * `config_delete` - Config Delete
+        * `maintenance` - Maintenance
+        * `rescue` - Rescue
+      enum:
+      - provision
+      - attach
+      - detach
+      - reenroll
+      - cancel
+      - route_apply
+      - config_delete
+      - maintenance
+      - rescue
+      type: string
+    GatewayOperationStatusEnum:
+      description: |-
+        * `queued` - Queued
+        * `running` - Running
+        * `applied` - Applied
+        * `failed` - Failed
+      enum:
+      - queued
+      - running
+      - applied
+      - failed
+      type: string
+    GatewayPortRange:
+      example:
+        start: 9607
+        end: 39073
+      properties:
+        start:
+          maximum: 65535
+          minimum: 1
+          type: integer
+        end:
+          maximum: 65535
+          minimum: 1
+          type: integer
+      required:
+      - end
+      - start
+      type: object
+    GatewayPortRangeRequest:
+      example:
+        start: 9607
+        end: 39073
+      properties:
+        start:
+          maximum: 65535
+          minimum: 1
+          type: integer
+        end:
+          maximum: 65535
+          minimum: 1
+          type: integer
+      required:
+      - end
+      - start
+      type: object
+    GatewayPreview:
+      properties:
+        revision:
+          type: integer
+        servers:
+          items:
+            $ref: "#/components/schemas/GatewayPreviewServer"
+          type: array
+      required:
+      - revision
+      - servers
+      type: object
+    GatewayPreviewNetwork:
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+      required:
+      - id
+      - name
+      type: object
+    GatewayPreviewServer:
+      properties:
+        id:
+          type: integer
+        hostname:
+          type: string
+      required:
+      - hostname
+      - id
+      type: object
+    GatewayReenrollConflict:
+      description: "A re-enrollment's 409 answer: the conflict, and a fresh preview\
+        \ of what the restart takes away."
+      example:
+        message: message
+        extra:
+          fields:
+            key:
+            - fields
+            - fields
+          preview: ""
+      properties:
+        message:
+          type: string
+        extra:
+          $ref: "#/components/schemas/GatewayDeleteConflictExtra"
+      required:
+      - extra
+      - message
+      type: object
+    GatewayReenrollRequest:
+      description: |-
+        The body of a re-enrollment (spec 8.1 step 6, 13.1): the preview's revision, the networks the
+        gateway routes for and the servers that lose internet while it restarts.
+      example:
+        revision: 0
+        servers:
+        - 6
+        - 6
+        networks:
+        - 1
+        - 1
+      properties:
+        revision:
+          description: "The gateway's desired revision from the preview; without it,\
+            \ a preview."
+          type: integer
+        servers:
+          description: The preview's server ids.
+          items:
+            type: integer
+          type: array
+        networks:
+          description: The preview's network ids.
+          items:
+            type: integer
+          type: array
+      type: object
+    GatewayRoute:
+      description: "An http listener's route (spec 5.6): a host and path prefix to\
+        \ a backend pool; pending until applied."
+      example:
+        id: 0
+        hostnames:
+        - hostnames
+        - hostnames
+        path_prefix: path_prefix
+        pool: 6
+        redirect_https: true
+        enabled: true
+        changed_revision: 1
+        pending: true
+      properties:
+        id:
+          readOnly: true
+          type: integer
+        hostnames:
+          description: Empty matches every host.
+          items:
+            type: string
+          type: array
+        path_prefix:
+          readOnly: true
+          type: string
+        pool:
+          type: integer
+        redirect_https:
+          description: "Always false: HTTPS redirects are not available yet."
+          readOnly: true
+          type: boolean
+        enabled:
+          readOnly: true
+          type: boolean
+        changed_revision:
+          readOnly: true
+          type: integer
+        pending:
+          readOnly: true
+          type: boolean
+      required:
+      - changed_revision
+      - enabled
+      - hostnames
+      - id
+      - path_prefix
+      - pending
+      - pool
+      - redirect_https
+      type: object
+    GatewayRouteOutcome:
+      example:
+        status: status
+        completed_at: completed_at
+        reason: reason
+      properties:
+        status:
+          description: "queued, running, applied or failed."
+          type: string
+        completed_at:
+          nullable: true
+          type: string
+        reason:
+          description: "Why the server failed, or why its applied route is not acknowledged."
+          type: string
+      required:
+      - completed_at
+      - reason
+      - status
+      type: object
+    GatewayRouteWriteRequest:
+      description: The fields a customer writes; gateway.lb_routes.clean_route decides
+        what they may hold.
+      example:
+        hostnames:
+        - hostnames
+        - hostnames
+        path_prefix: path_prefix
+        pool: 0
+        redirect_https: true
+        enabled: true
+      properties:
+        hostnames:
+          description: Up to 16 names; empty matches every host.
+          items:
+            minLength: 1
+            type: string
+          type: array
+        path_prefix:
+          description: Literal and case-sensitive.
+          maxLength: 256
+          minLength: 1
+          type: string
+        pool:
+          description: A backend pool's id.
+          type: integer
+        redirect_https:
+          description: Only false is accepted for now.
+          type: boolean
+        enabled:
+          type: boolean
+      type: object
+    GatewayStateEnum:
+      description: |-
+        * `provisioning` - Provisioning
+        * `enrolling` - Enrolling
+        * `active` - Active
+        * `config_error` - Configuration error
+        * `unreachable` - Unreachable
+        * `enrollment_conflict` - Enrollment conflict
+        * `failed` - Failed
+        * `suspended` - Suspended
+        * `maintenance` - Maintenance
+        * `terminating` - Terminating
+        * `terminated` - Terminated
+      enum:
+      - provisioning
+      - enrolling
+      - active
+      - config_error
+      - unreachable
+      - enrollment_conflict
+      - failed
+      - suspended
+      - maintenance
+      - terminating
+      - terminated
+      type: string
+    GatewayStatus:
+      description: A gateway's state and the customer part of its last status report;
+        unknown values are null.
+      example:
+        state: provisioning
+        state_reason: state_reason
+        state_changed_at: state_changed_at
+        desired_revision: 0
+        applied_revision: 6
+        last_status_at: last_status_at
+        agent_version: agent_version
+        envoy_version: envoy_version
+        image_version: image_version
+        attempted_revision: 1
+        local_ready: true
+        clock_synchronized: true
+        apply_error: ""
+        interfaces:
+        - slot: 5
+          name: name
+          state: state
+          addresses:
+          - addresses
+          - addresses
+        - slot: 5
+          name: name
+          state: state
+          addresses:
+          - addresses
+          - addresses
+        conntrack: ""
+        egress_probe: ""
+        security_updates: 5
+        reboot_required: true
+        uptime_s: 2
+      properties:
+        state:
+          $ref: "#/components/schemas/GatewayStateEnum"
+        state_reason:
+          type: string
+        state_changed_at:
+          nullable: true
+          type: string
+        desired_revision:
+          type: integer
+        applied_revision:
+          nullable: true
+          type: integer
+        last_status_at:
+          nullable: true
+          type: string
+        agent_version:
+          nullable: true
+          type: string
+        envoy_version:
+          nullable: true
+          type: string
+        image_version:
+          nullable: true
+          type: string
+        attempted_revision:
+          nullable: true
+          type: integer
+        local_ready:
+          nullable: true
+          type: boolean
+        clock_synchronized:
+          nullable: true
+          type: boolean
+        apply_error:
+          allOf:
+          - $ref: "#/components/schemas/GatewayApplyError"
+          nullable: true
+        interfaces:
+          items:
+            $ref: "#/components/schemas/GatewayInterface"
+          nullable: true
+          type: array
+        conntrack:
+          allOf:
+          - $ref: "#/components/schemas/GatewayConntrack"
+          nullable: true
+        egress_probe:
+          allOf:
+          - $ref: "#/components/schemas/GatewayEgressProbe"
+          nullable: true
+        security_updates:
+          nullable: true
+          type: integer
+        reboot_required:
+          nullable: true
+          type: boolean
+        uptime_s:
+          nullable: true
+          type: integer
+      required:
+      - agent_version
+      - applied_revision
+      - apply_error
+      - attempted_revision
+      - clock_synchronized
+      - conntrack
+      - desired_revision
+      - egress_probe
+      - envoy_version
+      - image_version
+      - interfaces
+      - last_status_at
+      - local_ready
+      - reboot_required
+      - security_updates
+      - state
+      - state_changed_at
+      - state_reason
+      - uptime_s
+      type: object
     HTTPRoute:
       description: Serializer for HTTPRoute resources with automatic certificate issuance.
       example:
@@ -14786,15 +18397,11 @@ components:
       type: object
     KubeVersionEnum:
       description: |-
-        * `1.33.13` - 1.33.13
-        * `1.34.10` - 1.34.10
-        * `1.35.7` - 1.35.7
-        * `1.36.3` - 1.36.3
+        * `1.35.10` - 1.35.10
+        * `1.36.6` - 1.36.6
       enum:
-      - 1.33.13
-      - 1.34.10
-      - 1.35.7
-      - 1.36.3
+      - 1.35.10
+      - 1.36.6
       type: string
     LBFirewallRule:
       example:
@@ -14929,6 +18536,120 @@ components:
           maximum: 32767
           minimum: 0
           type: integer
+      type: object
+    LBReimageAvailabilityEnum:
+      description: |-
+        * `busy` - busy
+        * `unavailable` - unavailable
+      enum:
+      - busy
+      - unavailable
+      type: string
+    LBReimageOperation:
+      properties:
+        operation_id:
+          type: string
+        state:
+          $ref: "#/components/schemas/LBReimageOperationStateEnum"
+        rollback_until:
+          nullable: true
+          type: string
+      required:
+      - operation_id
+      - rollback_until
+      - state
+      type: object
+    LBReimageOperationStateEnum:
+      description: |-
+        * `preparing` - preparing
+        * `switching` - switching
+        * `restoring` - restoring
+        * `cancelling` - cancelling
+        * `paused` - paused
+        * `done` - done
+        * `rolled_back` - rolled_back
+        * `failed` - failed
+      enum:
+      - preparing
+      - switching
+      - restoring
+      - cancelling
+      - paused
+      - done
+      - rolled_back
+      - failed
+      type: string
+    LBReimageRefused:
+      example:
+        refusal: plan_stale
+      properties:
+        refusal:
+          $ref: "#/components/schemas/RefusalEnum"
+      required:
+      - refusal
+      type: object
+    LBReimageRequest:
+      example:
+        plan_id: plan_id
+        confirmation: confirmation
+      properties:
+        plan_id:
+          description: The plan_id returned by GET
+          minLength: 1
+          type: string
+        confirmation:
+          description: "The cluster's name, typed to confirm"
+          minLength: 1
+          type: string
+      required:
+      - confirmation
+      - plan_id
+      type: object
+    LBReimageStart:
+      properties:
+        eligible:
+          type: boolean
+        reason:
+          allOf:
+          - $ref: "#/components/schemas/LBReimageAvailabilityEnum"
+          description: |-
+            Why no start is possible now: busy (try later) or unavailable
+
+            * `busy` - busy
+            * `unavailable` - unavailable
+          nullable: true
+        plan_id:
+          type: string
+      required:
+      - eligible
+      - plan_id
+      - reason
+      type: object
+    LBReimageStarted:
+      example:
+        operation_id: operation_id
+      properties:
+        operation_id:
+          type: string
+      required:
+      - operation_id
+      type: object
+    LBReimageStatus:
+      example:
+        operation: ""
+        start: ""
+      properties:
+        operation:
+          allOf:
+          - $ref: "#/components/schemas/LBReimageOperation"
+          nullable: true
+        start:
+          allOf:
+          - $ref: "#/components/schemas/LBReimageStart"
+          nullable: true
+      required:
+      - operation
+      - start
       type: object
     LBUpgradeDispatchResponse:
       example:
@@ -16189,6 +19910,466 @@ components:
         results:
           items:
             $ref: "#/components/schemas/FundsLog"
+          type: array
+      required:
+      - count
+      - results
+      type: object
+    PaginatedGatewayBackendList:
+      example:
+        count: 123
+        next: http://api.example.org/accounts/?page=4
+        previous: http://api.example.org/accounts/?page=2
+        results:
+        - id: 0
+          network: 6
+          address: address
+          port: 1
+          weight: 5
+          enabled: true
+          health: ""
+          health_changed: health_changed
+          changed_revision: 5
+          pending: true
+        - id: 0
+          network: 6
+          address: address
+          port: 1
+          weight: 5
+          enabled: true
+          health: ""
+          health_changed: health_changed
+          changed_revision: 5
+          pending: true
+      properties:
+        count:
+          example: 123
+          type: integer
+        next:
+          example: http://api.example.org/accounts/?page=4
+          format: uri
+          nullable: true
+          type: string
+        previous:
+          example: http://api.example.org/accounts/?page=2
+          format: uri
+          nullable: true
+          type: string
+        results:
+          items:
+            $ref: "#/components/schemas/GatewayBackend"
+          type: array
+      required:
+      - count
+      - results
+      type: object
+    PaginatedGatewayBackendPoolList:
+      example:
+        count: 123
+        next: http://api.example.org/accounts/?page=4
+        previous: http://api.example.org/accounts/?page=2
+        results:
+        - id: 0
+          name: name
+          policy: ""
+          proxy_protocol: true
+          health_check: ""
+          changed_revision: 6
+          pending: true
+        - id: 0
+          name: name
+          policy: ""
+          proxy_protocol: true
+          health_check: ""
+          changed_revision: 6
+          pending: true
+      properties:
+        count:
+          example: 123
+          type: integer
+        next:
+          example: http://api.example.org/accounts/?page=4
+          format: uri
+          nullable: true
+          type: string
+        previous:
+          example: http://api.example.org/accounts/?page=2
+          format: uri
+          nullable: true
+          type: string
+        results:
+          items:
+            $ref: "#/components/schemas/GatewayBackendPool"
+          type: array
+      required:
+      - count
+      - results
+      type: object
+    PaginatedGatewayFirewallRuleList:
+      example:
+        count: 123
+        next: http://api.example.org/accounts/?page=4
+        previous: http://api.example.org/accounts/?page=2
+        results:
+        - id: 0
+          position: 6
+          action: ""
+          source: ""
+          destination: ""
+          protocol: ""
+          ports:
+          - start: 9607
+            end: 39073
+          - start: 9607
+            end: 39073
+          enabled: true
+          comment: comment
+          changed_revision: 5
+          pending: true
+        - id: 0
+          position: 6
+          action: ""
+          source: ""
+          destination: ""
+          protocol: ""
+          ports:
+          - start: 9607
+            end: 39073
+          - start: 9607
+            end: 39073
+          enabled: true
+          comment: comment
+          changed_revision: 5
+          pending: true
+      properties:
+        count:
+          example: 123
+          type: integer
+        next:
+          example: http://api.example.org/accounts/?page=4
+          format: uri
+          nullable: true
+          type: string
+        previous:
+          example: http://api.example.org/accounts/?page=2
+          format: uri
+          nullable: true
+          type: string
+        results:
+          items:
+            $ref: "#/components/schemas/GatewayFirewallRule"
+          type: array
+      required:
+      - count
+      - results
+      type: object
+    PaginatedGatewayForwardList:
+      example:
+        count: 123
+        next: http://api.example.org/accounts/?page=4
+        previous: http://api.example.org/accounts/?page=2
+        results:
+        - id: 0
+          protocol: ""
+          public_ports: ""
+          allowed_sources: ""
+          target: ""
+          preserve_client_ip: true
+          enabled: true
+          comment: comment
+          changed_revision: 6
+          pending: true
+        - id: 0
+          protocol: ""
+          public_ports: ""
+          allowed_sources: ""
+          target: ""
+          preserve_client_ip: true
+          enabled: true
+          comment: comment
+          changed_revision: 6
+          pending: true
+      properties:
+        count:
+          example: 123
+          type: integer
+        next:
+          example: http://api.example.org/accounts/?page=4
+          format: uri
+          nullable: true
+          type: string
+        previous:
+          example: http://api.example.org/accounts/?page=2
+          format: uri
+          nullable: true
+          type: string
+        results:
+          items:
+            $ref: "#/components/schemas/GatewayForward"
+          type: array
+      required:
+      - count
+      - results
+      type: object
+    PaginatedGatewayLBListenerList:
+      example:
+        count: 123
+        next: http://api.example.org/accounts/?page=4
+        previous: http://api.example.org/accounts/?page=2
+        results:
+        - id: 0
+          protocol: ""
+          port: 6
+          mode: tcp
+          pool: 1
+          allowed_sources:
+          - allowed_sources
+          - allowed_sources
+          enabled: true
+          comment: comment
+          changed_revision: 5
+          pending: true
+        - id: 0
+          protocol: ""
+          port: 6
+          mode: tcp
+          pool: 1
+          allowed_sources:
+          - allowed_sources
+          - allowed_sources
+          enabled: true
+          comment: comment
+          changed_revision: 5
+          pending: true
+      properties:
+        count:
+          example: 123
+          type: integer
+        next:
+          example: http://api.example.org/accounts/?page=4
+          format: uri
+          nullable: true
+          type: string
+        previous:
+          example: http://api.example.org/accounts/?page=2
+          format: uri
+          nullable: true
+          type: string
+        results:
+          items:
+            $ref: "#/components/schemas/GatewayLBListener"
+          type: array
+      required:
+      - count
+      - results
+      type: object
+    PaginatedGatewayList:
+      example:
+        count: 123
+        next: http://api.example.org/accounts/?page=4
+        previous: http://api.example.org/accounts/?page=2
+        results:
+        - id: 0
+          name: name
+          state: ""
+          state_reason: state_reason
+          status: ""
+          desired_revision: 6
+          applied_revision: 1
+          ipv4: ipv4
+          ipv6: ipv6
+          maintenance_weekday: 5
+          maintenance_hour: 5
+          ha_enabled: true
+          current_operation: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          created: created
+        - id: 0
+          name: name
+          state: ""
+          state_reason: state_reason
+          status: ""
+          desired_revision: 6
+          applied_revision: 1
+          ipv4: ipv4
+          ipv6: ipv6
+          maintenance_weekday: 5
+          maintenance_hour: 5
+          ha_enabled: true
+          current_operation: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          created: created
+      properties:
+        count:
+          example: 123
+          type: integer
+        next:
+          example: http://api.example.org/accounts/?page=4
+          format: uri
+          nullable: true
+          type: string
+        previous:
+          example: http://api.example.org/accounts/?page=2
+          format: uri
+          nullable: true
+          type: string
+        results:
+          items:
+            $ref: "#/components/schemas/Gateway"
+          type: array
+      required:
+      - count
+      - results
+      type: object
+    PaginatedGatewayNetworkList:
+      example:
+        count: 123
+        next: http://api.example.org/accounts/?page=4
+        previous: http://api.example.org/accounts/?page=2
+        results:
+        - network: 0
+          role: ""
+          snat: true
+          state: ""
+          slot: 6
+          address: address
+          changed_revision: 1
+          pending: true
+          reason: reason
+        - network: 0
+          role: ""
+          snat: true
+          state: ""
+          slot: 6
+          address: address
+          changed_revision: 1
+          pending: true
+          reason: reason
+      properties:
+        count:
+          example: 123
+          type: integer
+        next:
+          example: http://api.example.org/accounts/?page=4
+          format: uri
+          nullable: true
+          type: string
+        previous:
+          example: http://api.example.org/accounts/?page=2
+          format: uri
+          nullable: true
+          type: string
+        results:
+          items:
+            $ref: "#/components/schemas/GatewayNetwork"
+          type: array
+      required:
+      - count
+      - results
+      type: object
+    PaginatedGatewayOperationList:
+      example:
+        count: 123
+        next: http://api.example.org/accounts/?page=4
+        previous: http://api.example.org/accounts/?page=2
+        results:
+        - id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          kind: ""
+          status: ""
+          network: 0
+          revision: 6
+          started_at: started_at
+          deadline_at: deadline_at
+          completed_at: completed_at
+          servers:
+          - 1
+          - 1
+          outcomes:
+            key:
+              status: status
+              completed_at: completed_at
+              reason: reason
+          reason: reason
+        - id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          kind: ""
+          status: ""
+          network: 0
+          revision: 6
+          started_at: started_at
+          deadline_at: deadline_at
+          completed_at: completed_at
+          servers:
+          - 1
+          - 1
+          outcomes:
+            key:
+              status: status
+              completed_at: completed_at
+              reason: reason
+          reason: reason
+      properties:
+        count:
+          example: 123
+          type: integer
+        next:
+          example: http://api.example.org/accounts/?page=4
+          format: uri
+          nullable: true
+          type: string
+        previous:
+          example: http://api.example.org/accounts/?page=2
+          format: uri
+          nullable: true
+          type: string
+        results:
+          items:
+            $ref: "#/components/schemas/GatewayOperation"
+          type: array
+      required:
+      - count
+      - results
+      type: object
+    PaginatedGatewayRouteList:
+      example:
+        count: 123
+        next: http://api.example.org/accounts/?page=4
+        previous: http://api.example.org/accounts/?page=2
+        results:
+        - id: 0
+          hostnames:
+          - hostnames
+          - hostnames
+          path_prefix: path_prefix
+          pool: 6
+          redirect_https: true
+          enabled: true
+          changed_revision: 1
+          pending: true
+        - id: 0
+          hostnames:
+          - hostnames
+          - hostnames
+          path_prefix: path_prefix
+          pool: 6
+          redirect_https: true
+          enabled: true
+          changed_revision: 1
+          pending: true
+      properties:
+        count:
+          example: 123
+          type: integer
+        next:
+          example: http://api.example.org/accounts/?page=4
+          format: uri
+          nullable: true
+          type: string
+        previous:
+          example: http://api.example.org/accounts/?page=2
+          format: uri
+          nullable: true
+          type: string
+        results:
+          items:
+            $ref: "#/components/schemas/GatewayRoute"
           type: array
       required:
       - count
@@ -17644,7 +21825,7 @@ components:
           minLength: 1
           type: string
         company:
-          maxLength: 40
+          maxLength: 128
           nullable: true
           type: string
         address:
@@ -17750,6 +21931,252 @@ components:
           maxLength: 200
           minLength: 1
           type: string
+      type: object
+    PatchedGatewayBackendPoolWriteRequest:
+      description: The fields a customer writes; gateway.backend_pools.clean_pool
+        decides what they may hold.
+      example:
+        name: name
+        policy: round_robin
+        proxy_protocol: true
+        health_check:
+          type: none
+          path: path
+          status_min: 139
+          status_max: 400
+          interval_s: 10
+          timeout_s: 18
+          healthy_threshold: 6
+          unhealthy_threshold: 3
+          port: 46277
+      properties:
+        name:
+          maxLength: 64
+          minLength: 1
+          type: string
+        policy:
+          $ref: "#/components/schemas/GatewayBackendPoolPolicyEnum"
+        proxy_protocol:
+          description: PROXY protocol v2 to the servers; tcp only.
+          type: boolean
+        health_check:
+          $ref: "#/components/schemas/GatewayHealthCheckWriteRequest"
+      type: object
+    PatchedGatewayBackendWriteRequest:
+      description: The fields a customer writes; gateway.backend_pools.clean_backend
+        decides what they may hold.
+      example:
+        network: 0
+        address: address
+        port: 39501
+        weight: 15
+        enabled: true
+      properties:
+        network:
+          description: An attached private network's id.
+          type: integer
+        address:
+          description: "A host of that network, other than the gateway."
+          minLength: 1
+          type: string
+        port:
+          maximum: 65535
+          minimum: 1
+          type: integer
+        weight:
+          maximum: 100
+          minimum: 1
+          type: integer
+        enabled:
+          type: boolean
+      type: object
+    PatchedGatewayFirewallRuleWriteRequest:
+      description: The fields a customer writes; gateway.firewall.clean_rule decides
+        what they may hold.
+      example:
+        action: ACCEPT
+        source:
+          network: 0
+          cidr: cidr
+        destination:
+          network: 6
+          cidr: cidr
+          internet: true
+        protocol: tcp
+        ports:
+        - start: 9607
+          end: 39073
+        - start: 9607
+          end: 39073
+        enabled: true
+        comment: comment
+      properties:
+        action:
+          $ref: "#/components/schemas/FwPolicyOutEnum"
+        source:
+          $ref: "#/components/schemas/GatewayFirewallSourceRequest"
+        destination:
+          $ref: "#/components/schemas/GatewayFirewallDestinationRequest"
+        protocol:
+          $ref: "#/components/schemas/GatewayFirewallProtocolEnum"
+        ports:
+          items:
+            $ref: "#/components/schemas/GatewayPortRangeRequest"
+          type: array
+        enabled:
+          type: boolean
+        comment:
+          maxLength: 256
+          type: string
+      type: object
+    PatchedGatewayForwardWriteRequest:
+      description: The fields a customer writes; gateway.forwards.clean_forward decides
+        what they may hold.
+      example:
+        protocol: tcp
+        public_ports:
+          start: 9607
+          end: 39073
+        target:
+          network: 0
+          address: address
+          port_start: 39501
+        allowed_sources:
+        - allowed_sources
+        - allowed_sources
+        preserve_client_ip: true
+        enabled: true
+        comment: comment
+      properties:
+        protocol:
+          $ref: "#/components/schemas/GatewayForwardProtocolEnum"
+        public_ports:
+          $ref: "#/components/schemas/GatewayPortRangeRequest"
+        target:
+          $ref: "#/components/schemas/GatewayForwardTargetRequest"
+        allowed_sources:
+          description: IPv4 networks; empty means any source.
+          items:
+            minLength: 1
+            type: string
+          type: array
+        preserve_client_ip:
+          description: Only false is accepted for now.
+          type: boolean
+        enabled:
+          type: boolean
+        comment:
+          maxLength: 256
+          type: string
+      type: object
+    PatchedGatewayLBListenerWriteRequest:
+      description: |-
+        The fields a customer writes; gateway.lb_listeners.clean_listener decides what they may hold.
+
+        protocol, port and mode are set at creation and cannot change.
+      example:
+        protocol: tcp
+        port: 5249
+        mode: ""
+        pool: 6
+        allowed_sources:
+        - allowed_sources
+        - allowed_sources
+        enabled: true
+        comment: comment
+      properties:
+        protocol:
+          $ref: "#/components/schemas/GatewayForwardProtocolEnum"
+        port:
+          maximum: 65535
+          minimum: 1
+          type: integer
+        mode:
+          allOf:
+          - $ref: "#/components/schemas/GatewayLBListenerModeEnum"
+          description: |-
+            tcp, udp or http; https is not available yet.
+
+            * `tcp` - tcp
+            * `udp` - udp
+            * `http` - http
+            * `https` - https
+        pool:
+          description: A backend pool's id; tcp and udp only.
+          nullable: true
+          type: integer
+        allowed_sources:
+          description: IPv4 and IPv6 networks; empty means any source.
+          items:
+            minLength: 1
+            type: string
+          type: array
+        enabled:
+          type: boolean
+        comment:
+          maxLength: 256
+          type: string
+      type: object
+    PatchedGatewayNetworkUpdateRequest:
+      example:
+        snat: true
+      properties:
+        snat:
+          description: A router network's internet egress through the gateway.
+          type: boolean
+      type: object
+    PatchedGatewayRouteWriteRequest:
+      description: The fields a customer writes; gateway.lb_routes.clean_route decides
+        what they may hold.
+      example:
+        hostnames:
+        - hostnames
+        - hostnames
+        path_prefix: path_prefix
+        pool: 0
+        redirect_https: true
+        enabled: true
+      properties:
+        hostnames:
+          description: Up to 16 names; empty matches every host.
+          items:
+            minLength: 1
+            type: string
+          type: array
+        path_prefix:
+          description: Literal and case-sensitive.
+          maxLength: 256
+          minLength: 1
+          type: string
+        pool:
+          description: A backend pool's id.
+          type: integer
+        redirect_https:
+          description: Only false is accepted for now.
+          type: boolean
+        enabled:
+          type: boolean
+      type: object
+    PatchedGatewayUpdateRequest:
+      description: "The name, and the maintenance window: weekday 0 (Monday) to 6\
+        \ (Sunday), hour 0 to 23, Bucharest time."
+      example:
+        name: name
+        maintenance_weekday: 0
+        maintenance_hour: 13
+      properties:
+        name:
+          maxLength: 64
+          minLength: 1
+          type: string
+        maintenance_weekday:
+          maximum: 6
+          minimum: 0
+          type: integer
+        maintenance_hour:
+          maximum: 23
+          minimum: 0
+          type: integer
       type: object
     PatchedHTTPRouteRequest:
       description: Serializer for HTTPRoute resources with automatic certificate issuance.
@@ -17949,10 +22376,19 @@ components:
       type: object
     PatchedServerDetailRequest:
       example:
+        hostname: hostname
         project: project
         password: password
         ssh_pub_key: ssh_pub_key
       properties:
+        hostname:
+          description: "Renaming also moves reverse DNS still on the old name. The\
+            \ server takes the new name at its next reboot from the panel or API,\
+            \ which also creates new SSH host keys and resets the login password and\
+            \ SSH keys to the ones saved here."
+          maxLength: 200
+          minLength: 1
+          type: string
         project:
           maxLength: 200
           type: string
@@ -18685,6 +23121,18 @@ components:
       - manual
       - unsubscribe
       type: string
+    RefusalEnum:
+      description: |-
+        * `plan_stale` - plan_stale
+        * `confirmation_invalid` - confirmation_invalid
+        * `busy` - busy
+        * `unavailable` - unavailable
+      enum:
+      - plan_stale
+      - confirmation_invalid
+      - busy
+      - unavailable
+      type: string
     ReinstallRequest:
       example:
         os_id: 0
@@ -18982,6 +23430,106 @@ components:
           type: string
       required:
       - reverse_dns
+      type: object
+    RouteConfigEnum:
+      description: |-
+        * `ok` - ok
+        * `missing` - missing
+        * `duplicate` - duplicate
+        * `obsolete` - obsolete
+        * `unknown` - unknown
+      enum:
+      - ok
+      - missing
+      - duplicate
+      - obsolete
+      - unknown
+      type: string
+    RoutePowerEnum:
+      description: |-
+        * `running` - running
+        * `stopped` - stopped
+        * `unknown` - unknown
+      enum:
+      - running
+      - stopped
+      - unknown
+      type: string
+    RouteStatus:
+      example:
+        network: 0
+        gateway: 6
+        servers:
+        - server: 1
+          hostname: hostname
+          power: running
+          config: ""
+          pending: ""
+          routes_here: true
+          acknowledged: true
+        - server: 1
+          hostname: hostname
+          power: running
+          config: ""
+          pending: ""
+          routes_here: true
+          acknowledged: true
+        operations:
+        - id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          kind: ""
+          status: ""
+          network: 0
+          revision: 6
+          started_at: started_at
+          deadline_at: deadline_at
+          completed_at: completed_at
+          servers:
+          - 1
+          - 1
+          outcomes:
+            key:
+              status: status
+              completed_at: completed_at
+              reason: reason
+          reason: reason
+        - id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          kind: ""
+          status: ""
+          network: 0
+          revision: 6
+          started_at: started_at
+          deadline_at: deadline_at
+          completed_at: completed_at
+          servers:
+          - 1
+          - 1
+          outcomes:
+            key:
+              status: status
+              completed_at: completed_at
+              reason: reason
+          reason: reason
+      properties:
+        network:
+          type: integer
+        gateway:
+          description: "The gateway that routes for the network, or null."
+          nullable: true
+          type: integer
+        servers:
+          items:
+            $ref: "#/components/schemas/ServerRoute"
+          type: array
+        operations:
+          description: "The network's route applies, newest first."
+          items:
+            $ref: "#/components/schemas/GatewayOperation"
+          type: array
+      required:
+      - gateway
+      - network
+      - operations
+      - servers
       type: object
     SSHKey:
       example:
@@ -19543,7 +24091,11 @@ components:
           readOnly: true
           type: integer
         hostname:
-          readOnly: true
+          description: "Renaming also moves reverse DNS still on the old name. The\
+            \ server takes the new name at its next reboot from the panel or API,\
+            \ which also creates new SSH host keys and resets the login password and\
+            \ SSH keys to the ones saved here."
+          maxLength: 200
           type: string
         project:
           maxLength: 200
@@ -19634,7 +24186,6 @@ components:
       - floating_ips
       - generation
       - ha_enabled
-      - hostname
       - id
       - image
       - machine
@@ -19649,10 +24200,19 @@ components:
       type: object
     ServerDetailRequest:
       example:
+        hostname: hostname
         project: project
         password: password
         ssh_pub_key: ssh_pub_key
       properties:
+        hostname:
+          description: "Renaming also moves reverse DNS still on the old name. The\
+            \ server takes the new name at its next reboot from the panel or API,\
+            \ which also creates new SSH host keys and resets the login password and\
+            \ SSH keys to the ones saved here."
+          maxLength: 200
+          minLength: 1
+          type: string
         project:
           maxLength: 200
           type: string
@@ -19784,6 +24344,63 @@ components:
           items:
             $ref: "#/components/schemas/ServerPublicInterface"
           type: array
+      type: object
+    ServerRoute:
+      description: |-
+        A server's default route on the network (spec 6.3): cloud-init evidence from Proxmox, not
+        proof that the running guest has the route. A server Proxmox could not tell about is unknown.
+      example:
+        server: 1
+        hostname: hostname
+        power: running
+        config: ""
+        pending: ""
+        routes_here: true
+        acknowledged: true
+      properties:
+        server:
+          type: integer
+        hostname:
+          type: string
+        power:
+          $ref: "#/components/schemas/RoutePowerEnum"
+        config:
+          allOf:
+          - $ref: "#/components/schemas/RouteConfigEnum"
+          description: |-
+            The spec 6.2 rule over current config.
+
+            * `ok` - ok
+            * `missing` - missing
+            * `duplicate` - duplicate
+            * `obsolete` - obsolete
+            * `unknown` - unknown
+        pending:
+          allOf:
+          - $ref: "#/components/schemas/RouteConfigEnum"
+          description: |-
+            The rule over the config a reboot applies; null without one.
+
+            * `ok` - ok
+            * `missing` - missing
+            * `duplicate` - duplicate
+            * `obsolete` - obsolete
+            * `unknown` - unknown
+          nullable: true
+        routes_here:
+          description: The rule gives this network's interface the default route.
+          type: boolean
+        acknowledged:
+          description: The last route apply's config and boot still hold.
+          type: boolean
+      required:
+      - acknowledged
+      - config
+      - hostname
+      - pending
+      - power
+      - routes_here
+      - server
       type: object
     ServerTrafficResponse:
       example:

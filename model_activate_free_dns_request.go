@@ -26,8 +26,8 @@ type ActivateFreeDNSRequest struct {
 	Domain string `json:"domain"`
 	// 'internal' for domains purchased on PidginHost, 'external' for user-added domains.  * `internal` - Internal * `external` - External
 	Source SourceEnum `json:"source"`
-	// IPv4 address to use as the default A record for the zone.
-	Ip string `json:"ip"`
+	// IPv4 address for the zone's default records. Leave it out to start with an empty zone.
+	Ip NullableString `json:"ip,omitempty"`
 }
 
 type _ActivateFreeDNSRequest ActivateFreeDNSRequest
@@ -36,11 +36,10 @@ type _ActivateFreeDNSRequest ActivateFreeDNSRequest
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewActivateFreeDNSRequest(domain string, source SourceEnum, ip string) *ActivateFreeDNSRequest {
+func NewActivateFreeDNSRequest(domain string, source SourceEnum) *ActivateFreeDNSRequest {
 	this := ActivateFreeDNSRequest{}
 	this.Domain = domain
 	this.Source = source
-	this.Ip = ip
 	return &this
 }
 
@@ -100,28 +99,46 @@ func (o *ActivateFreeDNSRequest) SetSource(v SourceEnum) {
 	o.Source = v
 }
 
-// GetIp returns the Ip field value
+// GetIp returns the Ip field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *ActivateFreeDNSRequest) GetIp() string {
-	if o == nil {
+	if o == nil || IsNil(o.Ip.Get()) {
 		var ret string
 		return ret
 	}
-
-	return o.Ip
+	return *o.Ip.Get()
 }
 
-// GetIpOk returns a tuple with the Ip field value
+// GetIpOk returns a tuple with the Ip field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *ActivateFreeDNSRequest) GetIpOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return &o.Ip, true
+	return o.Ip.Get(), o.Ip.IsSet()
 }
 
-// SetIp sets field value
+// HasIp returns a boolean if a field has been set.
+func (o *ActivateFreeDNSRequest) HasIp() bool {
+	if o != nil && o.Ip.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetIp gets a reference to the given NullableString and assigns it to the Ip field.
 func (o *ActivateFreeDNSRequest) SetIp(v string) {
-	o.Ip = v
+	o.Ip.Set(&v)
+}
+// SetIpNil sets the value for Ip to be an explicit nil
+func (o *ActivateFreeDNSRequest) SetIpNil() {
+	o.Ip.Set(nil)
+}
+
+// UnsetIp ensures that no value is present for Ip, not even an explicit nil
+func (o *ActivateFreeDNSRequest) UnsetIp() {
+	o.Ip.Unset()
 }
 
 func (o ActivateFreeDNSRequest) MarshalJSON() ([]byte, error) {
@@ -136,7 +153,9 @@ func (o ActivateFreeDNSRequest) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["domain"] = o.Domain
 	toSerialize["source"] = o.Source
-	toSerialize["ip"] = o.Ip
+	if o.Ip.IsSet() {
+		toSerialize["ip"] = o.Ip.Get()
+	}
 	return toSerialize, nil
 }
 
@@ -147,7 +166,6 @@ func (o *ActivateFreeDNSRequest) UnmarshalJSON(data []byte) (err error) {
 	requiredProperties := []string{
 		"domain",
 		"source",
-		"ip",
 	}
 
 	allProperties := make(map[string]interface{})

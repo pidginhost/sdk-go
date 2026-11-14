@@ -34,7 +34,7 @@ import (
 )
 
 func main() {
-	activateFreeDNSRequest := *openapiclient.NewActivateFreeDNSRequest("Domain_example", openapiclient.SourceEnum("internal"), "Ip_example") // ActivateFreeDNSRequest | 
+	activateFreeDNSRequest := *openapiclient.NewActivateFreeDNSRequest("Domain_example", openapiclient.SourceEnum("internal")) // ActivateFreeDNSRequest | 
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)

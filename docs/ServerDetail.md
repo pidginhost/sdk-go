@@ -6,7 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Billing** | [**NullableResourceBilling**](ResourceBilling.md) |  | [readonly] 
 **Id** | **int32** |  | [readonly] 
-**Hostname** | **string** |  | [readonly] 
+**Hostname** | Pointer to **string** | Renaming also moves reverse DNS still on the old name. The server takes the new name at its next reboot from the panel or API, which also creates new SSH host keys and resets the login password and SSH keys to the ones saved here. | [optional] 
 **Project** | Pointer to **string** |  | [optional] 
 **Image** | **string** |  | [readonly] 
 **Package** | **string** |  | [readonly] 
@@ -32,7 +32,7 @@ Name | Type | Description | Notes
 
 ### NewServerDetail
 
-`func NewServerDetail(billing NullableResourceBilling, id int32, hostname string, image string, package_ string, cpus int32, memory int32, diskSize int32, generation string, machine map[string]interface{}, volumes []Volume, networks ServerNetworks, floatingIps []FloatingIPSummary, status ResourceStatusEnum, username string, destroyProtection bool, haEnabled bool, customOs bool, rescueMode bool, bootIso NullableString, rescueSupported bool, ) *ServerDetail`
+`func NewServerDetail(billing NullableResourceBilling, id int32, image string, package_ string, cpus int32, memory int32, diskSize int32, generation string, machine map[string]interface{}, volumes []Volume, networks ServerNetworks, floatingIps []FloatingIPSummary, status ResourceStatusEnum, username string, destroyProtection bool, haEnabled bool, customOs bool, rescueMode bool, bootIso NullableString, rescueSupported bool, ) *ServerDetail`
 
 NewServerDetail instantiates a new ServerDetail object
 This constructor will assign default values to properties that have it defined,
@@ -116,6 +116,11 @@ and a boolean to check if the value has been set.
 
 SetHostname sets Hostname field to given value.
 
+### HasHostname
+
+`func (o *ServerDetail) HasHostname() bool`
+
+HasHostname returns a boolean if a field has been set.
 
 ### GetProject
 

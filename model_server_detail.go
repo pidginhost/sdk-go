@@ -24,7 +24,8 @@ var _ MappedNullable = &ServerDetail{}
 type ServerDetail struct {
 	Billing NullableResourceBilling `json:"billing"`
 	Id int32 `json:"id"`
-	Hostname string `json:"hostname"`
+	// Renaming also moves reverse DNS still on the old name. The server takes the new name at its next reboot from the panel or API, which also creates new SSH host keys and resets the login password and SSH keys to the ones saved here.
+	Hostname *string `json:"hostname,omitempty"`
 	Project *string `json:"project,omitempty"`
 	Image string `json:"image"`
 	Package string `json:"package"`
@@ -57,11 +58,10 @@ type _ServerDetail ServerDetail
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewServerDetail(billing NullableResourceBilling, id int32, hostname string, image string, package_ string, cpus int32, memory int32, diskSize int32, generation string, machine map[string]interface{}, volumes []Volume, networks ServerNetworks, floatingIps []FloatingIPSummary, status ResourceStatusEnum, username string, destroyProtection bool, haEnabled bool, customOs bool, rescueMode bool, bootIso NullableString, rescueSupported bool) *ServerDetail {
+func NewServerDetail(billing NullableResourceBilling, id int32, image string, package_ string, cpus int32, memory int32, diskSize int32, generation string, machine map[string]interface{}, volumes []Volume, networks ServerNetworks, floatingIps []FloatingIPSummary, status ResourceStatusEnum, username string, destroyProtection bool, haEnabled bool, customOs bool, rescueMode bool, bootIso NullableString, rescueSupported bool) *ServerDetail {
 	this := ServerDetail{}
 	this.Billing = billing
 	this.Id = id
-	this.Hostname = hostname
 	this.Image = image
 	this.Package = package_
 	this.Cpus = cpus
@@ -141,28 +141,36 @@ func (o *ServerDetail) SetId(v int32) {
 	o.Id = v
 }
 
-// GetHostname returns the Hostname field value
+// GetHostname returns the Hostname field value if set, zero value otherwise.
 func (o *ServerDetail) GetHostname() string {
-	if o == nil {
+	if o == nil || IsNil(o.Hostname) {
 		var ret string
 		return ret
 	}
-
-	return o.Hostname
+	return *o.Hostname
 }
 
-// GetHostnameOk returns a tuple with the Hostname field value
+// GetHostnameOk returns a tuple with the Hostname field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ServerDetail) GetHostnameOk() (*string, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.Hostname) {
 		return nil, false
 	}
-	return &o.Hostname, true
+	return o.Hostname, true
 }
 
-// SetHostname sets field value
+// HasHostname returns a boolean if a field has been set.
+func (o *ServerDetail) HasHostname() bool {
+	if o != nil && !IsNil(o.Hostname) {
+		return true
+	}
+
+	return false
+}
+
+// SetHostname gets a reference to the given string and assigns it to the Hostname field.
 func (o *ServerDetail) SetHostname(v string) {
-	o.Hostname = v
+	o.Hostname = &v
 }
 
 // GetProject returns the Project field value if set, zero value otherwise.
@@ -675,7 +683,9 @@ func (o ServerDetail) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["billing"] = o.Billing.Get()
 	toSerialize["id"] = o.Id
-	toSerialize["hostname"] = o.Hostname
+	if !IsNil(o.Hostname) {
+		toSerialize["hostname"] = o.Hostname
+	}
 	if !IsNil(o.Project) {
 		toSerialize["project"] = o.Project
 	}
@@ -710,7 +720,6 @@ func (o *ServerDetail) UnmarshalJSON(data []byte) (err error) {
 	requiredProperties := []string{
 		"billing",
 		"id",
-		"hostname",
 		"image",
 		"package",
 		"cpus",

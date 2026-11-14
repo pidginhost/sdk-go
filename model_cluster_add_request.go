@@ -45,7 +45,7 @@ func NewClusterAddRequest(clusterType ClusterTypeEnum, resourcePoolPackage strin
 	this := ClusterAddRequest{}
 	this.ClusterType = clusterType
 	this.ResourcePoolPackage = resourcePoolPackage
-	var kubeVersion KubeVersionEnum = KUBEVERSIONENUM__1_36_3
+	var kubeVersion KubeVersionEnum = KUBEVERSIONENUM__1_36_6
 	this.KubeVersion = &kubeVersion
 	var dualStack bool = false
 	this.DualStack = &dualStack
@@ -57,7 +57,7 @@ func NewClusterAddRequest(clusterType ClusterTypeEnum, resourcePoolPackage strin
 // but it doesn't guarantee that properties required by API are set
 func NewClusterAddRequestWithDefaults() *ClusterAddRequest {
 	this := ClusterAddRequest{}
-	var kubeVersion KubeVersionEnum = KUBEVERSIONENUM__1_36_3
+	var kubeVersion KubeVersionEnum = KUBEVERSIONENUM__1_36_6
 	this.KubeVersion = &kubeVersion
 	var dualStack bool = false
 	this.DualStack = &dualStack

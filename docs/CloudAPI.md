@@ -42,6 +42,51 @@ Method | HTTP request | Description
 [**CloudFloatingIpv6RdnsRetrieve**](CloudAPI.md#CloudFloatingIpv6RdnsRetrieve) | **Get** /api/cloud/floating-ipv6/{id}/rdns/ | 
 [**CloudFloatingIpv6Retrieve**](CloudAPI.md#CloudFloatingIpv6Retrieve) | **Get** /api/cloud/floating-ipv6/{id}/ | 
 [**CloudFloatingIpv6UnauthorizeCreate**](CloudAPI.md#CloudFloatingIpv6UnauthorizeCreate) | **Post** /api/cloud/floating-ipv6/{id}/unauthorize/ | 
+[**CloudGatewaysCreate**](CloudAPI.md#CloudGatewaysCreate) | **Post** /api/cloud/gateways/ | 
+[**CloudGatewaysDestroy**](CloudAPI.md#CloudGatewaysDestroy) | **Delete** /api/cloud/gateways/{id}/ | 
+[**CloudGatewaysFirewallRulesCreate**](CloudAPI.md#CloudGatewaysFirewallRulesCreate) | **Post** /api/cloud/gateways/{gateway_id}/firewall-rules/ | 
+[**CloudGatewaysFirewallRulesDestroy**](CloudAPI.md#CloudGatewaysFirewallRulesDestroy) | **Delete** /api/cloud/gateways/{gateway_id}/firewall-rules/{id}/ | 
+[**CloudGatewaysFirewallRulesList**](CloudAPI.md#CloudGatewaysFirewallRulesList) | **Get** /api/cloud/gateways/{gateway_id}/firewall-rules/ | 
+[**CloudGatewaysFirewallRulesMoveCreate**](CloudAPI.md#CloudGatewaysFirewallRulesMoveCreate) | **Post** /api/cloud/gateways/{gateway_id}/firewall-rules/{id}/move/ | 
+[**CloudGatewaysFirewallRulesPartialUpdate**](CloudAPI.md#CloudGatewaysFirewallRulesPartialUpdate) | **Patch** /api/cloud/gateways/{gateway_id}/firewall-rules/{id}/ | 
+[**CloudGatewaysFirewallRulesRetrieve**](CloudAPI.md#CloudGatewaysFirewallRulesRetrieve) | **Get** /api/cloud/gateways/{gateway_id}/firewall-rules/{id}/ | 
+[**CloudGatewaysList**](CloudAPI.md#CloudGatewaysList) | **Get** /api/cloud/gateways/ | 
+[**CloudGatewaysListenersCreate**](CloudAPI.md#CloudGatewaysListenersCreate) | **Post** /api/cloud/gateways/{gateway_id}/listeners/ | 
+[**CloudGatewaysListenersDestroy**](CloudAPI.md#CloudGatewaysListenersDestroy) | **Delete** /api/cloud/gateways/{gateway_id}/listeners/{id}/ | 
+[**CloudGatewaysListenersList**](CloudAPI.md#CloudGatewaysListenersList) | **Get** /api/cloud/gateways/{gateway_id}/listeners/ | 
+[**CloudGatewaysListenersPartialUpdate**](CloudAPI.md#CloudGatewaysListenersPartialUpdate) | **Patch** /api/cloud/gateways/{gateway_id}/listeners/{id}/ | 
+[**CloudGatewaysListenersRetrieve**](CloudAPI.md#CloudGatewaysListenersRetrieve) | **Get** /api/cloud/gateways/{gateway_id}/listeners/{id}/ | 
+[**CloudGatewaysListenersRoutesCreate**](CloudAPI.md#CloudGatewaysListenersRoutesCreate) | **Post** /api/cloud/gateways/{gateway_id}/listeners/{listener_id}/routes/ | 
+[**CloudGatewaysListenersRoutesDestroy**](CloudAPI.md#CloudGatewaysListenersRoutesDestroy) | **Delete** /api/cloud/gateways/{gateway_id}/listeners/{listener_id}/routes/{id}/ | 
+[**CloudGatewaysListenersRoutesList**](CloudAPI.md#CloudGatewaysListenersRoutesList) | **Get** /api/cloud/gateways/{gateway_id}/listeners/{listener_id}/routes/ | 
+[**CloudGatewaysListenersRoutesPartialUpdate**](CloudAPI.md#CloudGatewaysListenersRoutesPartialUpdate) | **Patch** /api/cloud/gateways/{gateway_id}/listeners/{listener_id}/routes/{id}/ | 
+[**CloudGatewaysListenersRoutesRetrieve**](CloudAPI.md#CloudGatewaysListenersRoutesRetrieve) | **Get** /api/cloud/gateways/{gateway_id}/listeners/{listener_id}/routes/{id}/ | 
+[**CloudGatewaysNetworksCreate**](CloudAPI.md#CloudGatewaysNetworksCreate) | **Post** /api/cloud/gateways/{gateway_id}/networks/ | 
+[**CloudGatewaysNetworksDestroy**](CloudAPI.md#CloudGatewaysNetworksDestroy) | **Delete** /api/cloud/gateways/{gateway_id}/networks/{network_id}/ | 
+[**CloudGatewaysNetworksList**](CloudAPI.md#CloudGatewaysNetworksList) | **Get** /api/cloud/gateways/{gateway_id}/networks/ | 
+[**CloudGatewaysNetworksPartialUpdate**](CloudAPI.md#CloudGatewaysNetworksPartialUpdate) | **Patch** /api/cloud/gateways/{gateway_id}/networks/{network_id}/ | 
+[**CloudGatewaysNetworksRetrieve**](CloudAPI.md#CloudGatewaysNetworksRetrieve) | **Get** /api/cloud/gateways/{gateway_id}/networks/{network_id}/ | 
+[**CloudGatewaysOperationsList**](CloudAPI.md#CloudGatewaysOperationsList) | **Get** /api/cloud/gateways/{gateway_id}/operations/ | 
+[**CloudGatewaysOperationsRetrieve**](CloudAPI.md#CloudGatewaysOperationsRetrieve) | **Get** /api/cloud/gateways/{gateway_id}/operations/{id}/ | 
+[**CloudGatewaysPartialUpdate**](CloudAPI.md#CloudGatewaysPartialUpdate) | **Patch** /api/cloud/gateways/{id}/ | 
+[**CloudGatewaysPoolsBackendsCreate**](CloudAPI.md#CloudGatewaysPoolsBackendsCreate) | **Post** /api/cloud/gateways/{gateway_id}/pools/{pool_id}/backends/ | 
+[**CloudGatewaysPoolsBackendsDestroy**](CloudAPI.md#CloudGatewaysPoolsBackendsDestroy) | **Delete** /api/cloud/gateways/{gateway_id}/pools/{pool_id}/backends/{id}/ | 
+[**CloudGatewaysPoolsBackendsList**](CloudAPI.md#CloudGatewaysPoolsBackendsList) | **Get** /api/cloud/gateways/{gateway_id}/pools/{pool_id}/backends/ | 
+[**CloudGatewaysPoolsBackendsPartialUpdate**](CloudAPI.md#CloudGatewaysPoolsBackendsPartialUpdate) | **Patch** /api/cloud/gateways/{gateway_id}/pools/{pool_id}/backends/{id}/ | 
+[**CloudGatewaysPoolsBackendsRetrieve**](CloudAPI.md#CloudGatewaysPoolsBackendsRetrieve) | **Get** /api/cloud/gateways/{gateway_id}/pools/{pool_id}/backends/{id}/ | 
+[**CloudGatewaysPoolsCreate**](CloudAPI.md#CloudGatewaysPoolsCreate) | **Post** /api/cloud/gateways/{gateway_id}/pools/ | 
+[**CloudGatewaysPoolsDestroy**](CloudAPI.md#CloudGatewaysPoolsDestroy) | **Delete** /api/cloud/gateways/{gateway_id}/pools/{id}/ | 
+[**CloudGatewaysPoolsList**](CloudAPI.md#CloudGatewaysPoolsList) | **Get** /api/cloud/gateways/{gateway_id}/pools/ | 
+[**CloudGatewaysPoolsPartialUpdate**](CloudAPI.md#CloudGatewaysPoolsPartialUpdate) | **Patch** /api/cloud/gateways/{gateway_id}/pools/{id}/ | 
+[**CloudGatewaysPoolsRetrieve**](CloudAPI.md#CloudGatewaysPoolsRetrieve) | **Get** /api/cloud/gateways/{gateway_id}/pools/{id}/ | 
+[**CloudGatewaysPortForwardsCreate**](CloudAPI.md#CloudGatewaysPortForwardsCreate) | **Post** /api/cloud/gateways/{gateway_id}/port-forwards/ | 
+[**CloudGatewaysPortForwardsDestroy**](CloudAPI.md#CloudGatewaysPortForwardsDestroy) | **Delete** /api/cloud/gateways/{gateway_id}/port-forwards/{id}/ | 
+[**CloudGatewaysPortForwardsList**](CloudAPI.md#CloudGatewaysPortForwardsList) | **Get** /api/cloud/gateways/{gateway_id}/port-forwards/ | 
+[**CloudGatewaysPortForwardsPartialUpdate**](CloudAPI.md#CloudGatewaysPortForwardsPartialUpdate) | **Patch** /api/cloud/gateways/{gateway_id}/port-forwards/{id}/ | 
+[**CloudGatewaysPortForwardsRetrieve**](CloudAPI.md#CloudGatewaysPortForwardsRetrieve) | **Get** /api/cloud/gateways/{gateway_id}/port-forwards/{id}/ | 
+[**CloudGatewaysReenrollCreate**](CloudAPI.md#CloudGatewaysReenrollCreate) | **Post** /api/cloud/gateways/{id}/reenroll/ | 
+[**CloudGatewaysRetrieve**](CloudAPI.md#CloudGatewaysRetrieve) | **Get** /api/cloud/gateways/{id}/ | 
+[**CloudGatewaysStatusRetrieve**](CloudAPI.md#CloudGatewaysStatusRetrieve) | **Get** /api/cloud/gateways/{id}/status/ | 
 [**CloudGenerationsList**](CloudAPI.md#CloudGenerationsList) | **Get** /api/cloud/generations/ | List hardware generations
 [**CloudGenerationsRetrieve**](CloudAPI.md#CloudGenerationsRetrieve) | **Get** /api/cloud/generations/{slug}/ | 
 [**CloudImagesList**](CloudAPI.md#CloudImagesList) | **Get** /api/cloud/images/ | 
@@ -61,12 +106,14 @@ Method | HTTP request | Description
 [**CloudIpv6RdnsRetrieve**](CloudAPI.md#CloudIpv6RdnsRetrieve) | **Get** /api/cloud/ipv6/{id}/rdns/ | 
 [**CloudIpv6Retrieve**](CloudAPI.md#CloudIpv6Retrieve) | **Get** /api/cloud/ipv6/{id}/ | 
 [**CloudPrivateNetworksAddServerCreate**](CloudAPI.md#CloudPrivateNetworksAddServerCreate) | **Post** /api/cloud/private-networks/{id}/add-server/ | 
+[**CloudPrivateNetworksApplyRouteCreate**](CloudAPI.md#CloudPrivateNetworksApplyRouteCreate) | **Post** /api/cloud/private-networks/{id}/apply-route/ | 
 [**CloudPrivateNetworksCreate**](CloudAPI.md#CloudPrivateNetworksCreate) | **Post** /api/cloud/private-networks/ | 
 [**CloudPrivateNetworksDestroy**](CloudAPI.md#CloudPrivateNetworksDestroy) | **Delete** /api/cloud/private-networks/{id}/ | 
 [**CloudPrivateNetworksList**](CloudAPI.md#CloudPrivateNetworksList) | **Get** /api/cloud/private-networks/ | 
 [**CloudPrivateNetworksPartialUpdate**](CloudAPI.md#CloudPrivateNetworksPartialUpdate) | **Patch** /api/cloud/private-networks/{id}/ | 
 [**CloudPrivateNetworksRemoveServerCreate**](CloudAPI.md#CloudPrivateNetworksRemoveServerCreate) | **Post** /api/cloud/private-networks/{id}/remove-server/ | 
 [**CloudPrivateNetworksRetrieve**](CloudAPI.md#CloudPrivateNetworksRetrieve) | **Get** /api/cloud/private-networks/{id}/ | 
+[**CloudPrivateNetworksRouteStatusRetrieve**](CloudAPI.md#CloudPrivateNetworksRouteStatusRetrieve) | **Get** /api/cloud/private-networks/{id}/route-status/ | 
 [**CloudPrivateNetworksUpdate**](CloudAPI.md#CloudPrivateNetworksUpdate) | **Put** /api/cloud/private-networks/{id}/ | 
 [**CloudServerPackagesByGenerationRetrieve**](CloudAPI.md#CloudServerPackagesByGenerationRetrieve) | **Get** /api/cloud/server-packages/by-generation/ | 
 [**CloudServerPackagesList**](CloudAPI.md#CloudServerPackagesList) | **Get** /api/cloud/server-packages/ | 
@@ -2770,6 +2817,3325 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
+## CloudGatewaysCreate
+
+> Gateway CloudGatewaysCreate(ctx).GatewayCreateRequest(gatewayCreateRequest).Execute()
+
+
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/pidginhost/sdk-go"
+)
+
+func main() {
+	gatewayCreateRequest := *openapiclient.NewGatewayCreateRequest("Name_example") // GatewayCreateRequest | 
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.CloudAPI.CloudGatewaysCreate(context.Background()).GatewayCreateRequest(gatewayCreateRequest).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `CloudAPI.CloudGatewaysCreate``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `CloudGatewaysCreate`: Gateway
+	fmt.Fprintf(os.Stdout, "Response from `CloudAPI.CloudGatewaysCreate`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiCloudGatewaysCreateRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **gatewayCreateRequest** | [**GatewayCreateRequest**](GatewayCreateRequest.md) |  | 
+
+### Return type
+
+[**Gateway**](Gateway.md)
+
+### Authorization
+
+[tokenAuth](../README.md#tokenAuth), [cookieAuth](../README.md#cookieAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## CloudGatewaysDestroy
+
+> GatewayOperation CloudGatewaysDestroy(ctx, id).Networks(networks).Revision(revision).Servers(servers).Execute()
+
+
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/pidginhost/sdk-go"
+)
+
+func main() {
+	id := "id_example" // string | 
+	networks := []int32{int32(123)} // []int32 | The preview's network ids. (optional)
+	revision := int32(56) // int32 | The gateway's desired revision from the preview; without it, a preview. (optional)
+	servers := []int32{int32(123)} // []int32 | The preview's server ids. (optional)
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.CloudAPI.CloudGatewaysDestroy(context.Background(), id).Networks(networks).Revision(revision).Servers(servers).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `CloudAPI.CloudGatewaysDestroy``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `CloudGatewaysDestroy`: GatewayOperation
+	fmt.Fprintf(os.Stdout, "Response from `CloudAPI.CloudGatewaysDestroy`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**id** | **string** |  | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiCloudGatewaysDestroyRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+ **networks** | **[]int32** | The preview&#39;s network ids. | 
+ **revision** | **int32** | The gateway&#39;s desired revision from the preview; without it, a preview. | 
+ **servers** | **[]int32** | The preview&#39;s server ids. | 
+
+### Return type
+
+[**GatewayOperation**](GatewayOperation.md)
+
+### Authorization
+
+[tokenAuth](../README.md#tokenAuth), [cookieAuth](../README.md#cookieAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## CloudGatewaysFirewallRulesCreate
+
+> GatewayFirewallRule CloudGatewaysFirewallRulesCreate(ctx, gatewayId).GatewayFirewallRuleWriteRequest(gatewayFirewallRuleWriteRequest).Execute()
+
+
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/pidginhost/sdk-go"
+)
+
+func main() {
+	gatewayId := int32(56) // int32 | 
+	gatewayFirewallRuleWriteRequest := *openapiclient.NewGatewayFirewallRuleWriteRequest(openapiclient.FwPolicyOutEnum("ACCEPT"), *openapiclient.NewGatewayFirewallSourceRequest(), *openapiclient.NewGatewayFirewallDestinationRequest(), openapiclient.GatewayFirewallProtocolEnum("tcp")) // GatewayFirewallRuleWriteRequest | 
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.CloudAPI.CloudGatewaysFirewallRulesCreate(context.Background(), gatewayId).GatewayFirewallRuleWriteRequest(gatewayFirewallRuleWriteRequest).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `CloudAPI.CloudGatewaysFirewallRulesCreate``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `CloudGatewaysFirewallRulesCreate`: GatewayFirewallRule
+	fmt.Fprintf(os.Stdout, "Response from `CloudAPI.CloudGatewaysFirewallRulesCreate`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**gatewayId** | **int32** |  | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiCloudGatewaysFirewallRulesCreateRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+ **gatewayFirewallRuleWriteRequest** | [**GatewayFirewallRuleWriteRequest**](GatewayFirewallRuleWriteRequest.md) |  | 
+
+### Return type
+
+[**GatewayFirewallRule**](GatewayFirewallRule.md)
+
+### Authorization
+
+[tokenAuth](../README.md#tokenAuth), [cookieAuth](../README.md#cookieAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## CloudGatewaysFirewallRulesDestroy
+
+> GatewayOperation CloudGatewaysFirewallRulesDestroy(ctx, gatewayId, id).Revision(revision).Execute()
+
+
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/pidginhost/sdk-go"
+)
+
+func main() {
+	gatewayId := int32(56) // int32 | 
+	id := int32(56) // int32 | 
+	revision := int32(56) // int32 | The gateway's desired revision from the preview; without it, a preview. (optional)
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.CloudAPI.CloudGatewaysFirewallRulesDestroy(context.Background(), gatewayId, id).Revision(revision).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `CloudAPI.CloudGatewaysFirewallRulesDestroy``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `CloudGatewaysFirewallRulesDestroy`: GatewayOperation
+	fmt.Fprintf(os.Stdout, "Response from `CloudAPI.CloudGatewaysFirewallRulesDestroy`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**gatewayId** | **int32** |  | 
+**id** | **int32** |  | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiCloudGatewaysFirewallRulesDestroyRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+ **revision** | **int32** | The gateway&#39;s desired revision from the preview; without it, a preview. | 
+
+### Return type
+
+[**GatewayOperation**](GatewayOperation.md)
+
+### Authorization
+
+[tokenAuth](../README.md#tokenAuth), [cookieAuth](../README.md#cookieAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## CloudGatewaysFirewallRulesList
+
+> PaginatedGatewayFirewallRuleList CloudGatewaysFirewallRulesList(ctx, gatewayId).Page(page).Execute()
+
+
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/pidginhost/sdk-go"
+)
+
+func main() {
+	gatewayId := int32(56) // int32 | 
+	page := int32(56) // int32 | A page number within the paginated result set. (optional)
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.CloudAPI.CloudGatewaysFirewallRulesList(context.Background(), gatewayId).Page(page).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `CloudAPI.CloudGatewaysFirewallRulesList``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `CloudGatewaysFirewallRulesList`: PaginatedGatewayFirewallRuleList
+	fmt.Fprintf(os.Stdout, "Response from `CloudAPI.CloudGatewaysFirewallRulesList`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**gatewayId** | **int32** |  | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiCloudGatewaysFirewallRulesListRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+ **page** | **int32** | A page number within the paginated result set. | 
+
+### Return type
+
+[**PaginatedGatewayFirewallRuleList**](PaginatedGatewayFirewallRuleList.md)
+
+### Authorization
+
+[tokenAuth](../README.md#tokenAuth), [cookieAuth](../README.md#cookieAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## CloudGatewaysFirewallRulesMoveCreate
+
+> GatewayFirewallRule CloudGatewaysFirewallRulesMoveCreate(ctx, gatewayId, id).GatewayFirewallMoveRequest(gatewayFirewallMoveRequest).Revision(revision).Execute()
+
+
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/pidginhost/sdk-go"
+)
+
+func main() {
+	gatewayId := int32(56) // int32 | 
+	id := int32(56) // int32 | 
+	gatewayFirewallMoveRequest := *openapiclient.NewGatewayFirewallMoveRequest(int32(123)) // GatewayFirewallMoveRequest | 
+	revision := int32(56) // int32 | The gateway's desired revision from the preview; without it, a preview. (optional)
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.CloudAPI.CloudGatewaysFirewallRulesMoveCreate(context.Background(), gatewayId, id).GatewayFirewallMoveRequest(gatewayFirewallMoveRequest).Revision(revision).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `CloudAPI.CloudGatewaysFirewallRulesMoveCreate``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `CloudGatewaysFirewallRulesMoveCreate`: GatewayFirewallRule
+	fmt.Fprintf(os.Stdout, "Response from `CloudAPI.CloudGatewaysFirewallRulesMoveCreate`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**gatewayId** | **int32** |  | 
+**id** | **int32** |  | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiCloudGatewaysFirewallRulesMoveCreateRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+ **gatewayFirewallMoveRequest** | [**GatewayFirewallMoveRequest**](GatewayFirewallMoveRequest.md) |  | 
+ **revision** | **int32** | The gateway&#39;s desired revision from the preview; without it, a preview. | 
+
+### Return type
+
+[**GatewayFirewallRule**](GatewayFirewallRule.md)
+
+### Authorization
+
+[tokenAuth](../README.md#tokenAuth), [cookieAuth](../README.md#cookieAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## CloudGatewaysFirewallRulesPartialUpdate
+
+> GatewayFirewallRule CloudGatewaysFirewallRulesPartialUpdate(ctx, gatewayId, id).PatchedGatewayFirewallRuleWriteRequest(patchedGatewayFirewallRuleWriteRequest).Execute()
+
+
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/pidginhost/sdk-go"
+)
+
+func main() {
+	gatewayId := int32(56) // int32 | 
+	id := int32(56) // int32 | 
+	patchedGatewayFirewallRuleWriteRequest := *openapiclient.NewPatchedGatewayFirewallRuleWriteRequest() // PatchedGatewayFirewallRuleWriteRequest |  (optional)
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.CloudAPI.CloudGatewaysFirewallRulesPartialUpdate(context.Background(), gatewayId, id).PatchedGatewayFirewallRuleWriteRequest(patchedGatewayFirewallRuleWriteRequest).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `CloudAPI.CloudGatewaysFirewallRulesPartialUpdate``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `CloudGatewaysFirewallRulesPartialUpdate`: GatewayFirewallRule
+	fmt.Fprintf(os.Stdout, "Response from `CloudAPI.CloudGatewaysFirewallRulesPartialUpdate`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**gatewayId** | **int32** |  | 
+**id** | **int32** |  | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiCloudGatewaysFirewallRulesPartialUpdateRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+ **patchedGatewayFirewallRuleWriteRequest** | [**PatchedGatewayFirewallRuleWriteRequest**](PatchedGatewayFirewallRuleWriteRequest.md) |  | 
+
+### Return type
+
+[**GatewayFirewallRule**](GatewayFirewallRule.md)
+
+### Authorization
+
+[tokenAuth](../README.md#tokenAuth), [cookieAuth](../README.md#cookieAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## CloudGatewaysFirewallRulesRetrieve
+
+> GatewayFirewallRule CloudGatewaysFirewallRulesRetrieve(ctx, gatewayId, id).Execute()
+
+
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/pidginhost/sdk-go"
+)
+
+func main() {
+	gatewayId := int32(56) // int32 | 
+	id := int32(56) // int32 | 
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.CloudAPI.CloudGatewaysFirewallRulesRetrieve(context.Background(), gatewayId, id).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `CloudAPI.CloudGatewaysFirewallRulesRetrieve``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `CloudGatewaysFirewallRulesRetrieve`: GatewayFirewallRule
+	fmt.Fprintf(os.Stdout, "Response from `CloudAPI.CloudGatewaysFirewallRulesRetrieve`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**gatewayId** | **int32** |  | 
+**id** | **int32** |  | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiCloudGatewaysFirewallRulesRetrieveRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+
+### Return type
+
+[**GatewayFirewallRule**](GatewayFirewallRule.md)
+
+### Authorization
+
+[tokenAuth](../README.md#tokenAuth), [cookieAuth](../README.md#cookieAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## CloudGatewaysList
+
+> PaginatedGatewayList CloudGatewaysList(ctx).Page(page).Execute()
+
+
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/pidginhost/sdk-go"
+)
+
+func main() {
+	page := int32(56) // int32 | A page number within the paginated result set. (optional)
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.CloudAPI.CloudGatewaysList(context.Background()).Page(page).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `CloudAPI.CloudGatewaysList``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `CloudGatewaysList`: PaginatedGatewayList
+	fmt.Fprintf(os.Stdout, "Response from `CloudAPI.CloudGatewaysList`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiCloudGatewaysListRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **page** | **int32** | A page number within the paginated result set. | 
+
+### Return type
+
+[**PaginatedGatewayList**](PaginatedGatewayList.md)
+
+### Authorization
+
+[tokenAuth](../README.md#tokenAuth), [cookieAuth](../README.md#cookieAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## CloudGatewaysListenersCreate
+
+> GatewayLBListener CloudGatewaysListenersCreate(ctx, gatewayId).GatewayLBListenerWriteRequest(gatewayLBListenerWriteRequest).Execute()
+
+
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/pidginhost/sdk-go"
+)
+
+func main() {
+	gatewayId := int32(56) // int32 | 
+	gatewayLBListenerWriteRequest := *openapiclient.NewGatewayLBListenerWriteRequest() // GatewayLBListenerWriteRequest |  (optional)
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.CloudAPI.CloudGatewaysListenersCreate(context.Background(), gatewayId).GatewayLBListenerWriteRequest(gatewayLBListenerWriteRequest).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `CloudAPI.CloudGatewaysListenersCreate``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `CloudGatewaysListenersCreate`: GatewayLBListener
+	fmt.Fprintf(os.Stdout, "Response from `CloudAPI.CloudGatewaysListenersCreate`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**gatewayId** | **int32** |  | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiCloudGatewaysListenersCreateRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+ **gatewayLBListenerWriteRequest** | [**GatewayLBListenerWriteRequest**](GatewayLBListenerWriteRequest.md) |  | 
+
+### Return type
+
+[**GatewayLBListener**](GatewayLBListener.md)
+
+### Authorization
+
+[tokenAuth](../README.md#tokenAuth), [cookieAuth](../README.md#cookieAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## CloudGatewaysListenersDestroy
+
+> GatewayOperation CloudGatewaysListenersDestroy(ctx, gatewayId, id).Revision(revision).Execute()
+
+
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/pidginhost/sdk-go"
+)
+
+func main() {
+	gatewayId := int32(56) // int32 | 
+	id := int32(56) // int32 | 
+	revision := int32(56) // int32 | The gateway's desired revision from the preview; without it, a preview. (optional)
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.CloudAPI.CloudGatewaysListenersDestroy(context.Background(), gatewayId, id).Revision(revision).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `CloudAPI.CloudGatewaysListenersDestroy``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `CloudGatewaysListenersDestroy`: GatewayOperation
+	fmt.Fprintf(os.Stdout, "Response from `CloudAPI.CloudGatewaysListenersDestroy`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**gatewayId** | **int32** |  | 
+**id** | **int32** |  | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiCloudGatewaysListenersDestroyRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+ **revision** | **int32** | The gateway&#39;s desired revision from the preview; without it, a preview. | 
+
+### Return type
+
+[**GatewayOperation**](GatewayOperation.md)
+
+### Authorization
+
+[tokenAuth](../README.md#tokenAuth), [cookieAuth](../README.md#cookieAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## CloudGatewaysListenersList
+
+> PaginatedGatewayLBListenerList CloudGatewaysListenersList(ctx, gatewayId).Page(page).Execute()
+
+
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/pidginhost/sdk-go"
+)
+
+func main() {
+	gatewayId := int32(56) // int32 | 
+	page := int32(56) // int32 | A page number within the paginated result set. (optional)
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.CloudAPI.CloudGatewaysListenersList(context.Background(), gatewayId).Page(page).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `CloudAPI.CloudGatewaysListenersList``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `CloudGatewaysListenersList`: PaginatedGatewayLBListenerList
+	fmt.Fprintf(os.Stdout, "Response from `CloudAPI.CloudGatewaysListenersList`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**gatewayId** | **int32** |  | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiCloudGatewaysListenersListRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+ **page** | **int32** | A page number within the paginated result set. | 
+
+### Return type
+
+[**PaginatedGatewayLBListenerList**](PaginatedGatewayLBListenerList.md)
+
+### Authorization
+
+[tokenAuth](../README.md#tokenAuth), [cookieAuth](../README.md#cookieAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## CloudGatewaysListenersPartialUpdate
+
+> GatewayLBListener CloudGatewaysListenersPartialUpdate(ctx, gatewayId, id).PatchedGatewayLBListenerWriteRequest(patchedGatewayLBListenerWriteRequest).Execute()
+
+
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/pidginhost/sdk-go"
+)
+
+func main() {
+	gatewayId := int32(56) // int32 | 
+	id := int32(56) // int32 | 
+	patchedGatewayLBListenerWriteRequest := *openapiclient.NewPatchedGatewayLBListenerWriteRequest() // PatchedGatewayLBListenerWriteRequest |  (optional)
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.CloudAPI.CloudGatewaysListenersPartialUpdate(context.Background(), gatewayId, id).PatchedGatewayLBListenerWriteRequest(patchedGatewayLBListenerWriteRequest).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `CloudAPI.CloudGatewaysListenersPartialUpdate``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `CloudGatewaysListenersPartialUpdate`: GatewayLBListener
+	fmt.Fprintf(os.Stdout, "Response from `CloudAPI.CloudGatewaysListenersPartialUpdate`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**gatewayId** | **int32** |  | 
+**id** | **int32** |  | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiCloudGatewaysListenersPartialUpdateRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+ **patchedGatewayLBListenerWriteRequest** | [**PatchedGatewayLBListenerWriteRequest**](PatchedGatewayLBListenerWriteRequest.md) |  | 
+
+### Return type
+
+[**GatewayLBListener**](GatewayLBListener.md)
+
+### Authorization
+
+[tokenAuth](../README.md#tokenAuth), [cookieAuth](../README.md#cookieAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## CloudGatewaysListenersRetrieve
+
+> GatewayLBListener CloudGatewaysListenersRetrieve(ctx, gatewayId, id).Execute()
+
+
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/pidginhost/sdk-go"
+)
+
+func main() {
+	gatewayId := int32(56) // int32 | 
+	id := int32(56) // int32 | 
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.CloudAPI.CloudGatewaysListenersRetrieve(context.Background(), gatewayId, id).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `CloudAPI.CloudGatewaysListenersRetrieve``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `CloudGatewaysListenersRetrieve`: GatewayLBListener
+	fmt.Fprintf(os.Stdout, "Response from `CloudAPI.CloudGatewaysListenersRetrieve`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**gatewayId** | **int32** |  | 
+**id** | **int32** |  | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiCloudGatewaysListenersRetrieveRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+
+### Return type
+
+[**GatewayLBListener**](GatewayLBListener.md)
+
+### Authorization
+
+[tokenAuth](../README.md#tokenAuth), [cookieAuth](../README.md#cookieAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## CloudGatewaysListenersRoutesCreate
+
+> GatewayRoute CloudGatewaysListenersRoutesCreate(ctx, gatewayId, listenerId).GatewayRouteWriteRequest(gatewayRouteWriteRequest).Execute()
+
+
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/pidginhost/sdk-go"
+)
+
+func main() {
+	gatewayId := int32(56) // int32 | 
+	listenerId := int32(56) // int32 | 
+	gatewayRouteWriteRequest := *openapiclient.NewGatewayRouteWriteRequest() // GatewayRouteWriteRequest |  (optional)
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.CloudAPI.CloudGatewaysListenersRoutesCreate(context.Background(), gatewayId, listenerId).GatewayRouteWriteRequest(gatewayRouteWriteRequest).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `CloudAPI.CloudGatewaysListenersRoutesCreate``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `CloudGatewaysListenersRoutesCreate`: GatewayRoute
+	fmt.Fprintf(os.Stdout, "Response from `CloudAPI.CloudGatewaysListenersRoutesCreate`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**gatewayId** | **int32** |  | 
+**listenerId** | **int32** |  | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiCloudGatewaysListenersRoutesCreateRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+ **gatewayRouteWriteRequest** | [**GatewayRouteWriteRequest**](GatewayRouteWriteRequest.md) |  | 
+
+### Return type
+
+[**GatewayRoute**](GatewayRoute.md)
+
+### Authorization
+
+[tokenAuth](../README.md#tokenAuth), [cookieAuth](../README.md#cookieAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## CloudGatewaysListenersRoutesDestroy
+
+> GatewayOperation CloudGatewaysListenersRoutesDestroy(ctx, gatewayId, id, listenerId).Revision(revision).Execute()
+
+
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/pidginhost/sdk-go"
+)
+
+func main() {
+	gatewayId := int32(56) // int32 | 
+	id := int32(56) // int32 | 
+	listenerId := int32(56) // int32 | 
+	revision := int32(56) // int32 | The gateway's desired revision from the preview; without it, a preview. (optional)
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.CloudAPI.CloudGatewaysListenersRoutesDestroy(context.Background(), gatewayId, id, listenerId).Revision(revision).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `CloudAPI.CloudGatewaysListenersRoutesDestroy``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `CloudGatewaysListenersRoutesDestroy`: GatewayOperation
+	fmt.Fprintf(os.Stdout, "Response from `CloudAPI.CloudGatewaysListenersRoutesDestroy`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**gatewayId** | **int32** |  | 
+**id** | **int32** |  | 
+**listenerId** | **int32** |  | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiCloudGatewaysListenersRoutesDestroyRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+
+ **revision** | **int32** | The gateway&#39;s desired revision from the preview; without it, a preview. | 
+
+### Return type
+
+[**GatewayOperation**](GatewayOperation.md)
+
+### Authorization
+
+[tokenAuth](../README.md#tokenAuth), [cookieAuth](../README.md#cookieAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## CloudGatewaysListenersRoutesList
+
+> PaginatedGatewayRouteList CloudGatewaysListenersRoutesList(ctx, gatewayId, listenerId).Page(page).Execute()
+
+
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/pidginhost/sdk-go"
+)
+
+func main() {
+	gatewayId := int32(56) // int32 | 
+	listenerId := int32(56) // int32 | 
+	page := int32(56) // int32 | A page number within the paginated result set. (optional)
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.CloudAPI.CloudGatewaysListenersRoutesList(context.Background(), gatewayId, listenerId).Page(page).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `CloudAPI.CloudGatewaysListenersRoutesList``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `CloudGatewaysListenersRoutesList`: PaginatedGatewayRouteList
+	fmt.Fprintf(os.Stdout, "Response from `CloudAPI.CloudGatewaysListenersRoutesList`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**gatewayId** | **int32** |  | 
+**listenerId** | **int32** |  | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiCloudGatewaysListenersRoutesListRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+ **page** | **int32** | A page number within the paginated result set. | 
+
+### Return type
+
+[**PaginatedGatewayRouteList**](PaginatedGatewayRouteList.md)
+
+### Authorization
+
+[tokenAuth](../README.md#tokenAuth), [cookieAuth](../README.md#cookieAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## CloudGatewaysListenersRoutesPartialUpdate
+
+> GatewayRoute CloudGatewaysListenersRoutesPartialUpdate(ctx, gatewayId, id, listenerId).PatchedGatewayRouteWriteRequest(patchedGatewayRouteWriteRequest).Execute()
+
+
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/pidginhost/sdk-go"
+)
+
+func main() {
+	gatewayId := int32(56) // int32 | 
+	id := int32(56) // int32 | 
+	listenerId := int32(56) // int32 | 
+	patchedGatewayRouteWriteRequest := *openapiclient.NewPatchedGatewayRouteWriteRequest() // PatchedGatewayRouteWriteRequest |  (optional)
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.CloudAPI.CloudGatewaysListenersRoutesPartialUpdate(context.Background(), gatewayId, id, listenerId).PatchedGatewayRouteWriteRequest(patchedGatewayRouteWriteRequest).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `CloudAPI.CloudGatewaysListenersRoutesPartialUpdate``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `CloudGatewaysListenersRoutesPartialUpdate`: GatewayRoute
+	fmt.Fprintf(os.Stdout, "Response from `CloudAPI.CloudGatewaysListenersRoutesPartialUpdate`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**gatewayId** | **int32** |  | 
+**id** | **int32** |  | 
+**listenerId** | **int32** |  | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiCloudGatewaysListenersRoutesPartialUpdateRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+
+ **patchedGatewayRouteWriteRequest** | [**PatchedGatewayRouteWriteRequest**](PatchedGatewayRouteWriteRequest.md) |  | 
+
+### Return type
+
+[**GatewayRoute**](GatewayRoute.md)
+
+### Authorization
+
+[tokenAuth](../README.md#tokenAuth), [cookieAuth](../README.md#cookieAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## CloudGatewaysListenersRoutesRetrieve
+
+> GatewayRoute CloudGatewaysListenersRoutesRetrieve(ctx, gatewayId, id, listenerId).Execute()
+
+
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/pidginhost/sdk-go"
+)
+
+func main() {
+	gatewayId := int32(56) // int32 | 
+	id := int32(56) // int32 | 
+	listenerId := int32(56) // int32 | 
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.CloudAPI.CloudGatewaysListenersRoutesRetrieve(context.Background(), gatewayId, id, listenerId).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `CloudAPI.CloudGatewaysListenersRoutesRetrieve``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `CloudGatewaysListenersRoutesRetrieve`: GatewayRoute
+	fmt.Fprintf(os.Stdout, "Response from `CloudAPI.CloudGatewaysListenersRoutesRetrieve`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**gatewayId** | **int32** |  | 
+**id** | **int32** |  | 
+**listenerId** | **int32** |  | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiCloudGatewaysListenersRoutesRetrieveRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+
+
+### Return type
+
+[**GatewayRoute**](GatewayRoute.md)
+
+### Authorization
+
+[tokenAuth](../README.md#tokenAuth), [cookieAuth](../README.md#cookieAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## CloudGatewaysNetworksCreate
+
+> GatewayOperation CloudGatewaysNetworksCreate(ctx, gatewayId).GatewayNetworkCreateRequest(gatewayNetworkCreateRequest).Execute()
+
+
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/pidginhost/sdk-go"
+)
+
+func main() {
+	gatewayId := int32(56) // int32 | 
+	gatewayNetworkCreateRequest := *openapiclient.NewGatewayNetworkCreateRequest(int32(123), openapiclient.GatewayNetworkRoleEnum("router")) // GatewayNetworkCreateRequest | 
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.CloudAPI.CloudGatewaysNetworksCreate(context.Background(), gatewayId).GatewayNetworkCreateRequest(gatewayNetworkCreateRequest).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `CloudAPI.CloudGatewaysNetworksCreate``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `CloudGatewaysNetworksCreate`: GatewayOperation
+	fmt.Fprintf(os.Stdout, "Response from `CloudAPI.CloudGatewaysNetworksCreate`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**gatewayId** | **int32** |  | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiCloudGatewaysNetworksCreateRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+ **gatewayNetworkCreateRequest** | [**GatewayNetworkCreateRequest**](GatewayNetworkCreateRequest.md) |  | 
+
+### Return type
+
+[**GatewayOperation**](GatewayOperation.md)
+
+### Authorization
+
+[tokenAuth](../README.md#tokenAuth), [cookieAuth](../README.md#cookieAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## CloudGatewaysNetworksDestroy
+
+> GatewayOperation CloudGatewaysNetworksDestroy(ctx, gatewayId, networkId).Revision(revision).Servers(servers).Execute()
+
+
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/pidginhost/sdk-go"
+)
+
+func main() {
+	gatewayId := int32(56) // int32 | 
+	networkId := int32(56) // int32 | 
+	revision := int32(56) // int32 | The gateway's desired revision from the preview; without it, a preview. (optional)
+	servers := []int32{int32(123)} // []int32 | The preview's server ids. (optional)
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.CloudAPI.CloudGatewaysNetworksDestroy(context.Background(), gatewayId, networkId).Revision(revision).Servers(servers).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `CloudAPI.CloudGatewaysNetworksDestroy``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `CloudGatewaysNetworksDestroy`: GatewayOperation
+	fmt.Fprintf(os.Stdout, "Response from `CloudAPI.CloudGatewaysNetworksDestroy`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**gatewayId** | **int32** |  | 
+**networkId** | **int32** |  | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiCloudGatewaysNetworksDestroyRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+ **revision** | **int32** | The gateway&#39;s desired revision from the preview; without it, a preview. | 
+ **servers** | **[]int32** | The preview&#39;s server ids. | 
+
+### Return type
+
+[**GatewayOperation**](GatewayOperation.md)
+
+### Authorization
+
+[tokenAuth](../README.md#tokenAuth), [cookieAuth](../README.md#cookieAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## CloudGatewaysNetworksList
+
+> PaginatedGatewayNetworkList CloudGatewaysNetworksList(ctx, gatewayId).Page(page).Execute()
+
+
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/pidginhost/sdk-go"
+)
+
+func main() {
+	gatewayId := int32(56) // int32 | 
+	page := int32(56) // int32 | A page number within the paginated result set. (optional)
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.CloudAPI.CloudGatewaysNetworksList(context.Background(), gatewayId).Page(page).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `CloudAPI.CloudGatewaysNetworksList``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `CloudGatewaysNetworksList`: PaginatedGatewayNetworkList
+	fmt.Fprintf(os.Stdout, "Response from `CloudAPI.CloudGatewaysNetworksList`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**gatewayId** | **int32** |  | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiCloudGatewaysNetworksListRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+ **page** | **int32** | A page number within the paginated result set. | 
+
+### Return type
+
+[**PaginatedGatewayNetworkList**](PaginatedGatewayNetworkList.md)
+
+### Authorization
+
+[tokenAuth](../README.md#tokenAuth), [cookieAuth](../README.md#cookieAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## CloudGatewaysNetworksPartialUpdate
+
+> GatewayNetwork CloudGatewaysNetworksPartialUpdate(ctx, gatewayId, networkId).Revision(revision).Servers(servers).PatchedGatewayNetworkUpdateRequest(patchedGatewayNetworkUpdateRequest).Execute()
+
+
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/pidginhost/sdk-go"
+)
+
+func main() {
+	gatewayId := int32(56) // int32 | 
+	networkId := int32(56) // int32 | 
+	revision := int32(56) // int32 | The gateway's desired revision from the preview; without it, a preview. (optional)
+	servers := []int32{int32(123)} // []int32 | The preview's server ids. (optional)
+	patchedGatewayNetworkUpdateRequest := *openapiclient.NewPatchedGatewayNetworkUpdateRequest() // PatchedGatewayNetworkUpdateRequest |  (optional)
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.CloudAPI.CloudGatewaysNetworksPartialUpdate(context.Background(), gatewayId, networkId).Revision(revision).Servers(servers).PatchedGatewayNetworkUpdateRequest(patchedGatewayNetworkUpdateRequest).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `CloudAPI.CloudGatewaysNetworksPartialUpdate``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `CloudGatewaysNetworksPartialUpdate`: GatewayNetwork
+	fmt.Fprintf(os.Stdout, "Response from `CloudAPI.CloudGatewaysNetworksPartialUpdate`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**gatewayId** | **int32** |  | 
+**networkId** | **int32** |  | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiCloudGatewaysNetworksPartialUpdateRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+ **revision** | **int32** | The gateway&#39;s desired revision from the preview; without it, a preview. | 
+ **servers** | **[]int32** | The preview&#39;s server ids. | 
+ **patchedGatewayNetworkUpdateRequest** | [**PatchedGatewayNetworkUpdateRequest**](PatchedGatewayNetworkUpdateRequest.md) |  | 
+
+### Return type
+
+[**GatewayNetwork**](GatewayNetwork.md)
+
+### Authorization
+
+[tokenAuth](../README.md#tokenAuth), [cookieAuth](../README.md#cookieAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## CloudGatewaysNetworksRetrieve
+
+> GatewayNetwork CloudGatewaysNetworksRetrieve(ctx, gatewayId, networkId).Execute()
+
+
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/pidginhost/sdk-go"
+)
+
+func main() {
+	gatewayId := int32(56) // int32 | 
+	networkId := int32(56) // int32 | 
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.CloudAPI.CloudGatewaysNetworksRetrieve(context.Background(), gatewayId, networkId).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `CloudAPI.CloudGatewaysNetworksRetrieve``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `CloudGatewaysNetworksRetrieve`: GatewayNetwork
+	fmt.Fprintf(os.Stdout, "Response from `CloudAPI.CloudGatewaysNetworksRetrieve`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**gatewayId** | **int32** |  | 
+**networkId** | **int32** |  | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiCloudGatewaysNetworksRetrieveRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+
+### Return type
+
+[**GatewayNetwork**](GatewayNetwork.md)
+
+### Authorization
+
+[tokenAuth](../README.md#tokenAuth), [cookieAuth](../README.md#cookieAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## CloudGatewaysOperationsList
+
+> PaginatedGatewayOperationList CloudGatewaysOperationsList(ctx, gatewayId).Page(page).Execute()
+
+
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/pidginhost/sdk-go"
+)
+
+func main() {
+	gatewayId := int32(56) // int32 | 
+	page := int32(56) // int32 | A page number within the paginated result set. (optional)
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.CloudAPI.CloudGatewaysOperationsList(context.Background(), gatewayId).Page(page).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `CloudAPI.CloudGatewaysOperationsList``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `CloudGatewaysOperationsList`: PaginatedGatewayOperationList
+	fmt.Fprintf(os.Stdout, "Response from `CloudAPI.CloudGatewaysOperationsList`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**gatewayId** | **int32** |  | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiCloudGatewaysOperationsListRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+ **page** | **int32** | A page number within the paginated result set. | 
+
+### Return type
+
+[**PaginatedGatewayOperationList**](PaginatedGatewayOperationList.md)
+
+### Authorization
+
+[tokenAuth](../README.md#tokenAuth), [cookieAuth](../README.md#cookieAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## CloudGatewaysOperationsRetrieve
+
+> GatewayOperation CloudGatewaysOperationsRetrieve(ctx, gatewayId, id).Execute()
+
+
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/pidginhost/sdk-go"
+)
+
+func main() {
+	gatewayId := int32(56) // int32 | 
+	id := "id_example" // string | 
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.CloudAPI.CloudGatewaysOperationsRetrieve(context.Background(), gatewayId, id).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `CloudAPI.CloudGatewaysOperationsRetrieve``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `CloudGatewaysOperationsRetrieve`: GatewayOperation
+	fmt.Fprintf(os.Stdout, "Response from `CloudAPI.CloudGatewaysOperationsRetrieve`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**gatewayId** | **int32** |  | 
+**id** | **string** |  | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiCloudGatewaysOperationsRetrieveRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+
+### Return type
+
+[**GatewayOperation**](GatewayOperation.md)
+
+### Authorization
+
+[tokenAuth](../README.md#tokenAuth), [cookieAuth](../README.md#cookieAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## CloudGatewaysPartialUpdate
+
+> Gateway CloudGatewaysPartialUpdate(ctx, id).PatchedGatewayUpdateRequest(patchedGatewayUpdateRequest).Execute()
+
+
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/pidginhost/sdk-go"
+)
+
+func main() {
+	id := "id_example" // string | 
+	patchedGatewayUpdateRequest := *openapiclient.NewPatchedGatewayUpdateRequest() // PatchedGatewayUpdateRequest |  (optional)
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.CloudAPI.CloudGatewaysPartialUpdate(context.Background(), id).PatchedGatewayUpdateRequest(patchedGatewayUpdateRequest).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `CloudAPI.CloudGatewaysPartialUpdate``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `CloudGatewaysPartialUpdate`: Gateway
+	fmt.Fprintf(os.Stdout, "Response from `CloudAPI.CloudGatewaysPartialUpdate`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**id** | **string** |  | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiCloudGatewaysPartialUpdateRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+ **patchedGatewayUpdateRequest** | [**PatchedGatewayUpdateRequest**](PatchedGatewayUpdateRequest.md) |  | 
+
+### Return type
+
+[**Gateway**](Gateway.md)
+
+### Authorization
+
+[tokenAuth](../README.md#tokenAuth), [cookieAuth](../README.md#cookieAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## CloudGatewaysPoolsBackendsCreate
+
+> GatewayBackend CloudGatewaysPoolsBackendsCreate(ctx, gatewayId, poolId).GatewayBackendWriteRequest(gatewayBackendWriteRequest).Execute()
+
+
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/pidginhost/sdk-go"
+)
+
+func main() {
+	gatewayId := int32(56) // int32 | 
+	poolId := int32(56) // int32 | 
+	gatewayBackendWriteRequest := *openapiclient.NewGatewayBackendWriteRequest() // GatewayBackendWriteRequest |  (optional)
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.CloudAPI.CloudGatewaysPoolsBackendsCreate(context.Background(), gatewayId, poolId).GatewayBackendWriteRequest(gatewayBackendWriteRequest).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `CloudAPI.CloudGatewaysPoolsBackendsCreate``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `CloudGatewaysPoolsBackendsCreate`: GatewayBackend
+	fmt.Fprintf(os.Stdout, "Response from `CloudAPI.CloudGatewaysPoolsBackendsCreate`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**gatewayId** | **int32** |  | 
+**poolId** | **int32** |  | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiCloudGatewaysPoolsBackendsCreateRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+ **gatewayBackendWriteRequest** | [**GatewayBackendWriteRequest**](GatewayBackendWriteRequest.md) |  | 
+
+### Return type
+
+[**GatewayBackend**](GatewayBackend.md)
+
+### Authorization
+
+[tokenAuth](../README.md#tokenAuth), [cookieAuth](../README.md#cookieAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## CloudGatewaysPoolsBackendsDestroy
+
+> GatewayOperation CloudGatewaysPoolsBackendsDestroy(ctx, gatewayId, id, poolId).Revision(revision).Execute()
+
+
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/pidginhost/sdk-go"
+)
+
+func main() {
+	gatewayId := int32(56) // int32 | 
+	id := int32(56) // int32 | 
+	poolId := int32(56) // int32 | 
+	revision := int32(56) // int32 | The gateway's desired revision from the preview; without it, a preview. (optional)
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.CloudAPI.CloudGatewaysPoolsBackendsDestroy(context.Background(), gatewayId, id, poolId).Revision(revision).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `CloudAPI.CloudGatewaysPoolsBackendsDestroy``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `CloudGatewaysPoolsBackendsDestroy`: GatewayOperation
+	fmt.Fprintf(os.Stdout, "Response from `CloudAPI.CloudGatewaysPoolsBackendsDestroy`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**gatewayId** | **int32** |  | 
+**id** | **int32** |  | 
+**poolId** | **int32** |  | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiCloudGatewaysPoolsBackendsDestroyRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+
+ **revision** | **int32** | The gateway&#39;s desired revision from the preview; without it, a preview. | 
+
+### Return type
+
+[**GatewayOperation**](GatewayOperation.md)
+
+### Authorization
+
+[tokenAuth](../README.md#tokenAuth), [cookieAuth](../README.md#cookieAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## CloudGatewaysPoolsBackendsList
+
+> PaginatedGatewayBackendList CloudGatewaysPoolsBackendsList(ctx, gatewayId, poolId).Page(page).Execute()
+
+
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/pidginhost/sdk-go"
+)
+
+func main() {
+	gatewayId := int32(56) // int32 | 
+	poolId := int32(56) // int32 | 
+	page := int32(56) // int32 | A page number within the paginated result set. (optional)
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.CloudAPI.CloudGatewaysPoolsBackendsList(context.Background(), gatewayId, poolId).Page(page).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `CloudAPI.CloudGatewaysPoolsBackendsList``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `CloudGatewaysPoolsBackendsList`: PaginatedGatewayBackendList
+	fmt.Fprintf(os.Stdout, "Response from `CloudAPI.CloudGatewaysPoolsBackendsList`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**gatewayId** | **int32** |  | 
+**poolId** | **int32** |  | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiCloudGatewaysPoolsBackendsListRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+ **page** | **int32** | A page number within the paginated result set. | 
+
+### Return type
+
+[**PaginatedGatewayBackendList**](PaginatedGatewayBackendList.md)
+
+### Authorization
+
+[tokenAuth](../README.md#tokenAuth), [cookieAuth](../README.md#cookieAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## CloudGatewaysPoolsBackendsPartialUpdate
+
+> GatewayBackend CloudGatewaysPoolsBackendsPartialUpdate(ctx, gatewayId, id, poolId).PatchedGatewayBackendWriteRequest(patchedGatewayBackendWriteRequest).Execute()
+
+
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/pidginhost/sdk-go"
+)
+
+func main() {
+	gatewayId := int32(56) // int32 | 
+	id := int32(56) // int32 | 
+	poolId := int32(56) // int32 | 
+	patchedGatewayBackendWriteRequest := *openapiclient.NewPatchedGatewayBackendWriteRequest() // PatchedGatewayBackendWriteRequest |  (optional)
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.CloudAPI.CloudGatewaysPoolsBackendsPartialUpdate(context.Background(), gatewayId, id, poolId).PatchedGatewayBackendWriteRequest(patchedGatewayBackendWriteRequest).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `CloudAPI.CloudGatewaysPoolsBackendsPartialUpdate``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `CloudGatewaysPoolsBackendsPartialUpdate`: GatewayBackend
+	fmt.Fprintf(os.Stdout, "Response from `CloudAPI.CloudGatewaysPoolsBackendsPartialUpdate`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**gatewayId** | **int32** |  | 
+**id** | **int32** |  | 
+**poolId** | **int32** |  | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiCloudGatewaysPoolsBackendsPartialUpdateRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+
+ **patchedGatewayBackendWriteRequest** | [**PatchedGatewayBackendWriteRequest**](PatchedGatewayBackendWriteRequest.md) |  | 
+
+### Return type
+
+[**GatewayBackend**](GatewayBackend.md)
+
+### Authorization
+
+[tokenAuth](../README.md#tokenAuth), [cookieAuth](../README.md#cookieAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## CloudGatewaysPoolsBackendsRetrieve
+
+> GatewayBackend CloudGatewaysPoolsBackendsRetrieve(ctx, gatewayId, id, poolId).Execute()
+
+
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/pidginhost/sdk-go"
+)
+
+func main() {
+	gatewayId := int32(56) // int32 | 
+	id := int32(56) // int32 | 
+	poolId := int32(56) // int32 | 
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.CloudAPI.CloudGatewaysPoolsBackendsRetrieve(context.Background(), gatewayId, id, poolId).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `CloudAPI.CloudGatewaysPoolsBackendsRetrieve``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `CloudGatewaysPoolsBackendsRetrieve`: GatewayBackend
+	fmt.Fprintf(os.Stdout, "Response from `CloudAPI.CloudGatewaysPoolsBackendsRetrieve`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**gatewayId** | **int32** |  | 
+**id** | **int32** |  | 
+**poolId** | **int32** |  | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiCloudGatewaysPoolsBackendsRetrieveRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+
+
+### Return type
+
+[**GatewayBackend**](GatewayBackend.md)
+
+### Authorization
+
+[tokenAuth](../README.md#tokenAuth), [cookieAuth](../README.md#cookieAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## CloudGatewaysPoolsCreate
+
+> GatewayBackendPool CloudGatewaysPoolsCreate(ctx, gatewayId).GatewayBackendPoolWriteRequest(gatewayBackendPoolWriteRequest).Execute()
+
+
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/pidginhost/sdk-go"
+)
+
+func main() {
+	gatewayId := int32(56) // int32 | 
+	gatewayBackendPoolWriteRequest := *openapiclient.NewGatewayBackendPoolWriteRequest() // GatewayBackendPoolWriteRequest |  (optional)
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.CloudAPI.CloudGatewaysPoolsCreate(context.Background(), gatewayId).GatewayBackendPoolWriteRequest(gatewayBackendPoolWriteRequest).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `CloudAPI.CloudGatewaysPoolsCreate``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `CloudGatewaysPoolsCreate`: GatewayBackendPool
+	fmt.Fprintf(os.Stdout, "Response from `CloudAPI.CloudGatewaysPoolsCreate`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**gatewayId** | **int32** |  | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiCloudGatewaysPoolsCreateRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+ **gatewayBackendPoolWriteRequest** | [**GatewayBackendPoolWriteRequest**](GatewayBackendPoolWriteRequest.md) |  | 
+
+### Return type
+
+[**GatewayBackendPool**](GatewayBackendPool.md)
+
+### Authorization
+
+[tokenAuth](../README.md#tokenAuth), [cookieAuth](../README.md#cookieAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## CloudGatewaysPoolsDestroy
+
+> GatewayOperation CloudGatewaysPoolsDestroy(ctx, gatewayId, id).Revision(revision).Execute()
+
+
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/pidginhost/sdk-go"
+)
+
+func main() {
+	gatewayId := int32(56) // int32 | 
+	id := int32(56) // int32 | 
+	revision := int32(56) // int32 | The gateway's desired revision from the preview; without it, a preview. (optional)
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.CloudAPI.CloudGatewaysPoolsDestroy(context.Background(), gatewayId, id).Revision(revision).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `CloudAPI.CloudGatewaysPoolsDestroy``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `CloudGatewaysPoolsDestroy`: GatewayOperation
+	fmt.Fprintf(os.Stdout, "Response from `CloudAPI.CloudGatewaysPoolsDestroy`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**gatewayId** | **int32** |  | 
+**id** | **int32** |  | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiCloudGatewaysPoolsDestroyRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+ **revision** | **int32** | The gateway&#39;s desired revision from the preview; without it, a preview. | 
+
+### Return type
+
+[**GatewayOperation**](GatewayOperation.md)
+
+### Authorization
+
+[tokenAuth](../README.md#tokenAuth), [cookieAuth](../README.md#cookieAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## CloudGatewaysPoolsList
+
+> PaginatedGatewayBackendPoolList CloudGatewaysPoolsList(ctx, gatewayId).Page(page).Execute()
+
+
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/pidginhost/sdk-go"
+)
+
+func main() {
+	gatewayId := int32(56) // int32 | 
+	page := int32(56) // int32 | A page number within the paginated result set. (optional)
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.CloudAPI.CloudGatewaysPoolsList(context.Background(), gatewayId).Page(page).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `CloudAPI.CloudGatewaysPoolsList``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `CloudGatewaysPoolsList`: PaginatedGatewayBackendPoolList
+	fmt.Fprintf(os.Stdout, "Response from `CloudAPI.CloudGatewaysPoolsList`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**gatewayId** | **int32** |  | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiCloudGatewaysPoolsListRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+ **page** | **int32** | A page number within the paginated result set. | 
+
+### Return type
+
+[**PaginatedGatewayBackendPoolList**](PaginatedGatewayBackendPoolList.md)
+
+### Authorization
+
+[tokenAuth](../README.md#tokenAuth), [cookieAuth](../README.md#cookieAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## CloudGatewaysPoolsPartialUpdate
+
+> GatewayBackendPool CloudGatewaysPoolsPartialUpdate(ctx, gatewayId, id).PatchedGatewayBackendPoolWriteRequest(patchedGatewayBackendPoolWriteRequest).Execute()
+
+
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/pidginhost/sdk-go"
+)
+
+func main() {
+	gatewayId := int32(56) // int32 | 
+	id := int32(56) // int32 | 
+	patchedGatewayBackendPoolWriteRequest := *openapiclient.NewPatchedGatewayBackendPoolWriteRequest() // PatchedGatewayBackendPoolWriteRequest |  (optional)
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.CloudAPI.CloudGatewaysPoolsPartialUpdate(context.Background(), gatewayId, id).PatchedGatewayBackendPoolWriteRequest(patchedGatewayBackendPoolWriteRequest).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `CloudAPI.CloudGatewaysPoolsPartialUpdate``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `CloudGatewaysPoolsPartialUpdate`: GatewayBackendPool
+	fmt.Fprintf(os.Stdout, "Response from `CloudAPI.CloudGatewaysPoolsPartialUpdate`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**gatewayId** | **int32** |  | 
+**id** | **int32** |  | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiCloudGatewaysPoolsPartialUpdateRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+ **patchedGatewayBackendPoolWriteRequest** | [**PatchedGatewayBackendPoolWriteRequest**](PatchedGatewayBackendPoolWriteRequest.md) |  | 
+
+### Return type
+
+[**GatewayBackendPool**](GatewayBackendPool.md)
+
+### Authorization
+
+[tokenAuth](../README.md#tokenAuth), [cookieAuth](../README.md#cookieAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## CloudGatewaysPoolsRetrieve
+
+> GatewayBackendPool CloudGatewaysPoolsRetrieve(ctx, gatewayId, id).Execute()
+
+
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/pidginhost/sdk-go"
+)
+
+func main() {
+	gatewayId := int32(56) // int32 | 
+	id := int32(56) // int32 | 
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.CloudAPI.CloudGatewaysPoolsRetrieve(context.Background(), gatewayId, id).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `CloudAPI.CloudGatewaysPoolsRetrieve``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `CloudGatewaysPoolsRetrieve`: GatewayBackendPool
+	fmt.Fprintf(os.Stdout, "Response from `CloudAPI.CloudGatewaysPoolsRetrieve`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**gatewayId** | **int32** |  | 
+**id** | **int32** |  | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiCloudGatewaysPoolsRetrieveRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+
+### Return type
+
+[**GatewayBackendPool**](GatewayBackendPool.md)
+
+### Authorization
+
+[tokenAuth](../README.md#tokenAuth), [cookieAuth](../README.md#cookieAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## CloudGatewaysPortForwardsCreate
+
+> GatewayForward CloudGatewaysPortForwardsCreate(ctx, gatewayId).GatewayForwardWriteRequest(gatewayForwardWriteRequest).Execute()
+
+
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/pidginhost/sdk-go"
+)
+
+func main() {
+	gatewayId := int32(56) // int32 | 
+	gatewayForwardWriteRequest := *openapiclient.NewGatewayForwardWriteRequest(openapiclient.GatewayForwardProtocolEnum("tcp"), *openapiclient.NewGatewayPortRangeRequest(int32(123), int32(123)), *openapiclient.NewGatewayForwardTargetRequest(int32(123), "Address_example", int32(123))) // GatewayForwardWriteRequest | 
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.CloudAPI.CloudGatewaysPortForwardsCreate(context.Background(), gatewayId).GatewayForwardWriteRequest(gatewayForwardWriteRequest).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `CloudAPI.CloudGatewaysPortForwardsCreate``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `CloudGatewaysPortForwardsCreate`: GatewayForward
+	fmt.Fprintf(os.Stdout, "Response from `CloudAPI.CloudGatewaysPortForwardsCreate`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**gatewayId** | **int32** |  | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiCloudGatewaysPortForwardsCreateRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+ **gatewayForwardWriteRequest** | [**GatewayForwardWriteRequest**](GatewayForwardWriteRequest.md) |  | 
+
+### Return type
+
+[**GatewayForward**](GatewayForward.md)
+
+### Authorization
+
+[tokenAuth](../README.md#tokenAuth), [cookieAuth](../README.md#cookieAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## CloudGatewaysPortForwardsDestroy
+
+> GatewayOperation CloudGatewaysPortForwardsDestroy(ctx, gatewayId, id).Revision(revision).Execute()
+
+
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/pidginhost/sdk-go"
+)
+
+func main() {
+	gatewayId := int32(56) // int32 | 
+	id := int32(56) // int32 | 
+	revision := int32(56) // int32 | The gateway's desired revision from the preview; without it, a preview. (optional)
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.CloudAPI.CloudGatewaysPortForwardsDestroy(context.Background(), gatewayId, id).Revision(revision).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `CloudAPI.CloudGatewaysPortForwardsDestroy``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `CloudGatewaysPortForwardsDestroy`: GatewayOperation
+	fmt.Fprintf(os.Stdout, "Response from `CloudAPI.CloudGatewaysPortForwardsDestroy`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**gatewayId** | **int32** |  | 
+**id** | **int32** |  | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiCloudGatewaysPortForwardsDestroyRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+ **revision** | **int32** | The gateway&#39;s desired revision from the preview; without it, a preview. | 
+
+### Return type
+
+[**GatewayOperation**](GatewayOperation.md)
+
+### Authorization
+
+[tokenAuth](../README.md#tokenAuth), [cookieAuth](../README.md#cookieAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## CloudGatewaysPortForwardsList
+
+> PaginatedGatewayForwardList CloudGatewaysPortForwardsList(ctx, gatewayId).Page(page).Execute()
+
+
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/pidginhost/sdk-go"
+)
+
+func main() {
+	gatewayId := int32(56) // int32 | 
+	page := int32(56) // int32 | A page number within the paginated result set. (optional)
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.CloudAPI.CloudGatewaysPortForwardsList(context.Background(), gatewayId).Page(page).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `CloudAPI.CloudGatewaysPortForwardsList``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `CloudGatewaysPortForwardsList`: PaginatedGatewayForwardList
+	fmt.Fprintf(os.Stdout, "Response from `CloudAPI.CloudGatewaysPortForwardsList`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**gatewayId** | **int32** |  | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiCloudGatewaysPortForwardsListRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+ **page** | **int32** | A page number within the paginated result set. | 
+
+### Return type
+
+[**PaginatedGatewayForwardList**](PaginatedGatewayForwardList.md)
+
+### Authorization
+
+[tokenAuth](../README.md#tokenAuth), [cookieAuth](../README.md#cookieAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## CloudGatewaysPortForwardsPartialUpdate
+
+> GatewayForward CloudGatewaysPortForwardsPartialUpdate(ctx, gatewayId, id).PatchedGatewayForwardWriteRequest(patchedGatewayForwardWriteRequest).Execute()
+
+
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/pidginhost/sdk-go"
+)
+
+func main() {
+	gatewayId := int32(56) // int32 | 
+	id := int32(56) // int32 | 
+	patchedGatewayForwardWriteRequest := *openapiclient.NewPatchedGatewayForwardWriteRequest() // PatchedGatewayForwardWriteRequest |  (optional)
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.CloudAPI.CloudGatewaysPortForwardsPartialUpdate(context.Background(), gatewayId, id).PatchedGatewayForwardWriteRequest(patchedGatewayForwardWriteRequest).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `CloudAPI.CloudGatewaysPortForwardsPartialUpdate``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `CloudGatewaysPortForwardsPartialUpdate`: GatewayForward
+	fmt.Fprintf(os.Stdout, "Response from `CloudAPI.CloudGatewaysPortForwardsPartialUpdate`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**gatewayId** | **int32** |  | 
+**id** | **int32** |  | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiCloudGatewaysPortForwardsPartialUpdateRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+ **patchedGatewayForwardWriteRequest** | [**PatchedGatewayForwardWriteRequest**](PatchedGatewayForwardWriteRequest.md) |  | 
+
+### Return type
+
+[**GatewayForward**](GatewayForward.md)
+
+### Authorization
+
+[tokenAuth](../README.md#tokenAuth), [cookieAuth](../README.md#cookieAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## CloudGatewaysPortForwardsRetrieve
+
+> GatewayForward CloudGatewaysPortForwardsRetrieve(ctx, gatewayId, id).Execute()
+
+
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/pidginhost/sdk-go"
+)
+
+func main() {
+	gatewayId := int32(56) // int32 | 
+	id := int32(56) // int32 | 
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.CloudAPI.CloudGatewaysPortForwardsRetrieve(context.Background(), gatewayId, id).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `CloudAPI.CloudGatewaysPortForwardsRetrieve``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `CloudGatewaysPortForwardsRetrieve`: GatewayForward
+	fmt.Fprintf(os.Stdout, "Response from `CloudAPI.CloudGatewaysPortForwardsRetrieve`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**gatewayId** | **int32** |  | 
+**id** | **int32** |  | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiCloudGatewaysPortForwardsRetrieveRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+
+### Return type
+
+[**GatewayForward**](GatewayForward.md)
+
+### Authorization
+
+[tokenAuth](../README.md#tokenAuth), [cookieAuth](../README.md#cookieAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## CloudGatewaysReenrollCreate
+
+> GatewayOperation CloudGatewaysReenrollCreate(ctx, id).GatewayReenrollRequest(gatewayReenrollRequest).Execute()
+
+
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/pidginhost/sdk-go"
+)
+
+func main() {
+	id := "id_example" // string | 
+	gatewayReenrollRequest := *openapiclient.NewGatewayReenrollRequest() // GatewayReenrollRequest |  (optional)
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.CloudAPI.CloudGatewaysReenrollCreate(context.Background(), id).GatewayReenrollRequest(gatewayReenrollRequest).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `CloudAPI.CloudGatewaysReenrollCreate``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `CloudGatewaysReenrollCreate`: GatewayOperation
+	fmt.Fprintf(os.Stdout, "Response from `CloudAPI.CloudGatewaysReenrollCreate`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**id** | **string** |  | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiCloudGatewaysReenrollCreateRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+ **gatewayReenrollRequest** | [**GatewayReenrollRequest**](GatewayReenrollRequest.md) |  | 
+
+### Return type
+
+[**GatewayOperation**](GatewayOperation.md)
+
+### Authorization
+
+[tokenAuth](../README.md#tokenAuth), [cookieAuth](../README.md#cookieAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## CloudGatewaysRetrieve
+
+> Gateway CloudGatewaysRetrieve(ctx, id).Execute()
+
+
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/pidginhost/sdk-go"
+)
+
+func main() {
+	id := "id_example" // string | 
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.CloudAPI.CloudGatewaysRetrieve(context.Background(), id).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `CloudAPI.CloudGatewaysRetrieve``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `CloudGatewaysRetrieve`: Gateway
+	fmt.Fprintf(os.Stdout, "Response from `CloudAPI.CloudGatewaysRetrieve`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**id** | **string** |  | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiCloudGatewaysRetrieveRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+### Return type
+
+[**Gateway**](Gateway.md)
+
+### Authorization
+
+[tokenAuth](../README.md#tokenAuth), [cookieAuth](../README.md#cookieAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## CloudGatewaysStatusRetrieve
+
+> GatewayStatus CloudGatewaysStatusRetrieve(ctx, id).Execute()
+
+
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/pidginhost/sdk-go"
+)
+
+func main() {
+	id := "id_example" // string | 
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.CloudAPI.CloudGatewaysStatusRetrieve(context.Background(), id).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `CloudAPI.CloudGatewaysStatusRetrieve``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `CloudGatewaysStatusRetrieve`: GatewayStatus
+	fmt.Fprintf(os.Stdout, "Response from `CloudAPI.CloudGatewaysStatusRetrieve`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**id** | **string** |  | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiCloudGatewaysStatusRetrieveRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+### Return type
+
+[**GatewayStatus**](GatewayStatus.md)
+
+### Authorization
+
+[tokenAuth](../README.md#tokenAuth), [cookieAuth](../README.md#cookieAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
 ## CloudGenerationsList
 
 > []HardwareGeneration CloudGenerationsList(ctx).Execute()
@@ -4063,6 +7429,78 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
+## CloudPrivateNetworksApplyRouteCreate
+
+> GatewayOperation CloudPrivateNetworksApplyRouteCreate(ctx, id).ApplyRouteRequest(applyRouteRequest).Execute()
+
+
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/pidginhost/sdk-go"
+)
+
+func main() {
+	id := int32(56) // int32 | 
+	applyRouteRequest := *openapiclient.NewApplyRouteRequest([]int32{int32(123)}) // ApplyRouteRequest | 
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.CloudAPI.CloudPrivateNetworksApplyRouteCreate(context.Background(), id).ApplyRouteRequest(applyRouteRequest).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `CloudAPI.CloudPrivateNetworksApplyRouteCreate``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `CloudPrivateNetworksApplyRouteCreate`: GatewayOperation
+	fmt.Fprintf(os.Stdout, "Response from `CloudAPI.CloudPrivateNetworksApplyRouteCreate`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**id** | **int32** |  | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiCloudPrivateNetworksApplyRouteCreateRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+ **applyRouteRequest** | [**ApplyRouteRequest**](ApplyRouteRequest.md) |  | 
+
+### Return type
+
+[**GatewayOperation**](GatewayOperation.md)
+
+### Authorization
+
+[tokenAuth](../README.md#tokenAuth), [cookieAuth](../README.md#cookieAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
 ## CloudPrivateNetworksCreate
 
 > PrivateNetwork CloudPrivateNetworksCreate(ctx).PrivateNetworkRequest(privateNetworkRequest).Execute()
@@ -4462,6 +7900,76 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**PrivateNetwork**](PrivateNetwork.md)
+
+### Authorization
+
+[tokenAuth](../README.md#tokenAuth), [cookieAuth](../README.md#cookieAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## CloudPrivateNetworksRouteStatusRetrieve
+
+> RouteStatus CloudPrivateNetworksRouteStatusRetrieve(ctx, id).Execute()
+
+
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/pidginhost/sdk-go"
+)
+
+func main() {
+	id := int32(56) // int32 | 
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.CloudAPI.CloudPrivateNetworksRouteStatusRetrieve(context.Background(), id).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `CloudAPI.CloudPrivateNetworksRouteStatusRetrieve``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `CloudPrivateNetworksRouteStatusRetrieve`: RouteStatus
+	fmt.Fprintf(os.Stdout, "Response from `CloudAPI.CloudPrivateNetworksRouteStatusRetrieve`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**id** | **int32** |  | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiCloudPrivateNetworksRouteStatusRetrieveRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+### Return type
+
+[**RouteStatus**](RouteStatus.md)
 
 ### Authorization
 

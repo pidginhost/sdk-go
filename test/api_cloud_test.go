@@ -538,6 +538,665 @@ func Test_pidginhostsdk_CloudAPIService(t *testing.T) {
 
 	})
 
+	t.Run("Test CloudAPIService CloudGatewaysCreate", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		resp, httpRes, err := apiClient.CloudAPI.CloudGatewaysCreate(context.Background()).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test CloudAPIService CloudGatewaysDestroy", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		var id string
+
+		resp, httpRes, err := apiClient.CloudAPI.CloudGatewaysDestroy(context.Background(), id).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test CloudAPIService CloudGatewaysFirewallRulesCreate", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		var gatewayId int32
+
+		resp, httpRes, err := apiClient.CloudAPI.CloudGatewaysFirewallRulesCreate(context.Background(), gatewayId).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test CloudAPIService CloudGatewaysFirewallRulesDestroy", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		var gatewayId int32
+		var id int32
+
+		resp, httpRes, err := apiClient.CloudAPI.CloudGatewaysFirewallRulesDestroy(context.Background(), gatewayId, id).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test CloudAPIService CloudGatewaysFirewallRulesList", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		var gatewayId int32
+
+		resp, httpRes, err := apiClient.CloudAPI.CloudGatewaysFirewallRulesList(context.Background(), gatewayId).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test CloudAPIService CloudGatewaysFirewallRulesMoveCreate", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		var gatewayId int32
+		var id int32
+
+		resp, httpRes, err := apiClient.CloudAPI.CloudGatewaysFirewallRulesMoveCreate(context.Background(), gatewayId, id).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test CloudAPIService CloudGatewaysFirewallRulesPartialUpdate", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		var gatewayId int32
+		var id int32
+
+		resp, httpRes, err := apiClient.CloudAPI.CloudGatewaysFirewallRulesPartialUpdate(context.Background(), gatewayId, id).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test CloudAPIService CloudGatewaysFirewallRulesRetrieve", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		var gatewayId int32
+		var id int32
+
+		resp, httpRes, err := apiClient.CloudAPI.CloudGatewaysFirewallRulesRetrieve(context.Background(), gatewayId, id).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test CloudAPIService CloudGatewaysList", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		resp, httpRes, err := apiClient.CloudAPI.CloudGatewaysList(context.Background()).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test CloudAPIService CloudGatewaysListenersCreate", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		var gatewayId int32
+
+		resp, httpRes, err := apiClient.CloudAPI.CloudGatewaysListenersCreate(context.Background(), gatewayId).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test CloudAPIService CloudGatewaysListenersDestroy", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		var gatewayId int32
+		var id int32
+
+		resp, httpRes, err := apiClient.CloudAPI.CloudGatewaysListenersDestroy(context.Background(), gatewayId, id).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test CloudAPIService CloudGatewaysListenersList", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		var gatewayId int32
+
+		resp, httpRes, err := apiClient.CloudAPI.CloudGatewaysListenersList(context.Background(), gatewayId).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test CloudAPIService CloudGatewaysListenersPartialUpdate", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		var gatewayId int32
+		var id int32
+
+		resp, httpRes, err := apiClient.CloudAPI.CloudGatewaysListenersPartialUpdate(context.Background(), gatewayId, id).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test CloudAPIService CloudGatewaysListenersRetrieve", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		var gatewayId int32
+		var id int32
+
+		resp, httpRes, err := apiClient.CloudAPI.CloudGatewaysListenersRetrieve(context.Background(), gatewayId, id).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test CloudAPIService CloudGatewaysListenersRoutesCreate", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		var gatewayId int32
+		var listenerId int32
+
+		resp, httpRes, err := apiClient.CloudAPI.CloudGatewaysListenersRoutesCreate(context.Background(), gatewayId, listenerId).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test CloudAPIService CloudGatewaysListenersRoutesDestroy", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		var gatewayId int32
+		var id int32
+		var listenerId int32
+
+		resp, httpRes, err := apiClient.CloudAPI.CloudGatewaysListenersRoutesDestroy(context.Background(), gatewayId, id, listenerId).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test CloudAPIService CloudGatewaysListenersRoutesList", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		var gatewayId int32
+		var listenerId int32
+
+		resp, httpRes, err := apiClient.CloudAPI.CloudGatewaysListenersRoutesList(context.Background(), gatewayId, listenerId).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test CloudAPIService CloudGatewaysListenersRoutesPartialUpdate", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		var gatewayId int32
+		var id int32
+		var listenerId int32
+
+		resp, httpRes, err := apiClient.CloudAPI.CloudGatewaysListenersRoutesPartialUpdate(context.Background(), gatewayId, id, listenerId).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test CloudAPIService CloudGatewaysListenersRoutesRetrieve", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		var gatewayId int32
+		var id int32
+		var listenerId int32
+
+		resp, httpRes, err := apiClient.CloudAPI.CloudGatewaysListenersRoutesRetrieve(context.Background(), gatewayId, id, listenerId).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test CloudAPIService CloudGatewaysNetworksCreate", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		var gatewayId int32
+
+		resp, httpRes, err := apiClient.CloudAPI.CloudGatewaysNetworksCreate(context.Background(), gatewayId).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test CloudAPIService CloudGatewaysNetworksDestroy", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		var gatewayId int32
+		var networkId int32
+
+		resp, httpRes, err := apiClient.CloudAPI.CloudGatewaysNetworksDestroy(context.Background(), gatewayId, networkId).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test CloudAPIService CloudGatewaysNetworksList", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		var gatewayId int32
+
+		resp, httpRes, err := apiClient.CloudAPI.CloudGatewaysNetworksList(context.Background(), gatewayId).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test CloudAPIService CloudGatewaysNetworksPartialUpdate", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		var gatewayId int32
+		var networkId int32
+
+		resp, httpRes, err := apiClient.CloudAPI.CloudGatewaysNetworksPartialUpdate(context.Background(), gatewayId, networkId).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test CloudAPIService CloudGatewaysNetworksRetrieve", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		var gatewayId int32
+		var networkId int32
+
+		resp, httpRes, err := apiClient.CloudAPI.CloudGatewaysNetworksRetrieve(context.Background(), gatewayId, networkId).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test CloudAPIService CloudGatewaysOperationsList", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		var gatewayId int32
+
+		resp, httpRes, err := apiClient.CloudAPI.CloudGatewaysOperationsList(context.Background(), gatewayId).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test CloudAPIService CloudGatewaysOperationsRetrieve", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		var gatewayId int32
+		var id string
+
+		resp, httpRes, err := apiClient.CloudAPI.CloudGatewaysOperationsRetrieve(context.Background(), gatewayId, id).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test CloudAPIService CloudGatewaysPartialUpdate", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		var id string
+
+		resp, httpRes, err := apiClient.CloudAPI.CloudGatewaysPartialUpdate(context.Background(), id).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test CloudAPIService CloudGatewaysPoolsBackendsCreate", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		var gatewayId int32
+		var poolId int32
+
+		resp, httpRes, err := apiClient.CloudAPI.CloudGatewaysPoolsBackendsCreate(context.Background(), gatewayId, poolId).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test CloudAPIService CloudGatewaysPoolsBackendsDestroy", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		var gatewayId int32
+		var id int32
+		var poolId int32
+
+		resp, httpRes, err := apiClient.CloudAPI.CloudGatewaysPoolsBackendsDestroy(context.Background(), gatewayId, id, poolId).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test CloudAPIService CloudGatewaysPoolsBackendsList", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		var gatewayId int32
+		var poolId int32
+
+		resp, httpRes, err := apiClient.CloudAPI.CloudGatewaysPoolsBackendsList(context.Background(), gatewayId, poolId).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test CloudAPIService CloudGatewaysPoolsBackendsPartialUpdate", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		var gatewayId int32
+		var id int32
+		var poolId int32
+
+		resp, httpRes, err := apiClient.CloudAPI.CloudGatewaysPoolsBackendsPartialUpdate(context.Background(), gatewayId, id, poolId).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test CloudAPIService CloudGatewaysPoolsBackendsRetrieve", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		var gatewayId int32
+		var id int32
+		var poolId int32
+
+		resp, httpRes, err := apiClient.CloudAPI.CloudGatewaysPoolsBackendsRetrieve(context.Background(), gatewayId, id, poolId).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test CloudAPIService CloudGatewaysPoolsCreate", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		var gatewayId int32
+
+		resp, httpRes, err := apiClient.CloudAPI.CloudGatewaysPoolsCreate(context.Background(), gatewayId).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test CloudAPIService CloudGatewaysPoolsDestroy", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		var gatewayId int32
+		var id int32
+
+		resp, httpRes, err := apiClient.CloudAPI.CloudGatewaysPoolsDestroy(context.Background(), gatewayId, id).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test CloudAPIService CloudGatewaysPoolsList", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		var gatewayId int32
+
+		resp, httpRes, err := apiClient.CloudAPI.CloudGatewaysPoolsList(context.Background(), gatewayId).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test CloudAPIService CloudGatewaysPoolsPartialUpdate", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		var gatewayId int32
+		var id int32
+
+		resp, httpRes, err := apiClient.CloudAPI.CloudGatewaysPoolsPartialUpdate(context.Background(), gatewayId, id).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test CloudAPIService CloudGatewaysPoolsRetrieve", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		var gatewayId int32
+		var id int32
+
+		resp, httpRes, err := apiClient.CloudAPI.CloudGatewaysPoolsRetrieve(context.Background(), gatewayId, id).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test CloudAPIService CloudGatewaysPortForwardsCreate", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		var gatewayId int32
+
+		resp, httpRes, err := apiClient.CloudAPI.CloudGatewaysPortForwardsCreate(context.Background(), gatewayId).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test CloudAPIService CloudGatewaysPortForwardsDestroy", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		var gatewayId int32
+		var id int32
+
+		resp, httpRes, err := apiClient.CloudAPI.CloudGatewaysPortForwardsDestroy(context.Background(), gatewayId, id).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test CloudAPIService CloudGatewaysPortForwardsList", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		var gatewayId int32
+
+		resp, httpRes, err := apiClient.CloudAPI.CloudGatewaysPortForwardsList(context.Background(), gatewayId).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test CloudAPIService CloudGatewaysPortForwardsPartialUpdate", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		var gatewayId int32
+		var id int32
+
+		resp, httpRes, err := apiClient.CloudAPI.CloudGatewaysPortForwardsPartialUpdate(context.Background(), gatewayId, id).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test CloudAPIService CloudGatewaysPortForwardsRetrieve", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		var gatewayId int32
+		var id int32
+
+		resp, httpRes, err := apiClient.CloudAPI.CloudGatewaysPortForwardsRetrieve(context.Background(), gatewayId, id).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test CloudAPIService CloudGatewaysReenrollCreate", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		var id string
+
+		resp, httpRes, err := apiClient.CloudAPI.CloudGatewaysReenrollCreate(context.Background(), id).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test CloudAPIService CloudGatewaysRetrieve", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		var id string
+
+		resp, httpRes, err := apiClient.CloudAPI.CloudGatewaysRetrieve(context.Background(), id).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test CloudAPIService CloudGatewaysStatusRetrieve", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		var id string
+
+		resp, httpRes, err := apiClient.CloudAPI.CloudGatewaysStatusRetrieve(context.Background(), id).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
 	t.Run("Test CloudAPIService CloudGenerationsList", func(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
@@ -790,6 +1449,20 @@ func Test_pidginhostsdk_CloudAPIService(t *testing.T) {
 
 	})
 
+	t.Run("Test CloudAPIService CloudPrivateNetworksApplyRouteCreate", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		var id int32
+
+		resp, httpRes, err := apiClient.CloudAPI.CloudPrivateNetworksApplyRouteCreate(context.Background(), id).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
 	t.Run("Test CloudAPIService CloudPrivateNetworksCreate", func(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
@@ -862,6 +1535,20 @@ func Test_pidginhostsdk_CloudAPIService(t *testing.T) {
 		var id int32
 
 		resp, httpRes, err := apiClient.CloudAPI.CloudPrivateNetworksRetrieve(context.Background(), id).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test CloudAPIService CloudPrivateNetworksRouteStatusRetrieve", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		var id int32
+
+		resp, httpRes, err := apiClient.CloudAPI.CloudPrivateNetworksRouteStatusRetrieve(context.Background(), id).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)

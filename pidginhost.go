@@ -3,7 +3,7 @@
 // Usage:
 //
 //	client := pidginhostsdk.New("your-api-token")
-//	servers, _, err := client.Cloud.CloudServersList(ctx).Execute()
+//	servers, _, err := client.CloudAPI.CloudServersList(ctx).Execute()
 package pidginhostsdk
 
 // New creates a PidginHost API client authenticated with the given token.
