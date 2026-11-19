@@ -27,6 +27,8 @@ type ServerUsageResponse struct {
 	UptimeText string `json:"uptime_text"`
 	Cpu map[string]interface{} `json:"cpu"`
 	Memory map[string]interface{} `json:"memory"`
+	// Why the status is unavailable, when it is.
+	Message *string `json:"message,omitempty"`
 }
 
 type _ServerUsageResponse ServerUsageResponse
@@ -173,6 +175,38 @@ func (o *ServerUsageResponse) SetMemory(v map[string]interface{}) {
 	o.Memory = v
 }
 
+// GetMessage returns the Message field value if set, zero value otherwise.
+func (o *ServerUsageResponse) GetMessage() string {
+	if o == nil || IsNil(o.Message) {
+		var ret string
+		return ret
+	}
+	return *o.Message
+}
+
+// GetMessageOk returns a tuple with the Message field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ServerUsageResponse) GetMessageOk() (*string, bool) {
+	if o == nil || IsNil(o.Message) {
+		return nil, false
+	}
+	return o.Message, true
+}
+
+// HasMessage returns a boolean if a field has been set.
+func (o *ServerUsageResponse) HasMessage() bool {
+	if o != nil && !IsNil(o.Message) {
+		return true
+	}
+
+	return false
+}
+
+// SetMessage gets a reference to the given string and assigns it to the Message field.
+func (o *ServerUsageResponse) SetMessage(v string) {
+	o.Message = &v
+}
+
 func (o ServerUsageResponse) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -188,6 +222,9 @@ func (o ServerUsageResponse) ToMap() (map[string]interface{}, error) {
 	toSerialize["uptime_text"] = o.UptimeText
 	toSerialize["cpu"] = o.Cpu
 	toSerialize["memory"] = o.Memory
+	if !IsNil(o.Message) {
+		toSerialize["message"] = o.Message
+	}
 	return toSerialize, nil
 }
 

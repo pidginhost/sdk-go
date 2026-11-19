@@ -12,6 +12,7 @@ Name | Type | Description | Notes
 **UsedBytes** | **int64** |  | [readonly] 
 **ObjectCount** | **int64** |  | [readonly] 
 **PublicRead** | **bool** |  | [readonly] 
+**DestroyProtection** | **bool** | Prevents the bucket from being deleted until disabled. | [readonly] 
 **Status** | [**ResourceStatusEnum**](ResourceStatusEnum.md) |  | [readonly] [default to RESOURCESTATUSENUM_PENDING]
 **Endpoint** | **string** |  | [readonly] 
 **Region** | **string** |  | [readonly] 
@@ -21,7 +22,7 @@ Name | Type | Description | Notes
 
 ### NewBucket
 
-`func NewBucket(billing NullableResourceBilling, id int32, name string, fullName string, quotaGb int32, usedBytes int64, objectCount int64, publicRead bool, status ResourceStatusEnum, endpoint string, region string, created string, ) *Bucket`
+`func NewBucket(billing NullableResourceBilling, id int32, name string, fullName string, quotaGb int32, usedBytes int64, objectCount int64, publicRead bool, destroyProtection bool, status ResourceStatusEnum, endpoint string, region string, created string, ) *Bucket`
 
 NewBucket instantiates a new Bucket object
 This constructor will assign default values to properties that have it defined,
@@ -204,6 +205,26 @@ and a boolean to check if the value has been set.
 `func (o *Bucket) SetPublicRead(v bool)`
 
 SetPublicRead sets PublicRead field to given value.
+
+
+### GetDestroyProtection
+
+`func (o *Bucket) GetDestroyProtection() bool`
+
+GetDestroyProtection returns the DestroyProtection field if non-nil, zero value otherwise.
+
+### GetDestroyProtectionOk
+
+`func (o *Bucket) GetDestroyProtectionOk() (*bool, bool)`
+
+GetDestroyProtectionOk returns a tuple with the DestroyProtection field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetDestroyProtection
+
+`func (o *Bucket) SetDestroyProtection(v bool)`
+
+SetDestroyProtection sets DestroyProtection field to given value.
 
 
 ### GetStatus

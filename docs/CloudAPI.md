@@ -8,6 +8,7 @@ Method | HTTP request | Description
 [**CloudBucketsCredentialsRevealCreate**](CloudAPI.md#CloudBucketsCredentialsRevealCreate) | **Post** /api/cloud/buckets/{id}/credentials/reveal/ | 
 [**CloudBucketsCredentialsRotateCreate**](CloudAPI.md#CloudBucketsCredentialsRotateCreate) | **Post** /api/cloud/buckets/{id}/credentials/rotate/ | 
 [**CloudBucketsDestroy**](CloudAPI.md#CloudBucketsDestroy) | **Delete** /api/cloud/buckets/{id}/ | 
+[**CloudBucketsDestroyProtectionCreate**](CloudAPI.md#CloudBucketsDestroyProtectionCreate) | **Post** /api/cloud/buckets/{id}/destroy-protection/ | 
 [**CloudBucketsList**](CloudAPI.md#CloudBucketsList) | **Get** /api/cloud/buckets/ | 
 [**CloudBucketsResizeCreate**](CloudAPI.md#CloudBucketsResizeCreate) | **Post** /api/cloud/buckets/{id}/resize/ | 
 [**CloudBucketsRetrieve**](CloudAPI.md#CloudBucketsRetrieve) | **Get** /api/cloud/buckets/{id}/ | 
@@ -130,6 +131,8 @@ Method | HTTP request | Description
 [**CloudServersDetachIpv6Create**](CloudAPI.md#CloudServersDetachIpv6Create) | **Post** /api/cloud/servers/{id}/detach-ipv6/ | 
 [**CloudServersList**](CloudAPI.md#CloudServersList) | **Get** /api/cloud/servers/ | 
 [**CloudServersModifyPackageCreate**](CloudAPI.md#CloudServersModifyPackageCreate) | **Post** /api/cloud/servers/{id}/modify-package/ | 
+[**CloudServersMonitoringRetrieve**](CloudAPI.md#CloudServersMonitoringRetrieve) | **Get** /api/cloud/servers/{id}/monitoring/ | 
+[**CloudServersMonitoringUpdate**](CloudAPI.md#CloudServersMonitoringUpdate) | **Put** /api/cloud/servers/{id}/monitoring/ | 
 [**CloudServersPartialUpdate**](CloudAPI.md#CloudServersPartialUpdate) | **Patch** /api/cloud/servers/{id}/ | 
 [**CloudServersPowerManagementCreate**](CloudAPI.md#CloudServersPowerManagementCreate) | **Post** /api/cloud/servers/{id}/power-management/ | 
 [**CloudServersPowerManagementRetrieve**](CloudAPI.md#CloudServersPowerManagementRetrieve) | **Get** /api/cloud/servers/{id}/power-management/ | 
@@ -434,6 +437,78 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
 - **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## CloudBucketsDestroyProtectionCreate
+
+> DestroyProtection CloudBucketsDestroyProtectionCreate(ctx, id).DestroyProtectionRequest(destroyProtectionRequest).Execute()
+
+
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/pidginhost/sdk-go"
+)
+
+func main() {
+	id := int32(56) // int32 | A unique integer value identifying this S3 bucket.
+	destroyProtectionRequest := *openapiclient.NewDestroyProtectionRequest(false) // DestroyProtectionRequest | 
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.CloudAPI.CloudBucketsDestroyProtectionCreate(context.Background(), id).DestroyProtectionRequest(destroyProtectionRequest).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `CloudAPI.CloudBucketsDestroyProtectionCreate``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `CloudBucketsDestroyProtectionCreate`: DestroyProtection
+	fmt.Fprintf(os.Stdout, "Response from `CloudAPI.CloudBucketsDestroyProtectionCreate`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**id** | **int32** | A unique integer value identifying this S3 bucket. | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiCloudBucketsDestroyProtectionCreateRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+ **destroyProtectionRequest** | [**DestroyProtectionRequest**](DestroyProtectionRequest.md) |  | 
+
+### Return type
+
+[**DestroyProtection**](DestroyProtection.md)
+
+### Authorization
+
+[tokenAuth](../README.md#tokenAuth), [cookieAuth](../README.md#cookieAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
 - **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
@@ -9081,6 +9156,148 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**ServerUpgradeResponse**](ServerUpgradeResponse.md)
+
+### Authorization
+
+[tokenAuth](../README.md#tokenAuth), [cookieAuth](../README.md#cookieAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## CloudServersMonitoringRetrieve
+
+> ServerMonitoring CloudServersMonitoringRetrieve(ctx, id).Execute()
+
+
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/pidginhost/sdk-go"
+)
+
+func main() {
+	id := int32(56) // int32 | A unique integer value identifying this virtual machine.
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.CloudAPI.CloudServersMonitoringRetrieve(context.Background(), id).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `CloudAPI.CloudServersMonitoringRetrieve``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `CloudServersMonitoringRetrieve`: ServerMonitoring
+	fmt.Fprintf(os.Stdout, "Response from `CloudAPI.CloudServersMonitoringRetrieve`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**id** | **int32** | A unique integer value identifying this virtual machine. | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiCloudServersMonitoringRetrieveRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+### Return type
+
+[**ServerMonitoring**](ServerMonitoring.md)
+
+### Authorization
+
+[tokenAuth](../README.md#tokenAuth), [cookieAuth](../README.md#cookieAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## CloudServersMonitoringUpdate
+
+> ServerMonitoring CloudServersMonitoringUpdate(ctx, id).ServerMonitoringRequest(serverMonitoringRequest).Execute()
+
+
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/pidginhost/sdk-go"
+)
+
+func main() {
+	id := int32(56) // int32 | A unique integer value identifying this virtual machine.
+	serverMonitoringRequest := *openapiclient.NewServerMonitoringRequest(false) // ServerMonitoringRequest | 
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.CloudAPI.CloudServersMonitoringUpdate(context.Background(), id).ServerMonitoringRequest(serverMonitoringRequest).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `CloudAPI.CloudServersMonitoringUpdate``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `CloudServersMonitoringUpdate`: ServerMonitoring
+	fmt.Fprintf(os.Stdout, "Response from `CloudAPI.CloudServersMonitoringUpdate`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**id** | **int32** | A unique integer value identifying this virtual machine. | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiCloudServersMonitoringUpdateRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+ **serverMonitoringRequest** | [**ServerMonitoringRequest**](ServerMonitoringRequest.md) |  | 
+
+### Return type
+
+[**ServerMonitoring**](ServerMonitoring.md)
 
 ### Authorization
 

@@ -500,6 +500,134 @@ func (a *CloudAPIService) CloudBucketsDestroyExecute(r ApiCloudBucketsDestroyReq
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
+type ApiCloudBucketsDestroyProtectionCreateRequest struct {
+	ctx context.Context
+	ApiService *CloudAPIService
+	id int32
+	destroyProtectionRequest *DestroyProtectionRequest
+}
+
+func (r ApiCloudBucketsDestroyProtectionCreateRequest) DestroyProtectionRequest(destroyProtectionRequest DestroyProtectionRequest) ApiCloudBucketsDestroyProtectionCreateRequest {
+	r.destroyProtectionRequest = &destroyProtectionRequest
+	return r
+}
+
+func (r ApiCloudBucketsDestroyProtectionCreateRequest) Execute() (*DestroyProtection, *http.Response, error) {
+	return r.ApiService.CloudBucketsDestroyProtectionCreateExecute(r)
+}
+
+/*
+CloudBucketsDestroyProtectionCreate Method for CloudBucketsDestroyProtectionCreate
+
+Enable or disable destroy protection.
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param id A unique integer value identifying this S3 bucket.
+ @return ApiCloudBucketsDestroyProtectionCreateRequest
+*/
+func (a *CloudAPIService) CloudBucketsDestroyProtectionCreate(ctx context.Context, id int32) ApiCloudBucketsDestroyProtectionCreateRequest {
+	return ApiCloudBucketsDestroyProtectionCreateRequest{
+		ApiService: a,
+		ctx: ctx,
+		id: id,
+	}
+}
+
+// Execute executes the request
+//  @return DestroyProtection
+func (a *CloudAPIService) CloudBucketsDestroyProtectionCreateExecute(r ApiCloudBucketsDestroyProtectionCreateRequest) (*DestroyProtection, *http.Response, error) {
+	var (
+		localVarHTTPMethod   = http.MethodPost
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *DestroyProtection
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CloudAPIService.CloudBucketsDestroyProtectionCreate")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/api/cloud/buckets/{id}/destroy-protection/"
+	localVarPath = strings.Replace(localVarPath, "{"+"id"+"}", url.PathEscape(parameterValueToString(r.id, "id")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+	if r.destroyProtectionRequest == nil {
+		return localVarReturnValue, nil, reportError("destroyProtectionRequest is required and must be specified")
+	}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{"application/json"}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	// body params
+	localVarPostBody = r.destroyProtectionRequest
+	if r.ctx != nil {
+		// API Key Authentication
+		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
+			if apiKey, ok := auth["tokenAuth"]; ok {
+				var key string
+				if apiKey.Prefix != "" {
+					key = apiKey.Prefix + " " + apiKey.Key
+				} else {
+					key = apiKey.Key
+				}
+				localVarHeaderParams["Authorization"] = key
+			}
+		}
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
 type ApiCloudBucketsListRequest struct {
 	ctx context.Context
 	ApiService *CloudAPIService
@@ -16059,6 +16187,251 @@ func (a *CloudAPIService) CloudServersModifyPackageCreateExecute(r ApiCloudServe
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
+type ApiCloudServersMonitoringRetrieveRequest struct {
+	ctx context.Context
+	ApiService *CloudAPIService
+	id int32
+}
+
+func (r ApiCloudServersMonitoringRetrieveRequest) Execute() (*ServerMonitoring, *http.Response, error) {
+	return r.ApiService.CloudServersMonitoringRetrieveExecute(r)
+}
+
+/*
+CloudServersMonitoringRetrieve Method for CloudServersMonitoringRetrieve
+
+Show whether monitoring alerts are on for this server.
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param id A unique integer value identifying this virtual machine.
+ @return ApiCloudServersMonitoringRetrieveRequest
+*/
+func (a *CloudAPIService) CloudServersMonitoringRetrieve(ctx context.Context, id int32) ApiCloudServersMonitoringRetrieveRequest {
+	return ApiCloudServersMonitoringRetrieveRequest{
+		ApiService: a,
+		ctx: ctx,
+		id: id,
+	}
+}
+
+// Execute executes the request
+//  @return ServerMonitoring
+func (a *CloudAPIService) CloudServersMonitoringRetrieveExecute(r ApiCloudServersMonitoringRetrieveRequest) (*ServerMonitoring, *http.Response, error) {
+	var (
+		localVarHTTPMethod   = http.MethodGet
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *ServerMonitoring
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CloudAPIService.CloudServersMonitoringRetrieve")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/api/cloud/servers/{id}/monitoring/"
+	localVarPath = strings.Replace(localVarPath, "{"+"id"+"}", url.PathEscape(parameterValueToString(r.id, "id")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	if r.ctx != nil {
+		// API Key Authentication
+		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
+			if apiKey, ok := auth["tokenAuth"]; ok {
+				var key string
+				if apiKey.Prefix != "" {
+					key = apiKey.Prefix + " " + apiKey.Key
+				} else {
+					key = apiKey.Key
+				}
+				localVarHeaderParams["Authorization"] = key
+			}
+		}
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiCloudServersMonitoringUpdateRequest struct {
+	ctx context.Context
+	ApiService *CloudAPIService
+	id int32
+	serverMonitoringRequest *ServerMonitoringRequest
+}
+
+func (r ApiCloudServersMonitoringUpdateRequest) ServerMonitoringRequest(serverMonitoringRequest ServerMonitoringRequest) ApiCloudServersMonitoringUpdateRequest {
+	r.serverMonitoringRequest = &serverMonitoringRequest
+	return r
+}
+
+func (r ApiCloudServersMonitoringUpdateRequest) Execute() (*ServerMonitoring, *http.Response, error) {
+	return r.ApiService.CloudServersMonitoringUpdateExecute(r)
+}
+
+/*
+CloudServersMonitoringUpdate Method for CloudServersMonitoringUpdate
+
+Turn monitoring alerts on or off. Only an active server can change it.
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param id A unique integer value identifying this virtual machine.
+ @return ApiCloudServersMonitoringUpdateRequest
+*/
+func (a *CloudAPIService) CloudServersMonitoringUpdate(ctx context.Context, id int32) ApiCloudServersMonitoringUpdateRequest {
+	return ApiCloudServersMonitoringUpdateRequest{
+		ApiService: a,
+		ctx: ctx,
+		id: id,
+	}
+}
+
+// Execute executes the request
+//  @return ServerMonitoring
+func (a *CloudAPIService) CloudServersMonitoringUpdateExecute(r ApiCloudServersMonitoringUpdateRequest) (*ServerMonitoring, *http.Response, error) {
+	var (
+		localVarHTTPMethod   = http.MethodPut
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *ServerMonitoring
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CloudAPIService.CloudServersMonitoringUpdate")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/api/cloud/servers/{id}/monitoring/"
+	localVarPath = strings.Replace(localVarPath, "{"+"id"+"}", url.PathEscape(parameterValueToString(r.id, "id")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+	if r.serverMonitoringRequest == nil {
+		return localVarReturnValue, nil, reportError("serverMonitoringRequest is required and must be specified")
+	}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{"application/json"}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	// body params
+	localVarPostBody = r.serverMonitoringRequest
+	if r.ctx != nil {
+		// API Key Authentication
+		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
+			if apiKey, ok := auth["tokenAuth"]; ok {
+				var key string
+				if apiKey.Prefix != "" {
+					key = apiKey.Prefix + " " + apiKey.Key
+				} else {
+					key = apiKey.Key
+				}
+				localVarHeaderParams["Authorization"] = key
+			}
+		}
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
 type ApiCloudServersPartialUpdateRequest struct {
 	ctx context.Context
 	ApiService *CloudAPIService
@@ -16203,7 +16576,7 @@ func (r ApiCloudServersPowerManagementCreateRequest) Execute() (*PowerManagement
 /*
 CloudServersPowerManagementCreate Method for CloudServersPowerManagementCreate
 
-Server power management
+Queue a power action and return the state observed before queueing. If the state cannot be read, the action is refused with HTTP 503.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param id A unique integer value identifying this virtual machine.
@@ -16297,6 +16670,16 @@ func (a *CloudAPIService) CloudServersPowerManagementCreateExecute(r ApiCloudSer
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
+		if localVarHTTPResponse.StatusCode == 503 {
+			var v PowerManagementHostUnavailable
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
@@ -16325,7 +16708,7 @@ func (r ApiCloudServersPowerManagementRetrieveRequest) Execute() (*PowerManageme
 /*
 CloudServersPowerManagementRetrieve Method for CloudServersPowerManagementRetrieve
 
-Server power management
+Read the server's power state and the reason if it is unavailable.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param id A unique integer value identifying this virtual machine.

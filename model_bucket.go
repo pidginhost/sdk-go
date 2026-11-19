@@ -30,6 +30,8 @@ type Bucket struct {
 	UsedBytes int64 `json:"used_bytes"`
 	ObjectCount int64 `json:"object_count"`
 	PublicRead bool `json:"public_read"`
+	// Prevents the bucket from being deleted until disabled.
+	DestroyProtection bool `json:"destroy_protection"`
 	Status ResourceStatusEnum `json:"status"`
 	Endpoint string `json:"endpoint"`
 	Region string `json:"region"`
@@ -42,7 +44,7 @@ type _Bucket Bucket
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewBucket(billing NullableResourceBilling, id int32, name string, fullName string, quotaGb int32, usedBytes int64, objectCount int64, publicRead bool, status ResourceStatusEnum, endpoint string, region string, created string) *Bucket {
+func NewBucket(billing NullableResourceBilling, id int32, name string, fullName string, quotaGb int32, usedBytes int64, objectCount int64, publicRead bool, destroyProtection bool, status ResourceStatusEnum, endpoint string, region string, created string) *Bucket {
 	this := Bucket{}
 	this.Billing = billing
 	this.Id = id
@@ -52,6 +54,7 @@ func NewBucket(billing NullableResourceBilling, id int32, name string, fullName 
 	this.UsedBytes = usedBytes
 	this.ObjectCount = objectCount
 	this.PublicRead = publicRead
+	this.DestroyProtection = destroyProtection
 	this.Status = status
 	this.Endpoint = endpoint
 	this.Region = region
@@ -261,6 +264,30 @@ func (o *Bucket) SetPublicRead(v bool) {
 	o.PublicRead = v
 }
 
+// GetDestroyProtection returns the DestroyProtection field value
+func (o *Bucket) GetDestroyProtection() bool {
+	if o == nil {
+		var ret bool
+		return ret
+	}
+
+	return o.DestroyProtection
+}
+
+// GetDestroyProtectionOk returns a tuple with the DestroyProtection field value
+// and a boolean to check if the value has been set.
+func (o *Bucket) GetDestroyProtectionOk() (*bool, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.DestroyProtection, true
+}
+
+// SetDestroyProtection sets field value
+func (o *Bucket) SetDestroyProtection(v bool) {
+	o.DestroyProtection = v
+}
+
 // GetStatus returns the Status field value
 func (o *Bucket) GetStatus() ResourceStatusEnum {
 	if o == nil {
@@ -375,6 +402,7 @@ func (o Bucket) ToMap() (map[string]interface{}, error) {
 	toSerialize["used_bytes"] = o.UsedBytes
 	toSerialize["object_count"] = o.ObjectCount
 	toSerialize["public_read"] = o.PublicRead
+	toSerialize["destroy_protection"] = o.DestroyProtection
 	toSerialize["status"] = o.Status
 	toSerialize["endpoint"] = o.Endpoint
 	toSerialize["region"] = o.Region
@@ -395,6 +423,7 @@ func (o *Bucket) UnmarshalJSON(data []byte) (err error) {
 		"used_bytes",
 		"object_count",
 		"public_read",
+		"destroy_protection",
 		"status",
 		"endpoint",
 		"region",

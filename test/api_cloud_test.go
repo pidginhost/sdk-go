@@ -76,6 +76,20 @@ func Test_pidginhostsdk_CloudAPIService(t *testing.T) {
 
 	})
 
+	t.Run("Test CloudAPIService CloudBucketsDestroyProtectionCreate", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		var id int32
+
+		resp, httpRes, err := apiClient.CloudAPI.CloudBucketsDestroyProtectionCreate(context.Background(), id).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
 	t.Run("Test CloudAPIService CloudBucketsList", func(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
@@ -1764,6 +1778,34 @@ func Test_pidginhostsdk_CloudAPIService(t *testing.T) {
 		var id int32
 
 		resp, httpRes, err := apiClient.CloudAPI.CloudServersModifyPackageCreate(context.Background(), id).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test CloudAPIService CloudServersMonitoringRetrieve", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		var id int32
+
+		resp, httpRes, err := apiClient.CloudAPI.CloudServersMonitoringRetrieve(context.Background(), id).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test CloudAPIService CloudServersMonitoringUpdate", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		var id int32
+
+		resp, httpRes, err := apiClient.CloudAPI.CloudServersMonitoringUpdate(context.Background(), id).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)

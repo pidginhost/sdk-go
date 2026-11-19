@@ -9,6 +9,7 @@ Name | Type | Description | Notes
 **UptimeText** | **string** |  | 
 **Cpu** | **map[string]interface{}** |  | 
 **Memory** | **map[string]interface{}** |  | 
+**Message** | Pointer to **string** | Why the status is unavailable, when it is. | [optional] 
 
 ## Methods
 
@@ -128,6 +129,31 @@ and a boolean to check if the value has been set.
 
 SetMemory sets Memory field to given value.
 
+
+### GetMessage
+
+`func (o *ServerUsageResponse) GetMessage() string`
+
+GetMessage returns the Message field if non-nil, zero value otherwise.
+
+### GetMessageOk
+
+`func (o *ServerUsageResponse) GetMessageOk() (*string, bool)`
+
+GetMessageOk returns a tuple with the Message field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetMessage
+
+`func (o *ServerUsageResponse) SetMessage(v string)`
+
+SetMessage sets Message field to given value.
+
+### HasMessage
+
+`func (o *ServerUsageResponse) HasMessage() bool`
+
+HasMessage returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

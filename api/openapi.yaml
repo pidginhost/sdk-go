@@ -1170,6 +1170,37 @@ paths:
       - cookieAuth: []
       tags:
       - cloud
+  /api/cloud/buckets/{id}/destroy-protection/:
+    post:
+      description: Enable or disable destroy protection.
+      operationId: cloud_buckets_destroy_protection_create
+      parameters:
+      - description: A unique integer value identifying this S3 bucket.
+        explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          type: integer
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/DestroyProtectionRequest"
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/DestroyProtection"
+          description: ""
+      security:
+      - tokenAuth: []
+      - cookieAuth: []
+      tags:
+      - cloud
   /api/cloud/buckets/{id}/resize/:
     post:
       description: Resize a bucket
@@ -5316,9 +5347,65 @@ paths:
       - cookieAuth: []
       tags:
       - cloud
+  /api/cloud/servers/{id}/monitoring/:
+    get:
+      description: Show whether monitoring alerts are on for this server.
+      operationId: cloud_servers_monitoring_retrieve
+      parameters:
+      - description: A unique integer value identifying this virtual machine.
+        explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          type: integer
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ServerMonitoring"
+          description: ""
+      security:
+      - tokenAuth: []
+      - cookieAuth: []
+      tags:
+      - cloud
+    put:
+      description: Turn monitoring alerts on or off. Only an active server can change
+        it.
+      operationId: cloud_servers_monitoring_update
+      parameters:
+      - description: A unique integer value identifying this virtual machine.
+        explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          type: integer
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ServerMonitoringRequest"
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ServerMonitoring"
+          description: ""
+      security:
+      - tokenAuth: []
+      - cookieAuth: []
+      tags:
+      - cloud
   /api/cloud/servers/{id}/power-management/:
     get:
-      description: Server power management
+      description: Read the server's power state and the reason if it is unavailable.
       operationId: cloud_servers_power_management_retrieve
       parameters:
       - description: A unique integer value identifying this virtual machine.
@@ -5342,7 +5429,8 @@ paths:
       tags:
       - cloud
     post:
-      description: Server power management
+      description: "Queue a power action and return the state observed before queueing.\
+        \ If the state cannot be read, the action is refused with HTTP 503."
       operationId: cloud_servers_power_management_create
       parameters:
       - description: A unique integer value identifying this virtual machine.
@@ -5365,6 +5453,12 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/PowerManagement"
+          description: ""
+        "503":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PowerManagementHostUnavailable"
           description: ""
       security:
       - tokenAuth: []
@@ -12247,6 +12341,7 @@ components:
         used_bytes: 1
         object_count: 5
         public_read: true
+        destroy_protection: true
         status: ""
         endpoint: endpoint
         region: region
@@ -12282,6 +12377,10 @@ components:
         public_read:
           readOnly: true
           type: boolean
+        destroy_protection:
+          description: Prevents the bucket from being deleted until disabled.
+          readOnly: true
+          type: boolean
         status:
           allOf:
           - $ref: "#/components/schemas/ResourceStatusEnum"
@@ -12299,6 +12398,7 @@ components:
       required:
       - billing
       - created
+      - destroy_protection
       - endpoint
       - full_name
       - id
@@ -14512,6 +14612,15 @@ components:
       - processing
       - invalid
       type: string
+    DestroyProtection:
+      example:
+        destroy_protection: true
+      properties:
+        destroy_protection:
+          type: boolean
+      required:
+      - destroy_protection
+      type: object
     DestroyProtectionRequest:
       example:
         destroy_protection: true
@@ -22754,10 +22863,26 @@ components:
     PowerManagement:
       example:
         status: status
+        message: message
       properties:
         status:
           type: string
+        message:
+          type: string
       required:
+      - status
+      type: object
+    PowerManagementHostUnavailable:
+      example:
+        status: status
+        message: message
+      properties:
+        status:
+          type: string
+        message:
+          type: string
+      required:
+      - message
       - status
       type: object
     PowerManagementRequest:
@@ -24229,6 +24354,28 @@ components:
           title: SSH public key
           type: string
       type: object
+    ServerMonitoring:
+      example:
+        enabled: true
+      properties:
+        enabled:
+          description: Email the account when this server stops unexpectedly or its
+            host stops responding. Free.
+          type: boolean
+      required:
+      - enabled
+      type: object
+    ServerMonitoringRequest:
+      example:
+        enabled: true
+      properties:
+        enabled:
+          description: Email the account when this server stops unexpectedly or its
+            host stops responding. Free.
+          type: boolean
+      required:
+      - enabled
+      type: object
     ServerNetworks:
       properties:
         public:
@@ -24541,6 +24688,7 @@ components:
           key: ""
         memory:
           key: ""
+        message: message
       properties:
         status:
           type: string
@@ -24554,6 +24702,9 @@ components:
         memory:
           additionalProperties: {}
           type: object
+        message:
+          description: "Why the status is unavailable, when it is."
+          type: string
       required:
       - cpu
       - memory
